@@ -207,10 +207,14 @@ export default function Experiences() {
                         )}
 
                         <Link
-                          to="/join"
-                          className="inline-flex items-center gap-2 font-mono-label text-xs text-impulse-white px-4 py-2 border border-impulse-blue/40 bg-impulse-blue/10 hover:bg-impulse-blue/20 hover:border-impulse-blue transition-all duration-200"
+                          to={event.link || '/join'}
+                          className={`inline-flex items-center gap-2 font-mono-label text-xs px-4 py-2 border transition-all duration-200 ${
+                            event.featured
+                              ? 'text-cyan-300 border-cyan-500/50 bg-cyan-500/10 hover:bg-cyan-500/25 hover:border-cyan-400 shadow-[0_0_12px_rgba(6,182,212,0.25)]'
+                              : 'text-impulse-white border-impulse-blue/40 bg-impulse-blue/10 hover:bg-impulse-blue/20 hover:border-impulse-blue'
+                          }`}
                         >
-                          RSVP
+                          {event.link ? 'EXPLORE HACK' : 'RSVP'}
                           <ArrowRight className="w-3 h-3" />
                         </Link>
                       </div>

@@ -55,9 +55,27 @@ export interface EventItem {
   tags?: string[];
   capacity?: string;
   highlight?: string;
+  link?: string;
+  image?: string;
+  featured?: boolean;
 }
 
 export const events: EventItem[] = [
+  {
+    id: 'shark-hack-2026',
+    date: 'OCT 30 - 31, 2026',
+    title: '🦈 SHARK HACK: Don’t Just Build. Make Them Believe.',
+    type: 'HACKATHONS',
+    description: 'An All-India flagship hackathon where technical execution meets pitching, product thinking, and live negotiation. Compete for ₹1,00,000+ Prize Pool, pitch in the offline Shark Room in Delhi, and negotiate deals in Impulse Credits.',
+    location: 'DELHI · OFFLINE GRAND ROUND',
+    status: 'REGISTRATION OPEN',
+    tags: ['Flagship', 'Live Deal Room', 'Impulse Credits', 'Women-In-Tech'],
+    capacity: '2–4 BUILDERS / TEAM',
+    highlight: '₹1,00,000+ PRIZE POOL',
+    link: '/shark-hack',
+    image: '/images/shark-hack-banner.jpg',
+    featured: true,
+  },
   {
     id: 'impulse-hack-01',
     date: 'OCT 18 - 20, 2026',
@@ -240,6 +258,7 @@ export const teamMembers: TeamMember[] = [
 
 export const navLinks = [
   { label: 'Explore', path: '/' },
+  { label: 'Shark Hack 🦈', path: '/shark-hack', highlight: true },
   { label: 'Events', path: '/events' },
   { label: 'Projects', path: '/projects' },
   { label: 'Community', path: '/community' },
@@ -248,6 +267,7 @@ export const navLinks = [
 
 export const footerLinks = [
   { label: 'Explore', path: '/' },
+  { label: 'Shark Hack 2026', path: '/shark-hack' },
   { label: 'Events', path: '/events' },
   { label: 'Projects', path: '/projects' },
   { label: 'Community', path: '/community' },

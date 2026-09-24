@@ -6,6 +6,7 @@ import Events from '@/pages/Events';
 import Projects from '@/pages/Projects';
 import CommunityPage from '@/pages/Community';
 import About from '@/pages/About';
+import SharkHack from '@/pages/SharkHack';
 import ScrollToTop from '@/components/ScrollToTop';
 import SmoothScrollProvider from '@/providers/SmoothScrollProvider';
 
@@ -16,6 +17,8 @@ function PageTitle() {
       '/': 'IMPULSE — Ideas in Motion',
       '/join': 'Join IMPULSE — Ideas in Motion',
       '/events': 'Events — IMPULSE',
+      '/shark-hack': 'SHARK HACK 2026 — Impulse Flagship Hackathon',
+      '/events/shark-hack': 'SHARK HACK 2026 — Impulse Flagship Hackathon',
       '/projects': 'Projects — IMPULSE',
       '/community': 'Community — IMPULSE',
       '/about': 'About — IMPULSE',
@@ -33,6 +36,8 @@ export default function App() {
         <PageTitle />
         <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/shark-hack" element={<SharkHack />} />
+        <Route path="/events/shark-hack" element={<SharkHack />} />
         <Route path="/join" element={<Join />} />
         <Route path="/events" element={<Events />} />
         <Route path="/projects" element={<Projects />} />

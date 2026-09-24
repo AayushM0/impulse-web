@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { Calendar, MapPin, ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Calendar, MapPin, ArrowRight, Sparkles, Trophy, Coins } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ImpulseField from '@/components/ImpulseField';
@@ -21,6 +22,8 @@ export default function Events() {
   const filteredEvents = activeCategory === 'ALL'
     ? events
     : events.filter((e) => e.type === activeCategory);
+
+  const showSharkBanner = activeCategory === 'ALL' || activeCategory === 'HACKATHONS';
 
   return (
     <div className="bg-space-950 min-h-screen">
@@ -59,7 +62,7 @@ export default function Events() {
       <section className="relative py-20 lg:py-28 overflow-hidden">
         <div className="max-w-[1440px] mx-auto px-6 lg:px-10">
           {/* Category filters */}
-          <div className="flex flex-wrap gap-3 mb-16">
+          <div className="flex flex-wrap gap-3 mb-12">
             {categories.map((cat) => (
               <button
                 key={cat}
@@ -74,6 +77,78 @@ export default function Events() {
               </button>
             ))}
           </div>
+
+          {/* Featured Flagship Spotlight Banner (Shark Hack) */}
+          {showSharkBanner && (
+            <div className="mb-16 relative rounded-2xl overflow-hidden border border-cyan-500/40 bg-gradient-to-r from-cyan-950/30 via-slate-900 to-purple-950/30 shadow-[0_0_35px_rgba(6,182,212,0.15)]">
+              <div className="grid lg:grid-cols-12 gap-8 items-center p-6 sm:p-10">
+                <div className="lg:col-span-7 space-y-4">
+                  <div className="flex flex-wrap items-center gap-2">
+                    <span className="font-mono-label text-[10px] px-3 py-1 bg-cyan-500/20 border border-cyan-400 text-cyan-300 rounded-full font-bold">
+                      FLAGSHIP ALL-INDIA EVENT
+                    </span>
+                    <span className="font-mono-label text-[10px] px-3 py-1 bg-amber-500/15 border border-amber-500/30 text-amber-300 rounded-full flex items-center gap-1">
+                      <Trophy className="w-3 h-3 text-amber-400" />
+                      ₹1,00,000+ PRIZE POOL
+                    </span>
+                    <span className="font-mono-label text-[10px] px-3 py-1 bg-pink-500/15 border border-pink-500/30 text-pink-300 rounded-full">
+                      WOMEN-IN-TECH PRIZE
+                    </span>
+                  </div>
+
+                  <h2 className="text-3xl sm:text-5xl font-sans font-bold text-white tracking-tight">
+                    🦈 SHARK HACK 2026
+                  </h2>
+                  <p className="text-slate-300 text-sm sm:text-base leading-relaxed max-w-xl">
+                    Don’t just build. Make them believe. An All-India hackathon where technical execution meets pitching, product thinking, and live negotiation inside the Shark Room in Delhi.
+                  </p>
+
+                  <div className="flex flex-wrap items-center gap-6 text-xs font-mono-label text-slate-400 pt-2">
+                    <span className="flex items-center gap-1.5 text-cyan-300">
+                      <Calendar className="w-4 h-4 text-cyan-400" />
+                      30 - 31 OCT 2026
+                    </span>
+                    <span className="flex items-center gap-1.5 text-slate-300">
+                      <MapPin className="w-4 h-4 text-cyan-400" />
+                      DELHI · OFFLINE GRAND ROUND
+                    </span>
+                    <span className="flex items-center gap-1.5 text-amber-300">
+                      <Coins className="w-4 h-4 text-amber-400" />
+                      IMPULSE CREDITS DEAL ROOM
+                    </span>
+                  </div>
+
+                  <div className="pt-4 flex flex-wrap items-center gap-4">
+                    <Link
+                      to="/shark-hack"
+                      className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-cyan-500 to-blue-600 text-slate-950 font-mono-label text-xs uppercase font-bold rounded hover:brightness-110 transition shadow-[0_0_20px_rgba(6,182,212,0.3)]"
+                    >
+                      Explore Shark Hack Page
+                      <ArrowRight className="w-4 h-4" />
+                    </Link>
+                    <Link
+                      to="/shark-hack#register"
+                      className="inline-flex items-center gap-2 px-5 py-3 border border-cyan-500/40 text-cyan-300 font-mono-label text-xs uppercase rounded hover:bg-cyan-500/10 transition"
+                    >
+                      Register Team (2–4 Builders)
+                    </Link>
+                  </div>
+                </div>
+
+                <div className="lg:col-span-5 relative rounded-xl overflow-hidden border border-cyan-500/30 aspect-[16/9] shadow-[0_0_25px_rgba(6,182,212,0.2)]">
+                  <img
+                    src="/images/shark-hack-banner.jpg"
+                    alt="Shark Hack 2026"
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent" />
+                  <div className="absolute bottom-3 left-3 font-mono-label text-[11px] text-cyan-300 bg-slate-950/80 px-2 py-1 rounded border border-slate-800">
+                    DELHI GRAND FINALE
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
 
           {filteredEvents.length === 0 ? (
             <div className="relative border border-space-600 hover:border-impulse-blue/30 transition-colors duration-500 p-16 lg:p-24 text-center overflow-hidden">
@@ -101,11 +176,8 @@ export default function Events() {
             </div>
           ) : (
             <div className="space-y-px bg-space-700/30">
-              {filteredEvents.map((event) => (
-                <div
-                  key={event.id}
-                  className="group bg-space-950 hover:bg-space-900 transition-colors duration-500"
-                >
+              {filteredEvents.map((event) => {
+                const RowContent = (
                   <div className="grid grid-cols-12 gap-4 lg:gap-8 px-6 lg:px-10 py-8 lg:py-10 items-center">
                     <div className="col-span-12 lg:col-span-2">
                       <div className="flex items-center gap-2 text-impulse-blue-bright/60">
@@ -117,7 +189,12 @@ export default function Events() {
                       <span className="font-mono-label text-impulse-magenta/60">{event.type}</span>
                     </div>
                     <div className="col-span-12 lg:col-span-4">
-                      <h3 className="text-xl lg:text-2xl font-sans font-medium text-impulse-white">{event.title}</h3>
+                      <h3 className="text-xl lg:text-2xl font-sans font-medium text-impulse-white group-hover:text-cyan-300 transition-colors flex items-center gap-2">
+                        {event.title}
+                        {event.link && (
+                          <ArrowRight className="w-4 h-4 text-cyan-400 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
+                        )}
+                      </h3>
                       <p className="mt-2 text-sm text-impulse-gray-light/50 leading-relaxed">{event.description}</p>
                     </div>
                     <div className="col-span-6 lg:col-span-2">
@@ -126,14 +203,40 @@ export default function Events() {
                         {event.location}
                       </div>
                     </div>
-                    <div className="col-span-6 lg:col-span-2 flex lg:justify-end">
+                    <div className="col-span-6 lg:col-span-2 flex lg:justify-end items-center gap-3">
                       <span className={`font-mono-label ${statusColors[event.status] || 'text-impulse-gray-light/50'}`}>
                         {event.status}
                       </span>
+                      {event.link && (
+                        <span className="hidden lg:inline-flex text-xs font-mono-label text-cyan-400 border border-cyan-500/30 bg-cyan-500/10 px-2.5 py-1 rounded">
+                          DETAILS →
+                        </span>
+                      )}
                     </div>
                   </div>
-                </div>
-              ))}
+                );
+
+                if (event.link) {
+                  return (
+                    <Link
+                      key={event.id}
+                      to={event.link}
+                      className="block group bg-space-950 hover:bg-space-900 transition-colors duration-500"
+                    >
+                      {RowContent}
+                    </Link>
+                  );
+                }
+
+                return (
+                  <div
+                    key={event.id}
+                    className="group bg-space-950 hover:bg-space-900 transition-colors duration-500"
+                  >
+                    {RowContent}
+                  </div>
+                );
+              })}
             </div>
           )}
         </div>

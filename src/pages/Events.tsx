@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Calendar, MapPin, ArrowRight, Sparkles, Trophy, Coins } from 'lucide-react';
+import { Calendar, MapPin, ArrowRight, Trophy, Coins } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ImpulseField from '@/components/ImpulseField';
@@ -8,6 +8,9 @@ import CTASection from '@/components/CTASection';
 import { events } from '@/data/content';
 
 const categories = ['ALL', 'HACKATHONS', 'BUILD SPRINTS', 'AI LABS', 'DEMO NIGHTS', 'COMMUNITY'];
+
+// Keep homepage demo events out of the Events page.
+const publishedEvents = events.filter((event) => event.id === 'shark-hack-2026');
 
 const statusColors: Record<string, string> = {
   'UPCOMING': 'text-impulse-blue-bright',
@@ -20,8 +23,8 @@ export default function Events() {
   const [activeCategory, setActiveCategory] = useState('ALL');
 
   const filteredEvents = activeCategory === 'ALL'
-    ? events
-    : events.filter((e) => e.type === activeCategory);
+    ? publishedEvents
+    : publishedEvents.filter((e) => e.type === activeCategory);
 
   const showSharkBanner = activeCategory === 'ALL' || activeCategory === 'HACKATHONS';
 

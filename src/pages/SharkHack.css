@@ -1,0 +1,199 @@
+.shark-hack-page {
+  --shark-accent: #60a5fa;
+  --shark-muted: #a2aabc;
+  background: #06070b;
+  color: #f5f7ff;
+}
+
+.shark-hack-page ::selection { background: #be185d; color: #fff; }
+
+.shark-hack-page > header a[href='/shark-hack'] {
+  color: #dbeafe;
+  background: linear-gradient(110deg, rgb(59 130 246 / 18%), rgb(236 72 153 / 20%));
+  border-color: rgb(96 165 250 / 55%);
+  box-shadow: 0 0 20px rgb(236 72 153 / 18%);
+}
+
+.shark-hack-page > header a[href='/shark-hack'] > span { background: #f472b6; }
+.shark-hack-page > footer { background: #06070b; border-top-color: rgb(141 153 190 / 15%); }
+
+.shark-hack-page .shark-hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding-top: 96px;
+  background: #06070b;
+}
+
+.shark-hack-page .shark-hero-atmosphere {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  background: radial-gradient(ellipse at 88% 30%, #351027 0%, transparent 55%), radial-gradient(ellipse at 50% 60%, #0a2052 0%, #06070b 75%);
+}
+
+.shark-hack-page .shark-hero-art {
+  position: absolute;
+  right: -2%;
+  top: 35px;
+  width: 66%;
+  height: calc(100% - 110px);
+  object-fit: cover;
+  object-position: right center;
+  filter: saturate(1.15) contrast(1.06);
+  opacity: 0.85;
+  mask-image: linear-gradient(90deg, transparent, #000 30%);
+}
+
+.shark-hack-page .shark-hero-atmosphere::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, #06070b 4%, rgb(6 7 11 / 92%) 27%, rgb(6 7 11 / 42%) 48%, transparent 78%),
+    linear-gradient(0deg, #06070b 6%, transparent 45%, rgb(6 7 11 / 40%) 100%),
+    linear-gradient(125deg, transparent 45%, rgb(37 99 235 / 12%) 67%, rgb(219 39 119 / 20%));
+}
+
+.shark-hack-page .shark-hero-container { max-width: 1360px; margin: 0 auto; padding: 0 48px; }
+.shark-hack-page .shark-hero-topline { display: flex; align-items: center; justify-content: space-between; }
+.shark-hack-page .shark-back-link { display: inline-flex; align-items: center; gap: 8px; color: #a2aabc; font-size: 12px; }
+.shark-hack-page .shark-back-link:hover { color: #fff; }
+.shark-hack-page .shark-edition { color: #9ba4c0; font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.18em; }
+
+.shark-hack-page .shark-hero-content {
+  position: relative;
+  padding: 90px 0 65px;
+  max-width: 850px;
+}
+
+.shark-hack-page .shark-hero-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #f9a8d4;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.shark-hack-page .shark-hero-eyebrow > span { width: 22px; height: 2px; flex-shrink: 0; background: #f472b6; box-shadow: 0 0 18px rgb(236 72 153 / 50%); }
+
+.shark-hack-page .shark-hero-title {
+  margin-top: 25px;
+  font-size: clamp(70px, 8.7vw, 125px);
+  font-weight: 700;
+  line-height: 0.96;
+  letter-spacing: -0.065em;
+  color: #fff;
+  white-space: nowrap;
+}
+
+.shark-hack-page .shark-hero-title-accent { background: linear-gradient(110deg, #60a5fa 10%, #f472b6 100%); background-clip: text; -webkit-background-clip: text; color: transparent; }
+.shark-hack-page .shark-hero-tagline { margin-top: 27px; color: #9aa5bb; font-size: clamp(20px, 2vw, 27px); letter-spacing: -0.03em; line-height: 1.4; }
+.shark-hack-page .shark-hero-tagline > span { color: #eef1fa; }
+.shark-hack-page .shark-hero-description { max-width: 455px; margin-top: 21px; color: #acb6c9; font-size: 15px; line-height: 1.8; }
+
+.shark-hack-page .shark-hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 30px; }
+.shark-hack-page .shark-primary-button,
+.shark-hack-page .shark-secondary-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 19px;
+  min-height: 50px;
+  padding: 12px 22px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  font-size: 13px;
+  font-weight: 600;
+  transition: background-color 160ms ease, border-color 160ms ease;
+}
+
+.shark-hack-page .shark-primary-button { background: linear-gradient(110deg, #2563eb, #db2777); color: #fff; box-shadow: 0 7px 30px rgb(219 39 119 / 25%); }
+.shark-hack-page .shark-primary-button:hover { background: linear-gradient(110deg, #1d4ed8, #be185d); box-shadow: 0 7px 35px rgb(219 39 119 / 35%); }
+.shark-hack-page .shark-secondary-button { background: rgb(6 7 11 / 55%); border-color: rgb(96 165 250 / 50%); color: #dbeafe; }
+.shark-hack-page .shark-secondary-button:hover { background: rgb(59 130 246 / 16%); border-color: #60a5fa; }
+.shark-hack-page .shark-hero-note { margin-top: 15px; color: #98a2b8; font-size: 12px; }
+
+.shark-hack-page .shark-hero-process {
+  display: flex;
+  align-items: center;
+  gap: 17px;
+  margin-top: 40px;
+  color: #a8b0ce;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.13em;
+}
+.shark-hack-page .shark-hero-process svg { width: 12px; height: 12px; color: #60a5fa; }
+.shark-hack-page .shark-hero-process > span:last-child { color: #f9a8d4; }
+
+.shark-hack-page .shark-event-facts { position: relative; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); padding: 27px 0 31px; border-top: 1px solid rgb(141 153 190 / 20%); }
+.shark-hack-page .shark-event-facts > div { padding: 0 25px; border-left: 1px solid rgb(141 153 190 / 15%); }
+.shark-hack-page .shark-event-facts > div:first-child { padding-left: 0; border-left: 0; }
+.shark-hack-page .shark-event-facts > div:last-child { padding-right: 0; }
+.shark-hack-page .shark-event-facts dt { display: flex; align-items: center; gap: 8px; color: #98a2b8; font-size: 12px; }
+.shark-hack-page .shark-event-facts dt svg { width: 14px; height: 14px; color: #60a5fa; }
+.shark-hack-page .shark-event-facts dd { margin-top: 10px; font-size: 17px; font-weight: 500; color: #f0f3ff; }
+.shark-hack-page .shark-event-facts dd > span { display: block; margin-top: 5px; font-size: 11px; font-weight: 400; color: #97a0b6; }
+.shark-hack-page .shark-event-facts .shark-date-note { color: #aeb9eb; }
+.shark-hack-page .shark-event-facts .shark-prize-value { color: #f472b6; }
+
+.shark-hack-page .shark-prizes-section { background: radial-gradient(ellipse at 0% 50%, rgb(37 99 235 / 12%), transparent 60%), radial-gradient(ellipse at 100% 50%, rgb(236 72 153 / 12%), transparent 60%); }
+.shark-hack-page .shark-registration-section { background: radial-gradient(ellipse at 10% 100%, rgb(37 99 235 / 22%), transparent 65%), radial-gradient(ellipse at 95% 100%, rgb(236 72 153 / 18%), transparent 60%); }
+
+
+.shark-hack-page .shark-hero-process > span:first-child { color: #93c5fd; }
+.shark-hack-page .shark-hero-process > span:nth-of-type(2) { color: #f9a8d4; }
+.shark-hack-page .shark-hero-process > span:nth-of-type(3) { color: #93c5fd; }
+.shark-hack-page #timeline .font-mono-label { color: #93c5fd; }
+.shark-hack-page #submission .font-mono-label { color: #f9a8d4; }
+.shark-hack-page #prizes .font-mono-label { color: #f9a8d4; }
+.shark-hack-page #faq .font-mono-label { color: #f9a8d4; }
+.shark-hack-page #register .font-mono-label { color: #93c5fd; }
+
+.shark-hack-page .shark-prize-card-main {
+  border-color: rgb(96 165 250 / 35%);
+  background: linear-gradient(135deg, rgb(37 99 235 / 17%), rgb(59 130 246 / 6%));
+}
+.shark-hack-page .shark-prize-card-women {
+  border-color: rgb(244 114 182 / 35%);
+  background: linear-gradient(135deg, rgb(219 39 119 / 17%), rgb(236 72 153 / 10%));
+}
+.shark-hack-page .shark-prize-card-main > svg { color: #93c5fd; }
+.shark-hack-page .shark-prize-card-women > svg { color: #f9a8d4; }
+
+@media (max-width: 1023px) {
+  .shark-hack-page .shark-hero-container { padding: 0 32px; }
+  .shark-hack-page .shark-hero-content { padding-top: 75px; padding-bottom: 50px; }
+  .shark-hack-page .shark-hero-art { width: 80%; right: -12%; opacity: 0.72; }
+  .shark-hack-page .shark-event-facts { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 25px 0; }
+  .shark-hack-page .shark-event-facts > div:nth-child(3) { padding-left: 0; border-left: 0; }
+}
+
+@media (max-width: 639px) {
+  .shark-hack-page .shark-hero { padding-top: 88px; }
+  .shark-hack-page .shark-hero-container { padding: 0 24px; }
+  .shark-hack-page .shark-hero-content { padding-top: 55px; padding-bottom: 35px; }
+  .shark-hack-page .shark-hero-art { top: 80px; right: -28%; width: 115%; height: 380px; opacity: 0.5; }
+  .shark-hack-page .shark-hero-atmosphere::after { background: linear-gradient(90deg, #06070b, rgb(6 7 11 / 30%) 90%), linear-gradient(0deg, #06070b 46%, transparent 85%); }
+  .shark-hack-page .shark-hero-eyebrow { font-size: 8px; letter-spacing: 0.1em; gap: 8px; }
+  .shark-hack-page .shark-hero-eyebrow > span { width: 14px; }
+  .shark-hack-page .shark-hero-title { font-size: clamp(40px, 11.4vw, 73px); margin-top: 24px; letter-spacing: -0.055em; }
+  .shark-hack-page .shark-hero-tagline { margin-top: 22px; font-size: 22px; }
+  .shark-hack-page .shark-hero-tagline > span { display: block; }
+  .shark-hack-page .shark-hero-description { margin-top: 18px; font-size: 14px; line-height: 1.75; }
+  .shark-hack-page .shark-hero-actions { flex-direction: column; gap: 10px; margin-top: 24px; }
+  .shark-hack-page .shark-hero-actions > a { width: 100%; }
+  .shark-hack-page .shark-hero-note { font-size: 11px; }
+  .shark-hack-page .shark-hero-process { gap: 12px; margin-top: 29px; font-size: 8px; letter-spacing: 0.08em; }
+  .shark-hack-page .shark-event-facts > div { padding: 0 0 0 15px; }
+  .shark-hack-page .shark-event-facts dt { gap: 6px; font-size: 11px; }
+  .shark-hack-page .shark-event-facts dd { font-size: 14px; }
+  .shark-hack-page .shark-event-facts dd > span { font-size: 10px; line-height: 1.6; }
+}

@@ -258,7 +258,6 @@ export const teamMembers: TeamMember[] = [
 
 export const navLinks = [
   { label: 'Explore', path: '/' },
-  { label: 'Shark Hack 🦈', path: '/shark-hack', highlight: true },
   { label: 'Events', path: '/events' },
   { label: 'Projects', path: '/projects' },
   { label: 'Community', path: '/community' },
@@ -267,7 +266,6 @@ export const navLinks = [
 
 export const footerLinks = [
   { label: 'Explore', path: '/' },
-  { label: 'Shark Hack 2026', path: '/shark-hack' },
   { label: 'Events', path: '/events' },
   { label: 'Projects', path: '/projects' },
   { label: 'Community', path: '/community' },

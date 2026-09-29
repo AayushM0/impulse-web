@@ -1,199 +1,433 @@
+/* Scoped to Shark Hack so the rest of the site keeps its existing design. */
 .shark-hack-page {
-  --shark-accent: #60a5fa;
-  --shark-muted: #a2aabc;
+  --sh-blue: #60a5fa;
+  --sh-pink: #f472b6;
+  --sh-border: rgb(148 163 184 / 17%);
   background: #06070b;
   color: #f5f7ff;
+  min-height: 100vh;
 }
-
 .shark-hack-page ::selection { background: #be185d; color: #fff; }
+.shark-hack-page .shark-focus:focus-visible { outline: 2px solid #93c5fd; outline-offset: 5px; }
+.shark-hack-page > main { padding-top: 64px; }
+.shark-hack-page [role='tabpanel'][hidden] { display: none; }
+.shark-hack-page [role='tabpanel'] { min-height: calc(100svh - 140px); }
+.shark-hack-page [role='tabpanel']:focus-visible { outline: 2px solid #93c5fd; outline-offset: -4px; }
+.shark-hack-page main section[id] { scroll-margin-top: 150px; }
+.shark-hack-page .shark-content-width { max-width: 1360px; margin: 0 auto; padding: 0 40px; }
 
-.shark-hack-page > header a[href='/shark-hack'] {
-  color: #dbeafe;
-  background: linear-gradient(110deg, rgb(59 130 246 / 18%), rgb(236 72 153 / 20%));
-  border-color: rgb(96 165 250 / 55%);
-  box-shadow: 0 0 20px rgb(236 72 153 / 18%);
+/* Overview cards open the same detail panels as the top navigation. */
+.shark-hack-page .shark-overview-explore { padding-top: 20px; padding-bottom: 56px; }
+.shark-hack-page .shark-explore-heading { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 24px; }
+.shark-hack-page .shark-explore-heading h2 { font-size: clamp(26px, 3vw, 38px); font-weight: 600; letter-spacing: -0.04em; }
+.shark-hack-page .shark-explore-heading h2 span { color: #92baff; }
+.shark-hack-page .shark-explore-heading p { color: #aebdd2; font-size: 14px; }
+.shark-hack-page .shark-explore-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.shark-hack-page .shark-explore-card { display: flex; align-items: start; gap: 16px; text-align: left; padding: 24px; border: 1px solid var(--sh-border); border-radius: 17px; background: linear-gradient(135deg, #101b2d, #0c101b); transition: border-color 180ms ease, background 180ms ease; }
+.shark-hack-page .shark-explore-card:hover { border-color: #60a5fa; background: linear-gradient(135deg, #172a49, #21142b); }
+.shark-hack-page .shark-explore-card > .shark-nav-icon { width: 40px; height: 40px; border-radius: 12px; }
+.shark-hack-page .shark-explore-card > .shark-nav-icon svg { width: 22px; height: 22px; }
+.shark-hack-page .shark-explore-copy { display: flex; flex-direction: column; gap: 9px; }
+.shark-hack-page .shark-explore-copy strong { font-size: 18px; font-weight: 600; line-height: 1.3; }
+.shark-hack-page .shark-explore-copy > span { color: #aebdd2; font-size: 13px; line-height: 1.6; }
+.shark-hack-page .shark-explore-copy .shark-explore-action { display: flex; align-items: center; gap: 10px; margin-top: 6px; color: #93c5fd; font-weight: 500; }
+.shark-hack-page .shark-explore-action svg { width: 16px; height: 16px; }
+.shark-hack-page .shark-explore-register { border-color: rgb(244 114 182 / 35%); background: linear-gradient(125deg, #122543, #28152c); }
+@media (max-width: 1000px) {
+  .shark-hack-page .shark-explore-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .shark-hack-page .shark-explore-heading { display: block; }
+  .shark-hack-page .shark-explore-heading p { margin-top: 10px; }
+}
+@media (max-width: 600px) {
+  .shark-hack-page .shark-explore-grid { grid-template-columns: 1fr; }
+  .shark-hack-page .shark-explore-card { padding: 20px; }
 }
 
-.shark-hack-page > header a[href='/shark-hack'] > span { background: #f472b6; }
-.shark-hack-page > footer { background: #06070b; border-top-color: rgb(141 153 190 / 15%); }
-
-.shark-hack-page .shark-hero {
-  position: relative;
-  isolation: isolate;
-  overflow: hidden;
-  padding-top: 96px;
-  background: #06070b;
-}
-
-.shark-hack-page .shark-hero-atmosphere {
-  position: absolute;
-  z-index: -1;
-  inset: 0;
-  overflow: hidden;
-  pointer-events: none;
-  background: radial-gradient(ellipse at 88% 30%, #351027 0%, transparent 55%), radial-gradient(ellipse at 50% 60%, #0a2052 0%, #06070b 75%);
-}
-
-.shark-hack-page .shark-hero-art {
-  position: absolute;
-  right: -2%;
-  top: 35px;
-  width: 66%;
-  height: calc(100% - 110px);
-  object-fit: cover;
-  object-position: right center;
-  filter: saturate(1.15) contrast(1.06);
-  opacity: 0.85;
-  mask-image: linear-gradient(90deg, transparent, #000 30%);
-}
-
-.shark-hack-page .shark-hero-atmosphere::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(90deg, #06070b 4%, rgb(6 7 11 / 92%) 27%, rgb(6 7 11 / 42%) 48%, transparent 78%),
-    linear-gradient(0deg, #06070b 6%, transparent 45%, rgb(6 7 11 / 40%) 100%),
-    linear-gradient(125deg, transparent 45%, rgb(37 99 235 / 12%) 67%, rgb(219 39 119 / 20%));
-}
-
-.shark-hack-page .shark-hero-container { max-width: 1360px; margin: 0 auto; padding: 0 48px; }
+/* Preserve the cinematic hero, with a stronger pair of actions. */
+.shark-hack-page .shark-hero { position: relative; isolation: isolate; overflow: hidden; padding: 18px 0 42px; }
+.shark-hack-page .shark-hero-atmosphere { position: absolute; z-index: -1; inset: 0; overflow: hidden; pointer-events: none; background: radial-gradient(ellipse at 88% 30%, #351027, transparent 55%), radial-gradient(ellipse at 50% 60%, #0a2052, #06070b 75%); }
+.shark-hack-page .shark-hero-art { position: absolute; right: -2%; top: 0; width: 66%; height: calc(100% - 115px); object-fit: cover; object-position: right center; filter: saturate(1.15) contrast(1.06); opacity: 0.85; mask-image: linear-gradient(90deg, transparent, #000 30%); }
+.shark-hack-page .shark-hero-atmosphere::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, #06070b 4%, rgb(6 7 11 / 92%) 27%, rgb(6 7 11 / 42%) 48%, transparent 78%), linear-gradient(0deg, #06070b 6%, transparent 45%, rgb(6 7 11 / 40%)), linear-gradient(125deg, transparent 45%, rgb(37 99 235 / 12%) 67%, rgb(219 39 119 / 20%)); }
 .shark-hack-page .shark-hero-topline { display: flex; align-items: center; justify-content: space-between; }
-.shark-hack-page .shark-back-link { display: inline-flex; align-items: center; gap: 8px; color: #a2aabc; font-size: 12px; }
-.shark-hack-page .shark-back-link:hover { color: #fff; }
-.shark-hack-page .shark-edition { color: #9ba4c0; font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.18em; }
-
-.shark-hack-page .shark-hero-content {
-  position: relative;
-  padding: 90px 0 65px;
-  max-width: 850px;
-}
-
-.shark-hack-page .shark-hero-eyebrow {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  color: #f9a8d4;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 10px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-}
-
-.shark-hack-page .shark-hero-eyebrow > span { width: 22px; height: 2px; flex-shrink: 0; background: #f472b6; box-shadow: 0 0 18px rgb(236 72 153 / 50%); }
-
-.shark-hack-page .shark-hero-title {
-  margin-top: 25px;
-  font-size: clamp(70px, 8.7vw, 125px);
-  font-weight: 700;
-  line-height: 0.96;
-  letter-spacing: -0.065em;
-  color: #fff;
-  white-space: nowrap;
-}
-
-.shark-hack-page .shark-hero-title-accent { background: linear-gradient(110deg, #60a5fa 10%, #f472b6 100%); background-clip: text; -webkit-background-clip: text; color: transparent; }
-.shark-hack-page .shark-hero-tagline { margin-top: 27px; color: #9aa5bb; font-size: clamp(20px, 2vw, 27px); letter-spacing: -0.03em; line-height: 1.4; }
-.shark-hack-page .shark-hero-tagline > span { color: #eef1fa; }
-.shark-hack-page .shark-hero-description { max-width: 455px; margin-top: 21px; color: #acb6c9; font-size: 15px; line-height: 1.8; }
-
-.shark-hack-page .shark-hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; margin-top: 30px; }
+.shark-hack-page .shark-back-link { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; color: #a2aabc; }
+.shark-hack-page .shark-back-link:hover { color: white; }
+.shark-hack-page .shark-back-icon { width: 16px; height: 16px; transform: rotate(180deg); }
+.shark-hack-page .shark-hero-content { padding: 35px 0 38px; max-width: 890px; }
+.shark-hack-page .shark-hero-eyebrow { display: flex; align-items: center; gap: 12px; color: #f9a8d4; font: 11px 'JetBrains Mono', monospace; letter-spacing: 0.14em; text-transform: uppercase; }
+.shark-hack-page .shark-hero-eyebrow > span { width: 22px; height: 2px; background: var(--sh-pink); box-shadow: 0 0 18px rgb(236 72 153 / 50%); flex-shrink: 0; }
+.shark-hack-page .shark-hero-title { margin-top: 25px; font-size: clamp(70px, 8.7vw, 125px); font-weight: 700; line-height: 0.96; letter-spacing: -0.065em; color: #fff; white-space: nowrap; }
+.shark-hack-page .shark-hero-title > span { background: linear-gradient(110deg, #60a5fa 10%, #f472b6); background-clip: text; -webkit-background-clip: text; color: transparent; }
+.shark-hack-page .shark-hero-tagline { margin-top: 28px; color: #a9b6cc; font-size: clamp(23px, 2.4vw, 33px); letter-spacing: -0.035em; line-height: 1.4; }
+.shark-hack-page .shark-hero-tagline > span { color: #f5f7ff; }
+.shark-hack-page .shark-hero-description { max-width: 505px; margin-top: 20px; color: #b8c5da; font-size: 17px; line-height: 1.75; }
+.shark-hack-page .shark-hero-actions { display: flex; flex-wrap: wrap; align-items: stretch; gap: 14px; margin-top: 30px; }
 .shark-hack-page .shark-primary-button,
-.shark-hack-page .shark-secondary-button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 19px;
-  min-height: 50px;
-  padding: 12px 22px;
-  border: 1px solid transparent;
-  border-radius: 4px;
-  font-size: 13px;
-  font-weight: 600;
-  transition: background-color 160ms ease, border-color 160ms ease;
+.shark-hack-page .shark-secondary-button { display: inline-flex; align-items: center; justify-content: space-between; gap: 24px; min-height: 76px; padding: 14px 16px 14px 22px; border: 1px solid transparent; border-radius: 13px; font-size: 17px; font-weight: 600; transition: transform 200ms ease, box-shadow 200ms ease; }
+.shark-hack-page .shark-primary-button { background: linear-gradient(110deg, #2563eb, #db2777); box-shadow: 0 10px 30px rgb(219 39 119 / 20%); color: white; }
+.shark-hack-page .shark-secondary-button { background: linear-gradient(120deg, #10284e, #22142a) padding-box, linear-gradient(110deg, #60a5fa, #f472b6) border-box; color: white; }
+.shark-hack-page .shark-secondary-button small { display: block; margin-bottom: 4px; color: #b8c8e0; font-size: 10px; font-weight: 400; letter-spacing: 0.035em; }
+.shark-hack-page .shark-button-arrow { width: 40px; height: 40px; display: grid; place-items: center; border-radius: 10px; background: rgb(255 255 255 / 13%); border: 1px solid rgb(255 255 255 / 17%); flex-shrink: 0; }
+.shark-hack-page .shark-secondary-button .shark-button-arrow { background: linear-gradient(130deg, #2563eb, #db2777); }
+.shark-hack-page .shark-button-arrow svg { width: 19px; height: 19px; transition: transform 200ms ease; }
+.shark-hack-page .shark-primary-button:hover,
+.shark-hack-page .shark-secondary-button:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgb(59 130 246 / 23%); }
+.shark-hack-page .shark-secondary-button:hover svg { transform: translateX(3px); }
+.shark-hack-page .shark-rewards-preview { display: inline-flex; align-items: center; gap: 12px; margin-top: 23px; padding: 12px 16px; border: 1px solid rgb(244 114 182 / 40%); border-radius: 12px; background: linear-gradient(110deg, rgb(37 99 235 / 20%), rgb(219 39 119 / 20%)); color: #f9c3df; font-size: 14px; font-weight: 500; text-align: left; }
+.shark-hack-page .shark-rewards-preview:hover { border-color: #f472b6; background: #28172e; }
+.shark-hack-page .shark-rewards-preview > svg { width: 19px; height: 19px; flex-shrink: 0; }
+.shark-hack-page .shark-rewards-preview > span > span { padding: 0 4px; color: #93c5fd; }
+.shark-hack-page .shark-hero-note { display: flex; align-items: center; gap: 8px; margin-top: 17px; color: #a8b6cc; font-size: 13px; }
+.shark-hack-page .shark-hero-note svg { width: 16px; height: 16px; flex-shrink: 0; color: #93c5fd; }
+.shark-hack-page .shark-hero-process { display: flex; align-items: center; gap: 17px; margin-top: 30px; font: 10px 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: 0.12em; color: #93c5fd; }
+.shark-hack-page .shark-hero-process > span:nth-of-type(even) { color: #f9a8d4; }
+.shark-hack-page .shark-hero-process svg { width: 12px; height: 12px; color: #7e8aa5; }
+
+/* Facts have a clear label, prominent value and separate confirmation note. */
+.shark-hack-page .shark-event-facts { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; position: relative; }
+.shark-hack-page .shark-fact-card { position: relative; padding: 23px; border-radius: 17px; border: 1px solid rgb(96 165 250 / 25%); background: radial-gradient(ellipse at top right, rgb(37 99 235 / 18%), transparent 80%), #0a111e; overflow: hidden; transition: transform 220ms ease, border-color 220ms ease; }
+.shark-hack-page .shark-fact-card::before { content: ''; position: absolute; inset: 0 0 auto; height: 2px; background: linear-gradient(90deg, #3b82f6, #ec4899); }
+.shark-hack-page .shark-fact-card:nth-child(even) { background: radial-gradient(ellipse at top right, rgb(219 39 119 / 15%), transparent 80%), #10101c; border-color: rgb(244 114 182 / 25%); }
+.shark-hack-page .shark-fact-card:hover { transform: translateY(-4px); border-color: #60a5fa; }
+.shark-hack-page .shark-fact-card:nth-child(even):hover { border-color: #f472b6; }
+.shark-hack-page .shark-fact-card dt { display: flex; align-items: center; gap: 10px; font-size: 12px; color: #b1bfd6; }
+.shark-hack-page .shark-fact-icon { display: grid; place-items: center; width: 37px; height: 37px; border-radius: 10px; background: rgb(59 130 246 / 15%); border: 1px solid rgb(96 165 250 / 22%); color: #93c5fd; flex-shrink: 0; }
+.shark-hack-page .shark-fact-icon svg { width: 18px; height: 18px; }
+.shark-hack-page .shark-fact-card:nth-child(even) .shark-fact-icon { color: #f9a8d4; background: rgb(219 39 119 / 14%); border-color: rgb(244 114 182 / 22%); }
+.shark-hack-page .shark-fact-card dd { margin-top: 22px; }
+.shark-hack-page .shark-fact-card strong { display: block; font-size: clamp(32px, 3.15vw, 44px); line-height: 1.05; font-weight: 600; letter-spacing: -0.055em; }
+.shark-hack-page .shark-fact-prize strong { color: #f9a8d4; font-size: clamp(29px, 2.8vw, 39px); }
+.shark-hack-page .shark-fact-unit { display: block; margin-top: 9px; font-size: 15px; color: #d3deed; }
+.shark-hack-page .shark-fact-note { display: flex; align-items: center; gap: 6px; border-top: 1px solid var(--sh-border); margin-top: 20px; padding-top: 14px; min-height: 45px; color: #a5b3c9; font-size: 11px; line-height: 1.5; }
+.shark-hack-page .shark-fact-note svg { width: 13px; height: 13px; flex-shrink: 0; color: #93c5fd; }
+
+/* One event panel is visible at a time; tabs stay available above it. */
+.shark-hack-page .shark-section-nav { position: sticky; top: 64px; z-index: 30; background: rgb(6 7 11 / 94%); border-block: 1px solid var(--sh-border); backdrop-filter: blur(20px); }
+.shark-hack-page .shark-section-nav-inner { display: flex; align-items: center; gap: 8px; padding-top: 12px; padding-bottom: 12px; overflow-x: auto; }
+.shark-hack-page .shark-section-link,
+.shark-hack-page .shark-section-register { display: inline-flex; flex-shrink: 0; align-items: center; gap: 9px; padding: 10px 13px; white-space: nowrap; border: 1px solid transparent; border-radius: 9px; color: #b4bed1; font-size: 14px; }
+.shark-hack-page .shark-section-link:hover { color: white; background: #111b2b; }
+.shark-hack-page .shark-section-link[aria-selected='true'],
+.shark-hack-page .shark-section-register[aria-selected='true'] { background: linear-gradient(110deg, rgb(37 99 235 / 20%), rgb(219 39 119 / 12%)); border-color: rgb(96 165 250 / 35%); color: white; }
+.shark-hack-page .shark-nav-icon { position: relative; display: grid; place-items: center; width: 24px; height: 24px; border-radius: 7px; color: #93c5fd; background: rgb(96 165 250 / 8%); flex-shrink: 0; }
+.shark-hack-page .shark-nav-icon > svg { width: 16px; height: 16px; }
+.shark-hack-page .shark-nav-icon-timeline { color: #7dd3fc; }
+.shark-hack-page .shark-nav-icon-shark-room,
+.shark-hack-page .shark-nav-icon-partners { color: #f9a8d4; background: rgb(244 114 182 / 8%); }
+.shark-hack-page .shark-nav-icon-prizes { color: #fcd34d; background: radial-gradient(circle, rgb(251 191 36 / 18%), transparent 75%); }
+.shark-hack-page .shark-nav-icon-prizes > svg:first-child { fill: rgb(251 191 36 / 18%); filter: drop-shadow(0 0 4px rgb(251 191 36 / 50%)); stroke-width: 2; }
+.shark-hack-page .shark-nav-icon-prizes > .shark-trophy-sparkle { position: absolute; width: 9px; height: 9px; top: -2px; right: -3px; color: #fef3c7; }
+.shark-hack-page .shark-section-register { margin-left: auto; min-height: 48px; padding: 12px 18px; gap: 14px; border-radius: 12px; color: #f5f7ff; font-size: 16px; font-weight: 500; background: linear-gradient(110deg, #101c32, #1c111e) padding-box, linear-gradient(110deg, #335c8c, #673149) border-box; }
+.shark-hack-page .shark-section-register:hover { box-shadow: 0 0 22px rgb(96 165 250 / 12%); }
+.shark-hack-page .shark-section-register[aria-selected='true'] { background: linear-gradient(110deg, #152b4d, #28172e) padding-box, linear-gradient(110deg, #60a5fa, #f472b6) border-box; border-color: transparent; }
+.shark-hack-page .shark-section-register svg { width: 18px; height: 18px; }
+.shark-hack-page .shark-section { padding: 56px 0; border-bottom: 1px solid var(--sh-border); }
+.shark-hack-page .shark-eyebrow { display: flex; align-items: center; gap: 12px; margin-bottom: 23px; color: #93c5fd; font: 11px 'JetBrains Mono', monospace; letter-spacing: 0.1em; text-transform: uppercase; line-height: 1.6; }
+.shark-hack-page .shark-eyebrow > span { display: grid; place-items: center; width: 30px; height: 30px; border: 1px solid rgb(96 165 250 / 30%); border-radius: 8px; background: rgb(37 99 235 / 8%); flex-shrink: 0; }
+.shark-hack-page .shark-eyebrow > span svg { width: 16px; height: 16px; }
+.shark-hack-page .shark-section h2 { font-size: clamp(34px, 4.3vw, 58px); font-weight: 600; line-height: 1.07; letter-spacing: -0.045em; }
+.shark-hack-page .shark-section h2 em { font-style: normal; color: #92baff; }
+.shark-hack-page .shark-section-intro { max-width: 460px; color: #aebdd2; font-size: 17px; line-height: 1.75; }
+.shark-hack-page .shark-section-heading { display: flex; justify-content: space-between; align-items: flex-end; gap: 40px; margin-bottom: 44px; }
+.shark-hack-page .shark-section-heading > .shark-section-intro { max-width: 330px; }
+
+/* Every stage follows the same side of one continuous timeline. */
+.shark-hack-page .shark-journey { max-width: 960px; margin: 0 auto; display: grid; gap: 24px; }
+.shark-hack-page .shark-journey-step { position: relative; display: grid; grid-template-columns: 64px minmax(0, 1fr); gap: 32px; align-items: start; }
+.shark-hack-page .shark-journey-step::before { content: ''; position: absolute; left: 30px; top: 42px; bottom: -66px; width: 4px; background: linear-gradient(#3b82f6, #ec4899); opacity: 0.65; }
+.shark-hack-page .shark-journey-step:last-child::before { display: none; }
+.shark-hack-page .shark-step-marker { position: relative; z-index: 1; grid-column: 1; grid-row: 1; justify-self: center; display: grid; place-items: center; margin-top: 24px; width: 54px; height: 54px; border-radius: 18px; color: white; background: linear-gradient(135deg, #38bdf8, #2563eb); border: 1px solid #7dd3fc; box-shadow: 0 0 0 8px #06070b, 0 0 30px rgb(59 130 246 / 25%); }
+.shark-hack-page .shark-step-marker svg { width: 25px; height: 25px; }
+.shark-hack-page .shark-journey-step:nth-child(even) .shark-step-marker,
+.shark-hack-page .shark-journey-finale .shark-step-marker { background: linear-gradient(135deg, #f472b6, #be185d); border-color: #f9a8d4; }
+.shark-hack-page .shark-step-card { position: relative; grid-row: 1; grid-column: 2; padding: 25px 28px; border-radius: 18px; border: 1px solid rgb(96 165 250 / 30%); background: linear-gradient(135deg, #10203a, #0a0e18); transition: border-color 220ms ease, box-shadow 220ms ease; }
+.shark-hack-page .shark-step-card::before { content: ''; position: absolute; top: 50px; right: 100%; width: 32px; height: 2px; background: #60a5fa; }
+.shark-hack-page .shark-journey-step:nth-child(even) .shark-step-card { background: linear-gradient(135deg, #211327, #0b101b); border-color: rgb(244 114 182 / 30%); }
+.shark-hack-page .shark-journey-step:nth-child(even) .shark-step-card::before { background: #f472b6; }
+.shark-hack-page .shark-step-card:hover { border-color: #93c5fd; box-shadow: 0 8px 35px rgb(59 130 246 / 12%); }
+.shark-hack-page .shark-step-label { display: flex; justify-content: space-between; gap: 12px; color: #93c5fd; font: 11px 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: 0.06em; }
+.shark-hack-page .shark-step-label > span { color: #9cabc3; text-align: right; font-size: 9px; }
+.shark-hack-page .shark-step-timing { display: flex; align-items: flex-start; gap: 7px; margin: 17px 0 12px; color: #b5d3ff; font-size: 12px; line-height: 1.6; }
+.shark-hack-page .shark-step-timing svg { width: 15px; height: 15px; margin-top: 2px; flex-shrink: 0; }
+.shark-hack-page .shark-step-card h3 { font-size: 26px; font-weight: 600; line-height: 1.15; letter-spacing: -0.025em; }
+.shark-hack-page .shark-step-description { margin-top: 14px; color: #b4c3d9; font-size: 15px; line-height: 1.75; }
+.shark-hack-page .shark-journey-finale .shark-step-card { background: linear-gradient(130deg, #2f142b, #131a30); border-color: #db2777; }
+.shark-hack-page .shark-journey-finale .shark-step-timing,
+.shark-hack-page .shark-journey-finale .shark-step-label { color: #f9a8d4; }
+.shark-hack-page .shark-schedule-note { display: flex; align-items: flex-start; gap: 12px; margin-top: 35px; padding: 18px 21px; border: 1px dashed rgb(96 165 250 / 30%); border-radius: 10px; font-size: 13px; color: #9fb2cf; line-height: 1.7; }
+.shark-hack-page .shark-schedule-note > svg { width: 18px; height: 18px; flex-shrink: 0; margin-top: 2px; color: #93c5fd; }
+.shark-hack-page .shark-schedule-note strong { color: #d0e1ff; font-weight: 500; }
+
+/* Explore what shortlisted teams do in the final. */
+.shark-hack-page .shark-room-section { background: radial-gradient(ellipse at 85% 60%, rgb(219 39 119 / 9%), transparent 65%); }
+.shark-hack-page .shark-room-section h2 em { color: #f9a8d4; }
+.shark-hack-page .shark-room-choices { position: relative; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 30px; margin-bottom: 20px; }
+.shark-hack-page .shark-room-choices::before { content: ''; position: absolute; left: 10%; right: 10%; top: 50%; height: 2px; background: linear-gradient(90deg, #60a5fa, #f472b6); opacity: 0.6; }
+.shark-hack-page .shark-room-choice { position: relative; display: flex; align-items: center; gap: 15px; padding: 20px; border: 1px solid var(--sh-border); border-radius: 16px; background: #0c111c; color: #b8c6db; font-size: 18px; font-weight: 500; text-align: left; transition: border-color 200ms ease, background 200ms ease; }
+.shark-hack-page .shark-room-choice:hover { border-color: #60a5fa; background: #121e31; }
+.shark-hack-page .shark-room-choice[aria-pressed='true'] { color: white; border-color: transparent; background: linear-gradient(110deg, #14294e, #2a1430) padding-box, linear-gradient(110deg, #60a5fa, #f472b6) border-box; box-shadow: 0 8px 26px rgb(37 99 235 / 12%); }
+.shark-hack-page .shark-room-choice-label { font-family: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif; }
+.shark-hack-page .shark-room-choice-label strong { display: block; font-size: 22px; font-weight: 600; line-height: 1.2; letter-spacing: -0.025em; }
+.shark-hack-page .shark-room-choice-label small { display: block; margin-bottom: 6px; color: #93c5fd; font-size: 10px; font-weight: 600; line-height: 1.3; text-transform: uppercase; letter-spacing: 0.1em; }
+.shark-hack-page .shark-room-choice[aria-pressed='true'] .shark-room-choice-label small { color: #f9a8d4; }
+.shark-hack-page .shark-room-choice-connector { position: absolute; right: -25px; top: calc(50% - 9px); width: 18px; height: 18px; color: #f9a8d4; background: #0b0911; pointer-events: none; }
+.shark-hack-page .shark-room-detail { display: grid; grid-template-columns: 1.3fr 0.7fr; gap: 30px; align-items: center; padding: 44px; border: 1px solid rgb(96 165 250 / 25%); border-radius: 22px; background: radial-gradient(ellipse at right, rgb(219 39 119 / 15%), transparent 60%), #0c1423; min-height: 360px; }
+.shark-hack-page .shark-room-kicker { color: #f9a8d4; font: 11px 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: 0.08em; line-height: 1.8; }
+.shark-hack-page .shark-room-detail h3 { max-width: 620px; margin-top: 18px; font-size: clamp(28px, 3vw, 42px); font-weight: 500; letter-spacing: -0.035em; line-height: 1.15; }
+.shark-hack-page .shark-room-detail-copy > p:not(.shark-room-kicker) { margin-top: 22px; color: #b4c6de; font-size: 17px; line-height: 1.8; }
+.shark-hack-page .shark-room-caption { display: flex; align-items: flex-start; gap: 10px; margin-top: 25px; color: #c5d9fc; font-size: 13px; line-height: 1.7; }
+.shark-hack-page .shark-room-caption svg { width: 18px; height: 18px; color: #f9a8d4; flex-shrink: 0; margin-top: 2px; }
+.shark-hack-page .shark-room-art { position: relative; display: grid; place-items: center; height: 250px; isolation: isolate; }
+.shark-hack-page .shark-room-orbit { position: absolute; width: 230px; height: 230px; border: 1px solid rgb(96 165 250 / 30%); border-radius: 50%; transform: rotate(-25deg) scaleY(0.7); }
+.shark-hack-page .shark-room-orbit:nth-child(2) { transform: rotate(45deg) scaleY(0.7); border-color: rgb(244 114 182 / 40%); }
+.shark-hack-page .shark-room-art-icon { display: grid; place-items: center; width: 128px; height: 128px; border-radius: 32px; transform: rotate(-8deg); color: white; background: linear-gradient(135deg, #38bdf8, #2563eb 40%, #db2777); box-shadow: 0 20px 70px rgb(219 39 119 / 30%), inset 0 1px 1px rgb(255 255 255 / 55%); }
+.shark-hack-page .shark-room-art-icon svg { width: 62px; height: 62px; stroke-width: 1.5; }
+.shark-hack-page .shark-room-art-label { position: absolute; bottom: 0; color: #a4b5d0; font: 10px 'JetBrains Mono', monospace; letter-spacing: 0.2em; }
+.shark-hack-page .shark-room-controls { grid-column: 1 / -1; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-top: 24px; border-top: 1px solid var(--sh-border); }
+.shark-hack-page .shark-room-previous,
+.shark-hack-page .shark-room-next { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 48px; padding: 12px 18px; border-radius: 10px; font-size: 14px; font-weight: 500; }
+.shark-hack-page .shark-room-previous { color: #d0daeb; border: 1px solid var(--sh-border); }
+.shark-hack-page .shark-room-previous:disabled { opacity: 0.35; cursor: not-allowed; }
+.shark-hack-page .shark-room-previous:not(:disabled):hover { background: #1a2840; }
+.shark-hack-page .shark-room-next { background: linear-gradient(110deg, #2563eb, #db2777); color: white; box-shadow: 0 6px 20px rgb(219 39 119 / 15%); }
+.shark-hack-page .shark-room-next:hover { filter: brightness(1.15); }
+.shark-hack-page .shark-room-controls button svg { width: 17px; height: 17px; flex-shrink: 0; }
+.shark-hack-page .shark-room-progress { display: flex; gap: 6px; }
+.shark-hack-page .shark-room-progress > span { width: 18px; height: 4px; border-radius: 3px; background: #30405a; }
+.shark-hack-page .shark-room-progress > .is-active { background: #f472b6; }
+
+/* Native FAQ disclosures. */
+.shark-hack-page summary { list-style: none; cursor: pointer; }
+.shark-hack-page summary::-webkit-details-marker { display: none; }
+.shark-hack-page .shark-disclosure-icon { display: grid; place-items: center; width: 33px; height: 33px; border-radius: 50%; border: 1px solid rgb(148 163 184 / 25%); background: rgb(148 163 184 / 6%); flex-shrink: 0; margin-left: auto; color: #93c5fd; }
+.shark-hack-page .shark-disclosure-icon svg { width: 16px; height: 16px; transition: transform 200ms ease; }
+.shark-hack-page details[open] > summary .shark-disclosure-icon svg { transform: rotate(180deg); }
+
+/* Rewards stay prominent without announcing prize amounts. */
+.shark-hack-page .shark-prizes-section { background: radial-gradient(ellipse at 0% 60%, rgb(37 99 235 / 10%), transparent 55%), radial-gradient(ellipse at 100% 60%, rgb(236 72 153 / 10%), transparent 60%); }
+.shark-hack-page .shark-section-symbol { display: grid; place-items: center; width: 76px; height: 76px; border-radius: 20px; border: 1px solid rgb(244 114 182 / 20%); background: rgb(219 39 119 / 8%); transform: rotate(8deg); color: #f9a8d4; }
+.shark-hack-page .shark-section-symbol svg { width: 33px; height: 33px; }
+.shark-hack-page .shark-prize-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; }
+.shark-hack-page .shark-prize-card { position: relative; overflow: hidden; isolation: isolate; padding: 35px; border: 1px solid rgb(96 165 250 / 35%); border-radius: 20px; background: linear-gradient(135deg, #12294f, #0c1224); }
+.shark-hack-page .shark-prize-card-women { border-color: rgb(244 114 182 / 35%); background: linear-gradient(135deg, #34152e, #170e1f); }
+.shark-hack-page .shark-prize-card-goodies { border-color: rgb(244 114 182 / 40%); background: linear-gradient(135deg, #291a3b, #151b34); }
+.shark-hack-page .shark-prize-top { display: flex; align-items: center; justify-content: space-between; gap: 15px; margin-bottom: 35px; color: #a6c8ff; font: 10px 'JetBrains Mono', monospace; letter-spacing: 0.1em; }
+.shark-hack-page .shark-prize-icon { display: grid; place-items: center; width: 49px; height: 49px; border-radius: 14px; border: 1px solid rgb(96 165 250 / 30%); background: rgb(96 165 250 / 10%); }
+.shark-hack-page .shark-prize-icon svg { width: 24px; height: 24px; }
+.shark-hack-page .shark-prize-card h3 { font-size: clamp(30px, 3vw, 42px); font-weight: 600; letter-spacing: -0.035em; line-height: 1.12; }
+.shark-hack-page .shark-prize-description { position: relative; margin-top: 21px; max-width: 390px; font-size: 15px; color: #b5c9e5; line-height: 1.75; }
+.shark-hack-page .shark-prize-card-women h3 { font-size: clamp(28px, 2.6vw, 36px); }
+.shark-hack-page .shark-prize-card-women h3 > span { color: #f9a8d4; }
+.shark-hack-page .shark-prize-card-women .shark-prize-top { color: #f9a8d4; }
+.shark-hack-page .shark-prize-card-women .shark-prize-icon { border-color: rgb(244 114 182 / 30%); background: rgb(244 114 182 / 10%); }
+.shark-hack-page .shark-prize-card-women .shark-prize-description { color: #d5bbcf; }
+.shark-hack-page .shark-prize-watermark { position: absolute; z-index: -1; bottom: -25px; right: -20px; width: 200px; height: 200px; color: rgb(96 165 250 / 7%); transform: rotate(-15deg); }
+.shark-hack-page .shark-prize-card-women .shark-prize-watermark { color: rgb(244 114 182 / 7%); }
+.shark-hack-page .shark-prize-cta { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 28px; margin-top: 25px; border: 1px solid var(--sh-border); border-radius: 16px; background: rgb(96 165 250 / 5%); }
+.shark-hack-page .shark-prize-cta h3 { font-size: 22px; font-weight: 500; line-height: 1.4; }
+.shark-hack-page .shark-prize-cta p { margin-top: 8px; font-size: 14px; color: #b4c3d9; }
+.shark-hack-page .shark-prize-cta .shark-primary-button { min-height: 58px; flex-shrink: 0; }
+.shark-hack-page .shark-prize-cta .shark-primary-button > svg { width: 20px; height: 20px; }
+
+/* Reserved partner areas contain no unconfirmed names or logos. */
+.shark-hack-page .shark-partner-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
+.shark-hack-page .shark-partner-card { padding: 28px; border: 1px solid var(--sh-border); border-radius: 20px; background: linear-gradient(135deg, #0d1b30, #15101e); }
+.shark-hack-page .shark-partner-heading { display: flex; align-items: center; gap: 16px; }
+.shark-hack-page .shark-partner-heading h3 { font-size: 24px; font-weight: 500; letter-spacing: -0.025em; line-height: 1.3; }
+.shark-hack-page .shark-partner-empty { display: grid; place-items: center; min-height: 180px; margin-top: 28px; padding: 24px; border: 1px dashed rgb(148 163 184 / 25%); border-radius: 14px; color: #9eacc5; font-size: 14px; }
+
+/* Native disclosures provide keyboard interaction without extra state. */
+.shark-hack-page .shark-faq-layout { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 65px; align-items: start; }
+.shark-hack-page .shark-faq-list { display: grid; gap: 12px; }
+.shark-hack-page .shark-faq-item { border: 1px solid var(--sh-border); border-radius: 13px; background: #0c1019; transition: border-color 200ms ease; }
+.shark-hack-page .shark-faq-item:hover { border-color: rgb(96 165 250 / 40%); }
+.shark-hack-page .shark-faq-item[open] { border-color: rgb(96 165 250 / 45%); background: linear-gradient(120deg, #101e33, #171320); }
+.shark-hack-page .shark-faq-item summary { display: flex; align-items: center; gap: 17px; padding: 23px; border-radius: 13px; font-size: 17px; line-height: 1.5; font-weight: 500; }
+.shark-hack-page .shark-faq-item > p { margin: 0 23px 23px; padding-top: 19px; border-top: 1px solid var(--sh-border); color: #b3c3db; font-size: 15px; line-height: 1.8; }
+
+/* Registration has a distinct entry area and an explicit unavailable state. */
+.shark-hack-page .shark-registration-section { background: radial-gradient(ellipse at 15% 100%, rgb(37 99 235 / 12%), transparent 65%), radial-gradient(ellipse at 95% 100%, rgb(219 39 119 / 10%), transparent 60%); }
+.shark-hack-page .shark-registration-heading { display: flex; align-items: center; justify-content: space-between; gap: 24px; margin-bottom: 32px; }
+.shark-hack-page .shark-registration-heading h2 { font-size: clamp(42px, 5vw, 68px); font-weight: 700; letter-spacing: -0.05em; }
+.shark-hack-page .shark-registration-heading > div > p:last-child { margin-top: 16px; color: #afc0d9; font-size: 17px; line-height: 1.6; }
+.shark-hack-page .shark-registration-badge { display: inline-flex; align-items: center; gap: 9px; padding: 10px 16px; border: 1px solid rgb(96 165 250 / 30%); border-radius: 30px; background: #101e35; color: #bfdbfe; white-space: nowrap; font-size: 13px; }
+.shark-hack-page .shark-registration-badge svg { width: 16px; height: 16px; }
+.shark-hack-page .shark-registration-ticket { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 24px; align-items: start; }
+.shark-hack-page .shark-registration-copy,
+.shark-hack-page .shark-registration-prep { padding: 34px; border: 1px solid rgb(96 165 250 / 25%); border-radius: 22px; }
+.shark-hack-page .shark-registration-copy { background: linear-gradient(135deg, #142b4c, #111629 65%, #251429); border-color: rgb(96 165 250 / 45%); }
+.shark-hack-page .shark-registration-prep { background: #0d1421; }
+.shark-hack-page .shark-registration-card-top { display: flex; align-items: center; justify-content: space-between; gap: 20px; color: #a8caff; font: 10px 'JetBrains Mono', monospace; letter-spacing: 0.1em; }
+.shark-hack-page .shark-registration-copy h3 { margin-top: 24px; font-size: clamp(28px, 3vw, 38px); font-weight: 600; line-height: 1.12; letter-spacing: -0.035em; }
+.shark-hack-page .shark-registration-copy h3 > span { color: #a4c5ff; }
+.shark-hack-page .shark-registration-facts { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-top: 26px; }
+.shark-hack-page .shark-registration-facts > div { padding: 16px; border: 1px solid rgb(148 163 184 / 16%); border-radius: 12px; background: rgb(6 7 11 / 25%); }
+.shark-hack-page .shark-registration-facts dt { color: #a8b8ce; font-size: 12px; }
+.shark-hack-page .shark-registration-facts dd { margin-top: 9px; font-size: 21px; font-weight: 600; line-height: 1.3; letter-spacing: -0.025em; }
+.shark-hack-page .shark-registration-facts dd > span { display: block; margin-top: 5px; font-size: 12px; font-weight: 400; color: #acbfdc; letter-spacing: 0; }
+.shark-hack-page .shark-registration-status { display: flex; align-items: flex-start; gap: 12px; margin-top: 24px; padding-top: 22px; border-top: 1px solid var(--sh-border); }
+.shark-hack-page .shark-registration-status > svg { width: 19px; height: 19px; color: #93c5fd; margin-top: 2px; flex-shrink: 0; }
+.shark-hack-page .shark-registration-status strong { font-size: 16px; color: #e2ebff; font-weight: 500; }
+.shark-hack-page .shark-registration-status p { margin-top: 6px; font-size: 12px; color: #a8b8ce; line-height: 1.7; }
+.shark-hack-page .shark-registration-unavailable { display: flex; align-items: center; justify-content: center; gap: 10px; width: 100%; min-height: 56px; margin-top: 20px; padding: 14px; border: 1px solid rgb(96 165 250 / 25%); border-radius: 12px; background: linear-gradient(110deg, #253d68, #442541); color: #c3cde0; font-size: 15px; font-weight: 500; cursor: not-allowed; }
+.shark-hack-page .shark-registration-unavailable svg { width: 18px; height: 18px; flex-shrink: 0; }
+.shark-hack-page .shark-registration-reassurance { display: flex; align-items: flex-start; gap: 8px; margin-top: 14px; font-size: 12px; color: #aec5e5; line-height: 1.6; }
+.shark-hack-page .shark-registration-reassurance svg { width: 16px; height: 16px; flex-shrink: 0; margin-top: 2px; }
+.shark-hack-page .shark-registration-prep > .shark-registration-prep-label { margin: 0 0 13px; color: #f9a8d4; font: 10px 'JetBrains Mono', monospace; letter-spacing: 0.12em; }
+.shark-hack-page .shark-registration-prep h3 { font-size: 23px; font-weight: 500; letter-spacing: -0.025em; }
+.shark-hack-page .shark-registration-prep ul { display: grid; gap: 10px; margin-top: 25px; }
+.shark-hack-page .shark-registration-prep li { display: flex; align-items: center; gap: 12px; padding: 14px; border: 1px solid var(--sh-border); border-radius: 12px; background: #101b2e; font-size: 15px; color: #d0daeb; }
+.shark-hack-page .shark-registration-prep li > span { display: grid; place-items: center; width: 25px; height: 25px; flex-shrink: 0; border-radius: 50%; border: 1px solid rgb(96 165 250 / 25%); background: rgb(37 99 235 / 10%); color: #93c5fd; }
+.shark-hack-page .shark-registration-prep li svg { width: 13px; height: 13px; }
+.shark-hack-page .shark-registration-prep > p { margin-top: 24px; font-size: 12px; line-height: 1.7; color: #9fafc9; }
+.shark-hack-page .shark-share-button { display: inline-flex; align-items: center; gap: 10px; margin-top: 22px; border: 1px solid rgb(244 114 182 / 30%); border-radius: 9px; background: rgb(219 39 119 / 10%); padding: 12px 15px; font-size: 13px; color: #f9a8d4; text-align: left; }
+.shark-hack-page .shark-share-button:hover { background: rgb(219 39 119 / 18%); }
+.shark-hack-page .shark-share-button svg { width: 16px; height: 16px; flex-shrink: 0; }
+.shark-hack-page .shark-registration-copy .shark-copy-status { margin-top: 9px; min-height: 20px; font-size: 12px; line-height: 1.6; color: #bfdbfe; }
+
+/* Colourful icon tiles use the same blue/pink family across the page. */
+.shark-hack-page .shark-colour-icon,
+.shark-hack-page .shark-fact-icon,
+.shark-hack-page .shark-prize-icon { display: grid; place-items: center; width: 44px; height: 44px; flex-shrink: 0; border-radius: 13px; border: 1px solid rgb(125 211 252 / 55%); color: white; background: linear-gradient(135deg, #38bdf8, #2563eb); box-shadow: 0 5px 18px rgb(37 99 235 / 20%), inset 0 1px 0 rgb(255 255 255 / 25%); }
+.shark-hack-page .shark-colour-icon svg { width: 22px; height: 22px; }
+.shark-hack-page .shark-fact-icon svg { width: 21px; height: 21px; }
+.shark-hack-page .shark-fact-card:nth-child(even) .shark-fact-icon,
+.shark-hack-page .shark-prize-card-women .shark-prize-icon,
+.shark-hack-page .shark-prize-card-goodies .shark-prize-icon,
+.shark-hack-page .shark-partner-card:nth-child(even) .shark-colour-icon,
+.shark-hack-page .shark-room-choice:nth-child(even) .shark-colour-icon,
+.shark-hack-page .shark-faq-item:nth-child(even) .shark-colour-icon,
+.shark-hack-page .shark-registration-prep li:nth-child(even) .shark-colour-icon { color: white; background: linear-gradient(135deg, #f472b6, #be185d); border-color: rgb(249 168 212 / 55%); box-shadow: 0 5px 18px rgb(219 39 119 / 20%), inset 0 1px 0 rgb(255 255 255 / 25%); }
+.shark-hack-page .shark-prize-icon { width: 56px; height: 56px; border-radius: 17px; }
+.shark-hack-page .shark-hero-process { flex-wrap: wrap; }
+.shark-hack-page .shark-hero-process > span { display: inline-flex; align-items: center; gap: 7px; }
+.shark-hack-page .shark-hero-process > span svg { width: 18px; height: 18px; color: currentColor; }
+.shark-hack-page .shark-faq-icon { width: 35px; height: 35px; border-radius: 10px; }
+.shark-hack-page .shark-faq-icon svg { width: 18px; height: 18px; }
+.shark-hack-page .shark-registration-prep li > .shark-colour-icon { width: 30px; height: 30px; border-radius: 9px; }
+.shark-hack-page .shark-registration-prep li > .shark-colour-icon svg { width: 16px; height: 16px; }
+
+@media (max-width: 1100px) {
+  .shark-hack-page .shark-faq-layout { gap: 35px; grid-template-columns: 1fr 1fr; }
+  .shark-hack-page .shark-prize-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .shark-hack-page .shark-prize-card-women { grid-column: 1 / -1; }
+  .shark-hack-page .shark-event-facts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .shark-hack-page .shark-registration-copy,
+  .shark-hack-page .shark-registration-prep { padding: 30px; }
 }
-
-.shark-hack-page .shark-primary-button { background: linear-gradient(110deg, #2563eb, #db2777); color: #fff; box-shadow: 0 7px 30px rgb(219 39 119 / 25%); }
-.shark-hack-page .shark-primary-button:hover { background: linear-gradient(110deg, #1d4ed8, #be185d); box-shadow: 0 7px 35px rgb(219 39 119 / 35%); }
-.shark-hack-page .shark-secondary-button { background: rgb(6 7 11 / 55%); border-color: rgb(96 165 250 / 50%); color: #dbeafe; }
-.shark-hack-page .shark-secondary-button:hover { background: rgb(59 130 246 / 16%); border-color: #60a5fa; }
-.shark-hack-page .shark-hero-note { margin-top: 15px; color: #98a2b8; font-size: 12px; }
-
-.shark-hack-page .shark-hero-process {
-  display: flex;
-  align-items: center;
-  gap: 17px;
-  margin-top: 40px;
-  color: #a8b0ce;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 9px;
-  text-transform: uppercase;
-  letter-spacing: 0.13em;
+@media (max-width: 767px) {
+  .shark-hack-page .shark-content-width { padding-left: 24px; padding-right: 24px; }
+  .shark-hack-page .shark-hero-art { width: 95%; right: -20%; opacity: 0.6; }
+  .shark-hack-page .shark-hero-content { padding-top: 28px; padding-bottom: 38px; }
+  .shark-hack-page .shark-section { padding: 40px 0; }
+  .shark-hack-page .shark-section-heading { flex-direction: column; align-items: flex-start; gap: 22px; margin-bottom: 32px; }
+  .shark-hack-page .shark-section-heading > .shark-section-intro { max-width: 500px; }
+  .shark-hack-page .shark-section-symbol { display: none; }
+  .shark-hack-page .shark-prize-grid,
+  .shark-hack-page .shark-partner-grid,
+  .shark-hack-page .shark-faq-layout,
+  .shark-hack-page .shark-registration-ticket { grid-template-columns: 1fr; gap: 28px; }
+  .shark-hack-page .shark-registration-heading { flex-direction: column; align-items: flex-start; gap: 18px; }
+  .shark-hack-page .shark-prize-card { padding: 28px; }
+  .shark-hack-page .shark-prize-cta { flex-direction: column; align-items: stretch; padding: 24px; }
+  .shark-hack-page .shark-partner-card { padding: 24px; }
 }
-.shark-hack-page .shark-hero-process svg { width: 12px; height: 12px; color: #60a5fa; }
-.shark-hack-page .shark-hero-process > span:last-child { color: #f9a8d4; }
-
-.shark-hack-page .shark-event-facts { position: relative; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); padding: 27px 0 31px; border-top: 1px solid rgb(141 153 190 / 20%); }
-.shark-hack-page .shark-event-facts > div { padding: 0 25px; border-left: 1px solid rgb(141 153 190 / 15%); }
-.shark-hack-page .shark-event-facts > div:first-child { padding-left: 0; border-left: 0; }
-.shark-hack-page .shark-event-facts > div:last-child { padding-right: 0; }
-.shark-hack-page .shark-event-facts dt { display: flex; align-items: center; gap: 8px; color: #98a2b8; font-size: 12px; }
-.shark-hack-page .shark-event-facts dt svg { width: 14px; height: 14px; color: #60a5fa; }
-.shark-hack-page .shark-event-facts dd { margin-top: 10px; font-size: 17px; font-weight: 500; color: #f0f3ff; }
-.shark-hack-page .shark-event-facts dd > span { display: block; margin-top: 5px; font-size: 11px; font-weight: 400; color: #97a0b6; }
-.shark-hack-page .shark-event-facts .shark-date-note { color: #aeb9eb; }
-.shark-hack-page .shark-event-facts .shark-prize-value { color: #f472b6; }
-
-.shark-hack-page .shark-prizes-section { background: radial-gradient(ellipse at 0% 50%, rgb(37 99 235 / 12%), transparent 60%), radial-gradient(ellipse at 100% 50%, rgb(236 72 153 / 12%), transparent 60%); }
-.shark-hack-page .shark-registration-section { background: radial-gradient(ellipse at 10% 100%, rgb(37 99 235 / 22%), transparent 65%), radial-gradient(ellipse at 95% 100%, rgb(236 72 153 / 18%), transparent 60%); }
-
-
-.shark-hack-page .shark-hero-process > span:first-child { color: #93c5fd; }
-.shark-hack-page .shark-hero-process > span:nth-of-type(2) { color: #f9a8d4; }
-.shark-hack-page .shark-hero-process > span:nth-of-type(3) { color: #93c5fd; }
-.shark-hack-page #timeline .font-mono-label { color: #93c5fd; }
-.shark-hack-page #submission .font-mono-label { color: #f9a8d4; }
-.shark-hack-page #prizes .font-mono-label { color: #f9a8d4; }
-.shark-hack-page #faq .font-mono-label { color: #f9a8d4; }
-.shark-hack-page #register .font-mono-label { color: #93c5fd; }
-
-.shark-hack-page .shark-prize-card-main {
-  border-color: rgb(96 165 250 / 35%);
-  background: linear-gradient(135deg, rgb(37 99 235 / 17%), rgb(59 130 246 / 6%));
-}
-.shark-hack-page .shark-prize-card-women {
-  border-color: rgb(244 114 182 / 35%);
-  background: linear-gradient(135deg, rgb(219 39 119 / 17%), rgb(236 72 153 / 10%));
-}
-.shark-hack-page .shark-prize-card-main > svg { color: #93c5fd; }
-.shark-hack-page .shark-prize-card-women > svg { color: #f9a8d4; }
-
-@media (max-width: 1023px) {
-  .shark-hack-page .shark-hero-container { padding: 0 32px; }
-  .shark-hack-page .shark-hero-content { padding-top: 75px; padding-bottom: 50px; }
-  .shark-hack-page .shark-hero-art { width: 80%; right: -12%; opacity: 0.72; }
-  .shark-hack-page .shark-event-facts { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 25px 0; }
-  .shark-hack-page .shark-event-facts > div:nth-child(3) { padding-left: 0; border-left: 0; }
-}
-
-@media (max-width: 639px) {
-  .shark-hack-page .shark-hero { padding-top: 88px; }
-  .shark-hack-page .shark-hero-container { padding: 0 24px; }
-  .shark-hack-page .shark-hero-content { padding-top: 55px; padding-bottom: 35px; }
-  .shark-hack-page .shark-hero-art { top: 80px; right: -28%; width: 115%; height: 380px; opacity: 0.5; }
-  .shark-hack-page .shark-hero-atmosphere::after { background: linear-gradient(90deg, #06070b, rgb(6 7 11 / 30%) 90%), linear-gradient(0deg, #06070b 46%, transparent 85%); }
-  .shark-hack-page .shark-hero-eyebrow { font-size: 8px; letter-spacing: 0.1em; gap: 8px; }
+@media (max-width: 539px) {
+  .shark-hack-page .shark-hero { padding-top: 18px; padding-bottom: 28px; }
+  .shark-hack-page .shark-hero-art { top: 0; right: -28%; width: 115%; height: 460px; opacity: 0.5; }
+  .shark-hack-page .shark-hero-atmosphere::after { background: linear-gradient(90deg, #06070b, rgb(6 7 11 / 30%) 90%), linear-gradient(0deg, #06070b 50%, transparent 85%); }
+  .shark-hack-page .shark-hero-eyebrow { font-size: 8px; letter-spacing: 0.08em; gap: 8px; }
   .shark-hack-page .shark-hero-eyebrow > span { width: 14px; }
   .shark-hack-page .shark-hero-title { font-size: clamp(40px, 11.4vw, 73px); margin-top: 24px; letter-spacing: -0.055em; }
-  .shark-hack-page .shark-hero-tagline { margin-top: 22px; font-size: 22px; }
+  .shark-hack-page .shark-hero-tagline { font-size: 24px; margin-top: 23px; }
   .shark-hack-page .shark-hero-tagline > span { display: block; }
-  .shark-hack-page .shark-hero-description { margin-top: 18px; font-size: 14px; line-height: 1.75; }
-  .shark-hack-page .shark-hero-actions { flex-direction: column; gap: 10px; margin-top: 24px; }
-  .shark-hack-page .shark-hero-actions > a { width: 100%; }
+  .shark-hack-page .shark-hero-description { font-size: 15px; }
+  .shark-hack-page .shark-hero-actions { flex-direction: column; gap: 12px; }
+  .shark-hack-page .shark-primary-button,
+  .shark-hack-page .shark-secondary-button { width: 100%; min-height: 69px; padding-left: 18px; font-size: 16px; }
   .shark-hack-page .shark-hero-note { font-size: 11px; }
-  .shark-hack-page .shark-hero-process { gap: 12px; margin-top: 29px; font-size: 8px; letter-spacing: 0.08em; }
-  .shark-hack-page .shark-event-facts > div { padding: 0 0 0 15px; }
-  .shark-hack-page .shark-event-facts dt { gap: 6px; font-size: 11px; }
-  .shark-hack-page .shark-event-facts dd { font-size: 14px; }
-  .shark-hack-page .shark-event-facts dd > span { font-size: 10px; line-height: 1.6; }
+  .shark-hack-page .shark-rewards-preview { width: 100%; font-size: 12px; gap: 8px; padding: 12px; }
+  .shark-hack-page .shark-rewards-preview > svg:last-child { margin-left: auto; }
+  .shark-hack-page .shark-hero-process { gap: 12px; font-size: 8px; }
+  .shark-hack-page .shark-event-facts { gap: 10px; }
+  .shark-hack-page .shark-fact-card { padding: 15px; border-radius: 13px; }
+  .shark-hack-page .shark-fact-card dt { flex-direction: column; align-items: flex-start; gap: 11px; font-size: 10px; }
+  .shark-hack-page .shark-fact-card dd { margin-top: 16px; }
+  .shark-hack-page .shark-fact-card strong { font-size: 30px; }
+  .shark-hack-page .shark-fact-prize strong { font-size: 23px; }
+  .shark-hack-page .shark-fact-unit { font-size: 11px; line-height: 1.5; min-height: 33px; }
+  .shark-hack-page .shark-fact-note { font-size: 10px; min-height: 48px; align-items: flex-start; }
+  .shark-hack-page .shark-fact-note svg { display: none; }
+  .shark-hack-page .shark-section-link { font-size: 13px; padding: 8px 10px; }
+  .shark-hack-page .shark-section-register { min-height: 44px; font-size: 14px; padding: 10px 14px; }
+  .shark-hack-page .shark-section-intro { font-size: 16px; }
+  .shark-hack-page .shark-eyebrow { font-size: 9px; letter-spacing: 0.06em; gap: 9px; }
+  .shark-hack-page .shark-faq-item summary { padding: 19px; gap: 12px; font-size: 16px; }
+  .shark-hack-page .shark-faq-item > p { margin: 0 19px 19px; }
+  .shark-hack-page .shark-prize-top { font-size: 8px; }
+  .shark-hack-page .shark-registration-copy,
+  .shark-hack-page .shark-registration-prep { padding: 25px; }
+  .shark-hack-page .shark-registration-facts { gap: 8px; }
+  .shark-hack-page .shark-registration-facts > div { padding: 12px; }
+  .shark-hack-page .shark-registration-facts dd { font-size: 18px; }
+}
+@media (max-width: 359px) {
+  .shark-hack-page .shark-event-facts { grid-template-columns: 1fr; }
+  .shark-hack-page .shark-fact-card dt { flex-direction: row; align-items: center; font-size: 12px; }
+  .shark-hack-page .shark-fact-unit { min-height: 0; font-size: 14px; }
+  .shark-hack-page .shark-fact-note { min-height: 0; }
+  .shark-hack-page .shark-fact-prize strong { font-size: 33px; }
+  .shark-hack-page .shark-disclosure-icon { width: 28px; height: 28px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .shark-hack-page .shark-primary-button:hover,
+  .shark-hack-page .shark-secondary-button:hover,
+  .shark-hack-page .shark-fact-card:hover,
+  .shark-hack-page .shark-secondary-button:hover svg { transform: none; }
+}
+
+@media (max-width: 1100px) {
+  .shark-hack-page .shark-room-choice { gap: 10px; padding: 15px; font-size: 16px; }
+  .shark-hack-page .shark-room-choice-label strong { font-size: 19px; }
+  .shark-hack-page .shark-room-detail { padding: 32px; }
+}
+@media (max-width: 767px) {
+  .shark-hack-page .shark-journey { gap: 24px; }
+  .shark-hack-page .shark-journey-step { grid-template-columns: 44px minmax(0, 1fr); gap: 20px; }
+  .shark-hack-page .shark-journey-step::before { left: 20px; }
+  .shark-hack-page .shark-step-marker { grid-column: 1; width: 44px; height: 44px; border-radius: 14px; margin-top: 22px; box-shadow: 0 0 0 5px #06070b; }
+  .shark-hack-page .shark-step-marker svg { width: 21px; height: 21px; }
+  .shark-hack-page .shark-step-card,
+  .shark-hack-page .shark-journey-step:nth-child(even) .shark-step-card { grid-column: 2; padding: 22px; }
+  .shark-hack-page .shark-step-card::before,
+  .shark-hack-page .shark-journey-step:nth-child(even) .shark-step-card::before { left: auto; right: 100%; width: 20px; top: 43px; }
+  .shark-hack-page .shark-step-label > span { display: none; }
+  .shark-hack-page .shark-step-card h3 { font-size: 23px; }
+  .shark-hack-page .shark-room-choices { gap: 10px; }
+  .shark-hack-page .shark-room-choice { flex-direction: column; text-align: center; padding: 14px 4px; }
+  .shark-hack-page .shark-room-choice-label strong { font-size: 16px; }
+  .shark-hack-page .shark-room-choice-connector { display: none; }
+  .shark-hack-page .shark-room-detail { grid-template-columns: 1fr; gap: 25px; padding: 28px; min-height: 0; }
+  .shark-hack-page .shark-room-art { height: 160px; grid-row: 1; }
+  .shark-hack-page .shark-room-orbit { width: 150px; height: 150px; }
+  .shark-hack-page .shark-room-art-icon { width: 86px; height: 86px; border-radius: 24px; }
+  .shark-hack-page .shark-room-art-icon svg { width: 42px; height: 42px; }
+  .shark-hack-page .shark-room-detail-copy > p:not(.shark-room-kicker) { font-size: 16px; }
+  .shark-hack-page .shark-room-choice .shark-colour-icon { width: 36px; height: 36px; border-radius: 11px; }
+}
+@media (max-width: 539px) {
+  .shark-hack-page .shark-hero-process { gap: 10px; letter-spacing: 0; }
+  .shark-hack-page .shark-hero-process > span { gap: 4px; }
+  .shark-hack-page .shark-hero-process > span svg { width: 14px; height: 14px; }
+  .shark-hack-page .shark-step-card,
+  .shark-hack-page .shark-journey-step:nth-child(even) .shark-step-card { padding: 20px 18px; }
+  .shark-hack-page .shark-step-description { font-size: 14px; }
+  .shark-hack-page .shark-room-choice { font-size: 11px; padding: 12px 3px; gap: 8px; }
+  .shark-hack-page .shark-room-choice-label strong { font-size: clamp(12px, 3.4vw, 15px); letter-spacing: -0.035em; }
+  .shark-hack-page .shark-room-choice-label small { font-size: 8px; letter-spacing: 0.02em; }
+  .shark-hack-page .shark-room-controls { display: grid; grid-template-columns: 1fr 1fr; align-items: stretch; gap: 12px; }
+  .shark-hack-page .shark-room-progress { grid-column: 1 / -1; justify-content: center; order: -1; }
+  .shark-hack-page .shark-room-previous,
+  .shark-hack-page .shark-room-next { padding: 12px; font-size: 12px; }
+  .shark-hack-page .shark-room-detail { padding: 23px; }
+  .shark-hack-page .shark-faq-item summary { gap: 10px; padding: 17px 14px; font-size: 15px; }
 }

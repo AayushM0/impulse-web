@@ -1,13 +1,14 @@
-import { useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import { ArrowDown, ArrowRight, ArrowUpRight, Calendar, Check, ChevronDown, Coins, MapPin, Trophy, Users } from 'lucide-react';
+import { useEffect, useRef, useState, type KeyboardEvent } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { ArrowLeft, ArrowRight, ArrowUpRight, Calendar, ChevronDown, Coins, MapPin, Trophy, Users, FileText, Code2, Flag, CheckCircle2, Clock3, ClipboardList, Copy, Mic2, MonitorPlay, MessagesSquare, Handshake, GraduationCap, Mail, Sparkles, Gift, Building2, LayoutGrid, CircleHelp, LockKeyhole } from 'lucide-react';
 import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
 import './SharkHack.css';
 
-// Participant-facing content from SHARK HACK (1).docx.
+// Participant-facing content from SHARK HACK (1).docx and explicit user updates.
+// Prize amounts are withheld; goodies and partner placeholders were requested by the user.
 // Unconfirmed dates, eligibility and rules remain explicitly provisional.
-// The document's final note specifies one finale date, subject to venue availability.
+// The user updated the proposed finale to 23 January 2027 (tentative).
+const proposedDate = '23 January 2027';
 const timeline = [
   {
     title: 'Register',
@@ -31,22 +32,16 @@ const timeline = [
   },
   {
     title: 'Enter the Shark Room',
-    timing: '30 or 31 October 2026 · Tentative',
+    timing: proposedDate + ' · Tentative',
     description: 'Pitch your solution, demonstrate your prototype and answer the judges’ questions. Defend its value and negotiate offers in Impulse Credits.',
   },
 ];
 
-const submissionChecklist = [
-  ['The problem', 'What exactly are you solving?'],
-  ['The user', 'Who experiences this problem?'],
-  ['Your solution', 'What have you built?'],
-  ['How it works', 'What is the mechanism or product flow?'],
-  ['The prototype', 'What can be seen, tested or demonstrated?'],
-  ['Innovation', 'What is different about your approach?'],
-  ['USP', 'Why does your solution stand out?'],
-  ['Impact', 'What changes if your solution succeeds?'],
-  ['Feasibility', 'Can this realistically be implemented?'],
-  ['Future potential', 'Where could this go beyond the hackathon?'],
+const sharkRoom = [
+  { label: 'Pitch', icon: Mic2, title: 'Tell the story behind your solution.', description: 'Present your solution to the judging panel. Explain the problem, who it helps and why someone would choose what you’ve built.', caption: 'Explain the problem. Communicate the value.' },
+  { label: 'Demo', icon: MonitorPlay, title: 'Show your prototype in action.', description: 'Demonstrate what you have built and how it works. Give the judges a clear view of your solution beyond the presentation.', caption: 'Bring your solution to life.' },
+  { label: 'Answer', icon: MessagesSquare, title: 'Take questions from the Sharks.', description: 'The judges will challenge your approach. Be ready to explain what makes your solution different, whether it can work and who benefits.', caption: 'Know your product. Defend your choices.' },
+  { label: 'Negotiate', icon: Handshake, title: 'Make the case for its value.', description: 'Receive offers in Impulse Credits and negotiate with the Sharks. These are competition credits, not real money; you are not selling your company.', caption: 'Offer rules and final scoring are still to be confirmed.' },
 ];
 
 const registrationChecklist = [
@@ -76,227 +71,303 @@ const faqs = [
   },
   {
     question: 'What details are still to be confirmed?',
-    answer: 'The final event date and venue, problem-release date and platform, submission deadline and format, detailed eligibility, pitch timings and scoring rules are still to be confirmed. The proposed Delhi round is on 30 or 31 October 2026, with one date to be selected based on venue availability.',
+    answer: 'The final event date and venue, problem-release date and platform, submission deadline and format, detailed eligibility, pitch timings and scoring rules are still to be confirmed. The proposed Delhi round is on ' + proposedDate + ' (tentative).',
   },
 ];
 
 const sectionLinks = [
   ['overview', 'Overview'],
   ['timeline', 'Timeline'],
-  ['submission', 'What to submit'],
+  ['shark-room', 'The Shark Room'],
   ['prizes', 'Prizes'],
+  ['partners', 'Partners'],
   ['faq', 'FAQs'],
-];
+  ['register', 'Registration'],
+] as const;
 
-const focusStyle = ' focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#93c5fd]';
+type SectionId = (typeof sectionLinks)[number][0];
+const sectionIcons = { overview: LayoutGrid, timeline: Calendar, 'shark-room': Mic2, prizes: Trophy, partners: Handshake, faq: CircleHelp, register: ClipboardList };
+const overviewLinks = [
+  { id: 'timeline', title: 'Plan your journey', description: 'From registration to the Delhi final.', action: 'View timeline' },
+  { id: 'shark-room', title: 'Meet the Shark Room', description: 'Pitch, demo, answer and negotiate.', action: 'Explore the stages' },
+  { id: 'prizes', title: 'See what’s at stake', description: 'Cash prizes, goodies and recognition.', action: 'Discover prizes' },
+  { id: 'partners', title: 'Behind the event', description: 'Sponsors and community partners.', action: 'View partners' },
+  { id: 'faq', title: 'Questions before you join?', description: 'Find the details you need to take part.', action: 'Read FAQs' },
+  { id: 'register', title: 'Get your team ready', description: 'Registration details and what to prepare.', action: 'View registration' },
+] as const;
+
+const timelineIcons = [Users, FileText, Code2, CheckCircle2, Flag];
+const faqIcons = [FileText, Users, MapPin, Coins, Calendar];
+const registrationIcons = [Flag, Users, GraduationCap, Mail, Code2];
+const focusStyle = ' shark-focus';
 
 export default function SharkHack() {
-  const { hash } = useLocation();
+  const { hash, pathname, search } = useLocation();
+  const navigate = useNavigate();
+  const activeSection = sectionLinks.find(([id]) => id === hash.slice(1))?.[0] ?? 'overview';
+  const [copyStatus, setCopyStatus] = useState('');
+  const [roomStep, setRoomStep] = useState(0);
+  const selectedRoomStep = sharkRoom[roomStep];
+  const RoomIcon = selectedRoomStep.icon;
+  const copyTimer = useRef<ReturnType<typeof setTimeout>>();
+  const focusPanel = useRef(false);
 
-  // Handle incoming registration links after the app's route-level scroll reset.
+  const selectSection = (id: SectionId, moveFocusToPanel = false) => {
+    focusPanel.current = moveFocusToPanel;
+    navigate({ pathname, search, hash: '#' + id }, { preventScrollReset: true });
+  };
+
+  const handleTabKeyDown = (event: KeyboardEvent<HTMLButtonElement>, index: number) => {
+    let nextIndex: number;
+    if (event.key === 'ArrowRight') nextIndex = (index + 1) % sectionLinks.length;
+    else if (event.key === 'ArrowLeft') nextIndex = (index - 1 + sectionLinks.length) % sectionLinks.length;
+    else if (event.key === 'Home') nextIndex = 0;
+    else if (event.key === 'End') nextIndex = sectionLinks.length - 1;
+    else return;
+    event.preventDefault();
+    const id = sectionLinks[nextIndex][0];
+    selectSection(id);
+    document.getElementById('tab-' + id)?.focus({ preventScroll: true });
+  };
+
+  const panelProps = (id: SectionId) => ({
+    role: 'tabpanel',
+    'aria-labelledby': 'tab-' + id,
+    hidden: activeSection !== id,
+    tabIndex: 0,
+  });
+
+  useEffect(() => () => clearTimeout(copyTimer.current), []);
+
   useEffect(() => {
-    if (!hash) return;
-    const frame = window.requestAnimationFrame(() => {
-      document.getElementById(hash.slice(1))?.scrollIntoView({ block: 'start' });
+    const frame = requestAnimationFrame(() => {
+      window.scrollTo({ top: 0, behavior: 'instant' });
+      document.getElementById('tab-' + activeSection)?.scrollIntoView({ block: 'nearest', inline: 'nearest', behavior: 'instant' });
+      if (focusPanel.current) {
+        document.getElementById(activeSection)?.focus({ preventScroll: true });
+        focusPanel.current = false;
+      }
     });
-    return () => window.cancelAnimationFrame(frame);
-  }, [hash]);
+    return () => cancelAnimationFrame(frame);
+  }, [activeSection]);
+
+  const copyEventLink = async () => {
+    clearTimeout(copyTimer.current);
+    try {
+      await navigator.clipboard.writeText(window.location.origin + '/events/shark-hack');
+      setCopyStatus('Event link copied.');
+      copyTimer.current = setTimeout(() => setCopyStatus(''), 3000);
+    } catch {
+      setCopyStatus('Could not copy. You can copy this page’s address from your browser.');
+    }
+  };
 
   return (
-    <div className="shark-hack-page min-h-screen">
+    // Native scrolling prevents the site's Lenis animation from carrying into a new tab.
+    <div className="shark-hack-page" data-lenis-prevent>
       <Navbar />
       <main>
-        <section id="overview" aria-labelledby="shark-hack-title" className="shark-hero scroll-mt-36">
-          <div className="shark-hero-atmosphere" aria-hidden="true">
-            <img src="/images/shark-hack-banner.jpg" alt="" width="1600" height="639" fetchPriority="high" className="shark-hero-art" />
-          </div>
-          <div className="shark-hero-container">
-            <div className="shark-hero-topline">
-              <Link to="/events" className={'shark-back-link' + focusStyle}>
-                <ArrowUpRight className="h-4 w-4 rotate-180" aria-hidden="true" /> All events
-              </Link>
-              <span className="shark-edition">IMPULSE / 2026</span>
-            </div>
-
-            <div className="shark-hero-content">
-              <p className="shark-hero-eyebrow"><span aria-hidden="true" /> Impulse presents · All-India hackathon</p>
-              <h1 id="shark-hack-title" className="shark-hero-title">
-                <span>SHARK</span>{' '}<span className="shark-hero-title-accent">HACK</span>
-              </h1>
-              <p className="shark-hero-tagline">Don’t just build. <span>Make them believe.</span></p>
-              <p className="shark-hero-description">
-                Build a solution to a surprise problem. Earn your place in the Delhi final, then pitch, demonstrate and negotiate its value with the Sharks.
-              </p>
-
-              <div className="shark-hero-actions">
-                <a href="#register" className={'shark-primary-button' + focusStyle}>
-                  Registration details <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
-                </a>
-                <a href="#timeline" className={'shark-secondary-button' + focusStyle}>
-                  Explore the timeline <ArrowDown className="h-4 w-4" aria-hidden="true" />
-                </a>
-              </div>
-              <p className="shark-hero-note">No PPT or solution needed at registration.</p>
-
-              <div className="shark-hero-process" aria-label="Build, pitch, negotiate, close">
-                <span>Build</span><ArrowRight aria-hidden="true" />
-                <span>Pitch</span><ArrowRight aria-hidden="true" />
-                <span>Negotiate</span><ArrowRight aria-hidden="true" />
-                <span>Close</span>
-              </div>
-            </div>
-
-            <dl className="shark-event-facts">
-              <div>
-                <dt><Calendar aria-hidden="true" /> Proposed final date</dt>
-                <dd>30 or 31 October 2026<span className="shark-date-note">One date to be confirmed</span></dd>
-              </div>
-              <div>
-                <dt><MapPin aria-hidden="true" /> Location</dt>
-                <dd>Delhi<span>Offline final · Venue to be confirmed</span></dd>
-              </div>
-              <div>
-                <dt><Users aria-hidden="true" /> Team size</dt>
-                <dd>2–4 participants<span>Per team</span></dd>
-              </div>
-              <div>
-                <dt><Trophy aria-hidden="true" /> Prize pool</dt>
-                <dd className="shark-prize-value">₹1,00,000+<span>Dedicated Women-in-Tech prize</span></dd>
-              </div>
-            </dl>
-          </div>
-        </section>
-
-        <nav aria-label="Shark Hack sections" className="sticky top-16 z-30 border-b border-[#8d99be]/15 bg-[#06070b]/95 backdrop-blur-xl">
-          <div className="mx-auto flex max-w-7xl items-center gap-6 overflow-x-auto px-6 py-4 lg:gap-8 lg:px-10">
-            {sectionLinks.map(([id, label]) => (
-              <a key={id} href={'#' + id} className={'shrink-0 rounded text-sm text-[#ced3e1] transition-colors hover:text-[#93c5fd]' + focusStyle}>{label}</a>
-            ))}
-            <a href="#register" className={'ml-auto inline-flex shrink-0 items-center gap-2 rounded text-sm font-medium text-[#93c5fd] hover:text-[#e2e7ff]' + focusStyle}>Registration <ArrowUpRight className="h-4 w-4" aria-hidden="true" /></a>
+        <nav aria-label="Shark Hack sections" className="shark-section-nav">
+          <div role="tablist" aria-label="Event details" className="shark-content-width shark-section-nav-inner">
+            {sectionLinks.map(([id, label], index) => {
+              const TabIcon = sectionIcons[id];
+              return (
+              <button key={id} id={'tab-' + id} type="button" role="tab" aria-selected={activeSection === id} aria-controls={id} tabIndex={activeSection === id ? 0 : -1} onClick={() => selectSection(id)} onKeyDown={(event) => handleTabKeyDown(event, index)} className={(id === 'register' ? 'shark-section-register' : 'shark-section-link') + (id === 'prizes' ? ' shark-prizes-tab' : '') + focusStyle}>
+                {id !== 'register' && <span className={'shark-nav-icon shark-nav-icon-' + id}><TabIcon aria-hidden="true" />{id === 'prizes' && <Sparkles className="shark-trophy-sparkle" aria-hidden="true" />}</span>}{label}{id === 'register' && <ArrowUpRight aria-hidden="true" />}
+              </button>
+              );
+            })}
           </div>
         </nav>
 
-        <section id="timeline" aria-labelledby="timeline-title" className="scroll-mt-36 border-b border-[#8d99be]/15 py-16 sm:py-24">
-          <div className="mx-auto grid max-w-7xl gap-10 px-6 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20 lg:px-10">
-            <div>
-              <p className="font-mono-label text-[#93c5fd]">Your event timeline</p>
-              <h2 id="timeline-title" className="mt-4 text-3xl font-semibold tracking-tight sm:text-4xl">From your first idea<br />to the Shark Room.</h2>
-              <p className="mt-5 max-w-sm leading-relaxed text-[#a2aabc]">Register, build, submit. Shortlisted teams take their solutions to the offline final in Delhi.</p>
-              <div className="mt-7 max-w-sm rounded-xl border border-[#60a5fa]/15 bg-[#60a5fa]/5 p-5 text-sm leading-relaxed text-[#bfdbfe]/90">
-                The schedule is provisional. The final date depends on venue availability; problem-release and submission dates are still to be confirmed.
-              </div>
+        <section id="overview" {...panelProps('overview')}>
+          <div className="shark-hero">
+          <div className="shark-hero-atmosphere" aria-hidden="true">
+            <img src="/images/shark-hack-banner.jpg" alt="" width="1600" height="639" fetchPriority="high" className="shark-hero-art" />
+          </div>
+          <div className="shark-content-width">
+            <div className="shark-hero-topline">
+              <Link to="/events" className={'shark-back-link' + focusStyle}><ArrowUpRight className="shark-back-icon" aria-hidden="true" /> All events</Link>
             </div>
-            <ol>
-              {timeline.map((step, index) => (
-                <li key={step.title} className={'relative pl-16' + (index < timeline.length - 1 ? ' pb-9' : '')}>
-                  {index < timeline.length - 1 && <div className="absolute bottom-0 left-5 top-11 w-px bg-gradient-to-b from-[#3b82f6]/30 to-white/10" aria-hidden="true" />}
-                  <span className="absolute left-0 top-0 flex h-10 w-10 items-center justify-center rounded-full border border-[#60a5fa]/25 bg-[#3b82f6]/5 font-mono text-xs text-[#93c5fd]" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
-                  <p className="text-xs font-medium text-[#93c5fd]">{step.timing}</p>
-                  <h3 className="mt-2 text-xl font-semibold text-[#f5f7ff]">{step.title}</h3>
-                  <p className="mt-3 text-sm leading-relaxed text-[#a2aabc]">{step.description}</p>
-                </li>
-              ))}
-            </ol>
+            <div className="shark-hero-content">
+              <p className="shark-hero-eyebrow"><span aria-hidden="true" /> Impulse presents · All-India hackathon</p>
+              <h1 id="shark-hack-title" className="shark-hero-title">SHARK <span>HACK</span></h1>
+              <p className="shark-hero-tagline">Don’t just build. <span>Make them believe.</span></p>
+              <p className="shark-hero-description">Build a solution to a surprise problem. Earn your place in the Delhi final, then pitch, demonstrate and negotiate its value with the Sharks.</p>
+              <button type="button" onClick={() => selectSection('prizes', true)} className={'shark-rewards-preview' + focusStyle}><Trophy aria-hidden="true" /><span>Cash prizes <span aria-hidden="true">·</span> Goodies <span aria-hidden="true">·</span> Recognition</span><ArrowRight aria-hidden="true" /></button>
+              <div className="shark-hero-actions">
+                <button type="button" onClick={() => selectSection('register', true)} className={'shark-primary-button' + focusStyle}><span>Registration details</span><span className="shark-button-arrow"><ArrowUpRight aria-hidden="true" /></span></button>
+                <button type="button" onClick={() => selectSection('timeline', true)} className={'shark-secondary-button' + focusStyle}><span><small>Your journey, step by step</small>Explore the timeline</span><span className="shark-button-arrow"><ArrowRight aria-hidden="true" /></span></button>
+              </div>
+              <p className="shark-hero-note"><CheckCircle2 aria-hidden="true" /> No PPT or solution needed at registration.</p>
+              <div className="shark-hero-process" aria-label="Build, pitch, negotiate, close"><span><Code2 aria-hidden="true" />Build</span><ArrowRight aria-hidden="true" /><span><Mic2 aria-hidden="true" />Pitch</span><ArrowRight aria-hidden="true" /><span><Handshake aria-hidden="true" />Negotiate</span><ArrowRight aria-hidden="true" /><span><Flag aria-hidden="true" />Close</span></div>
+            </div>
+            <dl className="shark-event-facts">
+              <div className="shark-fact-card">
+                <dt><span className="shark-fact-icon"><Calendar aria-hidden="true" /></span> Proposed final date</dt>
+                <dd><strong>23 Jan</strong><span className="shark-fact-unit">2027 · Tentative date</span><span className="shark-fact-note"><Clock3 aria-hidden="true" /> Final confirmation to follow</span></dd>
+              </div>
+              <div className="shark-fact-card">
+                <dt><span className="shark-fact-icon"><MapPin aria-hidden="true" /></span> The offline final</dt>
+                <dd><strong>Delhi</strong><span className="shark-fact-unit">For shortlisted teams</span><span className="shark-fact-note">Venue to be confirmed</span></dd>
+              </div>
+              <div className="shark-fact-card">
+                <dt><span className="shark-fact-icon"><Users aria-hidden="true" /></span> Your team</dt>
+                <dd><strong>2–4</strong><span className="shark-fact-unit">Participants per team</span><span className="shark-fact-note">No PPT needed to register</span></dd>
+              </div>
+              <div className="shark-fact-card shark-fact-prize">
+                <dt><span className="shark-fact-icon"><Trophy aria-hidden="true" /></span> Prizes & rewards</dt>
+                <dd><strong>Cash prizes</strong><span className="shark-fact-unit">Goodies & recognition</span><span className="shark-fact-note">Dedicated Women-in-Tech prize</span></dd>
+              </div>
+            </dl>
+          </div>
+          </div>
+          <div className="shark-overview-explore shark-content-width">
+            <div className="shark-explore-heading"><h2>There’s more to <span>Shark Hack.</span></h2><p>Choose a card to explore the details.</p></div>
+            <div className="shark-explore-grid">
+              {overviewLinks.map(({ id, title, description, action }) => {
+                const Icon = sectionIcons[id];
+                return <button key={id} type="button" className={'shark-explore-card shark-explore-' + id + focusStyle} onClick={() => selectSection(id, true)} aria-controls={id}>
+                  <span className={'shark-nav-icon shark-nav-icon-' + id}><Icon aria-hidden="true" /></span>
+                  <span className="shark-explore-copy"><strong>{title}</strong><span>{description}</span><span className="shark-explore-action">{action}<ArrowRight aria-hidden="true" /></span></span>
+                </button>;
+              })}
+            </div>
           </div>
         </section>
 
-        <section id="submission" aria-labelledby="submission-title" className="scroll-mt-36 py-16 sm:py-24">
-          <div className="mx-auto max-w-7xl px-6 lg:px-10">
-            <div className="flex flex-col justify-between gap-5 md:flex-row md:items-end">
-              <div>
-                <p className="font-mono-label text-[#93c5fd]">After the problem is released</p>
-                <h2 id="submission-title" className="mt-4 text-3xl font-semibold tracking-tight sm:text-4xl">What you’ll need to submit.</h2>
-              </div>
-              <p className="max-w-md text-sm leading-relaxed text-[#a2aabc]">Your presentation and documentation should explain your solution across these ten points. The submission format and deadline are still to be confirmed.</p>
+        <section id="timeline" {...panelProps('timeline')} className="shark-section shark-journey-section">
+          <div className="shark-content-width">
+            <div className="shark-section-heading">
+              <div><p className="shark-eyebrow"><span>01</span> Your event timeline</p><h2 id="timeline-title">Your path to<br />the <em>Shark Room.</em></h2></div>
+              <p className="shark-section-intro">Register, build, submit. Shortlisted teams take their solutions to the offline final in Delhi.</p>
             </div>
-            <div className="mt-8 rounded-xl border border-[#60a5fa]/20 bg-[#3b82f6]/5 px-5 py-4 text-sm text-[#dbeafe]">
-              <span className="font-semibold">For later, not registration:</span> you do not need a PPT or solution to sign up.
-            </div>
-            <details className="group mt-5 rounded-2xl border border-[#8d99be]/15 bg-white/[0.02]">
-              <summary className={'flex cursor-pointer list-none items-center justify-between gap-4 rounded-2xl p-6 text-base font-medium text-[#f5f7ff] [&::-webkit-details-marker]:hidden' + focusStyle}>
-                View the submission checklist
-                <ChevronDown className="h-5 w-5 shrink-0 text-[#93c5fd] transition-transform group-open:rotate-180 motion-reduce:transition-none" aria-hidden="true" />
-              </summary>
-              <ol className="grid gap-x-10 gap-y-6 border-t border-[#8d99be]/15 p-6 sm:grid-cols-2">
-                {submissionChecklist.map(([title, description], index) => (
-                  <li key={title} className="flex gap-4">
-                    <span className="pt-0.5 font-mono text-xs text-[#93c5fd]/70" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
-                    <div><h3 className="text-sm font-medium text-[#f5f7ff]">{title}</h3><p className="mt-1 text-sm leading-relaxed text-[#a2aabc]">{description}</p></div>
+            <ol className="shark-journey">
+              {timeline.map((step, index) => {
+                const StepIcon = timelineIcons[index];
+                return (
+                  <li key={step.title} className={'shark-journey-step' + (index === timeline.length - 1 ? ' shark-journey-finale' : '')}>
+                    <div className="shark-step-marker" aria-hidden="true"><StepIcon /></div>
+                    <div className="shark-step-card">
+                      <p className="shark-step-label">Stage {String(index + 1).padStart(2, '0')}<span>{index === timeline.length - 1 ? 'The offline final' : 'Road to the final'}</span></p>
+                      <p className="shark-step-timing"><Clock3 aria-hidden="true" />{step.timing}</p>
+                      <h3>{step.title}</h3><p className="shark-step-description">{step.description}</p>
+                    </div>
                   </li>
+                );
+              })}
+            </ol>
+            <div className="shark-schedule-note"><Clock3 aria-hidden="true" /><p><strong>The schedule is provisional.</strong> The final date depends on venue availability; problem-release and submission dates are still to be confirmed.</p></div>
+          </div>
+        </section>
+
+        <section id="shark-room" {...panelProps('shark-room')} className="shark-section shark-room-section">
+          <div className="shark-content-width">
+            <div className="shark-section-heading">
+              <div><p className="shark-eyebrow"><span>02</span> For shortlisted teams · Delhi</p><h2 id="shark-room-title">What happens in<br />the <em>Shark Room?</em></h2></div>
+              <p className="shark-section-intro">Meet the judges, present your solution and defend its value. Follow the four stages of the offline final.</p>
+            </div>
+            <div className="shark-room-explorer">
+              <div className="shark-room-choices" role="group" aria-label="Explore the Shark Room">
+                {sharkRoom.map(({ label, icon: Icon }, index) => (
+                  <button key={label} id={'room-choice-' + index} type="button" aria-pressed={roomStep === index} aria-controls="shark-room-detail" onClick={() => setRoomStep(index)} className={'shark-room-choice' + focusStyle}>
+                    <span className="shark-colour-icon"><Icon aria-hidden="true" /></span><span className="shark-room-choice-label"><small>Step {index + 1}</small><strong>{label}</strong></span>{index < sharkRoom.length - 1 && <ArrowRight className="shark-room-choice-connector" aria-hidden="true" />}
+                  </button>
                 ))}
-              </ol>
-            </details>
-          </div>
-        </section>
-
-        <section id="prizes" aria-labelledby="prizes-title" className="shark-prizes-section scroll-mt-36 border-y border-[#8d99be]/15 bg-white/[0.02] py-16 sm:py-24">
-          <div className="mx-auto max-w-7xl px-6 lg:px-10">
-            <p className="font-mono-label text-[#93c5fd]">Prizes & recognition</p>
-            <h2 id="prizes-title" className="mt-4 text-3xl font-semibold tracking-tight sm:text-4xl">Build something worth backing.</h2>
-            <div className="mt-9 grid gap-5 md:grid-cols-2">
-              <div className="shark-prize-card-main rounded-2xl border p-7 sm:p-9">
-                <Trophy className="h-7 w-7 text-[#93c5fd]" aria-hidden="true" />
-                <h3 className="mt-6 text-sm font-medium text-[#bfdbfe]">Total prize pool</h3>
-                <p className="mt-3 text-4xl font-semibold tracking-tight text-[#f5f7ff] sm:text-5xl">₹1,00,000+</p>
-                <p className="mt-4 max-w-md text-sm leading-relaxed text-[#a2aabc]">Compete for the Shark Hack prize pool in the offline grand round.</p>
               </div>
-              <div className="shark-prize-card-women rounded-2xl border p-7 sm:p-9">
-                <Users className="h-7 w-7 text-[#f9a8d4]" aria-hidden="true" />
-                <h3 className="mt-6 text-2xl font-semibold tracking-tight text-[#f5f7ff]">Women-in-Tech Prize</h3>
-                <p className="mt-4 text-sm leading-relaxed text-[#ced3e1]">A dedicated prize for eligible all-women teams.</p>
-                <p className="mt-3 max-w-md text-sm leading-relaxed text-[#a2aabc]">Organized by an all-women Impulse team, Shark Hack’s main competition remains open to eligible participants.</p>
+              <div id="shark-room-detail" className="shark-room-detail" role="region" aria-labelledby={'room-choice-' + roomStep} aria-live="polite">
+                <div className="shark-room-detail-copy"><p className="shark-room-kicker">Step {roomStep + 1} of {sharkRoom.length} / {selectedRoomStep.label}</p><h3>{selectedRoomStep.title}</h3><p>{selectedRoomStep.description}</p><div className="shark-room-caption"><Sparkles aria-hidden="true" />{selectedRoomStep.caption}</div></div>
+                <div className="shark-room-art" aria-hidden="true"><span className="shark-room-orbit" /><span className="shark-room-orbit" /><span className="shark-room-art-icon"><RoomIcon /></span><span className="shark-room-art-label">THE SHARK ROOM</span></div>
+                <div className="shark-room-controls">
+                  <button type="button" disabled={roomStep === 0} onClick={() => setRoomStep(step => Math.max(0, step - 1))} className={'shark-room-previous' + focusStyle}><ArrowLeft aria-hidden="true" /> Previous</button>
+                  <span className="shark-room-progress" aria-hidden="true">{sharkRoom.map(({ label }, index) => <span key={label} className={index === roomStep ? 'is-active' : ''} />)}</span>
+                  <button type="button" onClick={() => roomStep < sharkRoom.length - 1 ? setRoomStep(step => step + 1) : selectSection('register', true)} className={'shark-room-next' + focusStyle}>{roomStep < sharkRoom.length - 1 ? 'Next: ' + sharkRoom[roomStep + 1].label : 'Registration details'}<ArrowRight aria-hidden="true" /></button>
+                </div>
               </div>
-            </div>
-            <div className="mt-6 flex items-start gap-4 rounded-xl border border-[#8d99be]/15 p-5 sm:p-6">
-              <Coins className="mt-0.5 h-5 w-5 shrink-0 text-[#93c5fd]" aria-hidden="true" />
-              <p className="text-sm leading-relaxed text-[#a2aabc]"><span className="font-medium text-[#f5f7ff]">About Impulse Credits.</span> Judges use these competition credits to make offers on your solution’s value. They are not real money. The deal mechanics and their role in final rankings will be set out in the official rulebook.</p>
             </div>
           </div>
         </section>
 
-        <section id="faq" aria-labelledby="faq-title" className="scroll-mt-36 py-16 sm:py-24">
-          <div className="mx-auto grid max-w-7xl gap-8 px-6 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20 lg:px-10">
-            <div>
-              <p className="font-mono-label text-[#93c5fd]">Before you register</p>
-              <h2 id="faq-title" className="mt-4 text-3xl font-semibold tracking-tight sm:text-4xl">A few useful answers.</h2>
+        <section id="prizes" {...panelProps('prizes')} className="shark-section shark-prizes-section">
+          <div className="shark-content-width">
+            <div className="shark-section-heading"><div><p className="shark-eyebrow"><span><Trophy aria-hidden="true" /></span> Prizes & recognition</p><h2 id="prizes-title">Cash prizes.<br /><em>Goodies. Recognition.</em></h2></div><div className="shark-section-symbol" aria-hidden="true"><Trophy /></div></div>
+            <div className="shark-prize-grid">
+              <div className="shark-prize-card shark-prize-card-main">
+                <div className="shark-prize-top"><span className="shark-prize-icon"><Trophy aria-hidden="true" /></span><span>THE GRAND ROUND</span></div>
+                <h3>Cash prizes</h3>
+                <p className="shark-prize-description">Build your solution, make your pitch and compete for cash prizes at Shark Hack.</p>
+                <Trophy className="shark-prize-watermark" aria-hidden="true" />
+              </div>
+              <div className="shark-prize-card shark-prize-card-goodies">
+                <div className="shark-prize-top"><span className="shark-prize-icon"><Gift aria-hidden="true" /></span><span>MORE TO LOOK FORWARD TO</span></div>
+                <h3>Goodies</h3>
+                <p className="shark-prize-description">There’s more than cash to look forward to. Goodies are part of the Shark Hack rewards.</p>
+                <Gift className="shark-prize-watermark" aria-hidden="true" />
+              </div>
+              <div className="shark-prize-card shark-prize-card-women">
+                <div className="shark-prize-top"><span className="shark-prize-icon"><Users aria-hidden="true" /></span><span>DEDICATED RECOGNITION</span></div>
+                <h3>Women-in-Tech<br /><span>Prize</span></h3>
+                <p className="shark-prize-description">A dedicated prize for eligible all-women teams.</p>
+                <Users className="shark-prize-watermark" aria-hidden="true" />
+              </div>
             </div>
-            <div className="divide-y divide-white/10 border-y border-[#8d99be]/15">
-              {faqs.map(({ question, answer }) => (
-                <details key={question} className="group">
-                  <summary className={'flex cursor-pointer list-none items-center justify-between gap-5 rounded py-6 text-base font-medium text-[#f5f7ff] [&::-webkit-details-marker]:hidden' + focusStyle}>
-                    {question}<ChevronDown className="h-4 w-4 shrink-0 text-[#93c5fd] transition-transform group-open:rotate-180 motion-reduce:transition-none" aria-hidden="true" />
-                  </summary>
-                  <p className="pb-6 pr-6 text-sm leading-relaxed text-[#a2aabc]">{answer}</p>
+            <div className="shark-prize-cta"><div><h3>Ready to bring your idea to Shark Hack?</h3><p>No PPT or solution needed at registration.</p></div><button type="button" onClick={() => selectSection('register', true)} className={'shark-primary-button' + focusStyle}>Registration details <ArrowUpRight aria-hidden="true" /></button></div>
+          </div>
+        </section>
+
+        <section id="partners" {...panelProps('partners')} className="shark-section shark-partners-section">
+          <div className="shark-content-width">
+            <div className="shark-section-heading"><div><p className="shark-eyebrow"><span><Handshake aria-hidden="true" /></span> Sponsors & community</p><h2>Our sponsors.<br /><em>Our community partners.</em></h2></div></div>
+            <div className="shark-partner-grid">
+              <div className="shark-partner-card"><div className="shark-partner-heading"><span className="shark-colour-icon"><Building2 aria-hidden="true" /></span><h3>Sponsors</h3></div><div className="shark-partner-empty"><p>To be announced</p></div></div>
+              <div className="shark-partner-card"><div className="shark-partner-heading"><span className="shark-colour-icon"><Handshake aria-hidden="true" /></span><h3>Community Partners</h3></div><div className="shark-partner-empty"><p>To be announced</p></div></div>
+            </div>
+          </div>
+        </section>
+
+        <section id="faq" {...panelProps('faq')} className="shark-section">
+          <div className="shark-content-width shark-faq-layout">
+            <div><p className="shark-eyebrow"><span>04</span> Before you register</p><h2 id="faq-title">Good questions.<br /><em>Clear answers.</em></h2></div>
+            <div className="shark-faq-list">
+              {faqs.map(({ question, answer }, index) => {
+                const FaqIcon = faqIcons[index];
+                return (
+                <details key={question} className="shark-faq-item">
+                  <summary className={focusStyle}><span className="shark-faq-icon shark-colour-icon"><FaqIcon aria-hidden="true" /></span><span>{question}</span><span className="shark-disclosure-icon"><ChevronDown aria-hidden="true" /></span></summary>
+                  <p>{answer}</p>
                 </details>
-              ))}
+                );
+              })}
             </div>
           </div>
         </section>
 
-        <section id="register" aria-labelledby="registration-title" className="shark-registration-section scroll-mt-36 border-t border-[#60a5fa]/15 py-16 sm:py-24">
-          <div className="mx-auto grid max-w-7xl items-start gap-10 px-6 lg:grid-cols-2 lg:gap-20 lg:px-10">
-            <div>
-              <p className="font-mono-label text-[#93c5fd]">Registration</p>
-              <h2 id="registration-title" className="mt-4 text-3xl font-semibold tracking-tight sm:text-4xl">Get your team ready.</h2>
-              <p className="mt-5 max-w-md leading-relaxed text-[#ced3e1]">Bring together 2–4 participants. You’ll register through the official form; there’s no PPT or solution to submit at this stage.</p>
-              <div className="mt-7 rounded-xl border border-[#60a5fa]/20 bg-[#3b82f6]/5 p-5">
-                <p className="flex items-center gap-2 text-sm font-semibold text-[#93c5fd]"><Calendar className="h-4 w-4 shrink-0" aria-hidden="true" /> Registration link to be announced</p>
-                <p className="mt-2 text-sm leading-relaxed text-[#a2aabc]">Registration is not available on this page yet.</p>
-              </div>
+        <section id="register" {...panelProps('register')} className="shark-section shark-registration-section">
+          <div className="shark-content-width">
+            <div className="shark-registration-heading">
+              <div><p className="shark-eyebrow"><span><ClipboardList aria-hidden="true" /></span> Shark Hack · Team entry</p><h2 id="registration-title">Registration</h2><p>Form your team. Get ready to enter Shark Hack.</p></div>
+              <span className="shark-registration-badge"><Clock3 aria-hidden="true" /> Not open yet</span>
             </div>
-            <div className="rounded-2xl border border-[#8d99be]/15 bg-[#0d101a] p-7 sm:p-8">
-              <h3 className="text-lg font-medium text-[#f5f7ff]">Have these details ready</h3>
-              <ul className="mt-6 space-y-4">
-                {registrationChecklist.map((item) => (
-                  <li key={item} className="flex items-start gap-3 text-sm text-[#ced3e1]"><Check className="h-5 w-5 shrink-0 text-[#93c5fd]" aria-hidden="true" />{item}</li>
-                ))}
-              </ul>
-              <p className="mt-6 border-t border-[#8d99be]/15 pt-5 text-xs leading-relaxed text-[#a2aabc]">The official form may also request previous project experience or information needed for screening and logistics.</p>
+            <div className="shark-registration-ticket">
+              <div className="shark-registration-copy">
+                <div className="shark-registration-card-top"><span className="shark-colour-icon"><Users aria-hidden="true" /></span><span>TEAM REGISTRATION</span></div>
+                <h3>Bring your team.<br /><span>Build your next big idea.</span></h3>
+                <dl className="shark-registration-facts"><div><dt>Team size</dt><dd>2–4 <span>participants</span></dd></div><div><dt>Proposed final</dt><dd>23 Jan 2027 <span>Tentative</span></dd></div></dl>
+                <div className="shark-registration-status"><LockKeyhole aria-hidden="true" /><div><strong>Registration link to be announced</strong><p>You’ll register through the official form once the link is available.</p></div></div>
+                <button type="button" disabled className="shark-registration-unavailable"><LockKeyhole aria-hidden="true" /> Registration not open yet</button>
+                <p className="shark-registration-reassurance"><CheckCircle2 aria-hidden="true" /> No PPT or solution needed to register.</p>
+                <button type="button" onClick={copyEventLink} className={'shark-share-button' + focusStyle}><Copy aria-hidden="true" /> Copy event link for your team</button>
+                <p className="shark-copy-status" role="status">{copyStatus}</p>
+              </div>
+              <div className="shark-registration-prep">
+                <p className="shark-registration-prep-label">BEFORE YOU REGISTER</p><h3>Have these details ready</h3>
+                <ul>{registrationChecklist.map((item, index) => { const Icon = registrationIcons[index]; return (<li key={item}><span className="shark-colour-icon"><Icon aria-hidden="true" /></span>{item}</li>); })}</ul>
+                <p>The official form may also request previous project experience or information needed for screening and logistics.</p>
+              </div>
             </div>
           </div>
         </section>
       </main>
-      <Footer />
     </div>
   );
 }

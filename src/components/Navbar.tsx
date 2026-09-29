@@ -8,6 +8,9 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const location = useLocation();
+  const isLinkActive = (path: string) => path === '/'
+    ? location.pathname === '/'
+    : location.pathname.startsWith(path) || (path === '/events' && location.pathname === '/shark-hack');
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 40);
@@ -50,28 +53,13 @@ export default function Navbar() {
           </div>
 
           <div className="hidden lg:flex items-center gap-8">
-            {navLinks.map((link: any) => {
-              const isActive = link.path === '/' ? location.pathname === '/' : location.pathname.startsWith(link.path);
-              if (link.highlight) {
-                return (
-                  <Link
-                    key={link.label}
-                    to={link.path}
-                    className={`font-mono-label transition-all duration-300 px-3 py-1 rounded-full text-xs font-semibold flex items-center gap-1.5 ${
-                      isActive
-                        ? 'bg-cyan-500/20 text-cyan-200 border border-cyan-400 shadow-[0_0_15px_rgba(6,182,212,0.4)]'
-                        : 'bg-cyan-500/10 text-cyan-300 border border-cyan-500/30 hover:border-cyan-400 hover:text-white hover:shadow-[0_0_12px_rgba(6,182,212,0.3)]'
-                    }`}
-                  >
-                    <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
-                    {link.label}
-                  </Link>
-                );
-              }
+            {navLinks.map((link) => {
+              const isActive = isLinkActive(link.path);
               return (
                 <Link
                   key={link.label}
                   to={link.path}
+                  aria-current={isActive ? 'page' : undefined}
                   className={`font-mono-label transition-colors duration-300 relative group ${
                     isActive ? 'text-impulse-white' : 'text-impulse-gray-light/70 hover:text-impulse-white'
                   }`}
@@ -120,9 +108,10 @@ export default function Navbar() {
             <Link
               key={link.label}
               to={link.path}
+              aria-current={isLinkActive(link.path) ? 'page' : undefined}
               className={`font-sans text-2xl tracking-wide transition-all duration-500 ${
                 mobileOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-              } ${location.pathname === link.path ? 'text-impulse-white' : 'text-impulse-gray-light'}`}
+              } ${isLinkActive(link.path) ? 'text-impulse-white' : 'text-impulse-gray-light'}`}
               style={{ transitionDelay: `${i * 50}ms` }}
             >
               {link.label}

@@ -16,12 +16,12 @@ const upcomingEvents = [
     imageAlt: 'A shark lit in electric blue and pink',
     date: '23 Jan 2027',
     dateTime: '2027-01-23',
-    dateNote: 'Tentative date',
+    dateNote: 'Grand finale',
     location: 'Delhi',
     locationNote: 'Venue to be confirmed',
     team: '2–4 per team',
     rewards: 'Cash prizes & goodies',
-    registrationNote: 'Registration link to be announced',
+    registrationNote: 'Registration opens 1 Nov 2026 · Link to be announced',
     href: '/events/shark-hack',
   },
 ];
@@ -44,17 +44,18 @@ export default function Events() {
           <div className="events-grid">
             {upcomingEvents.map((event) => (
               <article key={event.id} className="event-card" aria-labelledby={'event-title-' + event.id}>
-                <div className="event-card-image">
+                <Link to={event.href} className="event-card-image" aria-label={'Explore ' + event.title}>
                   <img src={event.image} alt={event.imageAlt} />
                   <span className="event-card-status"><Clock3 aria-hidden="true" /> Upcoming</span>
-                </div>
+                  <span className="event-banner-preview" aria-hidden="true"><span><small>{event.date} · {event.location}</small><strong>Explore event</strong></span><ArrowUpRight /></span>
+                </Link>
                 <div className="event-card-body">
                   <p className="event-card-category">{event.category}</p>
                   <h3 id={'event-title-' + event.id}>{event.title}</h3>
                   <p className="event-card-description">{event.description}</p>
                   <dl className="event-card-facts">
                     <div className="event-card-date">
-                      <dt><Calendar aria-hidden="true" /> Proposed final</dt>
+                      <dt><Calendar aria-hidden="true" /> Grand finale</dt>
                       <dd><time dateTime={event.dateTime}>{event.date}</time><span>{event.dateNote}</span></dd>
                     </div>
                     <div className="event-card-location">

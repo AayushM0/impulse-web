@@ -1,40 +1,22 @@
 import { useEffect, useRef, useState, type KeyboardEvent } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { ArrowLeft, ArrowRight, ArrowUpRight, Calendar, ChevronDown, Coins, MapPin, Trophy, Users, FileText, Code2, Flag, CheckCircle2, Clock3, ClipboardList, Copy, Mic2, MonitorPlay, MessagesSquare, Handshake, GraduationCap, Mail, Sparkles, Gift, Building2, LayoutGrid, CircleHelp, LockKeyhole } from 'lucide-react';
+import { ArrowLeft, ArrowRight, ArrowUpRight, Calendar, ChevronDown, Coins, MapPin, Trophy, Users, FileText, Code2, Flag, CheckCircle2, Clock3, ClipboardList, Copy, Mic2, MonitorPlay, MessagesSquare, Handshake, GraduationCap, Mail, Sparkles, Gift, Building2, LayoutGrid, CircleHelp, LockKeyhole, X } from 'lucide-react';
 import Navbar from '@/components/Navbar';
+import SharkTimeline from '@/components/SharkTimeline';
 import './SharkHack.css';
 
 // Participant-facing content from SHARK HACK (1).docx and explicit user updates.
 // Prize amounts are withheld; goodies and partner placeholders were requested by the user.
-// Unconfirmed dates, eligibility and rules remain explicitly provisional.
-// The user updated the proposed finale to 23 January 2027 (tentative).
-const proposedDate = '23 January 2027';
+// Schedule follows the user's updated timeline; venue and rules are still pending.
+const finaleDate = '23 January 2027';
 const timeline = [
-  {
-    title: 'Register',
-    timing: 'Registration link to be announced',
-    description: 'Register through the official form. Teams have 2–4 members. You do not need to submit a PPT or solution at registration.',
-  },
-  {
-    title: 'Get the problem statement',
-    timing: 'Release date to be confirmed',
-    description: 'The official problem statement is revealed before building begins. Understand the challenge, identify your users and develop your approach.',
-  },
-  {
-    title: 'Build & submit',
-    timing: 'Submission deadline to be announced',
-    description: 'Build and test your prototype or MVP. Submit the required presentation and documentation before the official deadline.',
-  },
-  {
-    title: 'Shortlisting',
-    timing: 'Announcement date to be confirmed',
-    description: 'The Impulse organizing and judging team evaluates submissions. Shortlisted teams move on to the offline grand round in Delhi.',
-  },
-  {
-    title: 'Enter the Shark Room',
-    timing: proposedDate + ' · Tentative',
-    description: 'Pitch your solution, demonstrate your prototype and answer the judges’ questions. Defend its value and negotiate offers in Impulse Credits.',
-  },
+  { title: 'Registrations Open', timing: '01 November 2026', description: 'Registration opens for teams participating in SHARK HACK.', icon: Users },
+  { title: 'Problem Statements Released', timing: '01 December 2026', description: 'Problem statements are announced, and PPT/prototype submissions begin.', icon: FileText },
+  { title: 'Registration & Submission Deadline', timing: '05 January 2027', description: 'Final day for registrations and submission of the required PPT or prototype.', icon: Clock3 },
+  { title: 'Shortlist Announcement', timing: '11 January 2027', description: 'Shortlisted teams are announced following the evaluation process.', icon: CheckCircle2 },
+  { title: 'Mentorship Rounds', timing: '13\u201315 January 2027', description: 'Selected teams receive mentorship and guidance to refine their solutions.', icon: GraduationCap },
+  { title: 'Finalists Announced', timing: '17 January 2027', description: 'The teams advancing to the Grand Finale are announced.', icon: ClipboardList },
+  { title: 'Grand Finale', timing: '23 January 2027', location: 'Delhi', description: 'Finalist teams compete at the SHARK HACK Grand Finale in Delhi.', icon: Trophy },
 ];
 
 const sharkRoom = [
@@ -55,7 +37,7 @@ const registrationChecklist = [
 const faqs = [
   {
     question: 'Do I need a project or PPT to register?',
-    answer: 'No. A PPT or solution is not required during registration. Building begins after the official problem statement is released; the presentation and documentation are submitted later, before the announced deadline.',
+    answer: 'No. A PPT or solution is not required during registration. Problem statements are released and submissions open on 1 December 2026. Team registration and PPT/prototype submissions close on 5 January 2027.',
   },
   {
     question: 'Who can participate?',
@@ -63,7 +45,7 @@ const faqs = [
   },
   {
     question: 'Does every team attend the Delhi round?',
-    answer: 'Only shortlisted teams advance to the offline grand round in Delhi. Submissions will be evaluated by the Impulse organizing and judging team according to the officially published criteria.',
+    answer: 'No. The first shortlist is announced on 11 January 2027, followed by mentorship on 13–15 January. Teams selected to attend the Delhi grand finale are announced on 17 January 2027.',
   },
   {
     question: 'What are Impulse Credits? Am I selling my project?',
@@ -71,7 +53,7 @@ const faqs = [
   },
   {
     question: 'What details are still to be confirmed?',
-    answer: 'The final event date and venue, problem-release date and platform, submission deadline and format, detailed eligibility, pitch timings and scoring rules are still to be confirmed. The proposed Delhi round is on ' + proposedDate + ' (tentative).',
+    answer: 'The exact Delhi venue, registration link, problem-release platform, detailed submission format, eligibility, pitch timings and scoring rules are still to be confirmed. The grand finale is on ' + finaleDate + '.',
   },
 ];
 
@@ -96,7 +78,6 @@ const overviewLinks = [
   { id: 'register', title: 'Get your team ready', description: 'Registration details and what to prepare.', action: 'View registration' },
 ] as const;
 
-const timelineIcons = [Users, FileText, Code2, CheckCircle2, Flag];
 const faqIcons = [FileText, Users, MapPin, Coins, Calendar];
 const registrationIcons = [Flag, Users, GraduationCap, Mail, Code2];
 const focusStyle = ' shark-focus';
@@ -107,12 +88,16 @@ export default function SharkHack() {
   const activeSection = sectionLinks.find(([id]) => id === hash.slice(1))?.[0] ?? 'overview';
   const [copyStatus, setCopyStatus] = useState('');
   const [roomStep, setRoomStep] = useState(0);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const mobileMenuRef = useRef<HTMLDivElement>(null);
+  const mobileMenuButtonRef = useRef<HTMLButtonElement>(null);
   const selectedRoomStep = sharkRoom[roomStep];
   const RoomIcon = selectedRoomStep.icon;
   const copyTimer = useRef<ReturnType<typeof setTimeout>>();
   const focusPanel = useRef(false);
 
   const selectSection = (id: SectionId, moveFocusToPanel = false) => {
+    setMobileMenuOpen(false);
     focusPanel.current = moveFocusToPanel;
     navigate({ pathname, search, hash: '#' + id }, { preventScrollReset: true });
   };
@@ -138,6 +123,32 @@ export default function SharkHack() {
   });
 
   useEffect(() => () => clearTimeout(copyTimer.current), []);
+
+  useEffect(() => {
+    setMobileMenuOpen(false);
+  }, [activeSection]);
+
+  useEffect(() => {
+    if (!mobileMenuOpen) return;
+    const closeOutside = (event: PointerEvent) => {
+      if (!mobileMenuRef.current?.contains(event.target as Node)) setMobileMenuOpen(false);
+    };
+    const closeOnEscape = (event: globalThis.KeyboardEvent) => {
+      if (event.key !== 'Escape') return;
+      setMobileMenuOpen(false);
+      mobileMenuButtonRef.current?.focus({ preventScroll: true });
+    };
+    const breakpoint = window.matchMedia('(max-width: 900px)');
+    const closeOnResize = () => { if (!breakpoint.matches) setMobileMenuOpen(false); };
+    document.addEventListener('pointerdown', closeOutside);
+    document.addEventListener('keydown', closeOnEscape);
+    breakpoint.addEventListener('change', closeOnResize);
+    return () => {
+      document.removeEventListener('pointerdown', closeOutside);
+      document.removeEventListener('keydown', closeOnEscape);
+      breakpoint.removeEventListener('change', closeOnResize);
+    };
+  }, [mobileMenuOpen]);
 
   useEffect(() => {
     const frame = requestAnimationFrame(() => {
@@ -168,6 +179,27 @@ export default function SharkHack() {
       <Navbar />
       <main>
         <nav aria-label="Shark Hack sections" className="shark-section-nav">
+          <div className="shark-mobile-navigation" ref={mobileMenuRef}>
+            <div className="shark-mobile-shortcuts">
+              {sectionLinks.slice(0, 2).map(([id, label]) => {
+                const Icon = sectionIcons[id];
+                return <button key={id} type="button" className={'shark-mobile-tab' + focusStyle} aria-current={activeSection === id ? 'location' : undefined} aria-controls={id} onClick={() => selectSection(id)}><span className={'shark-nav-icon shark-nav-icon-' + id}><Icon aria-hidden="true" /></span>{label}</button>;
+              })}
+              <button ref={mobileMenuButtonRef} type="button" className={'shark-mobile-tab shark-mobile-more' + focusStyle} aria-expanded={mobileMenuOpen} aria-controls="shark-mobile-section-menu" data-active={!['overview', 'timeline'].includes(activeSection)} onClick={() => setMobileMenuOpen(open => !open)}><LayoutGrid aria-hidden="true" />More<span className="shark-mobile-menu-indicator" aria-hidden="true" /></button>
+            </div>
+            <div id="shark-mobile-section-menu" className="shark-mobile-section-menu" hidden={!mobileMenuOpen}>
+              <div className="shark-mobile-menu-heading"><span>Explore Shark Hack</span><button type="button" aria-label="Close section menu" className={focusStyle} onClick={() => { setMobileMenuOpen(false); mobileMenuButtonRef.current?.focus(); }}><X aria-hidden="true" /></button></div>
+              <div className="shark-mobile-menu-grid">
+                {sectionLinks.slice(2).map(([id, label]) => {
+                  const Icon = sectionIcons[id];
+                  return <button key={id} type="button" className={'shark-mobile-menu-option' + (id === 'register' ? ' shark-mobile-menu-register' : '') + focusStyle} aria-current={activeSection === id ? 'location' : undefined} aria-controls={id} onClick={() => {
+                    if (id === activeSection) { setMobileMenuOpen(false); document.getElementById(id)?.focus({ preventScroll: true }); }
+                    else selectSection(id, true);
+                  }}><span className={'shark-nav-icon shark-nav-icon-' + id}><Icon aria-hidden="true" /></span><span>{label}</span>{id === 'register' && <ArrowUpRight aria-hidden="true" />}</button>;
+                })}
+              </div>
+            </div>
+          </div>
           <div role="tablist" aria-label="Event details" className="shark-content-width shark-section-nav-inner">
             {sectionLinks.map(([id, label], index) => {
               const TabIcon = sectionIcons[id];
@@ -194,18 +226,18 @@ export default function SharkHack() {
               <h1 id="shark-hack-title" className="shark-hero-title">SHARK <span>HACK</span></h1>
               <p className="shark-hero-tagline">Don’t just build. <span>Make them believe.</span></p>
               <p className="shark-hero-description">Build a solution to a surprise problem. Earn your place in the Delhi final, then pitch, demonstrate and negotiate its value with the Sharks.</p>
-              <button type="button" onClick={() => selectSection('prizes', true)} className={'shark-rewards-preview' + focusStyle}><Trophy aria-hidden="true" /><span>Cash prizes <span aria-hidden="true">·</span> Goodies <span aria-hidden="true">·</span> Recognition</span><ArrowRight aria-hidden="true" /></button>
               <div className="shark-hero-actions">
                 <button type="button" onClick={() => selectSection('register', true)} className={'shark-primary-button' + focusStyle}><span>Registration details</span><span className="shark-button-arrow"><ArrowUpRight aria-hidden="true" /></span></button>
-                <button type="button" onClick={() => selectSection('timeline', true)} className={'shark-secondary-button' + focusStyle}><span><small>Your journey, step by step</small>Explore the timeline</span><span className="shark-button-arrow"><ArrowRight aria-hidden="true" /></span></button>
+                <button type="button" onClick={() => selectSection('timeline', true)} className={'shark-secondary-button' + focusStyle}><span>Explore the timeline</span><span className="shark-button-arrow"><ArrowRight aria-hidden="true" /></span></button>
               </div>
               <p className="shark-hero-note"><CheckCircle2 aria-hidden="true" /> No PPT or solution needed at registration.</p>
+              <button type="button" onClick={() => selectSection('prizes', true)} className={'shark-rewards-preview' + focusStyle}><Trophy aria-hidden="true" /><span>Cash prizes <span aria-hidden="true">·</span> Goodies <span aria-hidden="true">·</span> Recognition</span><ArrowRight aria-hidden="true" /></button>
               <div className="shark-hero-process" aria-label="Build, pitch, negotiate, close"><span><Code2 aria-hidden="true" />Build</span><ArrowRight aria-hidden="true" /><span><Mic2 aria-hidden="true" />Pitch</span><ArrowRight aria-hidden="true" /><span><Handshake aria-hidden="true" />Negotiate</span><ArrowRight aria-hidden="true" /><span><Flag aria-hidden="true" />Close</span></div>
             </div>
             <dl className="shark-event-facts">
               <div className="shark-fact-card">
-                <dt><span className="shark-fact-icon"><Calendar aria-hidden="true" /></span> Proposed final date</dt>
-                <dd><strong>23 Jan</strong><span className="shark-fact-unit">2027 · Tentative date</span><span className="shark-fact-note"><Clock3 aria-hidden="true" /> Final confirmation to follow</span></dd>
+                <dt><span className="shark-fact-icon"><Calendar aria-hidden="true" /></span> Grand finale date</dt>
+                <dd><strong>23 Jan</strong><span className="shark-fact-unit">2027 · Grand finale</span><span className="shark-fact-note"><Clock3 aria-hidden="true" /> Registration opens 1 Nov 2026</span></dd>
               </div>
               <div className="shark-fact-card">
                 <dt><span className="shark-fact-icon"><MapPin aria-hidden="true" /></span> The offline final</dt>
@@ -240,24 +272,9 @@ export default function SharkHack() {
           <div className="shark-content-width">
             <div className="shark-section-heading">
               <div><p className="shark-eyebrow"><span>01</span> Your event timeline</p><h2 id="timeline-title">Your path to<br />the <em>Shark Room.</em></h2></div>
-              <p className="shark-section-intro">Register, build, submit. Shortlisted teams take their solutions to the offline final in Delhi.</p>
+              <p className="shark-section-intro">From ideas to impact — follow the journey to SHARK HACK.</p>
             </div>
-            <ol className="shark-journey">
-              {timeline.map((step, index) => {
-                const StepIcon = timelineIcons[index];
-                return (
-                  <li key={step.title} className={'shark-journey-step' + (index === timeline.length - 1 ? ' shark-journey-finale' : '')}>
-                    <div className="shark-step-marker" aria-hidden="true"><StepIcon /></div>
-                    <div className="shark-step-card">
-                      <p className="shark-step-label">Stage {String(index + 1).padStart(2, '0')}<span>{index === timeline.length - 1 ? 'The offline final' : 'Road to the final'}</span></p>
-                      <p className="shark-step-timing"><Clock3 aria-hidden="true" />{step.timing}</p>
-                      <h3>{step.title}</h3><p className="shark-step-description">{step.description}</p>
-                    </div>
-                  </li>
-                );
-              })}
-            </ol>
-            <div className="shark-schedule-note"><Clock3 aria-hidden="true" /><p><strong>The schedule is provisional.</strong> The final date depends on venue availability; problem-release and submission dates are still to be confirmed.</p></div>
+            <SharkTimeline steps={timeline} />
           </div>
         </section>
 
@@ -352,8 +369,8 @@ export default function SharkHack() {
               <div className="shark-registration-copy">
                 <div className="shark-registration-card-top"><span className="shark-colour-icon"><Users aria-hidden="true" /></span><span>TEAM REGISTRATION</span></div>
                 <h3>Bring your team.<br /><span>Build your next big idea.</span></h3>
-                <dl className="shark-registration-facts"><div><dt>Team size</dt><dd>2–4 <span>participants</span></dd></div><div><dt>Proposed final</dt><dd>23 Jan 2027 <span>Tentative</span></dd></div></dl>
-                <div className="shark-registration-status"><LockKeyhole aria-hidden="true" /><div><strong>Registration link to be announced</strong><p>You’ll register through the official form once the link is available.</p></div></div>
+                <dl className="shark-registration-facts"><div><dt>Team size</dt><dd>2–4 <span>participants</span></dd></div><div><dt>Grand finale</dt><dd>23 Jan 2027 <span>Delhi</span></dd></div></dl>
+                <div className="shark-registration-status"><LockKeyhole aria-hidden="true" /><div><strong>Registrations open 1 November 2026</strong><p>Registration and submissions close on 5 January 2027. The official registration link will be announced.</p></div></div>
                 <button type="button" disabled className="shark-registration-unavailable"><LockKeyhole aria-hidden="true" /> Registration not open yet</button>
                 <p className="shark-registration-reassurance"><CheckCircle2 aria-hidden="true" /> No PPT or solution needed to register.</p>
                 <button type="button" onClick={copyEventLink} className={'shark-share-button' + focusStyle}><Copy aria-hidden="true" /> Copy event link for your team</button>

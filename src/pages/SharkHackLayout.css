@@ -9,10 +9,10 @@
 .shark-scroll-page .shark-section-nav-inner .shark-nav-icon { display: none; }
 .shark-scroll-page .shark-section-link:hover, .shark-scroll-page .shark-section-link[aria-current] { color: #f5f7ff; background: #10203a; }
 .shark-scroll-page .shark-section-link[aria-current]::after { content: ''; position: absolute; height: 2px; bottom: 5px; left: 20px; right: 20px; background: linear-gradient(90deg, #60a5fa, #f472b6); }
-.shark-scroll-page .shark-section-register { background: #93c5fd; border: 1px solid #93c5fd; color: #06070b; font-weight: 600; margin-left: 6px; }
+.shark-scroll-page .shark-section-register { background: linear-gradient(115deg, #60a5fa88, #f472b688) padding-box, linear-gradient(#06070b, #06070b) padding-box, linear-gradient(115deg, #60a5facc, #f472b6cc) border-box; border: 1px solid transparent; color: #f5f7ff; font-weight: 600; margin-left: 6px; box-shadow: 0 4px 20px #60a5fa18, 0 4px 20px #f472b612, inset 0 1px 0 #f5f7ff18; }
 .shark-scroll-page .shark-section-register:hover,
-.shark-scroll-page .shark-section-register[aria-expanded='true'] { background: var(--sh-blue); border-color: var(--sh-blue); color: #06070b; box-shadow: none; }
-.shark-scroll-page .shark-section-register > svg { color: inherit; }
+.shark-scroll-page .shark-section-register[aria-expanded='true'] { background: linear-gradient(115deg, #60a5faa6, #f472b6a6) padding-box, linear-gradient(#06070b, #06070b) padding-box, linear-gradient(115deg, #60a5fa, #f472b6) border-box; border-color: transparent; color: #f5f7ff; box-shadow: 0 4px 24px #60a5fa24, 0 4px 24px #f472b618, inset 0 1px 0 #f5f7ff18; }
+.shark-scroll-page .shark-section-register > svg { color: #f5f7ff; }
 .shark-nav-registration { position: relative; }
 .shark-registration-notice { position: absolute; z-index: 2; top: calc(100% + 14px); right: 0; width: 300px; max-width: calc(100vw - 40px); padding: 18px; border: 1px solid #314d73; border-radius: 14px; background: #06070b; color: #afbed3; text-align: left; }
 .shark-registration-notice > div { display: flex; align-items: flex-start; gap: 10px; }
@@ -62,17 +62,20 @@
 .shark-scroll-page .shark-room-section { padding-block: 112px; }
 .shark-scroll-page .shark-room-section .shark-section-heading { display: block; max-width: 780px; margin-bottom: 64px; }
 .shark-scroll-page .shark-room-section .shark-section-intro { max-width: 580px; margin-top: 28px; padding: 0; line-height: 1.85; }
-.shark-scroll-page .shark-room-explorer { display: grid; grid-template-columns: 240px minmax(0, 1fr); align-items: start; gap: 48px; max-width: 1100px; margin-inline: auto; }
-.shark-scroll-page .shark-room-choices { grid-template-columns: 1fr; gap: 16px; margin: 0; }
+.shark-scroll-page .shark-room-explorer { display: grid; grid-template-columns: minmax(0, 1fr); gap: 0; max-width: 1100px; margin-inline: auto; border: 1px solid #243149; border-radius: 22px; background: #0c1019; }
+.shark-scroll-page .shark-room-choices { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; margin: 0; padding: 10px; border-bottom: 1px solid #243149; }
 .shark-scroll-page .shark-room-choices::before, .shark-scroll-page .shark-room-choice-connector { display: none; }
-.shark-scroll-page .shark-room-choice { min-height: 92px; padding: 20px; gap: 16px; border-radius: 14px; background: transparent; border-color: #243149; }
-.shark-scroll-page .shark-room-choice-label strong { font-size: 20px; }
+.shark-scroll-page .shark-room-choice { min-height: 80px; padding: 16px; gap: 12px; border-radius: 12px; background: transparent; border-color: transparent; }
+.shark-scroll-page .shark-room-choice-label strong { font-size: 18px; }
 .shark-scroll-page .shark-room-choice[aria-pressed='true'] { background: #10203a; border-color: #60a5fa; box-shadow: none; }
-.shark-scroll-page .shark-room-detail { grid-template-columns: 1fr; align-content: start; gap: 0; padding: 44px 48px; min-height: 0; border-radius: 24px; background: linear-gradient(140deg, #0c1423, #0c1019); }
+.shark-scroll-page .shark-room-detail { grid-template-columns: minmax(0, 1fr) 130px; align-items: center; gap: 32px; padding: 36px 40px; min-height: 320px; border: 0; border-radius: 0 0 22px 22px; background: linear-gradient(140deg, #0c1423, #0c1019); }
+.shark-scroll-page .shark-room-step-mark { display: flex; flex-direction: column; align-items: center; gap: 12px; color: var(--sh-blue); }
+.shark-scroll-page .shark-room-step-mark span { font-size: 100px; font-weight: 600; line-height: 1; letter-spacing: -.07em; opacity: .16; }
+.shark-scroll-page .shark-room-step-mark > svg { width: 38px; height: 38px; stroke-width: 1; opacity: .45; }
 .shark-scroll-page .shark-room-art { display: none; }
-.shark-scroll-page .shark-room-detail h3 { max-width: 560px; margin-top: 20px; font-size: clamp(28px, 2.6vw, 38px); line-height: 1.25; }
-.shark-scroll-page .shark-room-detail-copy > p:not(.shark-room-kicker) { max-width: 580px; margin-top: 24px; font-size: 16px; line-height: 1.85; }
-.shark-scroll-page .shark-room-caption { margin-top: 30px; }
+.shark-scroll-page .shark-room-detail h3 { max-width: 760px; margin-top: 16px; font-size: clamp(26px, 2.4vw, 34px); line-height: 1.25; }
+.shark-scroll-page .shark-room-detail-copy > p:not(.shark-room-kicker) { max-width: 740px; margin-top: 18px; font-size: 16px; line-height: 1.8; }
+.shark-scroll-page .shark-room-caption { margin-top: 24px; }
 .shark-scroll-page .shark-room-controls { padding-top: 28px; gap: 20px; }
 .shark-scroll-page .shark-room-progress { display: none; }
 .shark-scroll-page .shark-room-next { margin-left: auto; }
@@ -110,7 +113,7 @@
 .shark-scroll-page .shark-registration-heading { margin-bottom: 48px; }
 .shark-scroll-page .shark-registration-ticket { gap: 28px; }
 @media (max-width: 1100px) {
-  .shark-scroll-page .shark-room-explorer { grid-template-columns: 210px minmax(0, 1fr); gap: 28px; }
+  .shark-scroll-page .shark-room-choice { padding: 14px 10px; gap: 10px; }
   .shark-scroll-page .shark-room-detail { padding: 36px; }
   .shark-scroll-page .shark-section-link, .shark-scroll-page .shark-section-register { padding-inline: 13px; }
   .shark-scroll-page .shark-event-facts { row-gap: 28px; }
@@ -130,7 +133,7 @@
   .shark-scroll-page .shark-mobile-shortcuts .shark-section-register > svg { width: 14px; height: 14px; }
 }
 @media (max-width: 767px) {
-  .shark-scroll-page .shark-section-nav { display: block; width: calc(100% - 24px); max-width: none; }
+  .shark-scroll-page .shark-section-nav { display: none; width: calc(100% - 24px); max-width: none; }
   .shark-scroll-page main section[id] { scroll-margin-top: 156px; }
   .shark-scroll-page .shark-hero { padding-top: 104px; }
   .shark-scroll-page .shark-hero-art { width: 235%; height: 660px; opacity: 0.5; object-position: right top; }
@@ -161,12 +164,13 @@
   .shark-scroll-page .shark-room-section { padding-block: 72px; }
   .shark-scroll-page .shark-room-section .shark-section-heading { margin-bottom: 36px; }
   .shark-scroll-page .shark-room-section .shark-section-intro { margin-top: 24px; }
-  .shark-scroll-page .shark-room-explorer { grid-template-columns: 1fr; gap: 28px; }
-  .shark-scroll-page .shark-room-choices { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
-  .shark-scroll-page .shark-room-choice { flex-direction: row; min-height: 84px; gap: 12px; padding: 16px 12px; text-align: left; }
+  .shark-scroll-page .shark-room-explorer { grid-template-columns: 1fr; gap: 0; border-radius: 18px; }
+  .shark-scroll-page .shark-room-choices { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; padding: 8px; }
+  .shark-scroll-page .shark-room-choice { flex-direction: row; min-height: 72px; gap: 10px; padding: 12px 10px; text-align: left; }
   .shark-scroll-page .shark-room-choice-label strong { font-size: 16px; }
   .shark-scroll-page .shark-room-choice .shark-colour-icon { flex-shrink: 0; }
-  .shark-scroll-page .shark-room-detail { min-height: 0; gap: 32px; padding: 30px 24px; border-radius: 20px; }
+  .shark-scroll-page .shark-room-detail { grid-template-columns: minmax(0, 1fr); min-height: 0; gap: 0; padding: 28px 22px; border-radius: 0 0 18px 18px; }
+  .shark-scroll-page .shark-room-step-mark { display: none; }
   .shark-scroll-page .shark-room-detail h3 { margin-top: 18px; font-size: 28px; }
   .shark-scroll-page .shark-room-detail-copy > p:not(.shark-room-kicker) { margin-top: 22px; font-size: 15px; line-height: 1.9; }
   .shark-scroll-page .shark-room-caption { margin-top: 28px; }

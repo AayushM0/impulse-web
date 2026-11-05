@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 import { ArrowDown, ArrowUpRight, Calendar, CalendarDays, Clock3, MapPin, Trophy, Users } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import EventsTypeBackground from '@/components/EventsTypeBackground';
-import { useEventReveals } from '@/hooks/useEventReveals';
+import EventsMeshBackground from '@/components/EventsMeshBackground';
+import { useEventsPageReveals } from '@/hooks/useEventsPageReveals';
 import './Events.css';
 import './EventsLayout.css';
 
@@ -32,13 +32,13 @@ const upcomingEvents = [
 
 export default function Events() {
   const pageRef = useRef<HTMLDivElement>(null);
-  useEventReveals(pageRef);
+  useEventsPageReveals(pageRef);
   return (
     <div className="events-page" ref={pageRef}>
       <Navbar />
       <main className="events-content">
         <header className="events-intro">
-          <EventsTypeBackground />
+          <EventsMeshBackground />
           <div className="events-hero-copy">
             <p className="events-eyebrow"><span /> DISCOVER · PARTICIPATE · BUILD</p>
             <h1>Events at Impulse.</h1>

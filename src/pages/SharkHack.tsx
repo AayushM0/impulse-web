@@ -258,7 +258,7 @@ export default function SharkHack() {
               </div>
               <div id="shark-room-detail" className="shark-room-detail" role="region" aria-labelledby={'room-choice-' + roomStep} aria-live="polite">
                 <div className="shark-room-detail-copy"><p className="shark-room-kicker">Step {roomStep + 1} of {sharkRoom.length} / {selectedRoomStep.label}</p><h3>{selectedRoomStep.title}</h3><p>{selectedRoomStep.description}</p><div className="shark-room-caption"><Sparkles aria-hidden="true" />{selectedRoomStep.caption}</div></div>
-                <div className="shark-room-art" aria-hidden="true"><span className="shark-room-orbit" /><span className="shark-room-orbit" /><span className="shark-room-art-icon"><RoomIcon /></span><span className="shark-room-art-label">THE SHARK ROOM</span></div>
+                <div className="shark-room-step-mark" aria-hidden="true"><span>{String(roomStep + 1).padStart(2, '0')}</span><RoomIcon /></div>
               </div>
             </div>
           </div>

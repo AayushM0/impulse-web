@@ -21,3 +21,14 @@ dist-ssr
 *.sln
 *.sw?
 .env
+
+# User assets & isolated unused files
+personal-assets/
+personal_assets/
+unused/
+docs/
+.scratch/
+AGENTS.md
+CLAUDE.md
+*.zip
+*.docx

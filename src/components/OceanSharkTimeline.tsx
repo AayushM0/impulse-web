@@ -1,6 +1,13 @@
 import { useId, useLayoutEffect, useRef, type CSSProperties } from 'react';
-import { Calendar, MapPin } from 'lucide-react';
-import type { TimelineStep } from './SharkTimeline';
+import { Calendar, MapPin, type LucideIcon } from 'lucide-react';
+export interface TimelineStep {
+  title: string;
+  timing: string;
+  description: string;
+  location?: string;
+  icon: LucideIcon;
+}
+
 import './OceanSharkTimeline.css';
 
 function WaterSurface({ id, landing = false }: { id: string; landing?: boolean }) {

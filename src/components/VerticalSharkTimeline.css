@@ -1,0 +1,26 @@
+/* A static, readable schedule on phones; the desktop wave stays unchanged. */
+@media (max-width: 900px) {
+  .shark-wave-scroll, .shark-wave-hint { display: none; }
+  .shark-vertical-timeline { display: grid; max-width: 540px; margin: 0 auto; padding: 0; list-style: none; }
+  .shark-vertical-stage { position: relative; display: grid; grid-template-columns: 32px minmax(0, 1fr); gap: 12px; padding-bottom: 22px; }
+  .shark-vertical-stage::before { content: ''; position: absolute; top: 28px; bottom: -28px; left: 15px; width: 2px; background: linear-gradient(var(--wave-border), #26334c); }
+  .shark-vertical-stage:last-child { padding-bottom: 0; }
+  .shark-vertical-stage:last-child::before { display: none; }
+  .shark-vertical-marker { position: relative; display: grid; place-items: center; margin-top: 20px; width: 32px; height: 32px; border: 1px solid var(--wave-border); border-radius: 50%; background: var(--wave-card-start); color: var(--wave-accent); box-shadow: 0 0 0 5px #06070b; font: 11px 'JetBrains Mono', monospace; }
+  .shark-vertical-card { min-width: 0; padding: 20px; border: 1px solid var(--wave-border); border-radius: 16px; background: linear-gradient(135deg, var(--wave-card-start), var(--wave-card-end)); }
+  .shark-vertical-card-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; color: var(--wave-accent); }
+  .shark-vertical-card-top > span { font: 10px 'JetBrains Mono', monospace; text-transform: uppercase; letter-spacing: 0.09em; }
+  .shark-vertical-card-top svg { width: 20px; height: 20px; }
+  .shark-vertical-date { display: flex; align-items: center; gap: 7px; margin-top: 18px; color: var(--wave-text); font-size: 13px; font-weight: 500; line-height: 1.5; }
+  .shark-vertical-date svg, .shark-vertical-location svg { width: 15px; height: 15px; flex-shrink: 0; color: var(--wave-accent); }
+  .shark-vertical-card h3 { margin-top: 10px; color: #f5f7ff; font-size: 19px; font-weight: 600; letter-spacing: -0.025em; line-height: 1.3; }
+  .shark-vertical-description { margin-top: 10px; color: #b8c7dd; font-size: 14px; line-height: 1.7; }
+  .shark-vertical-location { display: flex; align-items: center; gap: 7px; margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--wave-border); color: var(--wave-text); font-size: 13px; }
+}
+@media (max-width: 359px) {
+  .shark-vertical-stage { grid-template-columns: 28px minmax(0, 1fr); gap: 10px; }
+  .shark-vertical-marker { width: 28px; height: 28px; font-size: 10px; }
+  .shark-vertical-stage::before { left: 13px; }
+  .shark-vertical-card { padding: 16px; }
+  .shark-vertical-card h3 { font-size: 18px; }
+}

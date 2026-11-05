@@ -1,0 +1,149 @@
+.shark-ocean-timeline { --jump-x: 52px; --jump-y: -115px; --entry-x: 130px; --entry-y: -120px; position: relative; max-width: 1080px; margin: 0 auto; padding: 210px 0 224px; isolation: isolate; }
+.shark-ocean-water { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; z-index: 2; }
+.shark-ocean-flow { fill: none; stroke-linecap: round; }
+.shark-ocean-bank { stroke: #60a5fa; stroke-width: 76px; opacity: 0.07; }
+.shark-ocean-current { stroke-width: 62px; opacity: .7; }
+.shark-ocean-wavelet { fill: none; stroke: #dbeafe; stroke-width: 1.4px; opacity: 0.55; }
+.shark-ocean-progress { stroke-width: 52px; stroke-dasharray: 1; stroke-dashoffset: 1; opacity: 0.72; }
+.shark-ocean-wake { fill: none; stroke: #dbeafe; stroke-width: 3px; stroke-linecap: round; stroke-dasharray: 2 10; }
+.shark-ocean-bubble circle { fill: #93c5fd30; stroke: #dbeafe; stroke-width: 1px; }
+.shark-ocean-swimmer { filter: drop-shadow(0 4px 5px #06070bcc); }
+.shark-ocean-fish { transform: scale(1); }
+.shark-ocean-bow-wave { opacity: .65; }
+.shark-ocean-arrival { transform-origin: 0 12px; }
+.shark-ocean-finish-ring { fill: none; stroke: #93c5fd; stroke-width: 1.5px; opacity: 0; }
+.shark-ocean-finish-ring:nth-child(2) { stroke: #f472b6; }
+.shark-ocean-finish-drop { fill: #93c5fd; opacity: 0; }
+.shark-ocean-finish-drop:nth-child(even) { fill: #f472b6; }
+.shark-ocean-entry-pool { transform: scale(.5); }
+.shark-ocean-landing-pool { transform: translate(26px, 9px); }
+.shark-ocean-pool-depth { fill: #10203a; opacity: .45; }
+.shark-ocean-surface-flow, .shark-ocean-surface-ripples { fill: none; stroke: #93c5fd; stroke-width: 1.2px; stroke-linecap: round; }
+.shark-ocean-surface-flow { opacity: .5; }
+.shark-ocean-surface-flow path + path { stroke: #dbeafe; stroke-width: .8px; }
+.shark-ocean-surface-ripples { stroke: #dbeafe; opacity: .45; stroke-width: .8px; }
+.shark-ocean-takeoff { transform: scale(.5); }
+.shark-ocean-touchdown { transform: translate(var(--jump-x), 12px); }
+.shark-ocean-splash-crown { fill: #93c5fd; stroke: #dbeafe; stroke-width: 1; opacity: 0; }
+.shark-ocean-entry-fish, .shark-ocean-exit-fish { opacity: 0; filter: drop-shadow(0 12px 7px #06070b80); }
+.shark-ocean-timeline[data-entry='waiting'] .shark-ocean-swimmer,
+.shark-ocean-timeline[data-entry='playing'] .shark-ocean-swimmer { opacity: 0; }
+.shark-ocean-stages { margin: 0; padding: 0; list-style: none; }
+.shark-ocean-stage { --ocean-accent: #60a5fa; --ocean-border: #314d73; --ocean-card: #10203a; position: relative; min-height: 270px; padding-bottom: 56px; }
+.shark-ocean-stage[data-tone='pink'] { --ocean-accent: #f472b6; --ocean-border: #643056; --ocean-card: #210f25; }
+.shark-ocean-stage:last-child { padding-bottom: 0; min-height: 220px; }
+.shark-ocean-marker { position: absolute; z-index: 3; top: 42px; width: 10px; height: 10px; transform: translate(-50%, -50%); border: 1px solid #93c5fd; background: #10203a; border-radius: 50%; box-shadow: 0 0 0 5px #06070b; pointer-events: none; }
+.shark-ocean-card { position: relative; width: calc(50% - 100px); padding: 26px 28px; border-top: 1px solid #243149; border-radius: 4px 20px 20px 20px; }
+.shark-ocean-stage:nth-child(even) .shark-ocean-card { margin-left: auto; }
+.shark-ocean-card h3 { color: #dbe5f5; font-size: clamp(20px, 2vw, 27px); font-weight: 600; line-height: 1.25; letter-spacing: -0.025em; }
+.shark-ocean-details { padding-top: 20px; }
+.shark-ocean-timeline[data-ready='true'] .shark-ocean-stage[data-reached='false'] .shark-ocean-details { opacity: 0; transform: translateY(8px); }
+.shark-ocean-stage[data-reached='true'] .shark-ocean-card { border-color: var(--ocean-border); background: linear-gradient(135deg, var(--ocean-card), #0a0e18); box-shadow: inset 3px 0 var(--ocean-accent); }
+.shark-ocean-stage[data-reached='true'] .shark-ocean-marker { background: var(--ocean-accent); border-color: var(--ocean-accent); box-shadow: 0 0 0 5px #06070b, 0 0 22px var(--ocean-accent); }
+.shark-ocean-stage[data-current='true'] .shark-ocean-card { outline: 1px solid var(--ocean-border); }
+.shark-ocean-date, .shark-ocean-location { display: flex; align-items: center; gap: 8px; color: var(--ocean-accent); font-size: 13px; font-weight: 500; line-height: 1.5; }
+.shark-ocean-date { width: fit-content; max-width: 100%; padding: 9px 12px; border: 1px solid var(--ocean-border); border-radius: 9px; background: #142b52; color: #dbeafe; font-size: 16px; font-weight: 700; }
+.shark-ocean-stage[data-tone='pink'] .shark-ocean-date { background: #400f34; color: #fce7f3; }
+.shark-ocean-date svg, .shark-ocean-location svg { width: 16px; height: 16px; flex-shrink: 0; }
+.shark-ocean-description { margin-top: 14px; color: #b8c7dd; font-size: 15px; line-height: 1.75; }
+.shark-ocean-location { margin-top: 16px; }
+.shark-ocean-stage-icon { position: absolute; bottom: 16px; right: 16px; width: 40px; height: 40px; color: var(--ocean-accent); opacity: 0.09; }
+@media (prefers-reduced-motion: no-preference) {
+  .shark-ocean-details { transition: opacity 250ms ease, transform 250ms ease; }
+  .shark-ocean-card { transition: background 250ms ease, border-color 250ms ease; }
+  .shark-ocean-body { transform-origin: 0 14px; animation: shark-swim-body 1.6s ease-in-out infinite; }
+  .shark-ocean-side-tail { transform-origin: -30px 0; animation: shark-swim-tail .65s ease-in-out infinite; }
+  .shark-ocean-side-fin { transform-origin: 4px 7px; animation: shark-swim-fin 1.3s ease-in-out infinite; }
+  .shark-ocean-wavelet path { animation: shark-water-ripple 3s ease-in-out infinite alternate; }
+  .shark-ocean-wavelet:nth-of-type(even) path { animation-delay: -1.5s; }
+  .shark-ocean-bubble circle { animation: shark-water-bubble 1.7s ease-out infinite; }
+  .shark-ocean-bow-wave { animation: shark-bow-wave 2s ease-in-out infinite; }
+  .shark-ocean-surface-flow { animation: shark-surface-drift 3.6s ease-in-out infinite alternate; }
+  .shark-ocean-surface-ripples { animation: shark-surface-spread 3s ease-out infinite; }
+  .shark-ocean-timeline[data-entry='playing'] .shark-ocean-entry-fish { animation: shark-entry-flight 1.2s linear both; }
+  .shark-ocean-timeline[data-finished='true'] .shark-ocean-exit-fish { animation: shark-exit-flight 1.6s .18s linear both; }
+  .shark-ocean-timeline[data-finished='true'] .shark-ocean-arrival { animation: shark-finish-submerge 2s ease-in-out both; }
+  .shark-ocean-timeline[data-entry='playing'] .shark-ocean-entry .shark-ocean-splash-crown,
+  .shark-ocean-timeline[data-entry='complete'] .shark-ocean-entry .shark-ocean-splash-crown,
+  .shark-ocean-timeline[data-finished='true'] .shark-ocean-finish .shark-ocean-splash-crown { animation-name: shark-splash-crown; animation-duration: .6s; animation-timing-function: ease-out; animation-fill-mode: both; }
+  .shark-ocean-timeline[data-entry='playing'] .shark-ocean-entry .shark-ocean-finish-ring,
+  .shark-ocean-timeline[data-entry='complete'] .shark-ocean-entry .shark-ocean-finish-ring,
+  .shark-ocean-timeline[data-finished='true'] .shark-ocean-finish .shark-ocean-finish-ring { animation-name: shark-finish-ripple; animation-duration: 1.6s; animation-timing-function: ease-out; animation-fill-mode: both; }
+  .shark-ocean-timeline[data-entry='playing'] .shark-ocean-entry .shark-ocean-finish-drop,
+  .shark-ocean-timeline[data-entry='complete'] .shark-ocean-entry .shark-ocean-finish-drop,
+  .shark-ocean-timeline[data-finished='true'] .shark-ocean-finish .shark-ocean-finish-drop { animation-name: shark-finish-splash; animation-duration: 1.1s; animation-timing-function: ease-out; animation-fill-mode: both; }
+  .shark-ocean-timeline[data-finished='true'] .shark-ocean-wake { animation: shark-finish-wake 1.2s ease-out forwards; }
+  .shark-ocean-timeline:not([data-in-view='true']) * { animation-play-state: paused; }
+}
+@keyframes shark-swim-body { 0%, 100% { transform: rotate(-3deg); } 50% { transform: rotate(3deg); } }
+@keyframes shark-swim-tail { 0%, 100% { transform: rotate(-22deg); } 50% { transform: rotate(22deg); } }
+@keyframes shark-swim-fin { 0%, 100% { transform: rotate(-7deg); } 50% { transform: rotate(7deg); } }
+@keyframes shark-water-ripple { from { transform: translateY(-4px) scaleX(.8); opacity: .35; } to { transform: translateY(4px) scaleX(1.1); opacity: .8; } }
+@keyframes shark-water-bubble { from { transform: translateY(4px) scale(.5); opacity: .9; } to { transform: translateY(-12px) scale(1.25); opacity: 0; } }
+@keyframes shark-bow-wave { 0%, 100% { transform: scale(.92); opacity: .4; } 50% { transform: scale(1.05); opacity: .8; } }
+@keyframes shark-surface-drift { from { transform: translate(-3px, -1px); opacity: .35; } to { transform: translate(4px, 2px); opacity: .65; } }
+@keyframes shark-surface-spread { from { transform: scale(.6); opacity: 0; } 30% { opacity: .6; } to { transform: scale(1.3, 1.1); opacity: 0; } }
+@keyframes shark-entry-flight {
+  0% { transform: translate(var(--entry-x), var(--entry-y)) rotate(175deg); opacity: 0; }
+  15% { transform: translate(calc(var(--entry-x) * .69), calc(var(--entry-y) * .97)) rotate(168deg); opacity: 1; }
+  30% { transform: translate(calc(var(--entry-x) * .44), calc(var(--entry-y) * .89)) rotate(155deg); opacity: 1; }
+  45% { transform: translate(calc(var(--entry-x) * .25), calc(var(--entry-y) * .75)) rotate(137deg); opacity: 1; }
+  60% { transform: translate(calc(var(--entry-x) * .11), calc(var(--entry-y) * .56)) rotate(119deg); opacity: 1; }
+  75% { transform: translate(calc(var(--entry-x) * .03), calc(var(--entry-y) * .31)) rotate(103deg); opacity: 1; }
+  90% { transform: translate(0, 0) rotate(90deg); opacity: 1; }
+  100% { transform: translate(0, 12px) rotate(90deg); opacity: 0; }
+}
+@keyframes shark-exit-flight {
+  0% { transform: translate(0, 0) rotate(-80deg); opacity: 0; }
+  9% { transform: translate(calc(var(--jump-x) * .1), calc(var(--jump-y) * .36)) rotate(-80deg); opacity: 1; }
+  18% { transform: translate(calc(var(--jump-x) * .2), calc(var(--jump-y) * .64)) rotate(-76deg); opacity: 1; }
+  27% { transform: translate(calc(var(--jump-x) * .3), calc(var(--jump-y) * .84)) rotate(-70deg); opacity: 1; }
+  36% { transform: translate(calc(var(--jump-x) * .4), calc(var(--jump-y) * .96)) rotate(-55deg); opacity: 1; }
+  45% { transform: translate(calc(var(--jump-x) * .5), var(--jump-y)) rotate(0deg); opacity: 1; }
+  54% { transform: translate(calc(var(--jump-x) * .6), calc(var(--jump-y) * .96)) rotate(55deg); opacity: 1; }
+  63% { transform: translate(calc(var(--jump-x) * .7), calc(var(--jump-y) * .84)) rotate(70deg); opacity: 1; }
+  72% { transform: translate(calc(var(--jump-x) * .8), calc(var(--jump-y) * .64)) rotate(76deg); opacity: 1; }
+  81% { transform: translate(calc(var(--jump-x) * .9), calc(var(--jump-y) * .36)) rotate(80deg); opacity: 1; }
+  90% { transform: translate(var(--jump-x), 12px) rotate(82deg); opacity: .7; }
+  100% { transform: translate(var(--jump-x), 38px) rotate(85deg); opacity: 0; }
+}
+@keyframes shark-finish-submerge {
+  0% { transform: translateY(0); opacity: 1; }
+  8%, 100% { transform: translateY(12px); opacity: 0; }
+}
+@keyframes shark-splash-crown { 0% { transform: scale(.25, .1); opacity: 0; } 25% { transform: scale(1, 1); opacity: .9; } 100% { transform: translateY(10px) scale(1.3, .15); opacity: 0; } }
+@keyframes shark-finish-ripple { 0% { transform: scale(.3); opacity: 0; } 12% { opacity: .85; } 100% { transform: scale(3); opacity: 0; } }
+@keyframes shark-finish-splash { 0% { transform: translate(0, 0) scale(.3); opacity: 0; } 15% { opacity: .95; } 55% { transform: translate(calc(var(--splash-x) * .65), var(--splash-y)) scale(.8); opacity: .8; } 100% { transform: translate(var(--splash-x), 12px) scale(.4); opacity: 0; } }
+@keyframes shark-finish-wake { to { opacity: 0; } }
+@media (max-width: 767px) {
+  .shark-ocean-timeline { --jump-x: 40px; --jump-y: -86px; --entry-x: 100px; --entry-y: -85px; padding: 170px 0 192px; }
+  .shark-ocean-stage { min-height: 270px; padding-bottom: 38px; }
+  .shark-ocean-card { width: calc(100% - 76px); margin-left: 76px; padding: 22px 20px; }
+  .shark-ocean-card h3 { font-size: 22px; }
+  .shark-ocean-description { font-size: 14px; }
+  .shark-ocean-date { padding: 8px 10px; font-size: 14px; }
+  .shark-ocean-bank { stroke-width: 44px; }
+  .shark-ocean-current { stroke-width: 32px; }
+  .shark-ocean-progress { stroke-width: 26px; }
+  .shark-ocean-fish { transform: scale(.75); }
+  .shark-ocean-bow-wave { transform: scale(.8); animation: none; }
+  .shark-ocean-finish-scale { transform: scale(.55); }
+  .shark-ocean-air-shape { transform: scale(.75); }
+  .shark-ocean-entry-pool { transform: scale(.33); }
+  .shark-ocean-landing-pool { transform: translate(20px, 9px) scale(.7); }
+}
+@media (max-width: 359px) {
+  .shark-ocean-card { width: calc(100% - 65px); margin-left: 65px; padding: 20px 14px; }
+  .shark-ocean-card h3 { font-size: 19px; }
+  .shark-ocean-date { font-size: 12px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .shark-ocean-swimmer, .shark-ocean-progress, .shark-ocean-wake, .shark-ocean-bubble { display: none; }
+  .shark-ocean-entry, .shark-ocean-finish { display: none; }
+  .shark-ocean-details { opacity: 1 !important; transform: none !important; }
+}
+@media print {
+  .shark-ocean-water { display: none; }
+  .shark-ocean-details { opacity: 1 !important; transform: none !important; }
+  .shark-ocean-stage { break-inside: avoid; }
+}

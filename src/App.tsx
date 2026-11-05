@@ -7,6 +7,7 @@ const Projects = lazy(() => import('@/pages/Projects'));
 const CommunityPage = lazy(() => import('@/pages/Community'));
 const About = lazy(() => import('@/pages/About'));
 const SharkHack = lazy(() => import('@/pages/SharkHack'));
+const Cohort = lazy(() => import('@/pages/Cohort'));
 
 function RouteLoadingFallback() {
   return (
@@ -31,6 +32,7 @@ function PageTitle() {
       '/': 'IMPULSE — Ideas in Motion',
       '/join': 'Join IMPULSE — Ideas in Motion',
       '/events': 'Events — IMPULSE',
+      '/cohort': 'Builder Cohort — IMPULSE',
       '/shark-hack': 'SHARK HACK 2027 — Impulse Flagship Hackathon',
       '/events/shark-hack': 'SHARK HACK 2027 — Impulse Flagship Hackathon',
       '/projects': 'Projects — IMPULSE',
@@ -55,6 +57,7 @@ export default function App() {
         <Route path="/events/shark-hack" element={<SharkHack />} />
         <Route path="/join" element={<Join />} />
         <Route path="/events" element={<Events />} />
+        <Route path="/cohort" element={<Cohort />} />
         <Route path="/projects" element={<Projects />} />
         <Route path="/community" element={<CommunityPage />} />
         <Route path="/about" element={<About />} />

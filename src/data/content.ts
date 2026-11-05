@@ -213,6 +213,7 @@ export const teamMembers: TeamMember[] = [
 export const navLinks = [
   { label: 'Explore', path: '/' },
   { label: 'Events', path: '/events' },
+  { label: 'Cohort', path: '/cohort' },
   { label: 'Projects', path: '/projects' },
   { label: 'Community', path: '/community' },
   { label: 'About', path: '/about' },
@@ -221,6 +222,7 @@ export const navLinks = [
 export const footerLinks = [
   { label: 'Explore', path: '/' },
   { label: 'Events', path: '/events' },
+  { label: 'Cohort', path: '/cohort' },
   { label: 'Projects', path: '/projects' },
   { label: 'Community', path: '/community' },
   { label: 'About', path: '/about' },

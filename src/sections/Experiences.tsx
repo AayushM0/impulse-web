@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import { ArrowLeft, ArrowRight, Calendar, MapPin, Sparkles } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { gsap } from 'gsap';
@@ -36,7 +36,7 @@ export default function Experiences() {
   const wrapRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const progressBarRef = useRef<HTMLDivElement>(null);
-  const [scrollProgress, setScrollProgress] = useState(0);
+  const counterRef = useRef<HTMLSpanElement>(null);
 
   useGSAP(
     () => {
@@ -62,9 +62,12 @@ export default function Experiences() {
           scrub: 1,
           invalidateOnRefresh: true,
           onUpdate: (self) => {
-            setScrollProgress(self.progress);
             if (progressBarRef.current) {
               progressBarRef.current.style.width = `${Math.max(12, self.progress * 100)}%`;
+            }
+            if (counterRef.current) {
+              const currentIdx = Math.min(events.length, Math.floor(self.progress * (events.length - 1)) + 1);
+              counterRef.current.textContent = `${String(currentIdx).padStart(2, '0')} / ${String(events.length).padStart(2, '0')}`;
             }
           },
         },
@@ -103,11 +106,11 @@ export default function Experiences() {
                 <div
                   ref={progressBarRef}
                   className="h-full bg-gradient-to-r from-impulse-blue to-impulse-blue-bright transition-all duration-75"
-                  style={{ width: `${Math.max(15, scrollProgress * 100)}%` }}
+                  style={{ width: '15%' }}
                 />
               </div>
-              <span className="font-mono-label text-xs text-impulse-gray-light/60">
-                {String(Math.min(events.length, Math.floor(scrollProgress * (events.length - 1)) + 1)).padStart(2, '0')} / {String(events.length).padStart(2, '0')}
+              <span ref={counterRef} className="font-mono-label text-xs text-impulse-gray-light/60">
+                01 / {String(events.length).padStart(2, '0')}
               </span>
             </div>
 

@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 
 interface ThreeHeroLogoSceneProps {
-  scrollProgress?: number;
+  scrollProgress?: number | React.MutableRefObject<number>;
   className?: string;
 }
 
@@ -11,7 +11,7 @@ export default function ThreeHeroLogoScene({
   className = '',
 }: ThreeHeroLogoSceneProps) {
   const containerRef = useRef<HTMLDivElement>(null);
-  const scrollRef = useRef(scrollProgress);
+  const scrollRef = useRef<number | React.MutableRefObject<number>>(scrollProgress);
   scrollRef.current = scrollProgress;
 
   useEffect(() => {
@@ -224,7 +224,10 @@ export default function ThreeHeroLogoScene({
       const elapsedTime = clock.getElapsedTime();
 
       // Current scroll progress (0 = front and prominent, 1 = settled behind text)
-      const p = Math.min(1, Math.max(0, scrollRef.current));
+      const currentProgress = typeof scrollRef.current === 'object' && scrollRef.current !== null
+        ? scrollRef.current.current
+        : (scrollRef.current as number);
+      const p = Math.min(1, Math.max(0, currentProgress));
 
       // Interpolate Z-depth: starts front (+2.5) and retreats backward (-2.8)
       const targetZ = 2.5 * (1 - p) + (-2.8) * p;
@@ -267,13 +270,21 @@ export default function ThreeHeroLogoScene({
       if (renderer.domElement && container.contains(renderer.domElement)) {
         container.removeChild(renderer.domElement);
       }
+      scene.traverse((object) => {
+        if (object instanceof THREE.Mesh || object instanceof THREE.Points) {
+          if (object.geometry) {
+            object.geometry.dispose();
+          }
+          if (object.material) {
+            if (Array.isArray(object.material)) {
+              object.material.forEach((mat) => mat.dispose());
+            } else {
+              object.material.dispose();
+            }
+          }
+        }
+      });
       renderer.dispose();
-      coreGeometry.dispose();
-      coreMaterial.dispose();
-      haloGeometry.dispose();
-      haloMaterial.dispose();
-      particleGeom.dispose();
-      particleMat.dispose();
     };
   }, []);
 

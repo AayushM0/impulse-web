@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect } from 'react';
+import { useRef, useEffect } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
@@ -13,16 +13,17 @@ export default function Hero() {
   const initialCueRef = useRef<HTMLDivElement>(null);
   const settledCueRef = useRef<HTMLDivElement>(null);
   const topSealRef = useRef<HTMLDivElement>(null);
-
-  const [scrollProgress, setScrollProgress] = useState(0);
-  const [mouseOffset, setMouseOffset] = useState({ x: 0, y: 0 });
+  const wordmarkWrapperRef = useRef<HTMLDivElement>(null);
+  const scrollProgressRef = useRef(0);
 
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       const { innerWidth, innerHeight } = window;
       const x = (e.clientX / innerWidth - 0.5) * 2;
       const y = (e.clientY / innerHeight - 0.5) * 2;
-      setMouseOffset({ x, y });
+      if (wordmarkWrapperRef.current) {
+        wordmarkWrapperRef.current.style.transform = `translate3d(${x * -12}px, ${y * -12}px, 30px)`;
+      }
     };
 
     window.addEventListener('mousemove', handleMouseMove, { passive: true });
@@ -35,7 +36,7 @@ export default function Hero() {
 
       const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       if (prefersReducedMotion) {
-        setScrollProgress(1);
+        scrollProgressRef.current = 1;
         if (wordmarkRef.current) gsap.set(wordmarkRef.current, { opacity: 1, scale: 1 });
         if (subtitleRef.current) gsap.set(subtitleRef.current, { opacity: 1, y: 0 });
         return;
@@ -51,7 +52,7 @@ export default function Hero() {
           pinSpacing: true,
           scrub: 0.8,
           onUpdate: (self) => {
-            setScrollProgress(self.progress);
+            scrollProgressRef.current = self.progress;
           },
         },
       });
@@ -96,7 +97,7 @@ export default function Hero() {
     >
       {/* Fullscreen Background 3D Canvas */}
       <ThreeHeroLogoScene
-        scrollProgress={scrollProgress}
+        scrollProgress={scrollProgressRef}
         className="absolute inset-0 w-full h-full z-0"
       />
 
@@ -125,9 +126,10 @@ export default function Hero() {
 
       {/* Foreground Wordmark Layer (Centered in 3D Space) */}
       <div
-        className="relative z-10 my-auto flex flex-col items-center justify-center text-center px-4 pointer-events-auto"
+        ref={wordmarkWrapperRef}
+        className="relative z-10 my-auto flex flex-col items-center justify-center text-center px-4 pointer-events-auto will-change-transform"
         style={{
-          transform: `translate3d(${mouseOffset.x * -12}px, ${mouseOffset.y * -12}px, 30px)`,
+          transform: 'translate3d(0px, 0px, 30px)',
           transition: 'transform 0.12s ease-out',
         }}
       >

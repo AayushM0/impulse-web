@@ -4,9 +4,9 @@ import { ArrowDown, ArrowUpRight, Calendar, CalendarDays, Clock3, MapPin, Trophy
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import EventsMeshBackground from '@/components/EventsMeshBackground';
-import { useEventsPageReveals } from '@/hooks/useEventsPageReveals';
+import { useEventReveals } from '@/hooks/useEventReveals';
 import './Events.css';
-import './EventsLayout.css';
+
 
 // Add announced events here; homepage demo events stay out of this listing.
 // Shark Hack details follow the document and the user's confirmed updates.
@@ -32,7 +32,7 @@ const upcomingEvents = [
 
 export default function Events() {
   const pageRef = useRef<HTMLDivElement>(null);
-  useEventsPageReveals(pageRef);
+  useEventReveals(pageRef);
   return (
     <div className="events-page" ref={pageRef}>
       <Navbar />

@@ -618,3 +618,197 @@
   .shark-mobile-shortcuts { gap: 4px; }
   .shark-mobile-tab { gap: 5px; padding: 10px 4px; font-size: 12px; }
 }
+
+
+/* --- Layout overrides consolidated from SharkHackLayout.css --- */
+.shark-scroll-page { background-image: radial-gradient(ellipse at 0 35%, #10284e30, transparent 35%), radial-gradient(ellipse at 100% 65%, #35102730, transparent 35%); }
+.shark-scroll-page main section[id] { scroll-margin-top: 164px; }
+.shark-scroll-page main section:focus-visible { outline: 2px solid #93c5fd; outline-offset: -4px; }
+.shark-scroll-page .shark-section-nav { position: sticky; top: 76px; width: fit-content; max-width: calc(100% - 80px); margin: 12px auto -76px; border: 1px solid #314d73; border-radius: 999px; background: #06070bee; box-shadow: 0 12px 40px #0004; }
+.shark-scroll-page .shark-section-nav-inner { gap: 4px; padding: 6px; overflow: visible; }
+.shark-scroll-page .shark-section-link, .shark-scroll-page .shark-section-register { position: relative; min-height: 48px; padding: 12px 18px; border: 0; border-radius: 999px; background: none; color: #afbed3; font-size: 13px; font-weight: 500; white-space: nowrap; box-shadow: none; }
+.shark-scroll-page .shark-section-nav-inner .shark-nav-icon { display: none; }
+.shark-scroll-page .shark-section-link:hover, .shark-scroll-page .shark-section-link[aria-current] { color: #f5f7ff; background: #10203a; }
+.shark-scroll-page .shark-section-link[aria-current]::after { content: ''; position: absolute; height: 2px; bottom: 5px; left: 20px; right: 20px; background: linear-gradient(90deg, #60a5fa, #f472b6); }
+.shark-scroll-page .shark-section-register { background: linear-gradient(115deg, #60a5fa88, #f472b688) padding-box, linear-gradient(#06070b, #06070b) padding-box, linear-gradient(115deg, #60a5facc, #f472b6cc) border-box; border: 1px solid transparent; color: #f5f7ff; font-weight: 600; margin-left: 6px; box-shadow: 0 4px 20px #60a5fa18, 0 4px 20px #f472b612, inset 0 1px 0 #f5f7ff18; }
+.shark-scroll-page .shark-section-register:hover,
+.shark-scroll-page .shark-section-register[aria-expanded='true'] { background: linear-gradient(115deg, #60a5faa6, #f472b6a6) padding-box, linear-gradient(#06070b, #06070b) padding-box, linear-gradient(115deg, #60a5fa, #f472b6) border-box; border-color: transparent; color: #f5f7ff; box-shadow: 0 4px 24px #60a5fa24, 0 4px 24px #f472b618, inset 0 1px 0 #f5f7ff18; }
+.shark-scroll-page .shark-section-register > svg { color: #f5f7ff; }
+.shark-nav-registration { position: relative; }
+.shark-registration-notice { position: absolute; z-index: 2; top: calc(100% + 14px); right: 0; width: 300px; max-width: calc(100vw - 40px); padding: 18px; border: 1px solid #314d73; border-radius: 14px; background: #06070b; color: #afbed3; text-align: left; }
+.shark-registration-notice > div { display: flex; align-items: flex-start; gap: 10px; }
+.shark-registration-notice strong { padding-top: 6px; color: #f5f7ff; font-size: 14px; font-weight: 500; line-height: 1.5; }
+.shark-registration-notice button { display: grid; place-items: center; flex-shrink: 0; width: 36px; height: 36px; margin-left: auto; }
+.shark-registration-notice svg { width: 16px; height: 16px; }
+.shark-registration-notice p { margin-top: 8px; font-size: 13px; line-height: 1.7; }
+.shark-scroll-page .shark-hero { padding: 110px 0 0; }
+.shark-scroll-page .shark-hero-atmosphere { position: absolute; z-index: -1; inset: 0; width: 100%; max-width: none; height: 100%; margin: 0; background: radial-gradient(ellipse at 80% 30%, #351027, transparent 65%), #06070b; }
+.shark-scroll-page .shark-hero-art { top: 0; right: 0; width: 140%; max-width: none; height: 100%; object-fit: cover; object-position: right center; opacity: 0.48; mask-image: linear-gradient(#000, #000 55%, transparent 95%); }
+.shark-scroll-page .shark-hero-atmosphere::after { background: linear-gradient(180deg, #06070b80, #06070b44 25%, #06070bcc 65%, #06070b 100%); }
+.shark-scroll-page .shark-hero-topline { position: relative; top: auto; }
+.shark-scroll-page .shark-back-link { border: 0; background: none; padding: 8px 0; min-height: 44px; }
+.shark-scroll-page .shark-hero-content { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: min(800px, calc(100svh - 140px)); max-width: 1000px; margin: 0 auto; padding: 48px 0 70px; text-align: center; }
+.shark-scroll-page .shark-hero-eyebrow { justify-content: center; font-size: 12px; letter-spacing: 0.16em; }
+.shark-scroll-page .shark-hero-title { margin-top: 22px; font-size: clamp(74px, 11.5vw, 160px); font-weight: 700; font-style: italic; letter-spacing: -0.065em; line-height: 1; text-shadow: 0 8px 50px #06070b55; }
+.shark-scroll-page .shark-hero-tagline { font-size: clamp(22px, 2.5vw, 34px); margin-top: 22px; }
+.shark-scroll-page .shark-hero-description { max-width: 650px; margin-top: 22px; font-size: 16px; }
+.shark-scroll-page .shark-hero-actions { justify-content: center; margin-top: 32px; gap: 18px; }
+.shark-scroll-page #overview .shark-hero-actions > button { min-width: 240px; min-height: 56px; border-radius: 10px; padding: 14px 22px; font-size: 15px; }
+.shark-scroll-page .shark-hero-note { justify-content: center; margin-top: 20px; }
+.shark-scroll-page .shark-rewards-preview { width: auto; border: 0; background: none; margin-top: 12px; }
+.shark-scroll-page .shark-hero-process { display: flex; justify-content: center; gap: 20px; margin-top: 20px; }
+.shark-scroll-page .shark-hero-process > span { flex-direction: row; border: 0; background: none; padding: 0; }
+.shark-scroll-page .shark-event-facts { gap: 16px; padding: 32px 0; border: 0; background: none; }
+.shark-scroll-page .shark-fact-card { padding: 28px 24px; border: 1px solid #314d73; border-radius: 20px; background: linear-gradient(145deg, #10203a, #0a0e18); text-align: center; }
+.shark-scroll-page .shark-fact-card:nth-child(even) { border-color: #643056; background: linear-gradient(145deg, #210f25, #0a0e18); }
+.shark-scroll-page #overview .shark-event-facts .shark-fact-card::before,
+.shark-scroll-page #overview .shark-event-facts .shark-fact-card::after { content: none; animation: none; box-shadow: none; }
+.shark-scroll-page .shark-fact-card dt { justify-content: center; align-items: center; flex-direction: column; gap: 12px; }
+.shark-scroll-page .shark-fact-card dd { margin-top: 18px; }
+.shark-scroll-page .shark-fact-note { justify-content: center; }
+.shark-scroll-page .shark-overview-explore { padding-top: 80px; padding-bottom: 90px; }
+.shark-scroll-page .shark-explore-heading { margin-bottom: 32px; }
+.shark-scroll-page .shark-explore-grid { gap: 20px; }
+.shark-scroll-page .shark-explore-card { padding: 28px; min-height: 190px; border-radius: 6px 22px 6px 22px; }
+.shark-scroll-page .shark-section { padding: 90px 0; border-bottom: 1px solid #243149; }
+.shark-scroll-page .shark-section-heading { align-items: flex-start; margin-bottom: 64px; }
+.shark-scroll-page .shark-section h2 { font-size: clamp(36px, 4.3vw, 58px); line-height: 1.1; }
+.shark-scroll-page .shark-section h2 em { font-style: normal; }
+.shark-scroll-page .shark-section-intro { max-width: 340px; padding-top: 38px; }
+.shark-scroll-page .shark-eyebrow { margin-bottom: 22px; }
+.shark-scroll-page .shark-journey-section { background: radial-gradient(ellipse at 50% 45%, #10284e55, transparent 65%); }
+.shark-scroll-page .shark-journey-section .shark-section-heading { display: block; text-align: center; margin-bottom: 24px; }
+.shark-scroll-page .shark-journey-section .shark-eyebrow { justify-content: center; }
+.shark-scroll-page .shark-journey-section .shark-section-intro { margin: 24px auto 0; padding: 0; max-width: 500px; }
+.shark-scroll-page .shark-room-section { padding-block: 112px; }
+.shark-scroll-page .shark-room-section .shark-section-heading { display: block; max-width: 780px; margin-bottom: 64px; }
+.shark-scroll-page .shark-room-section .shark-section-intro { max-width: 580px; margin-top: 28px; padding: 0; line-height: 1.85; }
+.shark-scroll-page .shark-room-explorer { display: grid; grid-template-columns: minmax(0, 1fr); gap: 0; max-width: 1100px; margin-inline: auto; border: 1px solid #243149; border-radius: 22px; background: #0c1019; }
+.shark-scroll-page .shark-room-choices { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; margin: 0; padding: 10px; border-bottom: 1px solid #243149; }
+.shark-scroll-page .shark-room-choices::before, .shark-scroll-page .shark-room-choice-connector { display: none; }
+.shark-scroll-page .shark-room-choice { min-height: 80px; padding: 16px; gap: 12px; border-radius: 12px; background: transparent; border-color: transparent; }
+.shark-scroll-page .shark-room-choice-label strong { font-size: 18px; }
+.shark-scroll-page .shark-room-choice[aria-pressed='true'] { background: #10203a; border-color: #60a5fa; box-shadow: none; }
+.shark-scroll-page .shark-room-detail { grid-template-columns: minmax(0, 1fr) 130px; align-items: center; gap: 32px; padding: 36px 40px; min-height: 320px; border: 0; border-radius: 0 0 22px 22px; background: linear-gradient(140deg, #0c1423, #0c1019); }
+.shark-scroll-page .shark-room-step-mark { display: flex; flex-direction: column; align-items: center; gap: 12px; color: var(--sh-blue); }
+.shark-scroll-page .shark-room-step-mark span { font-size: 100px; font-weight: 600; line-height: 1; letter-spacing: -.07em; opacity: .16; }
+.shark-scroll-page .shark-room-step-mark > svg { width: 38px; height: 38px; stroke-width: 1; opacity: .45; }
+.shark-scroll-page .shark-room-art { display: none; }
+.shark-scroll-page .shark-room-detail h3 { max-width: 760px; margin-top: 16px; font-size: clamp(26px, 2.4vw, 34px); line-height: 1.25; }
+.shark-scroll-page .shark-room-detail-copy > p:not(.shark-room-kicker) { max-width: 740px; margin-top: 18px; font-size: 16px; line-height: 1.8; }
+.shark-scroll-page .shark-room-caption { margin-top: 24px; }
+.shark-scroll-page .shark-room-controls { padding-top: 28px; gap: 20px; }
+.shark-scroll-page .shark-room-progress { display: none; }
+.shark-scroll-page .shark-room-next { margin-left: auto; }
+.shark-scroll-page .shark-prize-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: end; gap: 24px; padding-top: 12px; max-width: 1040px; margin-inline: auto; }
+.shark-scroll-page .shark-prize-card { --prize-edge: #f472b6; --prize-tint: #34152e; display: flex; flex-direction: column; justify-content: center; min-height: 440px; padding: 72px 24px 108px; text-align: center; border: 2px solid var(--prize-edge); border-radius: 22px; background: linear-gradient(165deg, var(--prize-tint), #090c14 72%); }
+.shark-scroll-page .shark-prize-card-main { --prize-edge: #60a5fa; --prize-tint: #17395b; grid-column: 2; grid-row: 1; margin-top: 0; min-height: 500px; box-shadow: none; }
+.shark-scroll-page .shark-prize-card-second { --prize-edge: #93b4ff; --prize-tint: #18243d; grid-column: 1; grid-row: 1; }
+.shark-scroll-page .shark-prize-card-third { grid-column: 3; grid-row: 1; min-height: 400px; }
+.shark-scroll-page .shark-prize-top { flex-direction: column; justify-content: center; gap: 0; margin: 0; }
+.shark-scroll-page .shark-prize-top > span:last-child { position: absolute; top: 18px; right: 16px; max-width: calc(100% - 32px); padding: 8px 10px; border: 1px solid var(--prize-edge); border-radius: 5px; background: var(--prize-tint); color: #f5f7ff; font-size: 9px; letter-spacing: .06em; }
+.shark-scroll-page .shark-prize-card .shark-prize-icon { width: 86px; height: 86px; border: 0; border-radius: 0; background: none; color: var(--prize-edge); box-shadow: none; }
+.shark-scroll-page .shark-prize-icon svg { width: 76px; height: 76px; stroke-width: 1.3; }
+.shark-scroll-page .shark-prize-card h3 { position: absolute; bottom: 0; left: 0; right: 0; min-height: 82px; margin: 0; padding: 25px 14px; border-top: 1px solid var(--prize-edge); background: var(--prize-tint); color: var(--prize-edge); font-size: clamp(18px, 2vw, 24px); line-height: 1.25; text-transform: uppercase; letter-spacing: .02em; }
+.shark-scroll-page .shark-prize-card h3 br { display: none; }
+.shark-scroll-page .shark-prize-card h3 span::before { content: ' '; }
+.shark-scroll-page .shark-prize-description { margin-top: 24px; font-size: 15px; line-height: 1.7; }
+.shark-scroll-page .shark-prize-watermark { bottom: 94px; left: 50%; right: auto; transform: translateX(-50%); width: 220px; height: 220px; opacity: .55; }
+.shark-scroll-page .shark-prize-rank { display: block; margin-top: 12px; color: var(--prize-edge); font-size: 100px; font-weight: 700; line-height: 1; opacity: .3; }
+.shark-scroll-page .shark-special-prizes { margin-top: 64px; }
+.shark-scroll-page .shark-special-prizes > h3 { margin-bottom: 28px; font-size: clamp(25px, 3vw, 34px); font-weight: 600; color: #f5f7ff; }
+.shark-scroll-page .shark-special-prize-card { max-width: 420px; padding: 36px 28px; text-align: center; border: 1px solid #754464; border-radius: 20px; background: linear-gradient(155deg, #34152e, #0a0e18 80%); }
+.shark-scroll-page .shark-special-prize-icon { display: grid; place-items: center; margin: 0 auto 24px; width: 64px; height: 64px; color: #f472b6; }
+.shark-scroll-page .shark-special-prize-icon svg { width: 54px; height: 54px; stroke-width: 1.5; }
+.shark-scroll-page .shark-special-prize-card h4 { font-size: 23px; font-weight: 600; line-height: 1.3; }
+.shark-scroll-page .shark-prize-cta { margin-top: 40px; border-radius: 12px; }
+.shark-scroll-page .shark-partner-grid { gap: 28px; }
+.shark-scroll-page .shark-partner-card { min-height: 280px; border-radius: 12px; text-align: center; }
+.shark-scroll-page .shark-partner-heading { justify-content: center; }
+.shark-scroll-page .shark-faq-layout { display: block; }
+.shark-scroll-page .shark-faq-list { max-width: 1040px; margin: 48px auto 0; gap: 14px; }
+.shark-scroll-page .shark-faq-item { border-radius: 7px; border-left: 3px solid #60a5fa; }
+.shark-scroll-page .shark-faq-item:nth-child(even) { border-left-color: #f472b6; }
+.shark-scroll-page .shark-faq-item summary { padding: 24px; border-radius: 7px; }
+.shark-scroll-page .shark-faq-icon { display: none; }
+.shark-scroll-page .shark-registration-heading { margin-bottom: 48px; }
+.shark-scroll-page .shark-registration-ticket { gap: 28px; }
+@media (max-width: 1100px) {
+  .shark-scroll-page .shark-room-choice { padding: 14px 10px; gap: 10px; }
+  .shark-scroll-page .shark-room-detail { padding: 36px; }
+  .shark-scroll-page .shark-section-link, .shark-scroll-page .shark-section-register { padding-inline: 13px; }
+  .shark-scroll-page .shark-event-facts { row-gap: 28px; }
+  .shark-scroll-page .shark-prize-card { padding-inline: 18px; }
+}
+@media (max-width: 900px) {
+  .shark-scroll-page .shark-section-nav { width: calc(100% - 40px); max-width: 560px; top: 72px; margin-top: 8px; margin-bottom: -76px; border-radius: 18px; }
+  .shark-scroll-page .shark-mobile-navigation { padding: 6px; }
+  .shark-scroll-page .shark-mobile-section-menu { left: 0; right: 0; }
+  .shark-scroll-page .shark-section-nav-inner { display: none; }
+  .shark-scroll-page .shark-mobile-shortcuts { grid-template-columns: 1fr 1fr .8fr auto; gap: 2px; }
+  .shark-scroll-page .shark-mobile-tab { padding-inline: 5px; gap: 5px; font-size: 12px; }
+  .shark-scroll-page .shark-mobile-tab .shark-nav-icon,
+  .shark-scroll-page .shark-mobile-more > svg,
+  .shark-scroll-page .shark-mobile-menu-indicator { display: none; }
+  .shark-scroll-page .shark-mobile-shortcuts .shark-section-register { margin-left: 0; min-height: 48px; padding: 10px; gap: 6px; font-size: 12px; border-radius: 12px; }
+  .shark-scroll-page .shark-mobile-shortcuts .shark-section-register > svg { width: 14px; height: 14px; }
+}
+@media (max-width: 767px) {
+  .shark-scroll-page .shark-section-nav { display: none; width: calc(100% - 24px); max-width: none; }
+  .shark-scroll-page main section[id] { scroll-margin-top: 156px; }
+  .shark-scroll-page .shark-hero { padding-top: 104px; }
+  .shark-scroll-page .shark-hero-art { width: 235%; height: 660px; opacity: 0.5; object-position: right top; }
+  .shark-scroll-page .shark-hero-content { min-height: 0; margin-top: 0; padding: 42px 0 48px; }
+  .shark-scroll-page .shark-hero-eyebrow { font-size: 9px; letter-spacing: 0.04em; }
+  .shark-scroll-page .shark-hero-title { font-size: clamp(43px, 12vw, 82px); margin-top: 20px; }
+  .shark-scroll-page .shark-hero-tagline { font-size: 23px; max-width: 330px; }
+  .shark-scroll-page .shark-hero-description { font-size: 15px; margin-top: 18px; }
+  .shark-scroll-page .shark-hero-actions { width: 100%; max-width: 380px; margin-top: 26px; gap: 12px; }
+  .shark-scroll-page #overview .shark-hero-actions > button { min-width: 0; min-height: 52px; }
+  .shark-scroll-page .shark-hero-note { font-size: 11px; }
+  .shark-scroll-page .shark-rewards-preview { padding-inline: 0; gap: 8px; font-size: 11px; }
+  .shark-scroll-page .shark-hero-process { flex-wrap: wrap; gap: 16px; font-size: 11px; }
+  .shark-scroll-page .shark-event-facts { padding: 24px 0; gap: 12px; }
+  .shark-scroll-page .shark-fact-card { padding: 22px 14px; border-radius: 16px; }
+  .shark-scroll-page .shark-fact-card strong { font-size: 30px; }
+  .shark-scroll-page .shark-fact-prize strong { font-size: 25px; }
+  .shark-scroll-page .shark-fact-note { margin-top: 10px; font-size: 10px; }
+  .shark-scroll-page .shark-overview-explore { padding-top: 52px; padding-bottom: 52px; }
+  .shark-scroll-page .shark-explore-heading { gap: 14px; margin-bottom: 26px; }
+  .shark-scroll-page .shark-explore-grid { gap: 14px; }
+  .shark-scroll-page .shark-explore-card { min-height: 0; padding: 24px 20px; }
+  .shark-scroll-page .shark-section { padding: 56px 0; }
+  .shark-scroll-page .shark-section-heading { margin-bottom: 36px; gap: 20px; }
+  .shark-scroll-page .shark-section h2 { font-size: clamp(30px, 8vw, 42px); }
+  .shark-scroll-page .shark-section-intro { padding-top: 0; }
+  .shark-scroll-page .shark-eyebrow { margin-bottom: 18px; }
+  .shark-scroll-page .shark-room-section { padding-block: 72px; }
+  .shark-scroll-page .shark-room-section .shark-section-heading { margin-bottom: 36px; }
+  .shark-scroll-page .shark-room-section .shark-section-intro { margin-top: 24px; }
+  .shark-scroll-page .shark-room-explorer { grid-template-columns: 1fr; gap: 0; border-radius: 18px; }
+  .shark-scroll-page .shark-room-choices { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px; padding: 8px; }
+  .shark-scroll-page .shark-room-choice { flex-direction: row; min-height: 72px; gap: 10px; padding: 12px 10px; text-align: left; }
+  .shark-scroll-page .shark-room-choice-label strong { font-size: 16px; }
+  .shark-scroll-page .shark-room-choice .shark-colour-icon { flex-shrink: 0; }
+  .shark-scroll-page .shark-room-detail { grid-template-columns: minmax(0, 1fr); min-height: 0; gap: 0; padding: 28px 22px; border-radius: 0 0 18px 18px; }
+  .shark-scroll-page .shark-room-step-mark { display: none; }
+  .shark-scroll-page .shark-room-detail h3 { margin-top: 18px; font-size: 28px; }
+  .shark-scroll-page .shark-room-detail-copy > p:not(.shark-room-kicker) { margin-top: 22px; font-size: 15px; line-height: 1.9; }
+  .shark-scroll-page .shark-room-caption { margin-top: 28px; }
+  .shark-scroll-page .shark-room-controls { grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); padding-top: 24px; gap: 12px; }
+  .shark-scroll-page .shark-room-controls button { width: 100%; margin: 0; }
+  .shark-scroll-page .shark-prize-grid { grid-template-columns: 1fr; padding-top: 0; gap: 20px; }
+  .shark-scroll-page .shark-prize-card { grid-column: auto; grid-row: auto; min-height: 380px; margin-top: 0; padding: 72px 24px 110px; }
+  .shark-scroll-page .shark-prize-card h3 { font-size: 22px; }
+  .shark-scroll-page .shark-prize-top { margin-bottom: 0; }
+  .shark-scroll-page .shark-prize-rank { font-size: 76px; }
+  .shark-scroll-page .shark-special-prizes { margin-top: 42px; }
+  .shark-scroll-page .shark-special-prize-card { max-width: none; padding: 30px 22px; }
+  .shark-scroll-page .shark-prize-cta { margin-top: 24px; }
+  .shark-scroll-page .shark-partner-card { min-height: 230px; }
+  .shark-scroll-page .shark-partner-grid { gap: 18px; }
+  .shark-scroll-page .shark-faq-list { margin-top: 32px; }
+  .shark-scroll-page .shark-faq-item summary { padding: 20px 16px; font-size: 15px; }
+  .shark-scroll-page .shark-registration-heading { margin-bottom: 30px; }
+  .shark-scroll-page .shark-registration-ticket { gap: 20px; }
+}

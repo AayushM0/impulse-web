@@ -6,7 +6,7 @@ import SharkRegistrationButton from '@/components/SharkRegistrationButton';
 import SharkTimeline from '@/components/OceanSharkTimeline';
 import { useEventReveals } from '@/hooks/useEventReveals';
 import './SharkHack.css';
-import './SharkHackLayout.css';
+
 
 // Participant-facing content from SHARK HACK (1).docx and explicit user updates.
 // Overall prize pool confirmed by the user; individual place amounts are not specified.

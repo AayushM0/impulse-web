@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { ArrowRight, Github, ExternalLink } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -101,13 +102,13 @@ export default function Projects() {
                 <p className="text-sm lg:text-base text-impulse-gray-light/50 max-w-md mx-auto mb-10 leading-relaxed">
                   Be the first to build something in this category. Projects built by our community will appear here.
                 </p>
-                <a
-                  href="/join"
+                <Link
+                  to="/join"
                   className="group inline-flex items-center gap-3 font-mono-label text-impulse-white border border-impulse-blue/40 bg-impulse-blue/10 hover:bg-impulse-blue/20 hover:border-impulse-blue/60 transition-all duration-300 px-8 py-4 energy-sweep"
                 >
                   START BUILDING
                   <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                </a>
+                </Link>
               </div>
             </div>
           ) : (

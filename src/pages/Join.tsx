@@ -8,6 +8,7 @@ import { interests } from '@/data/content';
 export default function Join() {
   const [selectedInterests, setSelectedInterests] = useState<string[]>([]);
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -30,8 +31,41 @@ export default function Join() {
     setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setIsSubmitting(true);
+
+    const submission = {
+      ...formData,
+      interests: selectedInterests,
+      submittedAt: new Date().toISOString(),
+    };
+
+    // 1. Local persistence buffer (guarantees candidate details are never lost)
+    try {
+      const existingRaw = localStorage.getItem('impulse_applications');
+      const existing = existingRaw ? JSON.parse(existingRaw) : [];
+      existing.push(submission);
+      localStorage.setItem('impulse_applications', JSON.stringify(existing));
+    } catch (err) {
+      console.warn('Could not cache submission locally:', err);
+    }
+
+    // 2. Dispatch to external webhook if configured
+    const webhookUrl = import.meta.env.VITE_JOIN_WEBHOOK_URL;
+    if (webhookUrl) {
+      try {
+        await fetch(webhookUrl, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(submission),
+        });
+      } catch (err) {
+        console.warn('Webhook transmission error (saved locally):', err);
+      }
+    }
+
+    setIsSubmitting(false);
     setSubmitted(true);
   };
 
@@ -217,9 +251,10 @@ export default function Join() {
               <div className="pt-4">
                 <button
                   type="submit"
-                  className="group w-full sm:w-auto inline-flex items-center justify-center gap-3 font-mono-label text-impulse-white border border-impulse-blue/40 bg-impulse-blue/10 hover:bg-impulse-blue/20 hover:border-impulse-blue/60 transition-all duration-300 px-12 py-4 energy-sweep"
+                  disabled={isSubmitting}
+                  className="group w-full sm:w-auto inline-flex items-center justify-center gap-3 font-mono-label text-impulse-white border border-impulse-blue/40 bg-impulse-blue/10 hover:bg-impulse-blue/20 hover:border-impulse-blue/60 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 px-12 py-4 energy-sweep"
                 >
-                  ENTER IMPULSE
+                  {isSubmitting ? 'TRANSMITTING SIGNAL...' : 'ENTER IMPULSE'}
                   <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                 </button>
               </div>

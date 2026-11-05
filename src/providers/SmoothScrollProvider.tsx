@@ -5,6 +5,9 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
+let lenisInstance: Lenis | null = null;
+export const getLenis = () => lenisInstance;
+
 interface SmoothScrollProviderProps {
   children: React.ReactNode;
 }
@@ -25,6 +28,7 @@ export default function SmoothScrollProvider({ children }: SmoothScrollProviderP
 
     // Sync Lenis scroll updates with GSAP ScrollTrigger
     lenis.on('scroll', ScrollTrigger.update);
+    lenisInstance = lenis;
 
     const updateTicker = (time: number) => {
       lenis.raf(time * 1000);
@@ -36,6 +40,7 @@ export default function SmoothScrollProvider({ children }: SmoothScrollProviderP
     return () => {
       gsap.ticker.remove(updateTicker);
       lenis.destroy();
+      lenisInstance = null;
     };
   }, []);
 

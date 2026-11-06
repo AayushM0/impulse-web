@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, ArrowRight } from 'lucide-react';
 import Logo from './Logo';
 import { navLinks } from '@/data/content';
+import { getLenis } from '@/providers/SmoothScrollProvider';
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -11,6 +12,22 @@ export default function Navbar() {
   const isLinkActive = (path: string) => path === '/'
     ? location.pathname === '/'
     : location.pathname.startsWith(path) || (path === '/events' && location.pathname === '/shark-hack');
+
+  const handleNavClick = (path: string) => {
+    if (location.pathname === path) {
+      const lenis = getLenis();
+      if (lenis) {
+        lenis.scrollTo(0, { immediate: false });
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+  };
+
+  const handleMobileNavClick = (path: string) => {
+    setMobileOpen(false);
+    handleNavClick(path);
+  };
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 40);
@@ -59,6 +76,7 @@ export default function Navbar() {
                 <Link
                   key={link.label}
                   to={link.path}
+                  onClick={() => handleNavClick(link.path)}
                   aria-current={isActive ? 'page' : undefined}
                   className={`font-mono-label transition-colors duration-300 relative group ${
                     isActive ? 'text-impulse-white' : 'text-impulse-gray-light/70 hover:text-impulse-white'
@@ -78,6 +96,7 @@ export default function Navbar() {
           <div className="hidden lg:flex items-center">
             <Link
               to="/join"
+              onClick={() => handleNavClick('/join')}
               className="group inline-flex items-center gap-2 font-mono-label text-impulse-white border border-impulse-blue/30 bg-impulse-blue/5 hover:bg-impulse-blue/15 hover:border-impulse-blue/50 transition-all duration-300 px-5 py-2.5 energy-sweep"
             >
               Join Impulse
@@ -108,6 +127,7 @@ export default function Navbar() {
             <Link
               key={link.label}
               to={link.path}
+              onClick={() => handleMobileNavClick(link.path)}
               aria-current={isLinkActive(link.path) ? 'page' : undefined}
               className={`font-sans text-2xl tracking-wide transition-all duration-500 ${
                 mobileOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
@@ -119,6 +139,7 @@ export default function Navbar() {
           ))}
           <Link
             to="/join"
+            onClick={() => handleMobileNavClick('/join')}
             className={`mt-4 inline-flex items-center gap-2 font-mono-label text-impulse-white border border-impulse-blue/40 bg-impulse-blue/10 px-7 py-3.5 transition-all duration-500 ${
               mobileOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
             }`}

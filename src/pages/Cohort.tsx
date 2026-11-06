@@ -14,6 +14,7 @@ import {
 } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import { getLenis } from '@/providers/SmoothScrollProvider';
 import './Cohort.css';
 
 interface CohortProject {
@@ -299,24 +300,38 @@ export default function Cohort() {
   }, [timelineDate]);
 
   return (
-    <main className="cohort-page">
+    <div className="bg-[#030407] min-h-screen">
       <Navbar />
-
-      <section className="cohort-hero">
-        <div className="cohort-hero-stage">
-          <div className="cohort-hero-content">
-            <h1 className="cohort-motion-reveal">BUILDER <span>COHORT</span></h1>
-            <div className="cohort-capsule cohort-motion-reveal">PROJECTS IN MOTION</div>
-            <p className="cohort-intro cohort-motion-reveal">
-              A high-intensity, 5-month cohort turning builders into product teams. From problem validation to live production deployment with real users.
-            </p>
-            <button className="cohort-primary-button cohort-motion-reveal" onClick={() => setActiveModal({ type: 'roadmap' })}>
-              Learn more <ArrowRight size={15} />
-            </button>
+      <main className="cohort-page">
+        <section className="cohort-hero">
+          <div className="cohort-hero-stage">
+            <div className="cohort-hero-content">
+              <h1 className="cohort-motion-reveal">BUILDER <span>COHORT</span></h1>
+              <div className="cohort-capsule cohort-motion-reveal">PROJECTS IN MOTION</div>
+              <p className="cohort-intro cohort-motion-reveal">
+                A high-intensity, 5-month cohort turning builders into product teams. From problem validation to live production deployment with real users.
+              </p>
+              <button className="cohort-primary-button cohort-motion-reveal" onClick={() => setActiveModal({ type: 'roadmap' })}>
+                Learn more <ArrowRight size={15} />
+              </button>
+            </div>
           </div>
-        </div>
-        <a className="cohort-scroll-cue" href="#cohort-timeline" aria-label="Scroll to cohort timeline"><ArrowDown size={15} /></a>
-      </section>
+          <button
+            type="button"
+            className="cohort-scroll-cue"
+            onClick={() => {
+              const el = document.getElementById('cohort-timeline');
+              if (el) {
+                const lenis = getLenis();
+                if (lenis) lenis.scrollTo(el, { offset: -64 });
+                else el.scrollIntoView({ behavior: 'smooth' });
+              }
+            }}
+            aria-label="Scroll to cohort timeline"
+          >
+            <ArrowDown size={15} />
+          </button>
+        </section>
 
       <section className="cohort-timeline-section" id="cohort-timeline" aria-label="Five-month cohort timeline">
         <div className="cohort-timeline">
@@ -411,9 +426,21 @@ export default function Cohort() {
             </svg>
           </ol>
         </div>
-        <a className="cohort-timeline-scroll-cue" href="#cohort-projects" aria-label="Scroll to cohort projects">
+        <button
+          type="button"
+          className="cohort-timeline-scroll-cue"
+          onClick={() => {
+            const el = document.getElementById('cohort-projects');
+            if (el) {
+              const lenis = getLenis();
+              if (lenis) lenis.scrollTo(el, { offset: -64 });
+              else el.scrollIntoView({ behavior: 'smooth' });
+            }
+          }}
+          aria-label="Scroll to cohort projects"
+        >
           <ArrowDown size={15} />
-        </a>
+        </button>
       </section>
 
       <section className="cohort-projects" id="cohort-projects">
@@ -544,6 +571,7 @@ export default function Cohort() {
           </section>
         </div>
       )}
-    </main>
+      </main>
+    </div>
   );
 }

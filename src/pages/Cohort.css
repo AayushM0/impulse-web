@@ -5,7 +5,7 @@
   --cohort-muted: #9aa9bd;
   min-height: 100vh;
   padding-top: 64px;
-  overflow: hidden;
+  overflow-x: clip;
   font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif;
   color: #f4f7fb;
   background:
@@ -377,7 +377,7 @@
 @keyframes cohort-timeline-pin-spin { 0%, 80%, 100% { rotate: y 0deg; } 94% { rotate: y 360deg; } }
 @keyframes cohort-timeline-flow { to { stroke-dashoffset: -120; } }
 .cohort-scroll-cue,
-.cohort-timeline-scroll-cue { position: absolute; bottom: 14px; left: 50%; color: rgba(0, 210, 255, .65); transform: translateX(-50%); transition: color 180ms ease, translate 180ms ease; }
+.cohort-timeline-scroll-cue { position: absolute; bottom: 14px; left: 50%; color: rgba(0, 210, 255, .65); transform: translateX(-50%); transition: color 180ms ease, translate 180ms ease; background: transparent; border: none; cursor: pointer; padding: 0; }
 .cohort-scroll-cue:hover,
 .cohort-timeline-scroll-cue:hover { color: var(--cohort-cyan); translate: 0 3px; }
 .cohort-projects { box-sizing: border-box; width: 100%; max-width: 1480px; margin: 64px auto 57px; padding-inline: clamp(40px, 3.125vw, 46px); scroll-margin-top: 64px; }

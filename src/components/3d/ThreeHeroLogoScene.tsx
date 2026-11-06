@@ -215,11 +215,28 @@ export default function ThreeHeroLogoScene({
 
     window.addEventListener('resize', handleResize);
 
-    // Animation Loop
-    let animationFrameId: number;
+    // Animation Loop with Visibility Throttling
+    let animationFrameId: number = 0;
+    let isVisible = false;
+    let isRunning = false;
     let clock = new THREE.Clock();
 
+    const startLoop = () => {
+      if (isRunning || !isVisible || document.hidden) return;
+      isRunning = true;
+      clock.start();
+      animationFrameId = requestAnimationFrame(animate);
+    };
+
+    const stopLoop = () => {
+      if (!isRunning) return;
+      isRunning = false;
+      cancelAnimationFrame(animationFrameId);
+      clock.stop();
+    };
+
     const animate = () => {
+      if (!isRunning) return;
       const delta = clock.getDelta();
       const elapsedTime = clock.getElapsedTime();
 
@@ -261,10 +278,32 @@ export default function ThreeHeroLogoScene({
       animationFrameId = requestAnimationFrame(animate);
     };
 
-    animate();
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isVisible = entry.isIntersecting;
+        if (isVisible) {
+          startLoop();
+        } else {
+          stopLoop();
+        }
+      },
+      { threshold: 0.01 }
+    );
+    observer.observe(container);
+
+    const onVisibilityChange = () => {
+      if (document.hidden) {
+        stopLoop();
+      } else if (isVisible) {
+        startLoop();
+      }
+    };
+    document.addEventListener('visibilitychange', onVisibilityChange);
 
     return () => {
-      cancelAnimationFrame(animationFrameId);
+      stopLoop();
+      observer.disconnect();
+      document.removeEventListener('visibilitychange', onVisibilityChange);
       window.removeEventListener('mousemove', handleMouseMove);
       window.removeEventListener('resize', handleResize);
       if (renderer.domElement && container.contains(renderer.domElement)) {

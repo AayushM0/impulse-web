@@ -150,11 +150,31 @@ export default function ConnectWithUs() {
     container.addEventListener('mouseleave', onMouseLeave);
 
     let startTime = performance.now();
+    let inView = false;
+    let isRunning = false;
+    let lastTime = 0;
+
+    const startAnimation = () => {
+      if (isRunning || !inView || document.hidden) return;
+      isRunning = true;
+      animId = requestAnimationFrame(render);
+    };
+
+    const stopAnimation = () => {
+      if (!isRunning) return;
+      isRunning = false;
+      cancelAnimationFrame(animId);
+      animId = 0;
+    };
 
     const render = (now: number) => {
-      const time = (now - startTime) * 0.001;
+      if (!isRunning) return;
 
-      ctx.clearRect(0, 0, width, height);
+      if (!lastTime || now - lastTime >= 1000 / 30) {
+        lastTime = now;
+        const time = (now - startTime) * 0.001;
+
+        ctx.clearRect(0, 0, width, height);
 
       // 1. Draw glowing wave ribbons (smooth bezier paths)
       for (const track of [0, 1] as const) {
@@ -294,14 +314,37 @@ export default function ConnectWithUs() {
         ctx.fill();
         ctx.shadowBlur = 0;
       }
+      }
 
       animId = requestAnimationFrame(render);
     };
 
-    animId = requestAnimationFrame(render);
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        inView = entry.isIntersecting;
+        if (inView) {
+          startAnimation();
+        } else {
+          stopAnimation();
+        }
+      },
+      { threshold: 0.01 }
+    );
+    observer.observe(container);
+
+    const onVisibilityChange = () => {
+      if (document.hidden) {
+        stopAnimation();
+      } else if (inView) {
+        startAnimation();
+      }
+    };
+    document.addEventListener('visibilitychange', onVisibilityChange);
 
     return () => {
-      cancelAnimationFrame(animId);
+      stopAnimation();
+      observer.disconnect();
+      document.removeEventListener('visibilitychange', onVisibilityChange);
       window.removeEventListener('resize', resize);
       container.removeEventListener('mousemove', onMouseMove);
       container.removeEventListener('mouseleave', onMouseLeave);

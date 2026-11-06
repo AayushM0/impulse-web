@@ -151,7 +151,24 @@ export default function ImpulseField({
     const connectionDistance = 130;
     const reduced = reducedMotionRef.current;
 
+    let isVisible = false;
+    let isRunning = false;
+
+    const startAnimation = () => {
+      if (isRunning || !isVisible || document.hidden) return;
+      isRunning = true;
+      animationRef.current = requestAnimationFrame(animate);
+    };
+
+    const stopAnimation = () => {
+      if (!isRunning) return;
+      isRunning = false;
+      cancelAnimationFrame(animationRef.current);
+      animationRef.current = 0;
+    };
+
     const animate = () => {
+      if (!isRunning) return;
       ctx.clearRect(0, 0, width, height);
 
       const nodes = nodesRef.current;
@@ -352,10 +369,32 @@ export default function ImpulseField({
       animationRef.current = requestAnimationFrame(animate);
     };
 
-    animate();
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isVisible = entry.isIntersecting;
+        if (isVisible) {
+          startAnimation();
+        } else {
+          stopAnimation();
+        }
+      },
+      { threshold: 0.01 }
+    );
+    observer.observe(canvas);
+
+    const onVisibilityChange = () => {
+      if (document.hidden) {
+        stopAnimation();
+      } else if (isVisible) {
+        startAnimation();
+      }
+    };
+    document.addEventListener('visibilitychange', onVisibilityChange);
 
     return () => {
-      cancelAnimationFrame(animationRef.current);
+      stopAnimation();
+      observer.disconnect();
+      document.removeEventListener('visibilitychange', onVisibilityChange);
       window.removeEventListener('resize', resize);
       canvas.removeEventListener('mousemove', handleMouse);
       canvas.removeEventListener('mouseleave', handleMouseLeave);

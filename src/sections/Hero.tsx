@@ -1,8 +1,9 @@
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, lazy, Suspense } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
-import ThreeHeroLogoScene from '@/components/3d/ThreeHeroLogoScene';
+
+const ThreeHeroLogoScene = lazy(() => import('@/components/3d/ThreeHeroLogoScene'));
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -96,10 +97,12 @@ export default function Hero() {
       className="relative w-full h-screen bg-space-950 overflow-hidden flex flex-col justify-between items-center px-6 py-8 select-none"
     >
       {/* Fullscreen Background 3D Canvas */}
-      <ThreeHeroLogoScene
-        scrollProgress={scrollProgressRef}
-        className="absolute inset-0 w-full h-full z-0"
-      />
+      <Suspense fallback={null}>
+        <ThreeHeroLogoScene
+          scrollProgress={scrollProgressRef}
+          className="absolute inset-0 w-full h-full z-0"
+        />
+      </Suspense>
 
       {/* Subtle Background Architectural Grid */}
       <div className="absolute inset-0 grid-lines opacity-15 pointer-events-none z-0" aria-hidden="true" />

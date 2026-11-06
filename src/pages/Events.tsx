@@ -62,7 +62,14 @@ export default function Events() {
             {upcomingEvents.map((event) => (
               <article key={event.id} className="event-card" aria-labelledby={'event-title-' + event.id}>
                 <Link to={event.href} className="event-card-image" aria-label={'Explore ' + event.title}>
-                  <img src={event.image} alt={event.imageAlt} />
+                  <img
+                    src={event.image}
+                    alt={event.imageAlt}
+                    width={1600}
+                    height={639}
+                    loading="lazy"
+                    decoding="async"
+                  />
                   <span className="event-card-status"><Clock3 aria-hidden="true" /> Upcoming</span>
                   <span className="event-banner-preview" aria-hidden="true"><span><small>{event.date} · {event.location}</small><strong>Explore event</strong></span><ArrowUpRight /></span>
                 </Link>

@@ -214,18 +214,14 @@ export const navLinks = [
   { label: 'Explore', path: '/' },
   { label: 'Events', path: '/events' },
   { label: 'Cohort', path: '/cohort' },
-  { label: 'Projects', path: '/projects' },
   { label: 'Community', path: '/community' },
-  { label: 'About', path: '/about' },
 ];
 
 export const footerLinks = [
   { label: 'Explore', path: '/' },
   { label: 'Events', path: '/events' },
   { label: 'Cohort', path: '/cohort' },
-  { label: 'Projects', path: '/projects' },
   { label: 'Community', path: '/community' },
-  { label: 'About', path: '/about' },
   { label: 'Join', path: '/join' },
 ];
 

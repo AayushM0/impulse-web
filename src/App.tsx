@@ -3,9 +3,7 @@ import { useEffect, lazy, Suspense } from 'react';
 import Home from '@/pages/Home';
 const Join = lazy(() => import('@/pages/Join'));
 const Events = lazy(() => import('@/pages/Events'));
-const Projects = lazy(() => import('@/pages/Projects'));
 const CommunityPage = lazy(() => import('@/pages/Community'));
-const About = lazy(() => import('@/pages/About'));
 const SharkHack = lazy(() => import('@/pages/SharkHack'));
 const Cohort = lazy(() => import('@/pages/Cohort'));
 
@@ -35,9 +33,7 @@ function PageTitle() {
       '/cohort': 'Builder Cohort — IMPULSE',
       '/shark-hack': 'SHARK HACK 2027 — Impulse Flagship Hackathon',
       '/events/shark-hack': 'SHARK HACK 2027 — Impulse Flagship Hackathon',
-      '/projects': 'Projects — IMPULSE',
       '/community': 'Community — IMPULSE',
-      '/about': 'About — IMPULSE',
     };
     document.title = titles[location.pathname] || 'IMPULSE — Ideas in Motion';
   }, [location.pathname]);
@@ -58,9 +54,7 @@ export default function App() {
         <Route path="/join" element={<Join />} />
         <Route path="/events" element={<Events />} />
         <Route path="/cohort" element={<Cohort />} />
-        <Route path="/projects" element={<Projects />} />
         <Route path="/community" element={<CommunityPage />} />
-        <Route path="/about" element={<About />} />
         <Route path="*" element={<Home />} />
           </Routes>
         </Suspense>

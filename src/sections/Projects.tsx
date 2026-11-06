@@ -1,6 +1,5 @@
 import { useState, useRef } from 'react';
 import { ArrowRight, Github, ExternalLink, Star } from 'lucide-react';
-import { Link } from 'react-router-dom';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
@@ -76,13 +75,15 @@ export default function Projects() {
             </h2>
           </div>
 
-          <Link
-            to="/projects"
+          <a
+            href="https://github.com/impulse-community"
+            target="_blank"
+            rel="noopener noreferrer"
             className="group inline-flex items-center gap-2 font-mono-label text-xs text-impulse-blue-bright hover:text-impulse-white transition-colors self-start lg:self-end"
           >
             <span>VIEW REPOSITORY</span>
             <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
-          </Link>
+          </a>
         </div>
 
         {/* Filter Pills */}

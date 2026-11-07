@@ -43,15 +43,16 @@ export default function Hero() {
         return;
       }
 
-      // Timeline pinned for 1600px of scroll travel
+      // Timeline pinned for 1600px of scroll travel on desktop or 800px on mobile
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: containerRef.current,
           start: 'top top',
-          end: '+=1600',
+          end: () => (window.innerWidth < 768 ? '+=800' : '+=1600'),
           pin: true,
           pinSpacing: true,
           scrub: 0.8,
+          invalidateOnRefresh: true,
           onUpdate: (self) => {
             scrollProgressRef.current = self.progress;
           },

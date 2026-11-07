@@ -45,33 +45,38 @@ export default function Experiences() {
       const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       if (prefersReducedMotion) return;
 
-      const getDistance = () => {
-        return trackRef.current ? trackRef.current.scrollWidth - window.innerWidth + 80 : 0;
-      };
+      const mm = gsap.matchMedia();
 
-      const distance = getDistance();
+      // Only enable horizontal pinned scrub on desktop screens (768px and wider)
+      mm.add('(min-width: 768px)', () => {
+        const getDistance = () => {
+          return trackRef.current ? trackRef.current.scrollWidth - window.innerWidth + 80 : 0;
+        };
 
-      gsap.to(trackRef.current, {
-        x: () => -getDistance(),
-        ease: 'none',
-        scrollTrigger: {
-          trigger: wrapRef.current,
-          start: 'top top',
-          end: () => `+=${getDistance()}`,
-          pin: true,
-          scrub: 1,
-          invalidateOnRefresh: true,
-          onUpdate: (self) => {
-            if (progressBarRef.current) {
-              progressBarRef.current.style.width = `${Math.max(12, self.progress * 100)}%`;
-            }
-            if (counterRef.current) {
-              const currentIdx = Math.min(events.length, Math.floor(self.progress * (events.length - 1)) + 1);
-              counterRef.current.textContent = `${String(currentIdx).padStart(2, '0')} / ${String(events.length).padStart(2, '0')}`;
-            }
+        gsap.to(trackRef.current, {
+          x: () => -getDistance(),
+          ease: 'none',
+          scrollTrigger: {
+            trigger: wrapRef.current,
+            start: 'top top',
+            end: () => `+=${getDistance()}`,
+            pin: true,
+            scrub: 1,
+            invalidateOnRefresh: true,
+            onUpdate: (self) => {
+              if (progressBarRef.current) {
+                progressBarRef.current.style.width = `${Math.max(12, self.progress * 100)}%`;
+              }
+              if (counterRef.current) {
+                const currentIdx = Math.min(events.length, Math.floor(self.progress * (events.length - 1)) + 1);
+                counterRef.current.textContent = `${String(currentIdx).padStart(2, '0')} / ${String(events.length).padStart(2, '0')}`;
+              }
+            },
           },
-        },
+        });
       });
+
+      return () => mm.revert();
     },
     { scope: wrapRef }
   );
@@ -84,8 +89,8 @@ export default function Experiences() {
       {/* Background Architectural Grid Lines */}
       <div className="absolute inset-0 grid-lines opacity-10 pointer-events-none" aria-hidden="true" />
 
-      {/* Pinned Viewport Container */}
-      <div className="h-screen w-full flex flex-col justify-between py-10 lg:py-16">
+      {/* Viewport Container: natural height on mobile, full-screen pinned on desktop */}
+      <div className="h-auto min-h-screen md:h-screen w-full flex flex-col justify-between py-12 md:py-10 lg:py-16">
         {/* Section Header Row */}
         <div className="max-w-[1440px] w-full mx-auto px-6 lg:px-12 flex flex-col sm:flex-row sm:items-end justify-between gap-6 z-10">
           <div>
@@ -101,7 +106,7 @@ export default function Experiences() {
 
           {/* Progress Tracker & Links */}
           <div className="flex items-center gap-6">
-            <div className="hidden sm:flex items-center gap-3">
+            <div className="hidden md:flex items-center gap-3">
               <div className="w-28 sm:w-36 h-1 bg-space-800 rounded-full overflow-hidden">
                 <div
                   ref={progressBarRef}
@@ -124,11 +129,11 @@ export default function Experiences() {
           </div>
         </div>
 
-        {/* Pinned Horizontal Track that scrubs on vertical scroll */}
-        <div className="relative w-full my-auto overflow-hidden">
+        {/* Event Cards: vertically stacked on mobile (<768px), horizontal scrub on desktop (>=768px) */}
+        <div className="relative w-full my-8 md:my-auto overflow-visible md:overflow-hidden">
           <div
             ref={trackRef}
-            className="flex items-stretch gap-8 px-6 lg:px-12 w-max"
+            className="flex flex-col md:flex-row items-stretch gap-6 md:gap-8 px-6 lg:px-12 w-full md:w-max"
           >
             {events.map((event, index) => {
               const statusConfig = statusColorMap[event.status] || statusColorMap['UPCOMING'];
@@ -136,7 +141,7 @@ export default function Experiences() {
               return (
                 <div
                   key={event.id}
-                  className="w-[330px] sm:w-[420px] lg:w-[480px] flex-shrink-0"
+                  className="w-full md:w-[420px] lg:w-[480px] flex-shrink-0"
                 >
                   <TiltCard3D maxTilt={8} className="h-full">
                     <div className="h-full relative flex flex-col justify-between p-8 bg-space-900/95 border border-space-800 hover:border-impulse-blue/40 transition-colors duration-300">
@@ -229,8 +234,8 @@ export default function Experiences() {
           </div>
         </div>
 
-        {/* Bottom Scroll Cue */}
-        <div className="max-w-[1440px] w-full mx-auto px-6 lg:px-12 flex items-center justify-between text-xs font-mono-label text-impulse-gray-light/70">
+        {/* Bottom Scroll Cue (Desktop only) */}
+        <div className="hidden md:flex max-w-[1440px] w-full mx-auto px-6 lg:px-12 items-center justify-between text-xs font-mono-label text-impulse-gray-light/70">
           <span>← SCROLL VERTICALLY TO PAN EVENTS →</span>
           <span className="hidden sm:inline">CYCLE 01 // AUTONOMOUS SYSTEMS</span>
         </div>

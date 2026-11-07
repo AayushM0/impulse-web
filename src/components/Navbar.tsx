@@ -51,6 +51,16 @@ export default function Navbar() {
     };
   }, [mobileOpen]);
 
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && mobileOpen) {
+        setMobileOpen(false);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [mobileOpen]);
+
   return (
     <>
       <header
@@ -69,7 +79,7 @@ export default function Navbar() {
             </div>
           </div>
 
-          <div className="hidden lg:flex items-center gap-8">
+          <div className="hidden lg:flex items-center gap-6">
             {navLinks.map((link) => {
               const isActive = isLinkActive(link.path);
               return (
@@ -78,14 +88,14 @@ export default function Navbar() {
                   to={link.path}
                   onClick={() => handleNavClick(link.path)}
                   aria-current={isActive ? 'page' : undefined}
-                  className={`font-mono-label transition-colors duration-300 relative group ${
+                  className={`font-mono-label text-xs tracking-wider transition-colors duration-300 relative group py-2.5 px-3 min-h-[44px] inline-flex items-center ${
                     isActive ? 'text-impulse-white' : 'text-impulse-gray-light/70 hover:text-impulse-white'
                   }`}
                 >
                   {link.label}
                   <span
-                    className={`absolute -bottom-1 left-0 h-px bg-impulse-blue transition-all duration-300 ${
-                      isActive ? 'w-full' : 'w-0 group-hover:w-full'
+                    className={`absolute bottom-2 left-3 right-3 h-px bg-impulse-blue transition-all duration-300 origin-left ${
+                      isActive ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
                     }`}
                   />
                 </Link>
@@ -97,7 +107,7 @@ export default function Navbar() {
             <Link
               to="/join"
               onClick={() => handleNavClick('/join')}
-              className="group inline-flex items-center gap-2 font-mono-label text-impulse-white border border-impulse-blue/30 bg-impulse-blue/5 hover:bg-impulse-blue/15 hover:border-impulse-blue/50 transition-all duration-300 px-5 py-2.5 energy-sweep"
+              className="group inline-flex items-center gap-2 font-mono-label text-impulse-white border border-impulse-blue/30 bg-impulse-blue/5 hover:bg-impulse-blue/15 hover:border-impulse-blue/50 transition-all duration-300 px-5 py-2.5 min-h-[44px] energy-sweep"
             >
               Join Impulse
               <ArrowRight aria-hidden="true" className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
@@ -105,7 +115,7 @@ export default function Navbar() {
           </div>
 
           <button
-            className="lg:hidden text-impulse-white p-2"
+            className="lg:hidden text-impulse-white p-3 min-w-[44px] min-h-[44px] flex items-center justify-center -mr-2 rounded-sm"
             onClick={() => setMobileOpen(!mobileOpen)}
             aria-label="Toggle menu"
             aria-expanded={mobileOpen}

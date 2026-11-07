@@ -111,7 +111,7 @@ export default function Community() {
             <h3 className="font-mono-label text-xs text-impulse-blue-bright/70">
               FOUNDING CIRCLE // LEADERSHIP
             </h3>
-            <span className="font-mono-label text-xs text-impulse-gray-light/40">
+            <span className="font-mono-label text-xs text-impulse-gray-light/70">
               CHAPTER ONE
             </span>
           </div>
@@ -127,7 +127,7 @@ export default function Community() {
                         <div className="w-10 h-10 rounded-full bg-space-800 border border-space-700 flex items-center justify-center font-bold text-impulse-white font-sans text-sm">
                           {member.avatar}
                         </div>
-                        <span className="font-mono-label text-[10px] text-impulse-blue-bright/60">
+                        <span className="font-mono-label text-[10px] text-impulse-blue-bright/70">
                           {member.tag}
                         </span>
                       </div>
@@ -143,7 +143,7 @@ export default function Community() {
                       </p>
                     </div>
 
-                    <div className="mt-6 pt-4 border-t border-space-800 text-[11px] font-mono-label text-impulse-gray-light/40">
+                    <div className="mt-6 pt-4 border-t border-space-800 text-[11px] font-mono-label text-impulse-gray-light/70">
                       {member.discipline}
                     </div>
                   </div>

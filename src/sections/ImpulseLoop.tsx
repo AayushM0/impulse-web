@@ -14,18 +14,24 @@ export default function ImpulseLoop() {
   const { ref, isVisible } = useReveal();
   const [activeStage, setActiveStage] = useState<number>(0);
   const [isUserHovering, setIsUserHovering] = useState<boolean>(false);
+  const [isUserPaused, setIsUserPaused] = useState<boolean>(false);
 
   const radius = 200;
   const centerX = 280;
   const centerY = 280;
 
+  const handleSelectStage = (index: number) => {
+    setActiveStage(index);
+    setIsUserPaused(true);
+  };
+
   useEffect(() => {
-    if (isUserHovering) return;
+    if (isUserHovering || isUserPaused) return;
     const interval = setInterval(() => {
       setActiveStage((prev) => (prev + 1) % stages.length);
     }, 4000);
     return () => clearInterval(interval);
-  }, [isUserHovering]);
+  }, [isUserHovering, isUserPaused]);
 
   return (
     <section ref={ref} className="relative py-28 lg:py-36 bg-space-950 border-t border-space-800/80 overflow-hidden">
@@ -48,7 +54,7 @@ export default function ImpulseLoop() {
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           {/* Circular SVG Visualization */}
-          <div className={`flex justify-center transition-all duration-700 ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
+          <div className={`flex justify-center transition-[opacity,transform] duration-700 ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
             <div
               className="relative w-full max-w-[540px] aspect-square"
               onMouseEnter={() => setIsUserHovering(true)}
@@ -56,42 +62,48 @@ export default function ImpulseLoop() {
             >
               <svg viewBox="0 0 560 560" className="w-full h-full">
                 {/* Orbital rings */}
-                <circle cx={centerX} cy={centerY} r={radius} fill="none" stroke="rgba(59,130,246,0.18)" strokeWidth="1" />
-                <circle cx={centerX} cy={centerY} r={radius + 32} fill="none" stroke="rgba(59,130,246,0.08)" strokeWidth="0.5" strokeDasharray="3 5" />
-                <circle cx={centerX} cy={centerY} r={radius - 32} fill="none" stroke="rgba(59,130,246,0.08)" strokeWidth="0.5" strokeDasharray="3 5" />
+                <g aria-hidden="true">
+                  <circle cx={centerX} cy={centerY} r={radius} fill="none" stroke="rgba(59,130,246,0.18)" strokeWidth="1" />
+                  <circle cx={centerX} cy={centerY} r={radius + 32} fill="none" stroke="rgba(59,130,246,0.08)" strokeWidth="0.5" strokeDasharray="3 5" />
+                  <circle cx={centerX} cy={centerY} r={radius - 32} fill="none" stroke="rgba(59,130,246,0.08)" strokeWidth="0.5" strokeDasharray="3 5" />
+                </g>
 
                 {/* Connecting Arcs Between Stages */}
-                {stages.map((_, i) => {
-                  const angle1 = (i / stages.length) * Math.PI * 2 - Math.PI / 2;
-                  const angle2 = ((i + 1) / stages.length) * Math.PI * 2 - Math.PI / 2;
-                  const x1 = centerX + Math.cos(angle1) * radius;
-                  const y1 = centerY + Math.sin(angle1) * radius;
-                  const x2 = centerX + Math.cos(angle2) * radius;
-                  const y2 = centerY + Math.sin(angle2) * radius;
+                <g aria-hidden="true">
+                  {stages.map((_, i) => {
+                    const angle1 = (i / stages.length) * Math.PI * 2 - Math.PI / 2;
+                    const angle2 = ((i + 1) / stages.length) * Math.PI * 2 - Math.PI / 2;
+                    const x1 = centerX + Math.cos(angle1) * radius;
+                    const y1 = centerY + Math.sin(angle1) * radius;
+                    const x2 = centerX + Math.cos(angle2) * radius;
+                    const y2 = centerY + Math.sin(angle2) * radius;
 
-                  const midAngle = (angle1 + angle2) / 2;
-                  const ctrlRadius = radius + 22;
-                  const cpx = centerX + Math.cos(midAngle) * ctrlRadius;
-                  const cpy = centerY + Math.sin(midAngle) * ctrlRadius;
+                    const midAngle = (angle1 + angle2) / 2;
+                    const ctrlRadius = radius + 22;
+                    const cpx = centerX + Math.cos(midAngle) * ctrlRadius;
+                    const cpy = centerY + Math.sin(midAngle) * ctrlRadius;
 
-                  const isActive = activeStage === i;
+                    const isActive = activeStage === i;
 
-                  return (
-                    <path
-                      key={`arc-${i}`}
-                      d={`M ${x1} ${y1} Q ${cpx} ${cpy} ${x2} ${y2}`}
-                      fill="none"
-                      stroke={isActive ? 'rgba(96,165,250,0.85)' : 'rgba(59,130,246,0.15)'}
-                      strokeWidth={isActive ? '2' : '1'}
-                      className="transition-all duration-300"
-                    />
-                  );
-                })}
+                    return (
+                      <path
+                        key={`arc-${i}`}
+                        d={`M ${x1} ${y1} Q ${cpx} ${cpy} ${x2} ${y2}`}
+                        fill="none"
+                        stroke={isActive ? 'rgba(96,165,250,0.85)' : 'rgba(59,130,246,0.15)'}
+                        strokeWidth={isActive ? '2' : '1'}
+                        className="transition-colors duration-300"
+                      />
+                    );
+                  })}
+                </g>
 
                 {/* Center Core Impulse */}
-                <circle cx={centerX} cy={centerY} r="44" fill="rgba(59,130,246,0.05)" />
-                <circle cx={centerX} cy={centerY} r="7" fill="#F8FAFC" opacity="0.9" />
-                <circle cx={centerX} cy={centerY} r="3" fill="#60A5FA" />
+                <g aria-hidden="true">
+                  <circle cx={centerX} cy={centerY} r="44" fill="rgba(59,130,246,0.05)" />
+                  <circle cx={centerX} cy={centerY} r="7" fill="#F8FAFC" opacity="0.9" />
+                  <circle cx={centerX} cy={centerY} r="3" fill="#60A5FA" />
+                </g>
 
                 {/* Stage Nodes on the Orbit */}
                 {stages.map((stage, i) => {
@@ -103,33 +115,44 @@ export default function ImpulseLoop() {
                   return (
                     <g
                       key={stage.name}
+                      role="button"
+                      tabIndex={0}
+                      aria-label={`Stage ${i + 1}: ${stage.name}`}
+                      aria-pressed={isActive}
+                      onClick={() => handleSelectStage(i)}
                       onMouseEnter={() => {
                         setIsUserHovering(true);
                         setActiveStage(i);
                       }}
-                      className="cursor-pointer"
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                          e.preventDefault();
+                          handleSelectStage(i);
+                        }
+                      }}
+                      className="cursor-pointer focus:outline-none"
                     >
                       <circle
                         cx={x}
                         cy={y}
                         r={isActive ? 32 : 18}
                         fill={isActive ? 'rgba(59,130,246,0.25)' : 'rgba(59,130,246,0.06)'}
-                        className="transition-all duration-300"
+                        className="transition-colors duration-300"
                       />
                       <circle
                         cx={x}
                         cy={y}
                         r={isActive ? 7 : 4}
                         fill={isActive ? '#60A5FA' : 'rgba(96,165,250,0.6)'}
-                        className="transition-all duration-300"
+                        className="transition-colors duration-300"
                       />
-                      <circle cx={x} cy={y} r="2.5" fill="#F8FAFC" opacity="0.9" />
+                      <circle cx={x} cy={y} r="2.5" fill="#F8FAFC" opacity="0.9" aria-hidden="true" />
                       <text
                         x={x}
                         y={y + (Math.sin(angle) > 0 ? 28 : -18)}
                         textAnchor="middle"
-                        fill={isActive ? '#F8FAFC' : 'rgba(203,213,225,0.5)'}
-                        className="font-mono transition-all duration-300 font-semibold"
+                        fill={isActive ? '#F8FAFC' : 'rgba(203,213,225,0.7)'}
+                        className="font-mono transition-colors duration-300 font-semibold select-none"
                         style={{ fontSize: '11px', letterSpacing: '0.12em' }}
                       >
                         {stage.name}
@@ -146,43 +169,57 @@ export default function ImpulseLoop() {
             onMouseEnter={() => setIsUserHovering(true)}
             onMouseLeave={() => setIsUserHovering(false)}
           >
-            <div className="space-y-3">
+            <div
+              role="tablist"
+              aria-label="Impulse flywheel stages"
+              className="space-y-3"
+            >
               {stages.map((stage, i) => (
-                <div
+                <button
                   key={stage.name}
-                  onClick={() => setActiveStage(i)}
+                  type="button"
+                  role="tab"
+                  id={`stage-tab-${i}`}
+                  aria-selected={activeStage === i}
+                  aria-controls={`stage-panel-${i}`}
+                  onClick={() => handleSelectStage(i)}
                   onMouseEnter={() => setActiveStage(i)}
-                  className={`border-l-2 pl-6 py-4 cursor-pointer transition-all duration-300 ${
+                  className={`w-full text-left border-l-2 pl-6 py-4 cursor-pointer transition-colors duration-300 block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-impulse-blue rounded-r-sm ${
                     activeStage === i
                       ? 'border-impulse-blue bg-space-900/90'
                       : 'border-space-800 hover:border-space-700 bg-transparent'
                   }`}
                 >
                   <div className="flex items-center gap-3 mb-1.5">
-                    <span className="font-mono-label text-xs text-impulse-blue-bright/60">
+                    <span className="font-mono-label text-xs text-impulse-blue-bright/70 font-semibold">
                       {String(i + 1).padStart(2, '0')}
                     </span>
                     <span
                       className={`font-sans text-lg font-semibold tracking-wide transition-colors duration-200 ${
-                        activeStage === i ? 'text-impulse-white' : 'text-impulse-gray-light/60'
+                        activeStage === i ? 'text-impulse-white' : 'text-impulse-gray-light/70'
                       }`}
                     >
                       {stage.name}
                     </span>
                   </div>
 
-                  <p
-                    className={`text-sm text-impulse-gray-light/80 leading-relaxed transition-all duration-300 overflow-hidden ${
+                  <div
+                    id={`stage-panel-${i}`}
+                    role="tabpanel"
+                    aria-labelledby={`stage-tab-${i}`}
+                    className={`transition-[opacity,max-height] duration-300 overflow-hidden ${
                       activeStage === i ? 'opacity-100 max-h-32 mt-2' : 'opacity-0 max-h-0'
                     }`}
                   >
-                    {stage.description}
-                  </p>
-                </div>
+                    <p className="text-sm text-impulse-gray-light/80 leading-relaxed">
+                      {stage.description}
+                    </p>
+                  </div>
+                </button>
               ))}
             </div>
 
-            <p className="font-mono-label text-xs text-impulse-gray-light/40 mt-8">
+            <p className="font-mono-label text-xs text-impulse-gray-light/70 mt-8">
               HOVER OR CLICK TO EXPLORE STAGES
             </p>
           </div>

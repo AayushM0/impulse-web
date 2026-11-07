@@ -119,7 +119,7 @@ export default function Experiences() {
               className="inline-flex items-center gap-1.5 font-mono-label text-xs text-impulse-blue-bright hover:text-impulse-white transition-colors"
             >
               <span>ALL EVENTS</span>
-              <ArrowRight className="w-3.5 h-3.5" />
+              <ArrowRight aria-hidden="true" className="w-3.5 h-3.5" />
             </Link>
           </div>
         </div>
@@ -160,13 +160,13 @@ export default function Experiences() {
                         </div>
 
                         {/* Date & Location Pill */}
-                        <div className="flex flex-wrap items-center gap-4 text-xs font-mono-label text-impulse-gray-light/60 mb-4">
+                        <div className="flex flex-wrap items-center gap-4 text-xs font-mono-label text-impulse-gray-light/70 mb-4">
                           <span className="flex items-center gap-1.5">
-                            <Calendar className="w-3.5 h-3.5 text-impulse-blue-bright" />
+                            <Calendar aria-hidden="true" className="w-3.5 h-3.5 text-impulse-blue-bright" />
                             {event.date}
                           </span>
                           <span className="flex items-center gap-1.5">
-                            <MapPin className="w-3.5 h-3.5 text-impulse-blue-bright/80" />
+                            <MapPin aria-hidden="true" className="w-3.5 h-3.5 text-impulse-blue-bright/80" />
                             {event.location}
                           </span>
                         </div>
@@ -187,7 +187,7 @@ export default function Experiences() {
                             {event.tags.map((tag) => (
                               <span
                                 key={tag}
-                                className="px-2.5 py-0.5 text-[11px] font-mono-label text-impulse-gray-light/60 bg-space-800/60 border border-space-700/60"
+                                className="px-2.5 py-0.5 text-[11px] font-mono-label text-impulse-gray-light/70 bg-space-800/60 border border-space-700/60"
                               >
                                 #{tag}
                               </span>
@@ -200,11 +200,11 @@ export default function Experiences() {
                       <div className="pt-6 border-t border-space-800 flex items-center justify-between">
                         {event.highlight ? (
                           <span className="inline-flex items-center gap-1.5 text-xs font-mono-label text-impulse-blue-bright font-medium">
-                            <Sparkles className="w-3.5 h-3.5" />
+                            <Sparkles aria-hidden="true" className="w-3.5 h-3.5" />
                             {event.highlight}
                           </span>
                         ) : (
-                          <span className="text-xs font-mono-label text-impulse-gray-light/40">
+                          <span className="text-xs font-mono-label text-impulse-gray-light/70">
                             {event.capacity || 'LIMITED SLOTS'}
                           </span>
                         )}
@@ -218,7 +218,7 @@ export default function Experiences() {
                           }`}
                         >
                           {event.link ? 'EXPLORE HACK' : 'RSVP'}
-                          <ArrowRight className="w-3 h-3" />
+                          <ArrowRight aria-hidden="true" className="w-3 h-3" />
                         </Link>
                       </div>
                     </div>
@@ -230,7 +230,7 @@ export default function Experiences() {
         </div>
 
         {/* Bottom Scroll Cue */}
-        <div className="max-w-[1440px] w-full mx-auto px-6 lg:px-12 flex items-center justify-between text-xs font-mono-label text-impulse-gray-light/40">
+        <div className="max-w-[1440px] w-full mx-auto px-6 lg:px-12 flex items-center justify-between text-xs font-mono-label text-impulse-gray-light/70">
           <span>← SCROLL VERTICALLY TO PAN EVENTS →</span>
           <span className="hidden sm:inline">CYCLE 01 // AUTONOMOUS SYSTEMS</span>
         </div>

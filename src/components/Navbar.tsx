@@ -100,7 +100,7 @@ export default function Navbar() {
               className="group inline-flex items-center gap-2 font-mono-label text-impulse-white border border-impulse-blue/30 bg-impulse-blue/5 hover:bg-impulse-blue/15 hover:border-impulse-blue/50 transition-all duration-300 px-5 py-2.5 energy-sweep"
             >
               Join Impulse
-              <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
+              <ArrowRight aria-hidden="true" className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
             </Link>
           </div>
 
@@ -110,7 +110,7 @@ export default function Navbar() {
             aria-label="Toggle menu"
             aria-expanded={mobileOpen}
           >
-            {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            {mobileOpen ? <X aria-hidden="true" className="w-5 h-5" /> : <Menu aria-hidden="true" className="w-5 h-5" />}
           </button>
         </nav>
       </header>
@@ -145,7 +145,7 @@ export default function Navbar() {
             }`}
             style={{ transitionDelay: '300ms' }}
           >
-            Join Impulse <ArrowRight className="w-4 h-4" />
+            Join Impulse <ArrowRight aria-hidden="true" className="w-4 h-4" />
           </Link>
         </div>
       </div>

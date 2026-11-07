@@ -18,7 +18,7 @@ export const events: EventItem[] = [
   {
     id: 'shark-hack-2027',
     date: '23 JAN 2027',
-    title: '🦈 SHARK HACK: Don’t Just Build. Make Them Believe.',
+    title: 'SHARK HACK: Don’t Just Build. Make Them Believe.',
     type: 'HACKATHONS',
     description: 'An All-India flagship hackathon where technical execution meets pitching, product thinking, and live negotiation. Compete for ₹1 Lakh+ Prize Pool, pitch in the offline Shark Room in Delhi, and negotiate deals in Impulse Credits.',
     location: 'DELHI · OFFLINE GRAND ROUND',

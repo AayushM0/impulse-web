@@ -24,7 +24,7 @@ export default function CTASection({ headline, description, buttonText, buttonTo
       />
 
       <div className="relative max-w-3xl mx-auto px-6 text-center">
-        <div className="inline-flex items-center gap-2 font-mono-label text-impulse-blue-bright/60 mb-8">
+        <div className="inline-flex items-center gap-2 font-mono-label text-impulse-blue-bright/70 mb-8">
           <span className="w-2 h-2 rounded-full bg-impulse-blue animate-pulse-slow" />
           SIGNAL ACTIVE
         </div>
@@ -46,7 +46,7 @@ export default function CTASection({ headline, description, buttonText, buttonTo
         </Link>
 
         {microcopy && (
-          <p className="font-mono-label text-impulse-blue-bright/40 mt-8">
+          <p className="font-mono-label text-impulse-blue-bright/70 mt-8">
             {microcopy}
           </p>
         )}

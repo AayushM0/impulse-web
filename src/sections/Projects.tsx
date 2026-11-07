@@ -82,7 +82,7 @@ export default function Projects() {
             className="group inline-flex items-center gap-2 font-mono-label text-xs text-impulse-blue-bright hover:text-impulse-white transition-colors self-start lg:self-end"
           >
             <span>VIEW REPOSITORY</span>
-            <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
+            <ArrowRight aria-hidden="true" className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
           </a>
         </div>
 
@@ -95,7 +95,7 @@ export default function Projects() {
               className={`font-mono-label text-xs px-4 py-2 border transition-all duration-200 ${
                 activeCategory === cat
                   ? 'border-impulse-blue/70 bg-impulse-blue/15 text-impulse-white'
-                  : 'border-space-800 bg-space-900/60 text-impulse-gray-light/60 hover:border-space-700 hover:text-impulse-white'
+                  : 'border-space-800 bg-space-900/60 text-impulse-gray-light/70 hover:border-space-700 hover:text-impulse-white'
               }`}
             >
               {cat}
@@ -141,7 +141,7 @@ export default function Projects() {
                         {project.tags.map((tag) => (
                           <span
                             key={tag}
-                            className="px-2 py-0.5 text-[10px] font-mono-label text-impulse-gray-light/60 bg-space-800/60 border border-space-700/60"
+                            className="px-2 py-0.5 text-[10px] font-mono-label text-impulse-gray-light/70 bg-space-800/60 border border-space-700/60"
                           >
                             {tag}
                           </span>
@@ -152,7 +152,7 @@ export default function Projects() {
 
                   {/* Footer with Contributors & Action Links */}
                   <div className="pt-6 border-t border-space-800 flex items-center justify-between">
-                    <div className="flex items-center gap-1.5 text-xs font-mono-label text-impulse-gray-light/50">
+                    <div className="flex items-center gap-1.5 text-xs font-mono-label text-impulse-gray-light/70">
                       <span>by {project.contributors[0]}</span>
                       {project.contributors.length > 1 && (
                         <span className="text-[10px] text-impulse-blue-bright">
@@ -163,8 +163,8 @@ export default function Projects() {
 
                     <div className="flex items-center gap-3">
                       {project.stars && (
-                        <span className="inline-flex items-center gap-1 text-xs font-mono-label text-impulse-gray-light/60">
-                          <Star className="w-3 h-3 text-amber-400" />
+                        <span className="inline-flex items-center gap-1 text-xs font-mono-label text-impulse-gray-light/70">
+                          <Star aria-hidden="true" className="w-3 h-3 text-amber-400" />
                           {project.stars}
                         </span>
                       )}
@@ -173,10 +173,10 @@ export default function Projects() {
                           href={project.github}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="p-1.5 text-impulse-gray-light/60 hover:text-impulse-white transition-colors"
+                          className="p-1.5 text-impulse-gray-light/70 hover:text-impulse-white transition-colors"
                           aria-label={`${project.name} GitHub`}
                         >
-                          <Github className="w-4 h-4" />
+                          <Github aria-hidden="true" className="w-4 h-4" />
                         </a>
                       )}
                       {project.demo && (
@@ -187,7 +187,7 @@ export default function Projects() {
                           className="p-1.5 text-impulse-blue-bright hover:text-impulse-white transition-colors"
                           aria-label={`${project.name} Live Demo`}
                         >
-                          <ExternalLink className="w-4 h-4" />
+                          <ExternalLink aria-hidden="true" className="w-4 h-4" />
                         </a>
                       )}
                     </div>

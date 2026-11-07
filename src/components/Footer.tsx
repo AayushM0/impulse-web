@@ -12,9 +12,9 @@ export default function Footer() {
       <div className="relative max-w-[1440px] mx-auto px-6 lg:px-10 py-20 lg:py-28">
         {/* Large wordmark */}
         <div className="mb-16 lg:mb-24">
-          <h2 className="text-[14vw] lg:text-[10rem] font-sans font-bold tracking-tight leading-none text-impulse-white/10 select-none">
+          <p aria-hidden="true" className="text-[14vw] lg:text-[10rem] font-sans font-bold tracking-tight leading-none text-impulse-white/10 select-none">
             IMPULSE
-          </h2>
+          </p>
           <p className="font-mono-label text-impulse-blue-bright/60 mt-4">
             IDEAS IN MOTION.
           </p>
@@ -23,7 +23,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-20">
           {/* Links */}
           <div>
-            <p className="font-mono-label text-impulse-blue-bright/50 mb-6">Navigate</p>
+            <p className="font-mono-label text-impulse-blue-bright/70 mb-6">Navigate</p>
             <ul className="space-y-3">
               {footerLinks.map((link) => (
                 <li key={link.label}>
@@ -40,7 +40,7 @@ export default function Footer() {
 
           {/* Social */}
           <div>
-            <p className="font-mono-label text-impulse-blue-bright/50 mb-6">Connect</p>
+            <p className="font-mono-label text-impulse-blue-bright/70 mb-6">Connect</p>
             <ul className="space-y-3">
               {socialLinks.map((link) => (
                 <li key={link.label}>
@@ -58,7 +58,7 @@ export default function Footer() {
 
           {/* Contact */}
           <div>
-            <p className="font-mono-label text-impulse-blue-bright/50 mb-6">Contact</p>
+            <p className="font-mono-label text-impulse-blue-bright/70 mb-6">Contact</p>
             <a
               href="mailto:community.impulseteam@gmail.com"
               className="text-impulse-gray-light/80 hover:text-impulse-white transition-colors duration-300 text-sm tracking-wide break-all"
@@ -73,11 +73,11 @@ export default function Footer() {
 
         {/* Bottom bar */}
         <div className="mt-16 lg:mt-20 pt-8 border-t border-space-700/50 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="font-mono-label text-impulse-blue-bright/40">
+          <p className="font-mono-label text-impulse-blue-bright/70">
             CHAPTER ONE / 2026
           </p>
-          <p className="font-mono-label text-impulse-blue-bright/30">
-            IMPULSE — AI BUILDER COMMUNITY
+          <p className="font-mono-label text-impulse-blue-bright/70">
+            IMPULSE - AI BUILDER COMMUNITY
           </p>
         </div>
       </div>

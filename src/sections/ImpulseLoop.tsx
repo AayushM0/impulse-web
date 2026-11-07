@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useReveal } from '@/hooks/useReveal';
 
 const stages = [
@@ -13,29 +13,15 @@ const stages = [
 export default function ImpulseLoop() {
   const { ref, isVisible } = useReveal();
   const [activeStage, setActiveStage] = useState<number>(0);
-  const [isUserHovering, setIsUserHovering] = useState<boolean>(false);
-  const [isUserPaused, setIsUserPaused] = useState<boolean>(false);
 
   const radius = 200;
   const centerX = 280;
   const centerY = 280;
 
-  const handleSelectStage = (index: number) => {
-    setActiveStage(index);
-    setIsUserPaused(true);
-  };
-
-  useEffect(() => {
-    if (isUserHovering || isUserPaused) return;
-    const interval = setInterval(() => {
-      setActiveStage((prev) => (prev + 1) % stages.length);
-    }, 4000);
-    return () => clearInterval(interval);
-  }, [isUserHovering, isUserPaused]);
-
   return (
     <section ref={ref} className="relative py-28 lg:py-36 bg-space-950 border-t border-space-800/80 overflow-hidden">
       <div className="absolute inset-0 grid-lines opacity-10 pointer-events-none" aria-hidden="true" />
+      <div className="absolute inset-0 ambient-glow-loop pointer-events-none opacity-80" aria-hidden="true" />
 
       <div className="relative max-w-[1440px] mx-auto px-6 lg:px-12">
         <div className="max-w-3xl mb-16">
@@ -55,17 +41,34 @@ export default function ImpulseLoop() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           {/* Circular SVG Visualization */}
           <div className={`flex justify-center transition-[opacity,transform] duration-700 ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}`}>
-            <div
-              className="relative w-full max-w-[540px] aspect-square"
-              onMouseEnter={() => setIsUserHovering(true)}
-              onMouseLeave={() => setIsUserHovering(false)}
-            >
+            <div className="relative w-full max-w-[540px] aspect-square">
               <svg viewBox="0 0 560 560" className="w-full h-full">
+                <defs>
+                  <linearGradient id="orbitGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stopColor="#60A5FA" />
+                    <stop offset="50%" stopColor="#818CF8" />
+                    <stop offset="100%" stopColor="#EC4899" />
+                  </linearGradient>
+                </defs>
+
                 {/* Orbital rings */}
                 <g aria-hidden="true">
                   <circle cx={centerX} cy={centerY} r={radius} fill="none" stroke="rgba(59,130,246,0.18)" strokeWidth="1" />
                   <circle cx={centerX} cy={centerY} r={radius + 32} fill="none" stroke="rgba(59,130,246,0.08)" strokeWidth="0.5" strokeDasharray="3 5" />
                   <circle cx={centerX} cy={centerY} r={radius - 32} fill="none" stroke="rgba(59,130,246,0.08)" strokeWidth="0.5" strokeDasharray="3 5" />
+
+                  {/* Dynamic Active Orbit Highlight */}
+                  <circle
+                    cx={centerX}
+                    cy={centerY}
+                    r={radius}
+                    fill="none"
+                    stroke="url(#orbitGlow)"
+                    strokeWidth="2.5"
+                    strokeDasharray={`${(2 * Math.PI * radius) / stages.length} ${2 * Math.PI * radius}`}
+                    strokeDashoffset={-((activeStage / stages.length) * 2 * Math.PI * radius - (Math.PI * radius) / stages.length)}
+                    className="transition-all duration-500 ease-out"
+                  />
                 </g>
 
                 {/* Connecting Arcs Between Stages */}
@@ -119,15 +122,11 @@ export default function ImpulseLoop() {
                       tabIndex={0}
                       aria-label={`Stage ${i + 1}: ${stage.name}`}
                       aria-pressed={isActive}
-                      onClick={() => handleSelectStage(i)}
-                      onMouseEnter={() => {
-                        setIsUserHovering(true);
-                        setActiveStage(i);
-                      }}
+                      onClick={() => setActiveStage(i)}
                       onKeyDown={(e) => {
                         if (e.key === 'Enter' || e.key === ' ') {
                           e.preventDefault();
-                          handleSelectStage(i);
+                          setActiveStage(i);
                         }
                       }}
                       className="cursor-pointer focus:outline-none"
@@ -165,10 +164,12 @@ export default function ImpulseLoop() {
           </div>
 
           {/* Stage Details Column */}
-          <div
-            onMouseEnter={() => setIsUserHovering(true)}
-            onMouseLeave={() => setIsUserHovering(false)}
-          >
+          <div>
+            <div className="flex items-center justify-between mb-4 pb-2 border-b border-space-800/80 font-mono-label text-xs">
+              <span className="text-impulse-blue-bright font-semibold">STAGE {String(activeStage + 1).padStart(2, '0')} / {String(stages.length).padStart(2, '0')}</span>
+              <span className="text-impulse-gray-light/60">{stages[activeStage].name} // ACTIVE</span>
+            </div>
+
             <div
               role="tablist"
               aria-label="Impulse flywheel stages"
@@ -182,8 +183,7 @@ export default function ImpulseLoop() {
                   id={`stage-tab-${i}`}
                   aria-selected={activeStage === i}
                   aria-controls={`stage-panel-${i}`}
-                  onClick={() => handleSelectStage(i)}
-                  onMouseEnter={() => setActiveStage(i)}
+                  onClick={() => setActiveStage(i)}
                   className={`w-full text-left border-l-2 pl-6 py-4 cursor-pointer transition-colors duration-300 block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-impulse-blue rounded-r-sm ${
                     activeStage === i
                       ? 'border-impulse-blue bg-space-900/90'
@@ -220,7 +220,7 @@ export default function ImpulseLoop() {
             </div>
 
             <p className="font-mono-label text-xs text-impulse-gray-light/70 mt-8">
-              HOVER OR CLICK TO EXPLORE STAGES
+              CLICK OR TAP TO EXPLORE STAGES
             </p>
           </div>
         </div>

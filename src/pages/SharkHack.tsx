@@ -236,7 +236,7 @@ export default function SharkHack() {
           <div className="shark-content-width">
             <div className="shark-section-heading">
               <div><p className="shark-eyebrow"><span>01</span> Your event timeline</p><h2 id="timeline-title">Your path to<br />the <em>Shark Room.</em></h2></div>
-              <p className="shark-section-intro">From ideas to impact — follow the journey to SHARK HACK.</p>
+              <p className="shark-section-intro">From ideas to impact: follow the journey to SHARK HACK.</p>
             </div>
             <SharkTimeline steps={timeline} />
           </div>

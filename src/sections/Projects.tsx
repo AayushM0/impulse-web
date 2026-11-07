@@ -104,99 +104,127 @@ export default function Projects() {
           ))}
         </div>
 
-        {/* 3D Tilt Projects Grid */}
+        {/* 3D Tilt Projects Grid (Bento Layout) */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredProjects.map((project) => (
-            <div key={project.id} className="project-card">
-              <TiltCard3D maxTilt={8} className="h-full">
-                <div className="h-full relative flex flex-col justify-between p-8 bg-space-900/95 border border-space-800 hover:border-impulse-blue/40 transition-colors duration-300">
-                  <div>
-                    {/* Category & Status pill */}
-                    <div className="flex items-center justify-between gap-2 mb-6">
-                      <span className="font-mono-label text-xs text-impulse-blue-bright/70">
-                        {project.category}
-                      </span>
+          {filteredProjects.map((project, index) => {
+            const isFlagship = activeCategory === 'ALL' && index === 0;
 
-                      <span
-                        className={`font-mono-label text-[10px] px-2.5 py-0.5 border rounded-full ${
-                          statusBadgeStyles[project.status] || 'text-impulse-gray-light border-space-700'
-                        }`}
-                      >
-                        {project.status}
-                      </span>
-                    </div>
-
-                    {/* Project Name */}
-                    <h3 className="text-2xl font-sans font-semibold text-impulse-white tracking-tight mb-3">
-                      {project.name}
-                    </h3>
-
-                    {/* Description */}
-                    <p className="text-sm text-impulse-gray-light/70 leading-relaxed mb-6">
-                      {project.description}
-                    </p>
-
-                    {/* Tech Tags */}
-                    {project.tags && (
-                      <div className="flex flex-wrap gap-1.5 mb-6">
-                        {project.tags.map((tag) => (
-                          <span
-                            key={tag}
-                            className="px-2 py-0.5 text-[10px] font-mono-label text-impulse-gray-light/70 bg-space-800/60 border border-space-700/60"
-                          >
-                            {tag}
+            return (
+              <div
+                key={project.id}
+                className={`project-card ${isFlagship ? 'lg:col-span-2' : 'col-span-1'}`}
+              >
+                <TiltCard3D maxTilt={isFlagship ? 5 : 8} className="h-full">
+                  <div className="h-full relative flex flex-col justify-between p-8 bg-space-900/95 border border-space-800 hover:border-impulse-blue/40 transition-colors duration-300">
+                    <div>
+                      {/* Category & Status pill */}
+                      <div className="flex items-center justify-between gap-2 mb-6">
+                        <div className="flex items-center gap-2">
+                          <span className="font-mono-label text-xs text-impulse-blue-bright/70">
+                            {project.category}
                           </span>
-                        ))}
+                          {isFlagship && (
+                            <span className="inline-flex items-center gap-1.5 font-mono-label text-[10px] text-emerald-400 bg-emerald-500/10 px-2.5 py-0.5 border border-emerald-500/25 rounded-full">
+                              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                              FLAGSHIP ARCHITECTURE
+                            </span>
+                          )}
+                        </div>
+
+                        <span
+                          className={`font-mono-label text-[10px] px-2.5 py-0.5 border rounded-full ${
+                            statusBadgeStyles[project.status] || 'text-impulse-gray-light border-space-700'
+                          }`}
+                        >
+                          {project.status}
+                        </span>
                       </div>
-                    )}
-                  </div>
 
-                  {/* Footer with Contributors & Action Links */}
-                  <div className="pt-6 border-t border-space-800 flex items-center justify-between">
-                    <div className="flex items-center gap-1.5 text-xs font-mono-label text-impulse-gray-light/70">
-                      <span>by {project.contributors[0]}</span>
-                      {project.contributors.length > 1 && (
-                        <span className="text-[10px] text-impulse-blue-bright">
-                          +{project.contributors.length - 1}
-                        </span>
+                      {/* Project Name */}
+                      <h3 className={`${isFlagship ? 'text-3xl lg:text-4xl' : 'text-2xl'} font-sans font-semibold text-impulse-white tracking-tight mb-3`}>
+                        {project.name}
+                      </h3>
+
+                      {/* Description */}
+                      <p className={`text-sm text-impulse-gray-light/70 leading-relaxed mb-6 ${isFlagship ? 'max-w-2xl' : ''}`}>
+                        {project.description}
+                      </p>
+
+                      {/* Flagship Simulated Telemetry */}
+                      {isFlagship && (
+                        <div className="my-6 p-4 bg-space-950/80 border border-space-800 rounded-sm font-mono text-xs text-impulse-gray-light/80 space-y-1">
+                          <div className="flex items-center justify-between text-[10px] text-impulse-blue-bright/70 pb-1.5 mb-1.5 border-b border-space-800/80">
+                            <span>EXECUTION TELEMETRY // PERSISTENT HARNESS</span>
+                            <span className="text-emerald-400">LATENCY: 12ms</span>
+                          </div>
+                          <p className="text-emerald-400/90">&gt; multi_agent_scaffold.init() ... READY</p>
+                          <p className="text-impulse-gray-light/60">&gt; sandboxed microVM memory bounds: 256MB allocated</p>
+                          <p className="text-impulse-blue-bright/80">&gt; verifiable execution traces: 12/12 passing</p>
+                        </div>
+                      )}
+
+                      {/* Tech Tags */}
+                      {project.tags && (
+                        <div className="flex flex-wrap gap-1.5 mb-6">
+                          {project.tags.map((tag) => (
+                            <span
+                              key={tag}
+                              className="px-2 py-0.5 text-[10px] font-mono-label text-impulse-gray-light/70 bg-space-800/60 border border-space-700/60"
+                            >
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
                       )}
                     </div>
 
-                    <div className="flex items-center gap-3">
-                      {project.stars && (
-                        <span className="inline-flex items-center gap-1 text-xs font-mono-label text-impulse-gray-light/70">
-                          <Star aria-hidden="true" className="w-3 h-3 text-amber-400" />
-                          {project.stars}
-                        </span>
-                      )}
-                      {project.github && (
-                        <a
-                          href={project.github}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="p-1.5 text-impulse-gray-light/70 hover:text-impulse-white transition-colors"
-                          aria-label={`${project.name} GitHub`}
-                        >
-                          <Github aria-hidden="true" className="w-4 h-4" />
-                        </a>
-                      )}
-                      {project.demo && (
-                        <a
-                          href={project.demo}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="p-1.5 text-impulse-blue-bright hover:text-impulse-white transition-colors"
-                          aria-label={`${project.name} Live Demo`}
-                        >
-                          <ExternalLink aria-hidden="true" className="w-4 h-4" />
-                        </a>
-                      )}
+                    {/* Footer with Contributors & Action Links */}
+                    <div className="pt-6 border-t border-space-800 flex items-center justify-between">
+                      <div className="flex items-center gap-1.5 text-xs font-mono-label text-impulse-gray-light/70">
+                        <span>by {project.contributors[0]}</span>
+                        {project.contributors.length > 1 && (
+                          <span className="text-[10px] text-impulse-blue-bright">
+                            +{project.contributors.length - 1}
+                          </span>
+                        )}
+                      </div>
+
+                      <div className="flex items-center gap-3">
+                        {project.stars && (
+                          <span className="inline-flex items-center gap-1 text-xs font-mono-label text-impulse-gray-light/70">
+                            <Star aria-hidden="true" className="w-3 h-3 text-amber-400" />
+                            {project.stars}
+                          </span>
+                        )}
+                        {project.github && (
+                          <a
+                            href={project.github}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="p-1.5 text-impulse-gray-light/70 hover:text-impulse-white transition-colors"
+                            aria-label={`${project.name} GitHub`}
+                          >
+                            <Github aria-hidden="true" className="w-4 h-4" />
+                          </a>
+                        )}
+                        {project.demo && (
+                          <a
+                            href={project.demo}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="p-1.5 text-impulse-blue-bright hover:text-impulse-white transition-colors"
+                            aria-label={`${project.name} Live Demo`}
+                          >
+                            <ExternalLink aria-hidden="true" className="w-4 h-4" />
+                          </a>
+                        )}
+                      </div>
                     </div>
                   </div>
-                </div>
-              </TiltCard3D>
-            </div>
-          ))}
+                </TiltCard3D>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

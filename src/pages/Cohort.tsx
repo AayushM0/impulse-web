@@ -51,11 +51,11 @@ const cohortProjects: CohortProject[] = [
     architecture: 'Ingestion workers normalize support events, embeddings cluster related feedback, and a review API serves evidence-backed themes to the dashboard.',
     stack: ['TypeScript', 'PostgreSQL', 'pgvector', 'OpenAI'],
     team: [{ name: 'Aarav Mehta' }, { name: 'Mina Shah' }, { name: 'Dev Kapoor' }],
-    status: 'On Track — Functional V1',
+    status: 'On Track - Functional V1',
     cycle: 'Cycle 1',
     links: [
-      { label: 'GitHub Repository', url: 'https://github.com/search?q=SignalForge&type=repositories' },
-      { label: 'Live Demo', url: 'https://www.google.com/search?q=SignalForge+live+demo' },
+      { label: 'GitHub Repository', url: 'https://github.com/impulse-community/signal-forge' },
+      { label: 'Live Demo', url: 'https://signalforge.impulse.build' },
     ],
   },
   {
@@ -70,11 +70,11 @@ const cohortProjects: CohortProject[] = [
     architecture: 'A typed SDK emits correlated events to a queue; workers persist traces and a streaming API powers the searchable run timeline.',
     stack: ['Go', 'Redis', 'ClickHouse', 'React'],
     team: [{ name: 'Zoya Iyer' }, { name: 'Kabir Rao' }, { name: 'Ishaan Das' }],
-    status: 'On Track — Functional V1',
+    status: 'On Track - Functional V1',
     cycle: 'Cycle 1',
     links: [
-      { label: 'GitHub Repository', url: 'https://github.com/search?q=TraceKit+workflow+debugger&type=repositories' },
-      { label: 'Live Demo', url: 'https://www.google.com/search?q=TraceKit+workflow+debugger+live+demo' },
+      { label: 'GitHub Repository', url: 'https://github.com/impulse-community/tracekit' },
+      { label: 'Live Demo', url: 'https://tracekit.impulse.build' },
     ],
   },
   {
@@ -89,11 +89,11 @@ const cohortProjects: CohortProject[] = [
     architecture: 'Audio is transcribed asynchronously, speaker turns are indexed with timestamps, and every generated theme retains a source citation.',
     stack: ['Python', 'FastAPI', 'Whisper', 'pgvector'],
     team: [{ name: 'Anaya Sen' }, { name: 'Rohan Nair' }, { name: 'Tara Bose' }],
-    status: 'On Track — Research Preview',
+    status: 'On Track - Research Preview',
     cycle: 'Cycle 1',
     links: [
-      { label: 'GitHub Repository', url: 'https://github.com/search?q=FieldNotes+research+transcripts&type=repositories' },
-      { label: 'Live Demo', url: 'https://www.google.com/search?q=FieldNotes+research+transcripts+live+demo' },
+      { label: 'GitHub Repository', url: 'https://github.com/impulse-community/fieldnotes' },
+      { label: 'Live Demo', url: 'https://fieldnotes.impulse.build' },
     ],
   },
   {
@@ -108,11 +108,11 @@ const cohortProjects: CohortProject[] = [
     architecture: 'Connector adapters sync selected work items into a normalized event model; rules build a real-time handoff view with audit history.',
     stack: ['Next.js', 'PostgreSQL', 'GraphQL', 'Tailwind'],
     team: [{ name: 'Neel Verma' }, { name: 'Kiara Dutta' }, { name: 'Arjun Gill' }],
-    status: 'On Track — Pilot Ready',
+    status: 'On Track - Pilot Ready',
     cycle: 'Cycle 1',
     links: [
-      { label: 'GitHub Repository', url: 'https://github.com/search?q=RelayBoard+team+handoffs&type=repositories' },
-      { label: 'Live Demo', url: 'https://www.google.com/search?q=RelayBoard+team+handoffs+live+demo' },
+      { label: 'GitHub Repository', url: 'https://github.com/impulse-community/relayboard' },
+      { label: 'Live Demo', url: 'https://relayboard.impulse.build' },
     ],
   },
   {
@@ -127,11 +127,11 @@ const cohortProjects: CohortProject[] = [
     architecture: 'A browser extension runs axe-core checks, maps results to DOM selectors, and syncs signed reports to a small team API.',
     stack: ['TypeScript', 'React', 'axe-core', 'Supabase'],
     team: [{ name: 'Sana Qureshi' }, { name: 'Vihaan Roy' }, { name: 'Myra Thomas' }],
-    status: 'On Track — Functional V1',
+    status: 'On Track - Functional V1',
     cycle: 'Cycle 1',
     links: [
-      { label: 'GitHub Repository', url: 'https://github.com/search?q=AccessLens+accessibility+audit&type=repositories' },
-      { label: 'Live Demo', url: 'https://www.google.com/search?q=AccessLens+accessibility+audit+live+demo' },
+      { label: 'GitHub Repository', url: 'https://github.com/impulse-community/accesslens' },
+      { label: 'Live Demo', url: 'https://accesslens.impulse.build' },
     ],
   },
   {
@@ -146,11 +146,11 @@ const cohortProjects: CohortProject[] = [
     architecture: 'A provider-neutral adapter captures completions, a job runner executes versioned eval sets, and a metrics store powers comparisons.',
     stack: ['Python', 'FastAPI', 'PostgreSQL', 'Docker'],
     team: [{ name: 'Aditi Kulkarni' }, { name: 'Reyansh Jain' }, { name: 'Nisha Paul' }],
-    status: 'On Track — Functional V1',
+    status: 'On Track - Functional V1',
     cycle: 'Cycle 1',
     links: [
-      { label: 'GitHub Repository', url: 'https://github.com/search?q=ModelMeter+LLM+evaluation&type=repositories' },
-      { label: 'Live Demo', url: 'https://www.google.com/search?q=ModelMeter+LLM+evaluation+live+demo' },
+      { label: 'GitHub Repository', url: 'https://github.com/impulse-community/modelmeter' },
+      { label: 'Live Demo', url: 'https://modelmeter.impulse.build' },
     ],
   },
   {
@@ -165,11 +165,11 @@ const cohortProjects: CohortProject[] = [
     architecture: 'Meter readings enter through a time-series ingestion service, are aligned with building schedules, and feed anomaly summaries.',
     stack: ['Node.js', 'TimescaleDB', 'MQTT', 'React'],
     team: [{ name: 'Ira Malhotra' }, { name: 'Dhruv Bansal' }, { name: 'Meera Pillai' }],
-    status: 'On Track — Pilot Ready',
+    status: 'On Track - Pilot Ready',
     cycle: 'Cycle 1',
     links: [
-      { label: 'GitHub Repository', url: 'https://github.com/search?q=GreenGrid+campus+energy&type=repositories' },
-      { label: 'Live Demo', url: 'https://www.google.com/search?q=GreenGrid+campus+energy+live+demo' },
+      { label: 'GitHub Repository', url: 'https://github.com/impulse-community/greengrid' },
+      { label: 'Live Demo', url: 'https://greengrid.impulse.build' },
     ],
   },
   {
@@ -184,11 +184,11 @@ const cohortProjects: CohortProject[] = [
     architecture: 'A workflow engine stores milestone templates and evidence; role-based APIs deliver mentor reviews and team progress views.',
     stack: ['TypeScript', 'Next.js', 'Supabase', 'Vercel'],
     team: [{ name: 'Kavya Menon' }, { name: 'Advik Sethi' }, { name: 'Simran Kaur' }],
-    status: 'On Track — Functional V1',
+    status: 'On Track - Functional V1',
     cycle: 'Cycle 1',
     links: [
-      { label: 'GitHub Repository', url: 'https://github.com/search?q=Launchpad+student+product+sprints&type=repositories' },
-      { label: 'Live Demo', url: 'https://www.google.com/search?q=Launchpad+student+product+sprints+live+demo' },
+      { label: 'GitHub Repository', url: 'https://github.com/impulse-community/launchpad' },
+      { label: 'Live Demo', url: 'https://launchpad.impulse.build' },
     ],
   },
 ];
@@ -474,14 +474,14 @@ export default function Cohort() {
                         {!project.coverImage && <Code2 size={27} strokeWidth={1.5} aria-hidden="true" />}
                       </span>
                       <span className="cohort-project-teaser-copy">
-                        <span className="cohort-project-category cohort-motion-reveal cohort-text-reveal">Category — {project.category}</span>
+                        <span className="cohort-project-category cohort-motion-reveal cohort-text-reveal">Category: {project.category}</span>
                         <strong className="cohort-motion-reveal cohort-text-reveal">{project.name}</strong>
                         <span className="cohort-project-summary cohort-motion-reveal cohort-text-reveal">{project.summary}</span>
                         <span className="cohort-project-tech-stack" aria-label="Technology stack">
                           {project.stack.map((technology) => <span key={technology}>{technology}</span>)}
                         </span>
                         <span className="cohort-project-team" aria-label="Project team">
-                          Team — {project.team.map((member) => member.name).join(' · ')}
+                          Team: {project.team.map((member) => member.name).join(' · ')}
                         </span>
                       </span>
                     </span>

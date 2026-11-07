@@ -11,6 +11,7 @@ export default function Hero() {
   const containerRef = useRef<HTMLDivElement>(null);
   const wordmarkRef = useRef<HTMLHeadingElement>(null);
   const subtitleRef = useRef<HTMLDivElement>(null);
+  const actionGroupRef = useRef<HTMLDivElement>(null);
   const initialCueRef = useRef<HTMLDivElement>(null);
   const settledCueRef = useRef<HTMLDivElement>(null);
   const topSealRef = useRef<HTMLDivElement>(null);
@@ -40,6 +41,7 @@ export default function Hero() {
         scrollProgressRef.current = 1;
         if (wordmarkRef.current) gsap.set(wordmarkRef.current, { opacity: 1, scale: 1 });
         if (subtitleRef.current) gsap.set(subtitleRef.current, { opacity: 1, y: 0 });
+        if (actionGroupRef.current) gsap.set(actionGroupRef.current, { opacity: 1, y: 0 });
         return;
       }
 
@@ -81,7 +83,15 @@ export default function Hero() {
         0.45
       );
 
-      // 5. Settled prompt indicates user can continue scrolling down
+      // 5. Direct Action Group reveals
+      tl.fromTo(
+        actionGroupRef.current,
+        { opacity: 0, y: 14 },
+        { opacity: 1, y: 0, ease: 'power2.out', duration: 0.35 },
+        0.6
+      );
+
+      // 6. Settled prompt indicates user can continue scrolling down
       tl.fromTo(
         settledCueRef.current,
         { opacity: 0 },
@@ -108,11 +118,14 @@ export default function Hero() {
       {/* Subtle Background Architectural Grid */}
       <div className="absolute inset-0 grid-lines opacity-15 pointer-events-none z-0" aria-hidden="true" />
 
+      {/* Ambient Lighting Well */}
+      <div className="absolute inset-0 ambient-glow-blue pointer-events-none z-0" aria-hidden="true" />
+
       {/* Radial Depth Vignette */}
       <div
         className="absolute inset-0 pointer-events-none z-0"
         style={{
-          background: 'radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.05) 0%, rgba(5, 6, 16, 0.8) 70%, #050610 100%)',
+          background: 'radial-gradient(circle at 50% 50%, transparent 20%, rgba(5, 6, 16, 0.75) 70%, #050610 100%)',
         }}
         aria-hidden="true"
       />
@@ -158,6 +171,25 @@ export default function Hero() {
             IDEAS IN MOTION
           </p>
           <span className="w-8 sm:w-16 h-px bg-gradient-to-l from-transparent to-impulse-magenta/60" />
+        </div>
+
+        {/* Direct Action Group */}
+        <div
+          ref={actionGroupRef}
+          className="mt-6 sm:mt-8 flex flex-wrap items-center justify-center gap-3 opacity-0 pointer-events-auto"
+        >
+          <a
+            href="/cohort"
+            className="font-mono-label text-[11px] sm:text-xs px-5 py-2.5 bg-impulse-blue text-white font-semibold rounded-sm border border-impulse-blue-bright/60 hover:bg-impulse-blue/80 hover:shadow-[0_0_20px_rgba(59,130,246,0.5)] transition-all duration-300"
+          >
+            EXPLORE COHORT
+          </a>
+          <a
+            href="/shark-hack"
+            className="font-mono-label text-[11px] sm:text-xs px-5 py-2.5 bg-space-900/80 text-impulse-white rounded-sm border border-space-700 hover:border-impulse-blue/50 hover:bg-space-800 transition-all duration-300"
+          >
+            SHARK HACK
+          </a>
         </div>
       </div>
 

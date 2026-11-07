@@ -34,12 +34,14 @@ export default function TiltCard3D({
 
     card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
     card.style.transition = 'transform 0.1s ease-out';
+    card.style.setProperty('--mouse-x', `${x}px`);
+    card.style.setProperty('--mouse-y', `${y}px`);
 
     if (glare && glareRef.current) {
       const glareX = (x / rect.width) * 100;
       const glareY = (y / rect.height) * 100;
-      glareRef.current.style.opacity = '0.35';
-      glareRef.current.style.background = `radial-gradient(circle 320px at ${glareX}% ${glareY}%, rgba(96, 165, 250, 0.35), transparent 70%)`;
+      glareRef.current.style.opacity = '1';
+      glareRef.current.style.background = `radial-gradient(360px circle at ${glareX}% ${glareY}%, rgba(96, 165, 250, 0.22), transparent 65%)`;
     }
   }, [maxTilt, glare]);
 

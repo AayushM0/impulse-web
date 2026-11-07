@@ -69,7 +69,7 @@ export default function Join() {
     setSubmitted(true);
   };
 
-  const inputClass = "w-full bg-transparent border-b border-space-600 focus:border-impulse-blue transition-colors duration-300 px-0 py-3 text-impulse-white placeholder:text-impulse-gray-light/40 font-sans text-base outline-none";
+  const inputClass = "w-full bg-transparent border-b border-space-600 focus:border-impulse-blue focus:shadow-[0_1px_8px_rgba(59,130,246,0.3)] transition-all duration-300 px-0 py-3 text-impulse-white placeholder:text-impulse-gray-light/40 font-sans text-base outline-none";
   const labelClass = "font-mono-label text-xs tracking-wider text-impulse-blue-bright/70 mb-2 block";
 
   return (
@@ -213,8 +213,11 @@ export default function Join() {
                   value={formData.build}
                   onChange={handleChange}
                   className={`${inputClass} resize-none`}
-                  placeholder="AI tools, products, experiments, research…"
+                  placeholder="AI tools, products, experiments, research..."
                 />
+                <span className="font-mono-label text-[10px] text-impulse-gray-light/50 mt-1.5 block tracking-wider">
+                  [ MARKDOWN SUPPORTED // EXPERIMENTS, REPOS, OR RESEARCH IDEAS ]
+                </span>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
@@ -261,6 +264,9 @@ export default function Join() {
                   className={`${inputClass} resize-none`}
                   placeholder="What draws you to this community?"
                 />
+                <span className="font-mono-label text-[10px] text-impulse-gray-light/50 mt-1.5 block tracking-wider">
+                  [ DETAILED RESPONSES PRIORITIZED BY THE SELECTION COMMITTEE ]
+                </span>
               </div>
 
               <div className="pt-4">
@@ -270,7 +276,7 @@ export default function Join() {
                   aria-busy={isSubmitting}
                   className="group w-full sm:w-auto inline-flex items-center justify-center gap-3 font-mono-label text-impulse-white border border-impulse-blue/40 bg-impulse-blue/10 hover:bg-impulse-blue/20 hover:border-impulse-blue/60 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-300 px-12 py-4 min-h-[44px] energy-sweep"
                 >
-                  {isSubmitting ? 'TRANSMITTING SIGNAL…' : 'ENTER IMPULSE'}
+                  {isSubmitting ? 'TRANSMITTING SIGNAL...' : 'ENTER IMPULSE'}
                   <ArrowRight aria-hidden="true" className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                 </button>
               </div>

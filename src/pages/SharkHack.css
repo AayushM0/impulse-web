@@ -221,7 +221,7 @@
 .shark-hack-page .shark-room-choice { position: relative; display: flex; align-items: center; gap: 15px; padding: 20px; border: 1px solid var(--sh-border); border-radius: 16px; background: #0c111c; color: #b8c6db; font-size: 18px; font-weight: 500; text-align: left; transition: border-color 200ms ease, background 200ms ease; }
 .shark-hack-page .shark-room-choice:hover { border-color: #60a5fa; background: #121e31; }
 .shark-hack-page .shark-room-choice[aria-pressed='true'] { color: white; border-color: transparent; background: linear-gradient(110deg, #14294e, #2a1430) padding-box, linear-gradient(110deg, #60a5fa, #f472b6) border-box; box-shadow: 0 8px 26px rgb(37 99 235 / 12%); }
-.shark-hack-page .shark-room-choice-label { font-family: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif; }
+.shark-hack-page .shark-room-choice-label { font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif; }
 .shark-hack-page .shark-room-choice-label strong { display: block; font-size: 22px; font-weight: 600; line-height: 1.2; letter-spacing: -0.025em; }
 .shark-hack-page .shark-room-choice-label small { display: block; margin-bottom: 6px; color: #93c5fd; font-size: 10px; font-weight: 600; line-height: 1.3; text-transform: uppercase; letter-spacing: 0.1em; }
 .shark-hack-page .shark-room-choice[aria-pressed='true'] .shark-room-choice-label small { color: #f9a8d4; }

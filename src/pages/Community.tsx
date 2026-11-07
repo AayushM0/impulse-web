@@ -280,7 +280,10 @@ function MemberCard({
               <img
                 src={member.photoPath}
                 alt={`${displayName} profile`}
+                width={80}
+                height={80}
                 loading="lazy"
+                decoding="async"
                 style={{
                   objectPosition: member.photoPosition || '50% 50%',
                   transform: `scale(${member.photoZoom || 1})`,

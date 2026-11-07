@@ -391,7 +391,7 @@
   height: 20px;
   padding: 0 6px;
   border-radius: 999px;
-  font-family: ui-monospace, monospace;
+  font-family: 'JetBrains Mono', monospace;
   font-size: 10px;
   font-weight: 600;
   background: rgba(147, 197, 253, 0.12);
@@ -864,7 +864,7 @@
 }
 
 .community-member-back-badge {
-  font-family: ui-monospace, monospace;
+  font-family: 'JetBrains Mono', monospace;
   font-size: 7.5px;
   padding: 2px 6px;
   border-radius: 999px;
@@ -904,7 +904,7 @@
 }
 
 .community-field-label {
-  font-family: ui-monospace, monospace;
+  font-family: 'JetBrains Mono', monospace;
   font-size: 7px;
   color: #93c5fd;
   letter-spacing: 0.08em;
@@ -930,7 +930,7 @@
 
 .community-member-back-hint {
   display: block;
-  font-family: ui-monospace, monospace;
+  font-family: 'JetBrains Mono', monospace;
   font-size: 7px;
   letter-spacing: 0.08em;
   color: rgba(147, 197, 253, 0.7);

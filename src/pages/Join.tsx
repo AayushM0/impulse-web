@@ -69,8 +69,8 @@ export default function Join() {
     setSubmitted(true);
   };
 
-  const inputClass = "w-full bg-transparent border-b border-space-600 focus:border-impulse-blue transition-colors duration-300 px-0 py-3 text-impulse-white placeholder:text-impulse-gray-light/30 font-sans text-base outline-none";
-  const labelClass = "font-mono-label text-impulse-blue-bright/50 mb-2 block";
+  const inputClass = "w-full bg-transparent border-b border-space-600 focus:border-impulse-blue transition-colors duration-300 px-0 py-3 text-impulse-white placeholder:text-impulse-gray-light/40 font-sans text-base outline-none";
+  const labelClass = "font-mono-label text-xs tracking-wider text-impulse-blue-bright/70 mb-2 block";
 
   return (
     <div className="bg-space-950 min-h-screen">
@@ -137,6 +137,8 @@ export default function Join() {
                     name="name"
                     type="text"
                     required
+                    autoComplete="name"
+                    autoCapitalize="words"
                     value={formData.name}
                     onChange={handleChange}
                     className={inputClass}
@@ -150,6 +152,9 @@ export default function Join() {
                     name="email"
                     type="email"
                     required
+                    autoComplete="email"
+                    autoCapitalize="none"
+                    spellCheck="false"
                     value={formData.email}
                     onChange={handleChange}
                     className={inputClass}
@@ -164,6 +169,7 @@ export default function Join() {
                   id="year"
                   name="year"
                   type="text"
+                  autoComplete="off"
                   value={formData.year}
                   onChange={handleChange}
                   className={inputClass}
@@ -171,9 +177,9 @@ export default function Join() {
                 />
               </div>
 
-              {/* Interests */}
-              <div>
-                <p className={labelClass}>What are you interested in?</p>
+              {/* Interests Fieldset */}
+              <fieldset className="space-y-3">
+                <legend className={labelClass}>AREAS OF FOCUS (SELECT ALL THAT APPLY)</legend>
                 <div className="flex flex-wrap gap-3">
                   {interests.map((interest) => {
                     const isSelected = selectedInterests.includes(interest);
@@ -181,11 +187,14 @@ export default function Join() {
                       <button
                         key={interest}
                         type="button"
+                        role="checkbox"
+                        aria-checked={isSelected}
+                        aria-pressed={isSelected}
                         onClick={() => toggleInterest(interest)}
-                        className={`font-mono-label px-4 py-2.5 border transition-all duration-300 ${
+                        className={`font-mono-label text-xs px-4 py-2.5 min-h-[44px] inline-flex items-center justify-center border transition-colors duration-200 ${
                           isSelected
-                            ? 'border-impulse-blue/60 bg-impulse-blue/15 text-impulse-white'
-                            : 'border-space-600 text-impulse-gray-light/60 hover:border-impulse-blue/40 hover:text-impulse-white'
+                            ? 'border-impulse-blue/70 bg-impulse-blue/15 text-impulse-white shadow-[0_0_12px_rgba(59,130,246,0.15)]'
+                            : 'border-space-600 bg-space-900/40 text-impulse-gray-light/70 hover:border-impulse-blue/40 hover:text-impulse-white'
                         }`}
                       >
                         {interest}
@@ -193,7 +202,7 @@ export default function Join() {
                     );
                   })}
                 </div>
-              </div>
+              </fieldset>
 
               <div>
                 <label htmlFor="build" className={labelClass}>What would you like to build?</label>
@@ -204,7 +213,7 @@ export default function Join() {
                   value={formData.build}
                   onChange={handleChange}
                   className={`${inputClass} resize-none`}
-                  placeholder="AI tools, products, experiments, research..."
+                  placeholder="AI tools, products, experiments, research…"
                 />
               </div>
 
@@ -215,6 +224,9 @@ export default function Join() {
                     id="github"
                     name="github"
                     type="text"
+                    autoComplete="url"
+                    autoCapitalize="none"
+                    spellCheck="false"
                     value={formData.github}
                     onChange={handleChange}
                     className={inputClass}
@@ -227,6 +239,9 @@ export default function Join() {
                     id="linkedin"
                     name="linkedin"
                     type="text"
+                    autoComplete="url"
+                    autoCapitalize="none"
+                    spellCheck="false"
                     value={formData.linkedin}
                     onChange={handleChange}
                     className={inputClass}
@@ -252,10 +267,11 @@ export default function Join() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="group w-full sm:w-auto inline-flex items-center justify-center gap-3 font-mono-label text-impulse-white border border-impulse-blue/40 bg-impulse-blue/10 hover:bg-impulse-blue/20 hover:border-impulse-blue/60 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 px-12 py-4 energy-sweep"
+                  aria-busy={isSubmitting}
+                  className="group w-full sm:w-auto inline-flex items-center justify-center gap-3 font-mono-label text-impulse-white border border-impulse-blue/40 bg-impulse-blue/10 hover:bg-impulse-blue/20 hover:border-impulse-blue/60 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-300 px-12 py-4 min-h-[44px] energy-sweep"
                 >
-                  {isSubmitting ? 'TRANSMITTING SIGNAL...' : 'ENTER IMPULSE'}
-                  <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                  {isSubmitting ? 'TRANSMITTING SIGNAL…' : 'ENTER IMPULSE'}
+                  <ArrowRight aria-hidden="true" className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                 </button>
               </div>
             </form>

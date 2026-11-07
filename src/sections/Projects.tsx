@@ -93,7 +93,7 @@ export default function Projects() {
               key={cat}
               onClick={() => setActiveCategory(cat)}
               aria-pressed={activeCategory === cat}
-              className={`font-mono-label text-xs px-4 py-2.5 min-h-[44px] inline-flex items-center justify-center border transition-all duration-200 ${
+              className={`font-mono-label text-xs px-4 py-2.5 min-h-[44px] inline-flex items-center justify-center border transition-colors duration-200 ${
                 activeCategory === cat
                   ? 'border-impulse-blue/70 bg-impulse-blue/15 text-impulse-white'
                   : 'border-space-800 bg-space-900/60 text-impulse-gray-light/70 hover:border-space-700 hover:text-impulse-white'

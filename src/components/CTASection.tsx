@@ -39,10 +39,10 @@ export default function CTASection({ headline, description, buttonText, buttonTo
 
         <Link
           to={buttonTo}
-          className="group inline-flex items-center gap-3 font-mono-label text-impulse-white border border-impulse-blue/40 bg-impulse-blue/10 hover:bg-impulse-blue/20 hover:border-impulse-blue/60 transition-all duration-300 px-9 py-4 energy-sweep"
+          className="group inline-flex items-center gap-3 font-mono-label text-impulse-white border border-impulse-blue/40 bg-impulse-blue/10 hover:bg-impulse-blue/20 hover:border-impulse-blue/60 transition-colors duration-300 px-9 py-4 energy-sweep"
         >
           {buttonText}
-          <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+          <ArrowRight aria-hidden="true" className="w-4 h-4 transition-transform group-hover:translate-x-1" />
         </Link>
 
         {microcopy && (

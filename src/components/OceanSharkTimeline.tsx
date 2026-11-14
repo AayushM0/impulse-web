@@ -212,32 +212,32 @@ export default function OceanSharkTimeline({ steps }: { steps: readonly Timeline
       <svg className="shark-ocean-water" aria-hidden="true" preserveAspectRatio="none">
         <defs>
           <radialGradient id={`${id}-surface`}>
-            <stop stopColor="#314d73" stopOpacity=".95" /><stop offset=".5" stopColor="#17395b" stopOpacity=".9" /><stop offset=".85" stopColor="#10203a" stopOpacity=".7" /><stop offset="1" stopColor="#10203a" stopOpacity="0" />
+            <stop stopColor="#1e2a44" stopOpacity=".95" /><stop offset=".5" stopColor="#141d30" stopOpacity=".9" /><stop offset=".85" stopColor="#0e1626" stopOpacity=".7" /><stop offset="1" stopColor="#0e1626" stopOpacity="0" />
           </radialGradient>
           <path id={`${id}-pool-shape`} d="M-79 -1 C-69 -14 -45 -12 -29 -18 C-5 -25 16 -16 32 -18 C54 -21 70 -10 78 -4 C91 6 75 16 58 19 C39 31 16 25 -2 29 C-25 32 -35 23 -52 23 C-71 23 -88 12 -79 -1Z" />
           <clipPath id={`${id}-pool-clip`}><use href={`#${id}-pool-shape`} /></clipPath>
           <clipPath id={`${id}-breach-clip`}><rect x="-250" y="-300" width="500" height="312" /></clipPath>
           <linearGradient id={`${id}-water`} x1="0" y1="0" x2="0" y2="1">
-            <stop stopColor="#93c5fd" /><stop offset="0.55" stopColor="#60a5fa" /><stop offset="1" stopColor="#f472b6" />
+            <stop stopColor="#60a5fa" /><stop offset="0.55" stopColor="#2563eb" /><stop offset="1" stopColor="#ec4899" />
           </linearGradient>
           <linearGradient id={`${id}-shark`} x1="0" y1="0" x2="1" y2="0">
-            <stop stopColor="#60a5fa" /><stop offset="0.45" stopColor="#dbeafe" /><stop offset="0.8" stopColor="#93c5fd" /><stop offset="1" stopColor="#f472b6" />
+            <stop stopColor="#60a5fa" /><stop offset="0.45" stopColor="#9aa8c2" /><stop offset="0.8" stopColor="#60a5fa" /><stop offset="1" stopColor="#ec4899" />
           </linearGradient>
           <linearGradient id={`${id}-depth`} x1="0" y1="0" x2="1" y2="0">
-            <stop stopColor="#10203a" /><stop offset="0.5" stopColor="#17395b" /><stop offset="1" stopColor="#10203a" />
+            <stop stopColor="#0e1626" /><stop offset="0.5" stopColor="#1e2a44" /><stop offset="1" stopColor="#0e1626" />
           </linearGradient>
           <linearGradient id={`${id}-air-skin`} x1="0" y1="0" x2="0" y2="1">
-            <stop stopColor="#314d73" /><stop offset=".4" stopColor="#60a5fa" /><stop offset=".72" stopColor="#93c5fd" /><stop offset="1" stopColor="#dbeafe" />
+            <stop stopColor="#1e2a44" /><stop offset=".4" stopColor="#60a5fa" /><stop offset=".72" stopColor="#60a5fa" /><stop offset="1" stopColor="#9aa8c2" />
           </linearGradient>
-          <g id={`${id}-air-shark`} stroke="#93c5fd" strokeWidth=".8" strokeLinejoin="round">
+          <g id={`${id}-air-shark`} stroke="#60a5fa" strokeWidth=".8" strokeLinejoin="round">
             <path className="shark-ocean-side-tail" d="M-30 -2 Q-42 -9 -52 -24 L-47 -5 L-54 17 Q-41 13 -30 5Z" fill="#60a5fa" />
             <path d="M-8 -10 Q-4 -27 5 -31 L10 -9 M-4 8 L10 29 L17 10" fill="#2563eb" />
             <path d="M-35 0 C-17 -18 16 -20 42 -6 L54 1 Q37 7 30 12 C4 24 -19 12 -35 0Z" fill={`url(#${id}-air-skin)`} />
-            <path d="M-29 4 Q11 17 48 2 Q32 14 12 15 Q-10 15 -29 4Z" fill="#dbeafe" stroke="none" />
+            <path d="M-29 4 Q11 17 48 2 Q32 14 12 15 Q-10 15 -29 4Z" fill="#9aa8c2" stroke="none" />
             <path className="shark-ocean-side-fin" d="M4 7 L-4 28 L20 10Z" fill="#60a5fa" />
-            <path d="M16 -5 L13 5 M21 -4 L18 6 M26 -3 L23 6" fill="none" stroke="#314d73" strokeWidth="1.2" />
-            <circle cx="37" cy="-4" r="2" fill="#06070b" stroke="none" />
-            <path d="M42 5 Q46 5 50 2" fill="none" stroke="#314d73" />
+            <path d="M16 -5 L13 5 M21 -4 L18 6 M26 -3 L23 6" fill="none" stroke="#1e2a44" strokeWidth="1.2" />
+            <circle cx="37" cy="-4" r="2" fill="#070b14" stroke="none" />
+            <path d="M42 5 Q46 5 50 2" fill="none" stroke="#1e2a44" />
           </g>
         </defs>
         <path className="shark-ocean-flow shark-ocean-bank" />

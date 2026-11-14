@@ -222,7 +222,7 @@ export default function Cohort() {
   const { monthOffset, activePhase } = getCohortTimeline(timelineDate);
   const currentPhase = activePhase ?? (monthOffset >= roadmap.length ? roadmap.length - 1 : 0);
   const currentPhaseX = [100, 300, 500, 700, 900][currentPhase];
-  const currentPhaseColor = ['#60a5fa', '#818cf8', '#f472b6', '#60a5fa', '#f472b6'][currentPhase];
+  const currentPhaseColor = ['#60a5fa', '#f472b6', '#60a5fa', '#f472b6', '#60a5fa'][currentPhase];
   const categories = ['All Projects', ...new Set(cohortProjects.map((project) => project.category))];
   const visibleProjects = activeCategory === 'All Projects'
     ? cohortProjects

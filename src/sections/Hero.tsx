@@ -125,7 +125,7 @@ export default function Hero() {
       <div
         className="absolute inset-0 pointer-events-none z-0"
         style={{
-          background: 'radial-gradient(circle at 50% 50%, transparent 20%, rgba(5, 6, 16, 0.75) 70%, #050610 100%)',
+          background: 'radial-gradient(circle at 50% 50%, transparent 20%, rgba(7, 11, 20, 0.75) 70%, #070B14 100%)',
         }}
         aria-hidden="true"
       />

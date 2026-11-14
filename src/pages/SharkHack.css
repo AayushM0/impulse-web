@@ -68,7 +68,7 @@
 .shark-hack-page .shark-primary-button,
 .shark-hack-page .shark-secondary-button { display: inline-flex; align-items: center; justify-content: space-between; gap: 24px; min-height: 76px; padding: 14px 16px 14px 22px; border: 1px solid transparent; border-radius: 13px; font-size: 17px; font-weight: 600; transition: transform 200ms ease, box-shadow 200ms ease; }
 .shark-hack-page .shark-primary-button { background: linear-gradient(90deg, #2563EB, #EC4899); box-shadow: 0 10px 30px rgba(37, 99, 235, 0.25); color: white; }
-.shark-hack-page .shark-secondary-button { background: linear-gradient(120deg, #10284e, #22142a) padding-box, linear-gradient(90deg, #2563EB, #EC4899) border-box; color: white; }
+.shark-hack-page .shark-secondary-button { background: linear-gradient(120deg, #0E1626, #141D30) padding-box, linear-gradient(90deg, #2563EB, #EC4899) border-box; color: white; }
 .shark-hack-page .shark-secondary-button small { display: block; margin-bottom: 4px; color: #9AA8C2; font-size: 10px; font-weight: 400; letter-spacing: 0.035em; }
 .shark-hack-page .shark-button-arrow { width: 40px; height: 40px; display: grid; place-items: center; border-radius: 10px; background: rgba(255, 255, 255, 0.13); border: 1px solid rgba(255, 255, 255, 0.17); flex-shrink: 0; }
 .shark-hack-page .shark-secondary-button .shark-button-arrow { background: linear-gradient(130deg, #2563eb, #ec4899); }

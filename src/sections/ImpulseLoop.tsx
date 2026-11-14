@@ -45,8 +45,8 @@ export default function ImpulseLoop() {
               <svg viewBox="0 0 560 560" className="w-full h-full">
                 <defs>
                   <linearGradient id="orbitGlow" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stopColor="#60A5FA" />
-                    <stop offset="50%" stopColor="#818CF8" />
+                    <stop offset="0%" stopColor="#2563EB" />
+                    <stop offset="50%" stopColor="#60A5FA" />
                     <stop offset="100%" stopColor="#EC4899" />
                   </linearGradient>
                 </defs>
@@ -103,8 +103,8 @@ export default function ImpulseLoop() {
 
                 {/* Center Core Impulse */}
                 <g aria-hidden="true">
-                  <circle cx={centerX} cy={centerY} r="44" fill="rgba(59,130,246,0.05)" />
-                  <circle cx={centerX} cy={centerY} r="7" fill="#F8FAFC" opacity="0.9" />
+                  <circle cx={centerX} cy={centerY} r="44" fill="rgba(37,99,235,0.06)" />
+                  <circle cx={centerX} cy={centerY} r="7" fill="#F2F6FF" opacity="0.95" />
                   <circle cx={centerX} cy={centerY} r="3" fill="#60A5FA" />
                 </g>
 
@@ -145,12 +145,12 @@ export default function ImpulseLoop() {
                         fill={isActive ? '#60A5FA' : 'rgba(96,165,250,0.6)'}
                         className="transition-colors duration-300"
                       />
-                      <circle cx={x} cy={y} r="2.5" fill="#F8FAFC" opacity="0.9" aria-hidden="true" />
+                      <circle cx={x} cy={y} r="2.5" fill="#F2F6FF" opacity="0.95" aria-hidden="true" />
                       <text
                         x={x}
                         y={y + (Math.sin(angle) > 0 ? 28 : -18)}
                         textAnchor="middle"
-                        fill={isActive ? '#F8FAFC' : 'rgba(203,213,225,0.7)'}
+                        fill={isActive ? '#F2F6FF' : '#9AA8C2'}
                         className="font-mono transition-colors duration-300 font-semibold select-none"
                         style={{ fontSize: '11px', letterSpacing: '0.12em' }}
                       >

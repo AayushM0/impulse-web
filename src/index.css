@@ -3,6 +3,18 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --bg: #070B14;
+    --surface: #0E1626;
+    --border: #1E2A44;
+    --text: #F2F6FF;
+    --muted: #9AA8C2;
+    --primary: #2563EB;
+    --primary-bright: #60A5FA;
+    --accent: #F472B6;
+    --gradient: linear-gradient(90deg, #2563EB, #EC4899);
+  }
+
   * {
     box-sizing: border-box;
   }
@@ -35,8 +47,8 @@
   }
 
   body {
-    background-color: #050610;
-    color: #F8FAFC;
+    background-color: #070B14;
+    color: #F2F6FF;
     font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif;
     font-weight: 400;
     line-height: 1.5;
@@ -44,8 +56,8 @@
   }
 
   ::selection {
-    background: rgba(59, 130, 246, 0.3);
-    color: #F8FAFC;
+    background: rgba(37, 99, 235, 0.3);
+    color: #F2F6FF;
   }
 
   ::-webkit-scrollbar {
@@ -54,16 +66,16 @@
   }
 
   ::-webkit-scrollbar-track {
-    background: #050610;
+    background: #070B14;
   }
 
   ::-webkit-scrollbar-thumb {
-    background: rgba(59, 130, 246, 0.2);
+    background: rgba(37, 99, 235, 0.25);
     border-radius: 4px;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: rgba(59, 130, 246, 0.4);
+    background: rgba(37, 99, 235, 0.45);
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -83,21 +95,21 @@
 
   .impulse-bg-gradient {
     background:
-      radial-gradient(ellipse 80% 50% at 50% 0%, rgba(59, 130, 246, 0.08), transparent),
-      radial-gradient(ellipse 60% 40% at 80% 80%, rgba(99, 102, 241, 0.06), transparent),
+      radial-gradient(ellipse 80% 50% at 50% 0%, rgba(37, 99, 235, 0.08), transparent),
+      radial-gradient(ellipse 60% 40% at 80% 80%, rgba(96, 165, 250, 0.06), transparent),
       radial-gradient(ellipse 40% 30% at 20% 60%, rgba(236, 72, 153, 0.04), transparent),
-      #050610;
+      #070B14;
   }
 
   .text-gradient-impulse {
-    background: linear-gradient(135deg, #60A5FA 0%, #6366F1 40%, #EC4899 100%);
+    background: linear-gradient(135deg, #2563EB 0%, #60A5FA 40%, #EC4899 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
   }
 
   .text-gradient-blue {
-    background: linear-gradient(135deg, #60A5FA 0%, #8B5CF6 100%);
+    background: linear-gradient(135deg, #60A5FA 0%, #2563EB 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -128,7 +140,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(59, 130, 246, 0.2), transparent);
+    background: linear-gradient(90deg, transparent, rgba(37, 99, 235, 0.2), transparent);
     transform: translateX(-100%);
     transition: transform 0.6s ease-out;
   }
@@ -139,17 +151,17 @@
 
   .grid-lines {
     background-image:
-      linear-gradient(rgba(59, 130, 246, 0.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(59, 130, 246, 0.04) 1px, transparent 1px);
+      linear-gradient(rgba(37, 99, 235, 0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(37, 99, 235, 0.04) 1px, transparent 1px);
     background-size: 80px 80px;
   }
 
   .ambient-glow-blue {
-    background: radial-gradient(ellipse 65% 50% at 50% 35%, rgba(59, 130, 246, 0.15) 0%, rgba(99, 102, 241, 0.07) 40%, transparent 75%);
+    background: radial-gradient(ellipse 65% 50% at 50% 35%, rgba(37, 99, 235, 0.15) 0%, rgba(96, 165, 250, 0.07) 40%, transparent 75%);
   }
 
   .ambient-glow-loop {
-    background: radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.14) 0%, rgba(236, 72, 153, 0.06) 45%, transparent 75%);
+    background: radial-gradient(circle at 50% 50%, rgba(37, 99, 235, 0.14) 0%, rgba(236, 72, 153, 0.06) 45%, transparent 75%);
   }
 
   .tabular-nums {

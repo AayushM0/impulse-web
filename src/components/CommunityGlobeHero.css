@@ -335,7 +335,7 @@
 .globe-hero-tech-icon.is-left { left: clamp(22px, 5vw, 76px); }
 .globe-hero-tech-icon.is-right { right: clamp(22px, 5vw, 76px); }
 .globe-hero-tech-icon.is-pink { color: #f4b8ff; }
-.globe-hero-tech-icon.is-cyan { color: #83f3ff; }
+.globe-hero-tech-icon.is-blue { color: #60a5fa; }
 
 .globe-hero-edge-art > .globe-hero-tech-icon:nth-child(6),
 .globe-hero-edge-art > .globe-hero-tech-icon:nth-child(8),
@@ -374,7 +374,7 @@
 
 .globe-hero-star::before { width: 13px; height: 1px; }
 .globe-hero-star::after { width: 1px; height: 13px; }
-.globe-hero-star.is-cyan { color: #65efff; }
+.globe-hero-star.is-blue { color: #93c5fd; }
 .globe-hero-star.is-pink { color: #ff9cf2; }
 
 @keyframes tech-icon-orbit { 0%, 100% { transform: translate(0, 0) rotate(-2deg); } 25% { transform: translate(5px, -7px) rotate(2deg); } 50% { transform: translate(0, -12px) rotate(5deg); } 75% { transform: translate(-5px, -6px) rotate(1deg); } }

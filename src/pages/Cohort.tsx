@@ -222,7 +222,7 @@ export default function Cohort() {
   const { monthOffset, activePhase } = getCohortTimeline(timelineDate);
   const currentPhase = activePhase ?? (monthOffset >= roadmap.length ? roadmap.length - 1 : 0);
   const currentPhaseX = [100, 300, 500, 700, 900][currentPhase];
-  const currentPhaseColor = ['#38bdf8', '#c084fc', '#fb7185', '#38bdf8', '#f472b6'][currentPhase];
+  const currentPhaseColor = ['#60a5fa', '#818cf8', '#f472b6', '#60a5fa', '#f472b6'][currentPhase];
   const categories = ['All Projects', ...new Set(cohortProjects.map((project) => project.category))];
   const visibleProjects = activeCategory === 'All Projects'
     ? cohortProjects
@@ -300,7 +300,7 @@ export default function Cohort() {
   }, [timelineDate]);
 
   return (
-    <div className="bg-[#030407] min-h-screen">
+    <div className="bg-[#070B14] min-h-screen">
       <Navbar />
       <main className="cohort-page">
         <section className="cohort-hero">
@@ -345,9 +345,9 @@ export default function Cohort() {
             <svg className="cohort-timeline-connector" viewBox="0 0 1020 260" preserveAspectRatio="none" aria-hidden="true">
               <defs>
                 <linearGradient id="cohort-timeline-gradient" x1="0" x2="1">
-                  <stop offset="0%" stopColor="#00d2ff" />
-                  <stop offset="53%" stopColor="#8b5cf6" />
-                  <stop offset="100%" stopColor="#ff2e93" />
+                  <stop offset="0%" stopColor="#2563EB" />
+                  <stop offset="50%" stopColor="#60A5FA" />
+                  <stop offset="100%" stopColor="#EC4899" />
                 </linearGradient>
               </defs>
               <path d="M 100 135 C 165 135, 225 245, 300 135 S 430 25, 500 135 S 630 245, 700 135 S 835 25, 900 135" />
@@ -386,9 +386,9 @@ export default function Cohort() {
             <svg className="cohort-timeline-arrow-front" viewBox="0 0 1020 260" preserveAspectRatio="none" aria-hidden="true">
               <defs>
                 <linearGradient id="cohort-timeline-arrow-front-gradient" x1="0" x2="1">
-                  <stop offset="0%" stopColor="#00d2ff" />
-                  <stop offset="53%" stopColor="#8b5cf6" />
-                  <stop offset="100%" stopColor="#ff2e93" />
+                  <stop offset="0%" stopColor="#2563EB" />
+                  <stop offset="50%" stopColor="#60A5FA" />
+                  <stop offset="100%" stopColor="#EC4899" />
                 </linearGradient>
                 <marker id="cohort-timeline-arrow-front-head" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto">
                   <path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="url(#cohort-timeline-arrow-front-gradient)" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
@@ -406,9 +406,9 @@ export default function Cohort() {
             <svg className="cohort-timeline-arrow-overlay" viewBox="0 0 1020 260" preserveAspectRatio="none" aria-hidden="true">
               <defs>
                 <linearGradient id="cohort-timeline-arrow-gradient" x1="0" x2="1">
-                  <stop offset="0%" stopColor="#00d2ff" />
-                  <stop offset="53%" stopColor="#8b5cf6" />
-                  <stop offset="100%" stopColor="#ff2e93" />
+                  <stop offset="0%" stopColor="#2563EB" />
+                  <stop offset="50%" stopColor="#60A5FA" />
+                  <stop offset="100%" stopColor="#EC4899" />
                 </linearGradient>
                 <marker id="cohort-timeline-arrowhead" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="8" markerHeight="8" orient="auto">
                   <path d="M 0 0 L 8 4 L 0 8" fill="none" stroke="url(#cohort-timeline-arrow-gradient)" strokeWidth="1.5" strokeDasharray="2 1" strokeLinecap="round" strokeLinejoin="round" />

@@ -99,7 +99,7 @@ export default function Navbar() {
             <Link
               to="/join"
               onClick={() => handleNavClick('/join')}
-              className="group inline-flex items-center gap-2 font-mono-label text-impulse-white border border-impulse-blue/30 bg-impulse-blue/5 hover:bg-impulse-blue/15 hover:border-impulse-blue/50 transition-all duration-300 px-5 py-2.5 min-h-[44px] energy-sweep"
+              className="group inline-flex items-center gap-2 font-mono-label text-white bg-gradient-to-r from-[#2563EB] to-[#EC4899] hover:from-blue-500 hover:to-pink-500 shadow-[0_4px_16px_rgba(37,99,235,0.3)] transition-all duration-300 px-5 py-2.5 min-h-[44px] energy-sweep"
             >
               Join Impulse
               <ArrowRight aria-hidden="true" className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
@@ -142,7 +142,7 @@ export default function Navbar() {
           <Link
             to="/join"
             onClick={() => handleMobileNavClick('/join')}
-            className={`mt-4 inline-flex items-center gap-2 font-mono-label text-impulse-white border border-impulse-blue/40 bg-impulse-blue/10 px-7 py-3.5 transition-all duration-500 ${
+            className={`mt-4 inline-flex items-center gap-2 font-mono-label text-white bg-gradient-to-r from-[#2563EB] to-[#EC4899] px-7 py-3.5 transition-all duration-500 ${
               mobileOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
             }`}
             style={{ transitionDelay: '300ms' }}

@@ -274,7 +274,7 @@ export default function Join() {
                   type="submit"
                   disabled={isSubmitting}
                   aria-busy={isSubmitting}
-                  className="group w-full sm:w-auto inline-flex items-center justify-center gap-3 font-mono-label text-impulse-white border border-impulse-blue/40 bg-impulse-blue/10 hover:bg-impulse-blue/20 hover:border-impulse-blue/60 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-300 px-12 py-4 min-h-[44px] energy-sweep"
+                  className="group w-full sm:w-auto inline-flex items-center justify-center gap-3 font-mono-label text-white bg-gradient-to-r from-[#2563EB] to-[#EC4899] hover:from-blue-500 hover:to-pink-500 shadow-[0_4px_20px_rgba(37,99,235,0.35)] hover:shadow-[0_4px_24px_rgba(236,72,153,0.45)] border-0 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 px-12 py-4 min-h-[44px] energy-sweep"
                 >
                   {isSubmitting ? 'TRANSMITTING SIGNAL...' : 'ENTER IMPULSE'}
                   <ArrowRight aria-hidden="true" className="w-4 h-4 transition-transform group-hover:translate-x-1" />

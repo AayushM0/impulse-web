@@ -20,20 +20,20 @@
 .cohort-page > footer > .relative {
   box-sizing: border-box;
   width: 100%;
-  max-width: 1480px;
-  padding-left: clamp(40px, 3.125vw, 46px);
-  padding-right: clamp(40px, 3.125vw, 46px);
+  max-width: 1440px;
+  padding-left: 40px;
+  padding-right: 40px;
 }
 
 .cohort-timeline-section {
   position: relative;
   box-sizing: border-box;
   width: 100%;
-  max-width: 1480px;
+  max-width: 1440px;
   min-height: calc(100vh - 64px);
   min-height: calc(100svh - 64px);
   margin: 0 auto;
-  padding: 34px clamp(40px, 3.125vw, 46px);
+  padding: 34px 40px;
   display: grid;
   align-content: center;
   scroll-margin-top: 64px;
@@ -95,7 +95,7 @@
   to { transform: translate3d(1.5%, 1%, 0) scale(1.06); }
 }
 .cohort-scroll-cue { z-index: 1; }
-.cohort-hero-content { position: relative; z-index: 1; box-sizing: border-box; width: 100%; max-width: 1480px; padding: 32px clamp(40px, 3.125vw, 46px); text-align: center; }
+.cohort-hero-content { position: relative; z-index: 1; box-sizing: border-box; width: 100%; max-width: 1440px; padding: 32px 40px; text-align: center; }
 .cohort-hero-stage {
   position: relative;
   z-index: 1;
@@ -381,7 +381,7 @@
 .cohort-timeline-scroll-cue { position: absolute; bottom: 14px; left: 50%; color: rgba(96, 165, 250, .75); transform: translateX(-50%); transition: color 180ms ease, translate 180ms ease; background: transparent; border: none; cursor: pointer; padding: 0; }
 .cohort-scroll-cue:hover,
 .cohort-timeline-scroll-cue:hover { color: #60A5FA; translate: 0 3px; }
-.cohort-projects { box-sizing: border-box; width: 100%; max-width: 1480px; margin: 64px auto 57px; padding-inline: clamp(40px, 3.125vw, 46px); scroll-margin-top: 64px; }
+.cohort-projects { box-sizing: border-box; width: 100%; max-width: 1440px; margin: 64px auto 57px; padding-inline: 40px; scroll-margin-top: 64px; }
 @media (min-width: 1024px) {
   .cohort-projects { margin-top: 84px; }
 }

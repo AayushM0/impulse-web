@@ -15,7 +15,7 @@
 .shark-hack-page [role='tabpanel'] { min-height: calc(100svh - 140px); }
 .shark-hack-page [role='tabpanel']:focus-visible { outline: 2px solid #60a5fa; outline-offset: -4px; }
 .shark-hack-page main section[id] { scroll-margin-top: 150px; }
-.shark-hack-page .shark-content-width { max-width: 1360px; margin: 0 auto; padding: 0 40px; }
+.shark-hack-page .shark-content-width { max-width: 1440px; margin: 0 auto; padding: 0 40px; }
 
 /* Overview cards open the same detail panels as the top navigation. */
 .shark-hack-page .shark-overview-explore { padding-top: 20px; padding-bottom: 56px; }

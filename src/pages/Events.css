@@ -1,6 +1,6 @@
 /* Events directory; all styles stay local to this page. */
 .events-page { --events-blue: #60a5fa; --events-pink: #f472b6; min-height: 100vh; background: #070B14; color: #F2F6FF; }
-.events-page .events-content { max-width: 1360px; margin: auto; padding: 112px 40px 64px; }
+.events-page .events-content { max-width: 1440px; margin: auto; padding: 112px 40px 64px; }
 .events-page .events-intro { position: relative; padding-bottom: 36px; border-bottom: 1px solid #1E2A44; }
 .events-page .events-intro::after { content: ''; position: absolute; left: 0; bottom: -1px; width: min(280px, 65%); height: 2px; background: linear-gradient(90deg, #2563EB, #EC4899, transparent); transform-origin: left; }
 .events-page .events-eyebrow { display: flex; align-items: center; gap: 10px; color: #60a5fa; font: 10px 'JetBrains Mono', monospace; letter-spacing: .13em; }
@@ -144,7 +144,7 @@
 .events-page .events-intro h1 { font-size: clamp(44px, 6vw, 80px); font-weight: 600; margin: 24px 0 20px; text-wrap: balance; }
 .events-page .events-intro::after { content: none; }
 .events-page .events-list-heading { margin-top: 40px; margin-bottom: 28px; }
-.events-page .events-directory { position: relative; isolation: isolate; width: 100%; max-width: 1360px; margin-inline: auto; padding: 1px 40px 80px; scroll-margin-top: 88px; }
+.events-page .events-directory { position: relative; isolation: isolate; width: 100%; max-width: 1440px; margin-inline: auto; padding: 1px 40px 80px; scroll-margin-top: 88px; }
 .events-page .events-directory::before { content: ''; position: absolute; z-index: -1; inset: 0; pointer-events: none; background: radial-gradient(ellipse at 20% 30%, rgba(37, 99, 235, 0.08), transparent 60%), radial-gradient(ellipse at 80% 65%, rgba(236, 72, 153, 0.05), transparent 60%); mask-image: linear-gradient(transparent, #000 15%, #000 85%, transparent), linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); mask-composite: intersect; }
 .events-page .events-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
 .events-page .event-card { display: flex; flex-direction: column; border-radius: 20px; }

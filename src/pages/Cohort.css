@@ -190,18 +190,18 @@
   align-items: center;
   justify-content: center;
   gap: 11px;
-  border: 1px solid #1E2A44;
-  border-radius: 11px;
-  background: #2563EB;
-  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
+  border: 0;
+  border-radius: 8px;
+  background: linear-gradient(90deg, #2563EB, #EC4899);
+  box-shadow: 0 4px 16px rgba(37, 99, 235, 0.3);
   color: #FFFFFF;
   font: 600 11px 'JetBrains Mono', monospace;
   letter-spacing: 0.04em;
   text-transform: uppercase;
   cursor: pointer;
-  transition: box-shadow 180ms ease, transform 180ms ease, background-color 180ms ease;
+  transition: box-shadow 180ms ease, transform 180ms ease, filter 180ms ease;
 }
-.cohort-primary-button:hover { transform: translateY(-2px); background-color: #1e40af; box-shadow: 0 6px 20px rgba(37, 99, 235, 0.45); }
+.cohort-primary-button:hover { transform: translateY(-2px); filter: brightness(1.08); box-shadow: 0 4px 22px rgba(236, 72, 153, 0.4); }
 .cohort-hero-content > .cohort-primary-button.cohort-motion-reveal {
   filter: blur(10px);
   scale: .82;
@@ -317,7 +317,7 @@
   gap: 10px;
   padding: 12px 10px;
   border: 1px solid #1E2A44;
-  border-radius: 18px;
+  border-radius: 16px;
   background:
     radial-gradient(ellipse at 100% 0%, rgba(var(--phase-accent-rgb), .15), transparent 70%),
     #0E1626;
@@ -427,7 +427,7 @@
   --project-accent-border: #1E2A44;
   padding: 0;
   border: 0;
-  border-radius: 18px;
+  border-radius: 16px;
   background: transparent;
   color: inherit;
   text-align: left;
@@ -471,7 +471,7 @@
   overflow: hidden;
   padding: 16px;
   border: 1px solid #1E2A44;
-  border-radius: 18px;
+  border-radius: 16px;
   background:
     radial-gradient(ellipse at 100% 0%, var(--project-accent-soft), transparent 70%),
     #0E1626;

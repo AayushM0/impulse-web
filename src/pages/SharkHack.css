@@ -698,15 +698,17 @@
 .shark-scroll-page .shark-room-progress { display: none; }
 .shark-scroll-page .shark-room-next { margin-left: auto; }
 .shark-scroll-page .shark-prize-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: end; gap: 24px; padding-top: 12px; max-width: 1040px; margin-inline: auto; }
-.shark-scroll-page .shark-prize-card { --prize-edge: #f472b6; --prize-tint: #0E1626; display: flex; flex-direction: column; justify-content: center; min-height: 440px; padding: 72px 24px 108px; text-align: center; border: 2px solid var(--prize-edge); border-radius: 16px; background: #0E1626; }
+.shark-scroll-page .shark-prize-card { --prize-edge: #f472b6; --prize-tint: #0E1626; display: flex; flex-direction: column; justify-content: center; min-height: 440px; padding: 72px 24px 108px; text-align: center; border: 1px solid #1E2A44; border-radius: 16px; background: #0E1626; position: relative; overflow: hidden; transition: border-color 200ms ease, box-shadow 200ms ease, transform 200ms ease; }
+.shark-scroll-page .shark-prize-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: var(--prize-edge); opacity: 0.8; }
+.shark-scroll-page .shark-prize-card:hover { border-color: rgba(96, 165, 250, 0.5); box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4), 0 0 20px rgba(37, 99, 235, 0.15); transform: translateY(-2px); }
 .shark-scroll-page .shark-prize-card-main { --prize-edge: #60a5fa; --prize-tint: #0E1626; grid-column: 2; grid-row: 1; margin-top: 0; min-height: 500px; box-shadow: none; }
 .shark-scroll-page .shark-prize-card-second { --prize-edge: #60a5fa; --prize-tint: #0E1626; grid-column: 1; grid-row: 1; }
 .shark-scroll-page .shark-prize-card-third { grid-column: 3; grid-row: 1; min-height: 400px; }
 .shark-scroll-page .shark-prize-top { flex-direction: column; justify-content: center; gap: 0; margin: 0; }
-.shark-scroll-page .shark-prize-top > span:last-child { position: absolute; top: 18px; right: 16px; max-width: calc(100% - 32px); padding: 8px 10px; border: 1px solid var(--prize-edge); border-radius: 5px; background: #0E1626; color: #F2F6FF; font-size: 9px; letter-spacing: .06em; }
+.shark-scroll-page .shark-prize-top > span:last-child { position: absolute; top: 18px; right: 16px; max-width: calc(100% - 32px); padding: 8px 10px; border: 1px solid #1E2A44; border-radius: 5px; background: #0E1626; color: #F2F6FF; font-size: 9px; letter-spacing: .06em; }
 .shark-scroll-page .shark-prize-card .shark-prize-icon { width: 86px; height: 86px; border: 0; border-radius: 0; background: none; color: var(--prize-edge); box-shadow: none; }
 .shark-scroll-page .shark-prize-icon svg { width: 76px; height: 76px; stroke-width: 1.3; }
-.shark-scroll-page .shark-prize-card h3 { position: absolute; bottom: 0; left: 0; right: 0; min-height: 82px; margin: 0; padding: 25px 14px; border-top: 1px solid var(--prize-edge); background: #0E1626; color: var(--prize-edge); font-size: clamp(18px, 2vw, 24px); line-height: 1.25; text-transform: uppercase; letter-spacing: .02em; }
+.shark-scroll-page .shark-prize-card h3 { position: absolute; bottom: 0; left: 0; right: 0; min-height: 82px; margin: 0; padding: 25px 14px; border-top: 1px solid #1E2A44; background: #0E1626; color: var(--prize-edge); font-size: clamp(18px, 2vw, 24px); line-height: 1.25; text-transform: uppercase; letter-spacing: .02em; }
 .shark-scroll-page .shark-prize-card h3 br { display: none; }
 .shark-scroll-page .shark-prize-card h3 span::before { content: ' '; }
 .shark-scroll-page .shark-prize-description { margin-top: 24px; font-size: 15px; line-height: 1.7; color: #9AA8C2; }

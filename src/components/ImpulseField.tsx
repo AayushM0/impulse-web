@@ -38,7 +38,7 @@ interface ImpulseFieldProps {
 }
 
 const COLORS = {
-  blue: '59, 130, 246',
+  blue: '37, 99, 235',
   blueBright: '96, 165, 250',
   indigo: '99, 102, 241',
   violet: '139, 92, 246',

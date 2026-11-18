@@ -90,7 +90,7 @@
   top: 8%;
   width: 82%;
   height: 84%;
-  background: radial-gradient(ellipse, rgba(59, 130, 246, 0.28) 0%, rgba(236, 72, 153, 0.14) 45%, transparent 72%);
+  background: radial-gradient(ellipse, rgba(37, 99, 235, 0.28) 0%, rgba(236, 72, 153, 0.14) 45%, transparent 72%);
   filter: blur(34px);
   pointer-events: none;
   opacity: 0.85;

@@ -155,7 +155,7 @@ export default function Hero() {
           ref={wordmarkRef}
           className="text-7xl sm:text-9xl md:text-[11rem] lg:text-[13rem] xl:text-[15rem] font-sans font-black tracking-[-0.03em] leading-none text-impulse-white opacity-0"
           style={{
-            textShadow: '0 0 100px rgba(59, 130, 246, 0.5), 0 20px 40px rgba(0, 0, 0, 0.95)',
+            textShadow: '0 0 100px rgba(37, 99, 235, 0.5), 0 20px 40px rgba(0, 0, 0, 0.95)',
           }}
         >
           IMPULSE
@@ -180,13 +180,13 @@ export default function Hero() {
         >
           <a
             href="/cohort"
-            className="font-mono-label text-[11px] sm:text-xs px-5 py-2.5 bg-impulse-blue text-white font-semibold rounded-sm border border-impulse-blue-bright/60 hover:bg-impulse-blue/80 hover:shadow-[0_0_20px_rgba(59,130,246,0.5)] transition-all duration-300"
+            className="font-mono-label text-[11px] sm:text-xs px-5 py-2.5 bg-gradient-to-r from-[#2563EB] to-[#EC4899] text-white font-semibold rounded-lg hover:shadow-[0_4px_20px_rgba(37,99,235,0.4)] transition-all duration-300 energy-sweep"
           >
             EXPLORE COHORT
           </a>
           <a
             href="/shark-hack"
-            className="font-mono-label text-[11px] sm:text-xs px-5 py-2.5 bg-space-900/80 text-impulse-white rounded-sm border border-space-700 hover:border-impulse-blue/50 hover:bg-space-800 transition-all duration-300"
+            className="font-mono-label text-[11px] sm:text-xs px-5 py-2.5 bg-[#0E1626] text-[#F2F6FF] rounded-lg border border-[#1E2A44] hover:border-[#60A5FA]/60 hover:bg-[#141D30] hover:shadow-[0_0_16px_rgba(37,99,235,0.2)] transition-all duration-300"
           >
             SHARK HACK
           </a>

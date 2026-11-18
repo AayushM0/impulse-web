@@ -51,9 +51,9 @@ export default function ImpulseLoop() {
 
                 {/* Orbital rings */}
                 <g aria-hidden="true">
-                  <circle cx={centerX} cy={centerY} r={radius} fill="none" stroke="rgba(59,130,246,0.18)" strokeWidth="1" />
-                  <circle cx={centerX} cy={centerY} r={radius + 32} fill="none" stroke="rgba(59,130,246,0.08)" strokeWidth="0.5" strokeDasharray="3 5" />
-                  <circle cx={centerX} cy={centerY} r={radius - 32} fill="none" stroke="rgba(59,130,246,0.08)" strokeWidth="0.5" strokeDasharray="3 5" />
+                  <circle cx={centerX} cy={centerY} r={radius} fill="none" stroke="rgba(37,99,235,0.18)" strokeWidth="1" />
+                  <circle cx={centerX} cy={centerY} r={radius + 32} fill="none" stroke="rgba(37,99,235,0.08)" strokeWidth="0.5" strokeDasharray="3 5" />
+                  <circle cx={centerX} cy={centerY} r={radius - 32} fill="none" stroke="rgba(37,99,235,0.08)" strokeWidth="0.5" strokeDasharray="3 5" />
 
                   {/* Dynamic Active Orbit Highlight */}
                   <circle
@@ -91,7 +91,7 @@ export default function ImpulseLoop() {
                         key={`arc-${i}`}
                         d={`M ${x1} ${y1} Q ${cpx} ${cpy} ${x2} ${y2}`}
                         fill="none"
-                        stroke={isActive ? 'rgba(96,165,250,0.85)' : 'rgba(59,130,246,0.15)'}
+                        stroke={isActive ? 'rgba(96,165,250,0.85)' : 'rgba(37,99,235,0.15)'}
                         strokeWidth={isActive ? '2' : '1'}
                         className="transition-colors duration-300"
                       />
@@ -133,7 +133,7 @@ export default function ImpulseLoop() {
                         cx={x}
                         cy={y}
                         r={isActive ? 32 : 18}
-                        fill={isActive ? 'rgba(59,130,246,0.25)' : 'rgba(59,130,246,0.06)'}
+                        fill={isActive ? 'rgba(37,99,235,0.25)' : 'rgba(37,99,235,0.06)'}
                         className="transition-colors duration-300"
                       />
                       <circle

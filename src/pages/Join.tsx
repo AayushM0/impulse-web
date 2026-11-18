@@ -69,7 +69,7 @@ export default function Join() {
     setSubmitted(true);
   };
 
-  const inputClass = "w-full bg-transparent border-b border-space-600 focus:border-impulse-blue focus:shadow-[0_1px_8px_rgba(59,130,246,0.3)] transition-all duration-300 px-0 py-3 text-impulse-white placeholder:text-impulse-gray-light/40 font-sans text-base outline-none";
+  const inputClass = "w-full bg-transparent border-b border-space-600 focus:border-impulse-blue focus:shadow-[0_1px_8px_rgba(37,99,235,0.3)] transition-all duration-300 px-0 py-3 text-impulse-white placeholder:text-impulse-gray-light/40 font-sans text-base outline-none";
   const labelClass = "font-mono-label text-xs tracking-wider text-impulse-blue-bright/70 mb-2 block";
 
   return (
@@ -191,9 +191,9 @@ export default function Join() {
                         aria-checked={isSelected}
                         aria-pressed={isSelected}
                         onClick={() => toggleInterest(interest)}
-                        className={`font-mono-label text-xs px-4 py-2.5 min-h-[44px] inline-flex items-center justify-center border transition-colors duration-200 ${
+                        className={`font-mono-label text-xs px-4 py-2.5 min-h-[44px] inline-flex items-center justify-center border rounded-lg transition-colors duration-200 ${
                           isSelected
-                            ? 'border-impulse-blue/70 bg-impulse-blue/15 text-impulse-white shadow-[0_0_12px_rgba(59,130,246,0.15)]'
+                            ? 'border-impulse-blue/70 bg-impulse-blue/15 text-impulse-white shadow-[0_0_12px_rgba(37,99,235,0.15)]'
                             : 'border-space-600 bg-space-900/40 text-impulse-gray-light/70 hover:border-impulse-blue/40 hover:text-impulse-white'
                         }`}
                       >

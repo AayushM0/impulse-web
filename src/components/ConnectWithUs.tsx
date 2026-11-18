@@ -198,11 +198,11 @@ export default function ConnectWithUs() {
 
         const waveGrad = ctx.createLinearGradient(0, 0, width, 0);
         if (track === 0) {
-          waveGrad.addColorStop(0, 'rgba(59, 130, 246, 0)');
+          waveGrad.addColorStop(0, 'rgba(37, 99, 235, 0)');
           waveGrad.addColorStop(0.2, 'rgba(96, 165, 250, 0.45)');
           waveGrad.addColorStop(0.5, 'rgba(147, 197, 253, 0.65)');
           waveGrad.addColorStop(0.8, 'rgba(232, 121, 249, 0.45)');
-          waveGrad.addColorStop(1, 'rgba(59, 130, 246, 0)');
+          waveGrad.addColorStop(1, 'rgba(37, 99, 235, 0)');
           ctx.strokeStyle = waveGrad;
           ctx.lineWidth = 1.8;
           ctx.shadowColor = '#60a5fa';

@@ -13,7 +13,7 @@
 .events-page .events-list-heading h2 > span { display: grid; place-items: center; min-width: 26px; height: 26px; padding: 0 7px; border: 1px solid #1E2A44; border-radius: 8px; background: rgba(37, 99, 235, 0.12); color: var(--events-blue); font-size: 12px; }
 .events-page .events-list-heading > p { color: #9AA8C2; font-size: 12px; }
 .events-page .events-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); align-items: start; gap: 24px; }
-.events-page .event-card { min-width: 0; border: 1px solid #1E2A44; border-radius: 18px; overflow: hidden; background: #0E1626; transition: border-color 180ms ease, box-shadow 180ms ease; }
+.events-page .event-card { min-width: 0; border: 1px solid #1E2A44; border-radius: 16px; overflow: hidden; background: #0E1626; transition: border-color 180ms ease, box-shadow 180ms ease; }
 .events-page .event-card:focus-within { border-color: #60a5fa; }
 .events-page .event-card-image { display: block; position: relative; height: 166px; overflow: hidden; background: #070B14; }
 .events-page .event-card-image:focus-visible { outline-offset: -4px; }
@@ -44,8 +44,8 @@
 .events-page .event-card-highlights li { display: flex; align-items: center; gap: 6px; color: #9AA8C2; font-size: 10px; }
 .events-page .event-card-highlights svg { width: 14px; height: 14px; color: var(--events-blue); }
 .events-page .event-card-highlights li:last-child svg { color: var(--events-pink); }
-.events-page .event-card-link { position: relative; overflow: hidden; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 12px 15px; min-height: 44px; border: 1px solid #1E2A44; border-radius: 9px; background: #2563EB; color: #FFFFFF; font-size: 13px; font-weight: 500; transition: background-color 180ms ease, transform 180ms ease, box-shadow 180ms ease; }
-.events-page .event-card-link:hover { background: #1D4ED8; transform: translateY(-2px); box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35); }
+.events-page .event-card-link { position: relative; overflow: hidden; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 12px 15px; min-height: 44px; border: 0; border-radius: 8px; background: linear-gradient(90deg, #2563EB, #EC4899); color: #FFFFFF; font-size: 13px; font-weight: 500; box-shadow: 0 4px 16px rgba(37, 99, 235, 0.3); transition: filter 180ms ease, transform 180ms ease, box-shadow 180ms ease; }
+.events-page .event-card-link:hover { filter: brightness(1.08); transform: translateY(-2px); box-shadow: 0 4px 22px rgba(236, 72, 153, 0.4); }
 .events-page .event-card-link svg { width: 17px; height: 17px; flex-shrink: 0; color: #FFFFFF; }
 .events-page .event-card-registration { margin-top: 10px; font-size: 10px; color: #9AA8C2; }
 .events-page .events-future-note { display: flex; align-items: center; gap: 16px; margin-top: 28px; padding: 22px 0 0; border-top: 1px solid #1E2A44; }
@@ -96,7 +96,7 @@
   .events-page .events-list-heading { margin: 26px 0 18px; }
   .events-page .events-list-heading h2 { gap: 10px; font-size: 21px; }
   .events-page .events-grid { gap: 20px; }
-  .events-page .event-card { width: 100%; max-width: none; border-radius: 20px; }
+  .events-page .event-card { width: 100%; max-width: none; border-radius: 16px; }
   .events-page .event-card-image { height: auto; aspect-ratio: 1.45; }
   .events-page .event-card-image img { width: 210%; object-position: right center; }
   .events-page .event-banner-preview { display: none; }
@@ -114,7 +114,7 @@
   .events-page .event-card-highlights { display: grid; gap: 10px; margin: 20px 0; }
   .events-page .event-card-highlights li { gap: 9px; font-size: 13px; }
   .events-page .event-card-highlights svg { width: 17px; height: 17px; }
-  .events-page .event-card-link { min-height: 52px; padding: 14px 16px; font-size: 15px; border-radius: 11px; }
+  .events-page .event-card-link { min-height: 52px; padding: 14px 16px; font-size: 15px; border-radius: 8px; }
   .events-page .event-card-registration { margin-top: 12px; font-size: 12px; line-height: 1.65; }
   .events-page .events-future-note { align-items: flex-start; gap: 12px; margin-top: 26px; }
   .events-page .events-future-note h3 { font-size: 16px; }
@@ -147,7 +147,7 @@
 .events-page .events-directory { position: relative; isolation: isolate; width: 100%; max-width: 1440px; margin-inline: auto; padding: 1px 40px 80px; scroll-margin-top: 88px; }
 .events-page .events-directory::before { content: ''; position: absolute; z-index: -1; inset: 0; pointer-events: none; background: radial-gradient(ellipse at 20% 30%, rgba(37, 99, 235, 0.08), transparent 60%), radial-gradient(ellipse at 80% 65%, rgba(236, 72, 153, 0.05), transparent 60%); mask-image: linear-gradient(transparent, #000 15%, #000 85%, transparent), linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent); mask-composite: intersect; }
 .events-page .events-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
-.events-page .event-card { display: flex; flex-direction: column; border-radius: 20px; }
+.events-page .event-card { display: flex; flex-direction: column; border-radius: 16px; }
 .events-page .event-card-image { width: 100%; height: auto; min-height: 0; aspect-ratio: 1.85; border-bottom: 1px solid #1E2A44; }
 .events-page .event-card-image img { width: 210%; }
 .events-page .event-card-body { padding: 22px; }
@@ -184,8 +184,8 @@
 
 .events-page .events-hero-copy { position: relative; z-index: 1; width: 100%; max-width: 1120px; margin-block: auto; padding-block: 32px 48px; }
 .events-page .events-hero-description { max-width: 620px; margin-inline: auto; color: #9AA8C2; font-size: clamp(15px, 1.25vw, 19px); line-height: 1.75; text-wrap: balance; }
-.events-page .events-explore-link { display: inline-flex; align-items: center; justify-content: center; gap: 24px; min-height: 50px; margin-top: 30px; padding: 13px 22px; border-radius: 8px; border: 1px solid #1E2A44; background: #2563EB; color: #FFFFFF; font-size: 14px; font-weight: 500; transition: background-color 180ms ease, transform 180ms ease, box-shadow 180ms ease; }
-.events-page .events-explore-link:hover { background: #1D4ED8; transform: translateY(-2px); box-shadow: 0 4px 14px rgba(37, 99, 235, 0.35); }
+.events-page .events-explore-link { display: inline-flex; align-items: center; justify-content: center; gap: 16px; min-height: 50px; margin-top: 30px; padding: 13px 24px; border-radius: 8px; border: 1px solid #1E2A44; background: #0E1626; color: #F2F6FF; font-size: 14px; font-weight: 500; transition: background-color 180ms ease, border-color 180ms ease, transform 180ms ease, box-shadow 180ms ease; }
+.events-page .events-explore-link:hover { background: #141D30; border-color: rgba(96, 165, 250, 0.6); transform: translateY(-2px); box-shadow: 0 0 16px rgba(37, 99, 235, 0.2); }
 .events-page .events-explore-link svg { width: 16px; height: 16px; color: #FFFFFF; }
 .events-page .events-hero-feature { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 12px 18px; width: fit-content; max-width: 100%; margin: 38px auto 0; padding: 16px 20px; border: 1px solid #1E2A44; border-radius: 12px; background: #0E1626; transition: border-color 180ms ease; }
 .events-page .events-hero-feature:hover { border-color: #60a5fa; }

@@ -5,6 +5,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 import TiltCard3D from '@/components/3d/TiltCard3D';
+import { SectionKicker } from '@/components/ui';
 import { events } from '@/data/content';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -94,10 +95,7 @@ export default function Experiences() {
         {/* Section Header Row */}
         <div className="max-w-[1440px] w-full mx-auto px-6 lg:px-12 flex flex-col sm:flex-row sm:items-end justify-between gap-6 z-10">
           <div>
-            <div className="inline-flex items-center gap-2 font-mono-label text-[11px] text-impulse-blue-bright/70 border border-space-700/80 bg-space-900/60 backdrop-blur-md px-3 py-1 rounded-full mb-3">
-              <span className="w-1.5 h-1.5 rounded-full bg-impulse-blue" />
-              <span>EXPERIENCES // CALENDAR</span>
-            </div>
+            <SectionKicker number="01" label="EXPERIENCES // CALENDAR" />
 
             <h2 className="text-3xl sm:text-5xl font-sans font-bold text-impulse-white tracking-tight leading-tight">
               Built under pressure. <span className="text-impulse-blue-bright">Shipped in public.</span>
@@ -143,8 +141,8 @@ export default function Experiences() {
                   key={event.id}
                   className="w-full md:w-[420px] lg:w-[480px] flex-shrink-0"
                 >
-                  <TiltCard3D maxTilt={8} className="h-full">
-                    <div className="h-full relative flex flex-col justify-between p-8 bg-space-900/95 border border-space-800 hover:border-impulse-blue/40 transition-colors duration-300">
+                  <TiltCard3D maxTilt={8} className="h-full rounded-2xl overflow-hidden">
+                    <div className="h-full relative flex flex-col justify-between p-8 bg-space-900/95 border border-space-800 hover:border-impulse-blue/40 rounded-2xl transition-colors duration-300">
                       {/* Top Hairline Indicator */}
                       <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-impulse-blue/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
 
@@ -216,7 +214,7 @@ export default function Experiences() {
 
                         <Link
                           to={event.link || '/join'}
-                          className={`inline-flex items-center gap-2 font-mono-label text-xs px-4 py-2 border transition-colors duration-200 ${
+                          className={`inline-flex items-center gap-2 font-mono-label text-xs px-4 py-2 border rounded-lg transition-colors duration-200 ${
                             event.featured
                               ? 'text-impulse-white border-impulse-blue bg-impulse-blue/20 hover:bg-impulse-blue/30 hover:border-impulse-blue-bright shadow-[0_0_12px_rgba(37,99,235,0.25)]'
                               : 'text-impulse-white border-impulse-blue/40 bg-impulse-blue/10 hover:bg-impulse-blue/20 hover:border-impulse-blue'

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useReveal } from '@/hooks/useReveal';
+import { SectionKicker } from '@/components/ui';
 
 const stages = [
   { name: 'EXPLORE', description: 'Discover emerging technologies, model weights, and unexplored frontiers. Follow genuine technical curiosity.' },
@@ -25,10 +26,7 @@ export default function ImpulseLoop() {
 
       <div className="relative max-w-[1440px] mx-auto px-6 lg:px-12">
         <div className="max-w-3xl mb-16">
-          <div className="inline-flex items-center gap-2 font-mono-label text-[11px] text-impulse-blue-bright/70 border border-space-700/80 bg-space-900/60 backdrop-blur-md px-3 py-1 rounded-full mb-3">
-            <span className="w-1.5 h-1.5 rounded-full bg-impulse-blue" />
-            <span>OPERATING SYSTEM // THE FLYWHEEL</span>
-          </div>
+          <SectionKicker number="04" label="OPERATING SYSTEM // THE FLYWHEEL" />
 
           <h2 className="text-3xl sm:text-5xl lg:text-6xl font-sans font-bold text-impulse-white tracking-tight leading-tight">
             THE IMPULSE <span className="text-impulse-blue-bright">LOOP</span>

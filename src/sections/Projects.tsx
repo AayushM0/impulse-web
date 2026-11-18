@@ -4,6 +4,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 import TiltCard3D from '@/components/3d/TiltCard3D';
+import { SectionKicker } from '@/components/ui';
 import { projects } from '@/data/content';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -65,10 +66,7 @@ export default function Projects() {
         {/* Header */}
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 mb-12">
           <div>
-            <div className="inline-flex items-center gap-2 font-mono-label text-[11px] text-impulse-blue-bright/70 border border-space-700/80 bg-space-900/60 backdrop-blur-md px-3 py-1 rounded-full mb-3">
-              <span className="w-1.5 h-1.5 rounded-full bg-impulse-blue" />
-              <span>PROJECTS // PROTOTYPES</span>
-            </div>
+            <SectionKicker number="02" label="PROJECTS // PROTOTYPES" />
 
             <h2 className="text-3xl sm:text-5xl lg:text-6xl font-sans font-bold text-impulse-white tracking-tight leading-tight">
               Ideas that made it <span className="text-impulse-blue-bright">into the wild.</span>
@@ -93,7 +91,7 @@ export default function Projects() {
               key={cat}
               onClick={() => setActiveCategory(cat)}
               aria-pressed={activeCategory === cat}
-              className={`font-mono-label text-xs px-4 py-2.5 min-h-[44px] inline-flex items-center justify-center border transition-colors duration-200 ${
+              className={`font-mono-label text-xs px-4 py-2.5 min-h-[44px] inline-flex items-center justify-center border rounded-lg transition-colors duration-200 ${
                 activeCategory === cat
                   ? 'border-impulse-blue/70 bg-impulse-blue/15 text-impulse-white'
                   : 'border-space-800 bg-space-900/60 text-impulse-gray-light/70 hover:border-space-700 hover:text-impulse-white'
@@ -114,8 +112,8 @@ export default function Projects() {
                 key={project.id}
                 className={`project-card ${isFlagship ? 'lg:col-span-2' : 'col-span-1'}`}
               >
-                <TiltCard3D maxTilt={isFlagship ? 5 : 8} className="h-full">
-                  <div className="h-full relative flex flex-col justify-between p-8 bg-space-900/95 border border-space-800 hover:border-impulse-blue/40 transition-colors duration-300">
+                <TiltCard3D maxTilt={isFlagship ? 5 : 8} className="h-full rounded-2xl overflow-hidden">
+                  <div className="h-full relative flex flex-col justify-between p-8 bg-space-900/95 border border-space-800 hover:border-impulse-blue/40 rounded-2xl transition-colors duration-300">
                     <div>
                       {/* Category & Status pill */}
                       <div className="flex items-center justify-between gap-2 mb-6">

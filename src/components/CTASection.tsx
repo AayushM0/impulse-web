@@ -1,6 +1,6 @@
 import { ArrowRight } from 'lucide-react';
-import { Link } from 'react-router-dom';
 import ImpulseField from './ImpulseField';
+import { Button, SectionKicker } from '@/components/ui';
 
 interface CTASectionProps {
   headline: string;
@@ -24,9 +24,8 @@ export default function CTASection({ headline, description, buttonText, buttonTo
       />
 
       <div className="relative max-w-3xl mx-auto px-6 text-center">
-        <div className="inline-flex items-center gap-2 font-mono-label text-impulse-blue-bright/70 mb-8">
-          <span className="w-2 h-2 rounded-full bg-impulse-blue animate-pulse-slow" />
-          SIGNAL ACTIVE
+        <div className="flex justify-center mb-8">
+          <SectionKicker label="SIGNAL ACTIVE" />
         </div>
 
         <h2 className="text-4xl sm:text-5xl lg:text-6xl font-sans text-impulse-white mb-6 leading-[1.05]">
@@ -37,13 +36,15 @@ export default function CTASection({ headline, description, buttonText, buttonTo
           {description}
         </p>
 
-        <Link
+        <Button
           to={buttonTo}
-          className="group inline-flex items-center gap-3 font-mono-label text-impulse-white border border-impulse-blue/40 bg-impulse-blue/10 hover:bg-impulse-blue/20 hover:border-impulse-blue/60 transition-colors duration-300 px-9 py-4 energy-sweep"
+          variant="primary"
+          size="lg"
+          className="group shadow-[0_4px_24px_rgba(37,99,235,0.4)]"
         >
           {buttonText}
           <ArrowRight aria-hidden="true" className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-        </Link>
+        </Button>
 
         {microcopy && (
           <p className="font-mono-label text-impulse-blue-bright/70 mt-8">

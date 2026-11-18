@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { ArrowRight, ArrowUpRight, Calendar, ChevronDown, Coins, MapPin, Trophy, Users, FileText, Code2, Flag, CheckCircle2, Clock3, ClipboardList, Mic2, MonitorPlay, MessagesSquare, Handshake, GraduationCap, Sparkles, Award, Building2, LayoutGrid, CircleHelp, X } from 'lucide-react';
 import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
 import SharkRegistrationButton from '@/components/SharkRegistrationButton';
 import SharkTimeline from '@/components/OceanSharkTimeline';
 import { useEventReveals } from '@/hooks/useEventReveals';
@@ -319,6 +320,7 @@ export default function SharkHack() {
         </section>
 
       </main>
+      <Footer />
     </div>
   );
 }

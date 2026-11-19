@@ -310,7 +310,7 @@ export default function Footer() {
     >
       <div className="relative w-full max-w-[1440px] mx-auto px-6 lg:px-10 pt-5 md:pt-6 pb-0 font-sans flex flex-col justify-end">
         {/* Top bar: Editorial headline, nav links, socials */}
-        <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-gray-300 font-medium pt-1 pb-2 md:pb-3">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-gray-300 font-medium pt-1 pb-5 md:pb-6">
           <div className="overflow-hidden mb-2 md:mb-0">
             <div
               ref={headlineRef}

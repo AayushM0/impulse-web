@@ -95,6 +95,7 @@ const Tile = ({ tile }: { tile: TileData }) => (
 
 export interface GridMotionProps {
   items?: GridMotionItem[];
+  rowItems?: GridMotionItem[][];
   rows?: number;
   aspectRatio?: number;
   gap?: number;
@@ -117,6 +118,7 @@ export interface GridMotionProps {
 
 export default function GridMotion({
   items = [],
+  rowItems,
   rows = 4,
   aspectRatio = 1.33,
   gap = 16,
@@ -335,15 +337,20 @@ export default function GridMotion({
       cancelAnimationFrame(raf);
       visibility.disconnect();
     };
-  }, [layout, tiles]);
+  }, [layout, tiles, rowItems]);
 
-  const rowTiles = layout
-    ? Array.from({ length: settings.rows }, (_, r) =>
-        Array.from({ length: layout.perRow }, (_, j) =>
-          tiles.length ? tiles[(r * layout.perRow + j) % tiles.length] : EMPTY,
-        ),
-      )
-    : [];
+  const rowTiles = useMemo(() => {
+    if (!layout) return [];
+    return Array.from({ length: settings.rows }, (_, r) => {
+      const source =
+        rowItems && rowItems[r] && rowItems[r].length > 0
+          ? rowItems[r].map(toTile)
+          : tiles;
+      return Array.from({ length: layout.perRow }, (_, j) =>
+        source.length ? source[j % source.length] : EMPTY,
+      );
+    });
+  }, [layout, settings.rows, rowItems, tiles]);
 
   const mask =
     settings.fade > 0

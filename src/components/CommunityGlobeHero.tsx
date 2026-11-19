@@ -1,12 +1,24 @@
-import { useRef } from 'react';
+import { useMemo, useRef } from 'react';
 import { ArrowDown, ArrowUpRight } from 'lucide-react';
-import GridMotion from '@/components/GridMotion';
+import GridMotion, { type GridMotionItem } from '@/components/GridMotion';
 import { SectionKicker } from '@/components/ui';
-import { allCommunityMembers } from '@/data/communityMembers';
+import { allCommunityMembers, communityPresidents } from '@/data/communityMembers';
 import './CommunityGlobeHero.css';
 
-const memberPhotoItems = allCommunityMembers
+const founderItems: GridMotionItem[] = communityPresidents
   .filter((member) => Boolean(member.photoPath))
+  .map((member) => ({
+    src: member.photoPath,
+    alt: member.name,
+    position: member.photoPosition,
+  }));
+
+const otherMemberItems: GridMotionItem[] = allCommunityMembers
+  .filter(
+    (member) =>
+      !communityPresidents.some((president) => president.id === member.id) &&
+      Boolean(member.photoPath),
+  )
   .map((member) => ({
     src: member.photoPath,
     alt: member.name,
@@ -16,11 +28,34 @@ const memberPhotoItems = allCommunityMembers
 export default function CommunityGlobeHero() {
   const heroRef = useRef<HTMLElement>(null);
 
+  const memberRows: GridMotionItem[][] = useMemo(() => {
+    const topRow = otherMemberItems.slice(0, 9);
+    const centerRowUpper = [
+      founderItems[0],
+      otherMemberItems[9],
+      otherMemberItems[10],
+      founderItems[1],
+      otherMemberItems[11],
+      otherMemberItems[12],
+    ].filter(Boolean);
+    const centerRowLower = [
+      founderItems[1],
+      otherMemberItems[13],
+      otherMemberItems[14],
+      founderItems[0],
+      otherMemberItems[15],
+      otherMemberItems[16],
+    ].filter(Boolean);
+    const bottomRow = otherMemberItems.slice(17);
+
+    return [topRow, centerRowUpper, centerRowLower, bottomRow];
+  }, []);
+
   return (
     <header ref={heroRef} className="globe-hero community-intro" aria-labelledby="community-title">
       <div className="globe-hero-gridmotion" aria-hidden="true">
         <GridMotion
-          items={memberPhotoItems}
+          rowItems={memberRows}
           rows={4}
           aspectRatio={1.33}
           gap={16}
@@ -46,7 +81,7 @@ export default function CommunityGlobeHero() {
           Community at <span>Impulse.</span>
         </h1>
         <p className="community-hero-description">
-          A creative space where curious minds connect, innovative ideas grow, and passionate builders come together to create meaningful solutions. Different perspectives meet here around a shared desire to learn by doing.
+          A creative space where curious minds connect, innovate, and build meaningful solutions together.
         </p>
         <div className="community-hero-actions">
           <a className="community-hero-button-primary" href="#community-connect-title">

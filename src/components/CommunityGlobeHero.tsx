@@ -2,9 +2,19 @@ import { useEffect, useRef } from 'react';
 import { Handshake, Lightbulb, Network, MoveDownRight, MoveUpRight } from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import GridMotion from '@/components/GridMotion';
+import { allCommunityMembers } from '@/data/communityMembers';
 import './CommunityGlobeHero.css';
 
 gsap.registerPlugin(ScrollTrigger);
+
+const memberPhotoItems = allCommunityMembers
+  .filter((member) => Boolean(member.photoPath))
+  .map((member) => ({
+    src: member.photoPath,
+    alt: member.name,
+    position: member.photoPosition,
+  }));
 
 export default function CommunityGlobeHero() {
   const heroRef = useRef<HTMLElement>(null);
@@ -78,15 +88,24 @@ export default function CommunityGlobeHero() {
 
   return (
     <section ref={heroRef} className="globe-hero" aria-labelledby="community-title">
-      <div className="globe-hero-motion" aria-hidden="true">
-        <div className="globe-hero-ridges">
-          <span className="globe-hero-ridge globe-hero-ridge-pink" />
-          <span className="globe-hero-ridge globe-hero-ridge-purple" />
-        </div>
-        <div className="globe-hero-wave-field" />
-        <div className="globe-hero-sparkles">
-          <i /><i /><i /><i /><i /><i /><i /><i /><i /><i /><i /><i />
-        </div>
+      <div className="globe-hero-gridmotion" aria-hidden="true">
+        <GridMotion
+          items={memberPhotoItems}
+          rows={4}
+          aspectRatio={1.33}
+          gap={16}
+          radius={14}
+          angle={-12}
+          tilt={0}
+          speed={24}
+          direction="alternate"
+          parallax={0.5}
+          spotlight={0.6}
+          dim={0.35}
+          fade={0.5}
+          grayscale={false}
+        />
+        <div className="globe-hero-gridmotion-overlay" />
       </div>
       <div className="globe-hero-panel">
         <div ref={pillRef} className="globe-hero-pill">

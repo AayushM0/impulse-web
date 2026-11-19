@@ -3,49 +3,49 @@
 .shark-ocean-flow { fill: none; stroke-linecap: round; }
 .shark-ocean-bank { stroke: #60a5fa; stroke-width: 76px; opacity: 0.07; }
 .shark-ocean-current { stroke-width: 62px; opacity: .7; }
-.shark-ocean-wavelet { fill: none; stroke: #dbeafe; stroke-width: 1.4px; opacity: 0.55; }
+.shark-ocean-wavelet { fill: none; stroke: #9aa8c2; stroke-width: 1.4px; opacity: 0.45; }
 .shark-ocean-progress { stroke-width: 52px; stroke-dasharray: 1; stroke-dashoffset: 1; opacity: 0.72; }
-.shark-ocean-wake { fill: none; stroke: #dbeafe; stroke-width: 3px; stroke-linecap: round; stroke-dasharray: 2 10; }
-.shark-ocean-bubble circle { fill: #93c5fd30; stroke: #dbeafe; stroke-width: 1px; }
-.shark-ocean-swimmer { filter: drop-shadow(0 4px 5px #06070bcc); }
+.shark-ocean-wake { fill: none; stroke: #9aa8c2; stroke-width: 3px; stroke-linecap: round; stroke-dasharray: 2 10; }
+.shark-ocean-bubble circle { fill: rgba(96, 165, 250, 0.18); stroke: #9aa8c2; stroke-width: 1px; }
+.shark-ocean-swimmer { filter: drop-shadow(0 4px 5px #070b14cc); }
 .shark-ocean-fish { transform: scale(1); }
 .shark-ocean-bow-wave { opacity: .65; }
 .shark-ocean-arrival { transform-origin: 0 12px; }
-.shark-ocean-finish-ring { fill: none; stroke: #93c5fd; stroke-width: 1.5px; opacity: 0; }
+.shark-ocean-finish-ring { fill: none; stroke: #60a5fa; stroke-width: 1.5px; opacity: 0; }
 .shark-ocean-finish-ring:nth-child(2) { stroke: #f472b6; }
-.shark-ocean-finish-drop { fill: #93c5fd; opacity: 0; }
+.shark-ocean-finish-drop { fill: #60a5fa; opacity: 0; }
 .shark-ocean-finish-drop:nth-child(even) { fill: #f472b6; }
 .shark-ocean-entry-pool { transform: scale(.5); }
 .shark-ocean-landing-pool { transform: translate(26px, 9px); }
-.shark-ocean-pool-depth { fill: #10203a; opacity: .45; }
-.shark-ocean-surface-flow, .shark-ocean-surface-ripples { fill: none; stroke: #93c5fd; stroke-width: 1.2px; stroke-linecap: round; }
+.shark-ocean-pool-depth { fill: #0e1626; opacity: .45; }
+.shark-ocean-surface-flow, .shark-ocean-surface-ripples { fill: none; stroke: #60a5fa; stroke-width: 1.2px; stroke-linecap: round; }
 .shark-ocean-surface-flow { opacity: .5; }
-.shark-ocean-surface-flow path + path { stroke: #dbeafe; stroke-width: .8px; }
-.shark-ocean-surface-ripples { stroke: #dbeafe; opacity: .45; stroke-width: .8px; }
+.shark-ocean-surface-flow path + path { stroke: #9aa8c2; stroke-width: .8px; }
+.shark-ocean-surface-ripples { stroke: #9aa8c2; opacity: .45; stroke-width: .8px; }
 .shark-ocean-takeoff { transform: scale(.5); }
 .shark-ocean-touchdown { transform: translate(var(--jump-x), 12px); }
-.shark-ocean-splash-crown { fill: #93c5fd; stroke: #dbeafe; stroke-width: 1; opacity: 0; }
-.shark-ocean-entry-fish, .shark-ocean-exit-fish { opacity: 0; filter: drop-shadow(0 12px 7px #06070b80); }
+.shark-ocean-splash-crown { fill: #60a5fa; stroke: #9aa8c2; stroke-width: 1; opacity: 0; }
+.shark-ocean-entry-fish, .shark-ocean-exit-fish { opacity: 0; filter: drop-shadow(0 12px 7px #070b1480); }
 .shark-ocean-timeline[data-entry='waiting'] .shark-ocean-swimmer,
 .shark-ocean-timeline[data-entry='playing'] .shark-ocean-swimmer { opacity: 0; }
 .shark-ocean-stages { margin: 0; padding: 0; list-style: none; }
-.shark-ocean-stage { --ocean-accent: #60a5fa; --ocean-border: #314d73; --ocean-card: #10203a; position: relative; min-height: 270px; padding-bottom: 56px; }
-.shark-ocean-stage[data-tone='pink'] { --ocean-accent: #f472b6; --ocean-border: #643056; --ocean-card: #210f25; }
+.shark-ocean-stage { --ocean-accent: #60a5fa; --ocean-border: #1e2a44; --ocean-card: #0e1626; position: relative; min-height: 270px; padding-bottom: 56px; }
+.shark-ocean-stage[data-tone='pink'] { --ocean-accent: #f472b6; --ocean-border: #1e2a44; --ocean-card: #0e1626; }
 .shark-ocean-stage:last-child { padding-bottom: 0; min-height: 220px; }
-.shark-ocean-marker { position: absolute; z-index: 3; top: 42px; width: 10px; height: 10px; transform: translate(-50%, -50%); border: 1px solid #93c5fd; background: #10203a; border-radius: 50%; box-shadow: 0 0 0 5px #06070b; pointer-events: none; }
-.shark-ocean-card { position: relative; width: calc(50% - 100px); padding: 26px 28px; border-top: 1px solid #243149; border-radius: 4px 20px 20px 20px; }
+.shark-ocean-marker { position: absolute; z-index: 3; top: 42px; width: 10px; height: 10px; transform: translate(-50%, -50%); border: 1px solid #60a5fa; background: #0e1626; border-radius: 50%; box-shadow: 0 0 0 5px #070b14; pointer-events: none; }
+.shark-ocean-card { position: relative; width: calc(50% - 100px); padding: 26px 28px; border-top: 1px solid #1e2a44; border-radius: 4px 20px 20px 20px; background: #0e1626; }
 .shark-ocean-stage:nth-child(even) .shark-ocean-card { margin-left: auto; }
-.shark-ocean-card h3 { color: #dbe5f5; font-size: clamp(20px, 2vw, 27px); font-weight: 600; line-height: 1.25; letter-spacing: -0.025em; }
+.shark-ocean-card h3 { color: #f2f6ff; font-size: clamp(20px, 2vw, 27px); font-weight: 600; line-height: 1.25; letter-spacing: -0.025em; }
 .shark-ocean-details { padding-top: 20px; }
 .shark-ocean-timeline[data-ready='true'] .shark-ocean-stage[data-reached='false'] .shark-ocean-details { opacity: 0; transform: translateY(8px); }
-.shark-ocean-stage[data-reached='true'] .shark-ocean-card { border-color: var(--ocean-border); background: linear-gradient(135deg, var(--ocean-card), #0a0e18); box-shadow: inset 3px 0 var(--ocean-accent); }
-.shark-ocean-stage[data-reached='true'] .shark-ocean-marker { background: var(--ocean-accent); border-color: var(--ocean-accent); box-shadow: 0 0 0 5px #06070b, 0 0 22px var(--ocean-accent); }
+.shark-ocean-stage[data-reached='true'] .shark-ocean-card { border-color: var(--ocean-border); background: #0e1626; box-shadow: inset 3px 0 var(--ocean-accent); }
+.shark-ocean-stage[data-reached='true'] .shark-ocean-marker { background: var(--ocean-accent); border-color: var(--ocean-accent); box-shadow: 0 0 0 5px #070b14, 0 0 22px var(--ocean-accent); }
 .shark-ocean-stage[data-current='true'] .shark-ocean-card { outline: 1px solid var(--ocean-border); }
 .shark-ocean-date, .shark-ocean-location { display: flex; align-items: center; gap: 8px; color: var(--ocean-accent); font-size: 13px; font-weight: 500; line-height: 1.5; }
-.shark-ocean-date { width: fit-content; max-width: 100%; padding: 9px 12px; border: 1px solid var(--ocean-border); border-radius: 9px; background: #142b52; color: #dbeafe; font-size: 16px; font-weight: 700; }
-.shark-ocean-stage[data-tone='pink'] .shark-ocean-date { background: #400f34; color: #fce7f3; }
+.shark-ocean-date { width: fit-content; max-width: 100%; padding: 9px 12px; border: 1px solid #1e2a44; border-radius: 9px; background: #070b14; color: #f2f6ff; font-size: 16px; font-weight: 700; }
+.shark-ocean-stage[data-tone='pink'] .shark-ocean-date { background: #070b14; color: #f472b6; border-color: #1e2a44; }
 .shark-ocean-date svg, .shark-ocean-location svg { width: 16px; height: 16px; flex-shrink: 0; }
-.shark-ocean-description { margin-top: 14px; color: #b8c7dd; font-size: 15px; line-height: 1.75; }
+.shark-ocean-description { margin-top: 14px; color: #9aa8c2; font-size: 15px; line-height: 1.75; }
 .shark-ocean-location { margin-top: 16px; }
 .shark-ocean-stage-icon { position: absolute; bottom: 16px; right: 16px; width: 40px; height: 40px; color: var(--ocean-accent); opacity: 0.09; }
 @media (prefers-reduced-motion: no-preference) {

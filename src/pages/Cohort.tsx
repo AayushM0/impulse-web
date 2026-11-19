@@ -14,6 +14,7 @@ import {
 } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import { AsciiBackground, SectionKicker } from '@/components/ui';
 import { getLenis } from '@/providers/SmoothScrollProvider';
 import './Cohort.css';
 
@@ -222,7 +223,7 @@ export default function Cohort() {
   const { monthOffset, activePhase } = getCohortTimeline(timelineDate);
   const currentPhase = activePhase ?? (monthOffset >= roadmap.length ? roadmap.length - 1 : 0);
   const currentPhaseX = [100, 300, 500, 700, 900][currentPhase];
-  const currentPhaseColor = ['#38bdf8', '#c084fc', '#fb7185', '#38bdf8', '#f472b6'][currentPhase];
+  const currentPhaseColor = ['#60a5fa', '#f472b6', '#60a5fa', '#f472b6', '#60a5fa'][currentPhase];
   const categories = ['All Projects', ...new Set(cohortProjects.map((project) => project.category))];
   const visibleProjects = activeCategory === 'All Projects'
     ? cohortProjects
@@ -300,12 +301,27 @@ export default function Cohort() {
   }, [timelineDate]);
 
   return (
-    <div className="bg-[#030407] min-h-screen">
+    <div className="bg-[#070B14] min-h-screen">
       <Navbar />
       <main className="cohort-page">
         <section className="cohort-hero">
+          <AsciiBackground
+            className="cohort-hero-ascii"
+            variant="waves"
+            fade="bottom"
+            colors={['#1E2A44', '#2563EB', '#38BDF8', '#60A5FA', '#F472B6']}
+            glyphs=" ·:-=+*#%@"
+            size={13}
+            scale={1.4}
+            speed={0.65}
+            angle={-20}
+            clearing={0.15}
+            contrast={1.15}
+            intensity={1.05}
+          />
           <div className="cohort-hero-stage">
             <div className="cohort-hero-content">
+              <div className="flex justify-center mb-4"><SectionKicker label="INCUBATOR // CHAPTER ONE" /></div>
               <h1 className="cohort-motion-reveal">BUILDER <span>COHORT</span></h1>
               <div className="cohort-capsule cohort-motion-reveal">PROJECTS IN MOTION</div>
               <p className="cohort-intro cohort-motion-reveal">
@@ -337,6 +353,7 @@ export default function Cohort() {
         <div className="cohort-timeline">
           <div className="cohort-timeline-heading">
             <div>
+              <SectionKicker number="01" label="CURRICULUM // 5-MONTH SPRINT" className="mb-3" />
               <h2 className="cohort-motion-reveal">THE <span>BUILD JOURNEY</span></h2>
               <p className="cohort-motion-reveal">Five months to turn a bold idea into something real.</p>
             </div>
@@ -345,9 +362,9 @@ export default function Cohort() {
             <svg className="cohort-timeline-connector" viewBox="0 0 1020 260" preserveAspectRatio="none" aria-hidden="true">
               <defs>
                 <linearGradient id="cohort-timeline-gradient" x1="0" x2="1">
-                  <stop offset="0%" stopColor="#00d2ff" />
-                  <stop offset="53%" stopColor="#8b5cf6" />
-                  <stop offset="100%" stopColor="#ff2e93" />
+                  <stop offset="0%" stopColor="#2563EB" />
+                  <stop offset="50%" stopColor="#60A5FA" />
+                  <stop offset="100%" stopColor="#EC4899" />
                 </linearGradient>
               </defs>
               <path d="M 100 135 C 165 135, 225 245, 300 135 S 430 25, 500 135 S 630 245, 700 135 S 835 25, 900 135" />
@@ -386,9 +403,9 @@ export default function Cohort() {
             <svg className="cohort-timeline-arrow-front" viewBox="0 0 1020 260" preserveAspectRatio="none" aria-hidden="true">
               <defs>
                 <linearGradient id="cohort-timeline-arrow-front-gradient" x1="0" x2="1">
-                  <stop offset="0%" stopColor="#00d2ff" />
-                  <stop offset="53%" stopColor="#8b5cf6" />
-                  <stop offset="100%" stopColor="#ff2e93" />
+                  <stop offset="0%" stopColor="#2563EB" />
+                  <stop offset="50%" stopColor="#60A5FA" />
+                  <stop offset="100%" stopColor="#EC4899" />
                 </linearGradient>
                 <marker id="cohort-timeline-arrow-front-head" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="10" markerHeight="10" markerUnits="userSpaceOnUse" orient="auto">
                   <path d="M 1 1 L 8 5 L 1 9" fill="none" stroke="url(#cohort-timeline-arrow-front-gradient)" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
@@ -406,9 +423,9 @@ export default function Cohort() {
             <svg className="cohort-timeline-arrow-overlay" viewBox="0 0 1020 260" preserveAspectRatio="none" aria-hidden="true">
               <defs>
                 <linearGradient id="cohort-timeline-arrow-gradient" x1="0" x2="1">
-                  <stop offset="0%" stopColor="#00d2ff" />
-                  <stop offset="53%" stopColor="#8b5cf6" />
-                  <stop offset="100%" stopColor="#ff2e93" />
+                  <stop offset="0%" stopColor="#2563EB" />
+                  <stop offset="50%" stopColor="#60A5FA" />
+                  <stop offset="100%" stopColor="#EC4899" />
                 </linearGradient>
                 <marker id="cohort-timeline-arrowhead" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="8" markerHeight="8" orient="auto">
                   <path d="M 0 0 L 8 4 L 0 8" fill="none" stroke="url(#cohort-timeline-arrow-gradient)" strokeWidth="1.5" strokeDasharray="2 1" strokeLinecap="round" strokeLinejoin="round" />
@@ -446,6 +463,7 @@ export default function Cohort() {
       <section className="cohort-projects" id="cohort-projects">
         <div className="cohort-projects-heading cohort-motion-reveal">
           <div>
+            <SectionKicker number="02" label="SHOWCASE // SHIPPED CODE" className="mb-3" />
             <h2 className="cohort-motion-reveal cohort-text-reveal">COHORT FEATURED <span>PROJECTS</span></h2>
             <p className="cohort-section-kicker cohort-motion-reveal cohort-text-reveal">Built together, shipped to the world</p>
           </div>
@@ -461,7 +479,7 @@ export default function Cohort() {
 
         {visibleProjects.length ? (
           <div className="cohort-projects-grid" ref={projectsGridRef}>
-            {visibleProjects.map((project) => (
+            {visibleProjects.map((project, index) => (
               <article
                 className={`cohort-project-teaser${revealedProjectIds.has(project.id) ? ' is-revealed' : ' is-pending'}${flippedProjectId === project.id ? ' is-flipped' : ''}`}
                 data-project-id={project.id}
@@ -469,51 +487,49 @@ export default function Cohort() {
               >
                 <span className="cohort-project-teaser-inner">
                   <span className="cohort-project-teaser-face cohort-project-teaser-front">
-                    <span className="cohort-project-teaser-main">
-                      <span className="cohort-project-teaser-art" style={project.coverImage ? { backgroundImage: `url(${project.coverImage})` } : undefined}>
-                        {!project.coverImage && <Code2 size={27} strokeWidth={1.5} aria-hidden="true" />}
+                    <div className="cohort-project-card-top">
+                      <span className="cohort-project-category">{project.category}</span>
+                      <span className="cohort-project-card-art">
+                        <ProjectCardArt index={index} />
                       </span>
-                      <span className="cohort-project-teaser-copy">
-                        <span className="cohort-project-category cohort-motion-reveal cohort-text-reveal">Category: {project.category}</span>
-                        <strong className="cohort-motion-reveal cohort-text-reveal">{project.name}</strong>
-                        <span className="cohort-project-summary cohort-motion-reveal cohort-text-reveal">{project.summary}</span>
-                        <span className="cohort-project-tech-stack" aria-label="Technology stack">
-                          {project.stack.map((technology) => <span key={technology}>{technology}</span>)}
-                        </span>
-                        <span className="cohort-project-team" aria-label="Project team">
-                          Team: {project.team.map((member) => member.name).join(' · ')}
-                        </span>
+                    </div>
+                    <strong className="cohort-project-name cohort-motion-reveal cohort-text-reveal">{project.name}</strong>
+                    <p className="cohort-project-summary cohort-motion-reveal cohort-text-reveal">{project.summary}</p>
+                    <div className="cohort-project-tech-stack" aria-label="Technology stack">
+                      {project.stack.map((technology) => <span key={technology}>{technology}</span>)}
+                    </div>
+                    <div className="cohort-project-card-footer">
+                      <span className="cohort-project-team" aria-label="Project team">
+                        Team: {project.team.map((member) => member.name).join(' · ')}
                       </span>
-                    </span>
-                    <button
-                      className="cohort-project-teaser-action cohort-project-more"
-                      type="button"
-                      onClick={() => {
-                        setRevealedProjectIds((current) => new Set(current).add(project.id));
-                        setFlippedProjectId(project.id);
-                      }}
-                      aria-label={`Explore ${project.name}`}
-                    >
-                      View more <ArrowUpRight size={13} />
-                    </button>
+                      <button
+                        className="cohort-project-teaser-action cohort-project-more"
+                        type="button"
+                        onClick={() => {
+                          setRevealedProjectIds((current) => new Set(current).add(project.id));
+                          setFlippedProjectId(project.id);
+                        }}
+                        aria-label={`Explore ${project.name}`}
+                      >
+                        View details <ArrowUpRight size={13} />
+                      </button>
+                    </div>
                   </span>
                   <span className="cohort-project-teaser-face cohort-project-teaser-back">
-                    <span className="cohort-project-back-heading"><strong className="cohort-motion-reveal cohort-text-reveal">{project.name}</strong></span>
-                    <span className="cohort-project-back-details">
-                      <span className="cohort-project-back-field"><i className="cohort-motion-reveal cohort-text-reveal">PROBLEM STATEMENT</i><span>{project.problem}</span></span>
-                      <span className="cohort-project-back-field"><i className="cohort-motion-reveal cohort-text-reveal">TECHNICAL ARCHITECTURE</i><span>{project.architecture}</span></span>
-                      <span className="cohort-project-back-field"><i className="cohort-motion-reveal cohort-text-reveal">PROPOSED SOLUTION</i><span>{project.solution}</span></span>
-                      <span className="cohort-project-back-field"><i className="cohort-motion-reveal cohort-text-reveal">USP</i><span>{project.summary}</span></span>
-                    </span>
-                    <span className="cohort-project-links">
+                    <div className="cohort-project-back-header">
+                      <strong className="cohort-project-name cohort-motion-reveal cohort-text-reveal">{project.name}</strong>
+                      <span className="cohort-project-category">{project.category}</span>
+                    </div>
+                    <div className="cohort-project-back-details">
+                      <div className="cohort-project-back-field"><i className="cohort-motion-reveal cohort-text-reveal">PROBLEM STATEMENT</i><span>{project.problem}</span></div>
+                      <div className="cohort-project-back-field"><i className="cohort-motion-reveal cohort-text-reveal">TECHNICAL ARCHITECTURE</i><span>{project.architecture}</span></div>
+                      <div className="cohort-project-back-field"><i className="cohort-motion-reveal cohort-text-reveal">PROPOSED SOLUTION</i><span>{project.solution}</span></div>
+                      <div className="cohort-project-back-field"><i className="cohort-motion-reveal cohort-text-reveal">USP</i><span>{project.summary}</span></div>
+                    </div>
+                    <div className="cohort-project-links">
                       {project.links?.map((link) => (
                         <a key={link.label} href={link.url} target="_blank" rel="noreferrer">
-                          {link.label === 'GitHub Repository' ? (
-                            <>
-                              <span className="cohort-project-link-desktop-label">GitHub Repository</span>
-                              <span className="cohort-project-link-mobile-label">GitHub Repo</span>
-                            </>
-                          ) : link.label === 'Live Demo' ? 'Website' : link.label}
+                          {link.label === 'GitHub Repository' ? 'GitHub Repo' : link.label === 'Live Demo' ? 'Website' : link.label}
                           {' '}<ArrowUpRight size={11} aria-hidden="true" />
                         </a>
                       ))}
@@ -526,9 +542,9 @@ export default function Cohort() {
                         }}
                         aria-label={`Return to ${project.name} summary`}
                       >
-                        <ArrowLeft size={13} /> Tap to Return
+                        <ArrowLeft size={13} /> Return
                       </button>
-                    </span>
+                    </div>
                   </span>
                 </span>
               </article>
@@ -572,6 +588,59 @@ export default function Cohort() {
         </div>
       )}
       </main>
+    </div>
+  );
+}
+
+function ProjectCardArt({ index }: { index: number }) {
+  const mod = index % 5;
+  if (mod === 0) {
+    return (
+      <svg className="cohort-card-art-svg" viewBox="0 0 60 28" fill="none" aria-hidden="true">
+        <path d="M6 20 18 8l16 14 18-16" stroke="#60A5FA" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
+        <circle cx="6" cy="20" r="2.5" fill="#60A5FA" />
+        <circle cx="18" cy="8" r="2.5" fill="#60A5FA" />
+        <circle cx="34" cy="22" r="2.5" fill="#60A5FA" />
+        <circle cx="52" cy="6" r="2.5" fill="#F472B6" />
+      </svg>
+    );
+  }
+  if (mod === 1) {
+    return (
+      <svg className="cohort-card-art-svg" viewBox="0 0 60 28" fill="none" aria-hidden="true">
+        <rect x="8" y="16" width="7" height="9" rx="1" fill="rgba(244, 114, 182, 0.2)" stroke="#F472B6" strokeWidth="1.2" />
+        <rect x="20" y="11" width="7" height="14" rx="1" fill="rgba(244, 114, 182, 0.2)" stroke="#F472B6" strokeWidth="1.2" />
+        <rect x="32" y="6" width="7" height="19" rx="1" fill="rgba(244, 114, 182, 0.2)" stroke="#F472B6" strokeWidth="1.2" />
+        <rect x="44" y="2" width="6" height="23" rx="1" fill="rgba(244, 114, 182, 0.2)" stroke="#F472B6" strokeWidth="1.2" />
+      </svg>
+    );
+  }
+  if (mod === 2) {
+    return (
+      <svg className="cohort-card-art-svg" viewBox="0 0 60 28" fill="none" aria-hidden="true">
+        <ellipse cx="30" cy="14" rx="20" ry="7" stroke="rgba(96, 165, 250, 0.6)" strokeWidth="1.2" strokeDasharray="2 3" />
+        <ellipse cx="30" cy="14" rx="9" ry="12" stroke="rgba(244, 114, 182, 0.5)" strokeWidth="1.2" />
+        <circle cx="30" cy="14" r="3" fill="#F472B6" />
+        <circle cx="13" cy="14" r="2" fill="#60A5FA" />
+      </svg>
+    );
+  }
+  if (mod === 3) {
+    return (
+      <svg className="cohort-card-art-svg" viewBox="0 0 60 28" fill="none" aria-hidden="true">
+        <path d="M8 14h44M18 14l12-9 12 9-12 9-12-9Z" stroke="rgba(96, 165, 250, 0.7)" strokeWidth="1.2" />
+        <circle cx="8" cy="14" r="2.5" fill="#60A5FA" />
+        <circle cx="30" cy="5" r="2.5" fill="#F472B6" />
+        <circle cx="52" cy="14" r="2.5" fill="#60A5FA" />
+        <circle cx="30" cy="23" r="2.5" fill="#60A5FA" />
+      </svg>
+    );
+  }
+  return (
+    <div className="cohort-card-art-nodes flex items-center gap-1" aria-hidden="true">
+      <span className="font-mono-label text-[9px] px-1.5 py-0.5 rounded-full border border-blue-400/30 text-[#9AA8C2] bg-[#070B14]">MVP</span>
+      <span className="w-3 h-px bg-gradient-to-r from-blue-400/40 to-pink-400/40" />
+      <span className="font-mono-label text-[9px] px-1.5 py-0.5 rounded-full border border-pink-400/30 text-[#9AA8C2] bg-[#070B14]">PROD</span>
     </div>
   );
 }

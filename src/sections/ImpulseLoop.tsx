@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useReveal } from '@/hooks/useReveal';
+import { SectionKicker } from '@/components/ui';
 
 const stages = [
   { name: 'EXPLORE', description: 'Discover emerging technologies, model weights, and unexplored frontiers. Follow genuine technical curiosity.' },
@@ -25,10 +26,7 @@ export default function ImpulseLoop() {
 
       <div className="relative max-w-[1440px] mx-auto px-6 lg:px-12">
         <div className="max-w-3xl mb-16">
-          <div className="inline-flex items-center gap-2 font-mono-label text-[11px] text-impulse-blue-bright/70 border border-space-700/80 bg-space-900/60 backdrop-blur-md px-3 py-1 rounded-full mb-3">
-            <span className="w-1.5 h-1.5 rounded-full bg-impulse-blue" />
-            <span>OPERATING SYSTEM // THE FLYWHEEL</span>
-          </div>
+          <SectionKicker number="04" label="OPERATING SYSTEM // THE FLYWHEEL" />
 
           <h2 className="text-3xl sm:text-5xl lg:text-6xl font-sans font-bold text-impulse-white tracking-tight leading-tight">
             THE IMPULSE <span className="text-impulse-blue-bright">LOOP</span>
@@ -45,17 +43,17 @@ export default function ImpulseLoop() {
               <svg viewBox="0 0 560 560" className="w-full h-full">
                 <defs>
                   <linearGradient id="orbitGlow" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stopColor="#60A5FA" />
-                    <stop offset="50%" stopColor="#818CF8" />
+                    <stop offset="0%" stopColor="#2563EB" />
+                    <stop offset="50%" stopColor="#60A5FA" />
                     <stop offset="100%" stopColor="#EC4899" />
                   </linearGradient>
                 </defs>
 
                 {/* Orbital rings */}
                 <g aria-hidden="true">
-                  <circle cx={centerX} cy={centerY} r={radius} fill="none" stroke="rgba(59,130,246,0.18)" strokeWidth="1" />
-                  <circle cx={centerX} cy={centerY} r={radius + 32} fill="none" stroke="rgba(59,130,246,0.08)" strokeWidth="0.5" strokeDasharray="3 5" />
-                  <circle cx={centerX} cy={centerY} r={radius - 32} fill="none" stroke="rgba(59,130,246,0.08)" strokeWidth="0.5" strokeDasharray="3 5" />
+                  <circle cx={centerX} cy={centerY} r={radius} fill="none" stroke="rgba(37,99,235,0.18)" strokeWidth="1" />
+                  <circle cx={centerX} cy={centerY} r={radius + 32} fill="none" stroke="rgba(37,99,235,0.08)" strokeWidth="0.5" strokeDasharray="3 5" />
+                  <circle cx={centerX} cy={centerY} r={radius - 32} fill="none" stroke="rgba(37,99,235,0.08)" strokeWidth="0.5" strokeDasharray="3 5" />
 
                   {/* Dynamic Active Orbit Highlight */}
                   <circle
@@ -93,7 +91,7 @@ export default function ImpulseLoop() {
                         key={`arc-${i}`}
                         d={`M ${x1} ${y1} Q ${cpx} ${cpy} ${x2} ${y2}`}
                         fill="none"
-                        stroke={isActive ? 'rgba(96,165,250,0.85)' : 'rgba(59,130,246,0.15)'}
+                        stroke={isActive ? 'rgba(96,165,250,0.85)' : 'rgba(37,99,235,0.15)'}
                         strokeWidth={isActive ? '2' : '1'}
                         className="transition-colors duration-300"
                       />
@@ -103,8 +101,8 @@ export default function ImpulseLoop() {
 
                 {/* Center Core Impulse */}
                 <g aria-hidden="true">
-                  <circle cx={centerX} cy={centerY} r="44" fill="rgba(59,130,246,0.05)" />
-                  <circle cx={centerX} cy={centerY} r="7" fill="#F8FAFC" opacity="0.9" />
+                  <circle cx={centerX} cy={centerY} r="44" fill="rgba(37,99,235,0.06)" />
+                  <circle cx={centerX} cy={centerY} r="7" fill="#F2F6FF" opacity="0.95" />
                   <circle cx={centerX} cy={centerY} r="3" fill="#60A5FA" />
                 </g>
 
@@ -135,7 +133,7 @@ export default function ImpulseLoop() {
                         cx={x}
                         cy={y}
                         r={isActive ? 32 : 18}
-                        fill={isActive ? 'rgba(59,130,246,0.25)' : 'rgba(59,130,246,0.06)'}
+                        fill={isActive ? 'rgba(37,99,235,0.25)' : 'rgba(37,99,235,0.06)'}
                         className="transition-colors duration-300"
                       />
                       <circle
@@ -145,12 +143,12 @@ export default function ImpulseLoop() {
                         fill={isActive ? '#60A5FA' : 'rgba(96,165,250,0.6)'}
                         className="transition-colors duration-300"
                       />
-                      <circle cx={x} cy={y} r="2.5" fill="#F8FAFC" opacity="0.9" aria-hidden="true" />
+                      <circle cx={x} cy={y} r="2.5" fill="#F2F6FF" opacity="0.95" aria-hidden="true" />
                       <text
                         x={x}
                         y={y + (Math.sin(angle) > 0 ? 28 : -18)}
                         textAnchor="middle"
-                        fill={isActive ? '#F8FAFC' : 'rgba(203,213,225,0.7)'}
+                        fill={isActive ? '#F2F6FF' : '#9AA8C2'}
                         className="font-mono transition-colors duration-300 font-semibold select-none"
                         style={{ fontSize: '11px', letterSpacing: '0.12em' }}
                       >

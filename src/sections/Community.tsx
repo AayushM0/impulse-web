@@ -4,6 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
 import ImpulseField from '@/components/ImpulseField';
 import TiltCard3D from '@/components/3d/TiltCard3D';
+import { SectionKicker } from '@/components/ui';
 import { teamMembers } from '@/data/content';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -60,10 +61,7 @@ export default function Community() {
       <div className="relative max-w-[1440px] mx-auto px-6 lg:px-12">
         {/* Header */}
         <div className="mb-14">
-          <div className="inline-flex items-center gap-2 font-mono-label text-[11px] text-impulse-blue-bright/70 border border-space-700/80 bg-space-900/60 backdrop-blur-md px-3 py-1 rounded-full mb-3">
-            <span className="w-1.5 h-1.5 rounded-full bg-impulse-blue" />
-            <span>COLLECTIVE // PEOPLE</span>
-          </div>
+          <SectionKicker number="03" label="COLLECTIVE // PEOPLE" />
 
           <h2 className="text-3xl sm:text-5xl lg:text-6xl font-sans font-bold text-impulse-white tracking-tight leading-tight max-w-4xl">
             Find people who build like you <span className="text-impulse-blue-bright">think.</span>
@@ -119,8 +117,8 @@ export default function Community() {
           <div ref={cardsRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {teamMembers.map((member) => (
               <div key={member.name} className="team-card">
-                <TiltCard3D maxTilt={8} className="h-full">
-                  <div className="h-full relative p-6 bg-space-900/95 border border-space-800 hover:border-impulse-blue/40 transition-colors duration-300 flex flex-col justify-between">
+                <TiltCard3D maxTilt={8} className="h-full rounded-2xl overflow-hidden">
+                  <div className="h-full relative p-6 bg-space-900/95 border border-space-800 hover:border-impulse-blue/40 rounded-2xl transition-colors duration-300 flex flex-col justify-between">
                     <div>
                       {/* Avatar & Tag Row */}
                       <div className="flex items-center justify-between mb-6">

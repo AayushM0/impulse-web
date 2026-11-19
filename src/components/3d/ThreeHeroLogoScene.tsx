@@ -54,9 +54,9 @@ export default function ThreeHeroLogoScene({
     magentaPoint.position.set(0, 0, -6);
     scene.add(magentaPoint);
 
-    const cyanPoint = new THREE.PointLight(0x60a5fa, 45, 50);
-    cyanPoint.position.set(8, 8, 4);
-    scene.add(cyanPoint);
+    const brightBluePoint = new THREE.PointLight(0x60a5fa, 45, 50);
+    brightBluePoint.position.set(8, 8, 4);
+    scene.add(brightBluePoint);
 
     // 1. Central Core Sphere
     const coreGeometry = new THREE.SphereGeometry(1.2, 32, 32);

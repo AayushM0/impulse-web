@@ -28,12 +28,12 @@ function PageTitle() {
   useEffect(() => {
     const titles: Record<string, string> = {
       '/': 'IMPULSE: Ideas in Motion',
-      '/join': 'Join IMPULSE: Ideas in Motion',
-      '/events': 'Events: IMPULSE',
-      '/cohort': 'Builder Cohort: IMPULSE',
-      '/shark-hack': 'SHARK HACK 2027: Impulse Flagship Hackathon',
-      '/events/shark-hack': 'SHARK HACK 2027: Impulse Flagship Hackathon',
-      '/community': 'Community: IMPULSE',
+      '/join': 'Join | IMPULSE: Ideas in Motion',
+      '/events': 'Events | IMPULSE: Ideas in Motion',
+      '/cohort': 'Builder Cohort | IMPULSE: Ideas in Motion',
+      '/shark-hack': 'Shark Hack 2027 | IMPULSE: Ideas in Motion',
+      '/events/shark-hack': 'Shark Hack 2027 | IMPULSE: Ideas in Motion',
+      '/community': 'Community | IMPULSE: Ideas in Motion',
     };
     document.title = titles[location.pathname] || 'IMPULSE: Ideas in Motion';
   }, [location.pathname]);

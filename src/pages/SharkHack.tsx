@@ -2,8 +2,10 @@ import { useEffect, useRef, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { ArrowRight, ArrowUpRight, Calendar, ChevronDown, Coins, MapPin, Trophy, Users, FileText, Code2, Flag, CheckCircle2, Clock3, ClipboardList, Mic2, MonitorPlay, MessagesSquare, Handshake, GraduationCap, Sparkles, Award, Building2, LayoutGrid, CircleHelp, X } from 'lucide-react';
 import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
 import SharkRegistrationButton from '@/components/SharkRegistrationButton';
 import SharkTimeline from '@/components/OceanSharkTimeline';
+import { SectionKicker } from '@/components/ui';
 import { useEventReveals } from '@/hooks/useEventReveals';
 import './SharkHack.css';
 
@@ -199,7 +201,9 @@ export default function SharkHack() {
               <Link to="/events" className={'shark-back-link' + focusStyle}><ArrowUpRight className="shark-back-icon" aria-hidden="true" /> All events</Link>
             </div>
             <div className="shark-hero-content">
-              <p className="shark-hero-eyebrow"><span aria-hidden="true" /> Impulse presents · All-India hackathon</p>
+              <div className="flex justify-center mb-4">
+                <SectionKicker label="ALL-INDIA HACKATHON // FINALE" />
+              </div>
               <h1 id="shark-hack-title" className="shark-hero-title">SHARK <span>HACK</span></h1>
               <p className="shark-hero-tagline">Don’t just build. <span>Make them believe.</span></p>
               <p className="shark-hero-description">Build a solution to a surprise problem. Earn your place in the Delhi final, then pitch, demonstrate and negotiate its value with the Sharks.</p>
@@ -235,7 +239,10 @@ export default function SharkHack() {
         <section id="timeline" {...panelProps('timeline')} className="shark-section shark-journey-section">
           <div className="shark-content-width">
             <div className="shark-section-heading">
-              <div><p className="shark-eyebrow"><span>01</span> Your event timeline</p><h2 id="timeline-title">Your path to<br />the <em>Shark Room.</em></h2></div>
+              <div>
+                <SectionKicker number="01" label="TIMELINE // THE JOURNEY" className="mb-4" />
+                <h2 id="timeline-title">Your path to<br />the <em>Shark Room.</em></h2>
+              </div>
               <p className="shark-section-intro">From ideas to impact: follow the journey to SHARK HACK.</p>
             </div>
             <SharkTimeline steps={timeline} />
@@ -245,7 +252,10 @@ export default function SharkHack() {
         <section id="shark-room" {...panelProps('shark-room')} className="shark-section shark-room-section">
           <div className="shark-content-width">
             <div className="shark-section-heading">
-              <div><p className="shark-eyebrow"><span>02</span> For shortlisted teams · Delhi</p><h2 id="shark-room-title">What happens in<br />the <em>Shark Room?</em></h2></div>
+              <div>
+                <SectionKicker number="02" label="FINALS // THE SHARK ROOM" className="mb-4" />
+                <h2 id="shark-room-title">What happens in<br />the <em>Shark Room?</em></h2>
+              </div>
               <p className="shark-section-intro">Meet the judges, present your solution and defend its value. Follow the four stages of the offline final.</p>
             </div>
             <div className="shark-room-explorer">
@@ -266,7 +276,13 @@ export default function SharkHack() {
 
         <section id="prizes" {...panelProps('prizes')} className="shark-section shark-prizes-section">
           <div className="shark-content-width">
-            <div className="shark-section-heading"><div><p className="shark-eyebrow"><span><Trophy aria-hidden="true" /></span> Prizes & recognition</p><h2 id="prizes-title">Prizes</h2></div><div className="shark-section-symbol" aria-hidden="true"><Trophy /></div></div>
+            <div className="shark-section-heading">
+              <div>
+                <SectionKicker number="03" label="REWARDS // PRIZE POOL" className="mb-4" />
+                <h2 id="prizes-title">Prizes</h2>
+              </div>
+              <div className="shark-section-symbol" aria-hidden="true"><Trophy /></div>
+            </div>
             <div className="shark-prize-grid">
               {[
                 { place: 'First place', rank: '1', badge: '1ST', className: 'main', icon: Trophy },
@@ -293,7 +309,7 @@ export default function SharkHack() {
 
         <section id="partners" {...panelProps('partners')} className="shark-section shark-partners-section">
           <div className="shark-content-width">
-            <div className="shark-section-heading"><div><p className="shark-eyebrow"><span><Handshake aria-hidden="true" /></span> Sponsors & community</p><h2>Our sponsors.<br /><em>Our community partners.</em></h2></div></div>
+            <div className="shark-section-heading"><div><SectionKicker number="04" label="PARTNERS // ECOSYSTEM" className="mb-4" /><h2>Our sponsors.<br /><em>Our community partners.</em></h2></div></div>
             <div className="shark-partner-grid">
               <div className="shark-partner-card"><div className="shark-partner-heading"><span className="shark-colour-icon"><Building2 aria-hidden="true" /></span><h3>Sponsors</h3></div><div className="shark-partner-empty"><p>To be announced</p></div></div>
               <div className="shark-partner-card"><div className="shark-partner-heading"><span className="shark-colour-icon"><Handshake aria-hidden="true" /></span><h3>Community Partners</h3></div><div className="shark-partner-empty"><p>To be announced</p></div></div>
@@ -303,7 +319,7 @@ export default function SharkHack() {
 
         <section id="faq" {...panelProps('faq')} className="shark-section">
           <div className="shark-content-width shark-faq-layout">
-            <div><p className="shark-eyebrow"><span>04</span> Before you register</p><h2 id="faq-title">Good questions.<br /><em>Clear answers.</em></h2></div>
+            <div><SectionKicker number="05" label="INTEL // FREQUENTLY ASKED" className="mb-4" /><h2 id="faq-title">Good questions.<br /><em>Clear answers.</em></h2></div>
             <div className="shark-faq-list">
               {faqs.map(({ question, answer }, index) => {
                 const FaqIcon = faqIcons[index];
@@ -319,6 +335,7 @@ export default function SharkHack() {
         </section>
 
       </main>
+      <Footer />
     </div>
   );
 }

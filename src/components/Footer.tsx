@@ -44,13 +44,24 @@ export default function Footer() {
             <ul className="space-y-3">
               {socialLinks.map((link) => (
                 <li key={link.label}>
-                  <a
-                    href={link.href}
-                    className="group inline-flex items-center gap-1 text-impulse-gray-light/80 hover:text-impulse-white transition-colors duration-300 text-sm tracking-wide"
-                  >
-                    {link.label}
-                    <ArrowUpRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-opacity" />
-                  </a>
+                  {link.href && link.href !== '#' ? (
+                    <a
+                      href={link.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group inline-flex items-center gap-1.5 text-impulse-gray-light/80 hover:text-impulse-white transition-colors duration-300 text-sm tracking-wide"
+                    >
+                      {link.label}
+                      <ArrowUpRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-opacity" />
+                    </a>
+                  ) : (
+                    <span className="inline-flex items-center gap-2 text-impulse-gray-light/50 text-sm tracking-wide select-none cursor-default">
+                      <span>{link.label}</span>
+                      <span className="font-mono-label text-[10px] px-1.5 py-0.5 rounded border border-space-700 bg-space-900/60 text-impulse-blue-bright/60">
+                        SOON
+                      </span>
+                    </span>
+                  )}
                 </li>
               ))}
             </ul>

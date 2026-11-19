@@ -56,7 +56,7 @@ export default function ConnectWithUs() {
     const getWaveY = (x: number, time: number, track: 0 | 1) => {
       const cy = height * 0.52;
       if (track === 0) {
-        // Cyan-blue wave
+        // Blue wave
         return (
           cy +
           Math.sin(x * 0.009 + time * 1.8) * 16 +
@@ -75,9 +75,9 @@ export default function ConnectWithUs() {
     // Initialize stream particles
     const particleColors = [
       'rgba(96, 165, 250, ',
-      'rgba(56, 189, 248, ',
+      'rgba(37, 99, 235, ',
       'rgba(244, 114, 182, ',
-      'rgba(232, 121, 249, ',
+      'rgba(236, 72, 153, ',
       'rgba(255, 255, 255, ',
     ];
 
@@ -198,11 +198,11 @@ export default function ConnectWithUs() {
 
         const waveGrad = ctx.createLinearGradient(0, 0, width, 0);
         if (track === 0) {
-          waveGrad.addColorStop(0, 'rgba(59, 130, 246, 0)');
+          waveGrad.addColorStop(0, 'rgba(37, 99, 235, 0)');
           waveGrad.addColorStop(0.2, 'rgba(96, 165, 250, 0.45)');
           waveGrad.addColorStop(0.5, 'rgba(147, 197, 253, 0.65)');
           waveGrad.addColorStop(0.8, 'rgba(232, 121, 249, 0.45)');
-          waveGrad.addColorStop(1, 'rgba(59, 130, 246, 0)');
+          waveGrad.addColorStop(1, 'rgba(37, 99, 235, 0)');
           ctx.strokeStyle = waveGrad;
           ctx.lineWidth = 1.8;
           ctx.shadowColor = '#60a5fa';

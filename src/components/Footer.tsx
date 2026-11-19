@@ -1,3 +1,4 @@
+import { useRef } from 'react';
 import { Link } from 'react-router-dom';
 
 const navLinks = [
@@ -114,25 +115,29 @@ const socials = [
 ];
 
 export default function Footer() {
-  return (
-    <footer className="relative w-full overflow-hidden bg-space-950 text-white border-t border-white/20 select-none">
-      {/* Background blueprint wireframes and ambient bottom glow */}
-      <div className="absolute inset-0 pointer-events-none select-none overflow-hidden" aria-hidden="true">
-        <img
-          alt=""
-          draggable={false}
-          loading="lazy"
-          decoding="async"
-          className="w-full h-full object-cover object-bottom opacity-85"
-          src="/images/backgrounds/bg-footer.svg"
-        />
-      </div>
+  const footerRef = useRef<HTMLElement>(null);
+  const wordmarkRef = useRef<HTMLDivElement>(null);
+  const mascotRef = useRef<HTMLImageElement>(null);
+  const headingRef = useRef<HTMLDivElement>(null);
 
-      {/* Desktop / Tablet Container */}
-      <div className="hidden md:block relative max-w-7xl mx-auto px-8 pt-12 pb-16 font-sans">
-        {/* Top bar: Nav on left, Socials on right */}
-        <div className="flex items-center justify-between text-sm text-gray-300 font-medium mb-10">
-          <nav className="flex items-center gap-8" aria-label="Footer navigation">
+  return (
+    <footer
+      ref={footerRef}
+      className="relative w-full overflow-hidden bg-space-950 text-white border-t border-white/20 select-none min-h-[360px] md:min-h-[420px] lg:min-h-[500px] flex flex-col justify-between"
+    >
+      <div className="relative w-full max-w-[1440px] mx-auto px-6 lg:px-10 pt-6 pb-0 font-sans flex-1 flex flex-col justify-between min-h-[360px] md:min-h-[420px] lg:min-h-[500px]">
+        {/* Top bar: Editorial headline, nav links, socials */}
+        <div className="flex flex-col md:flex-row items-center justify-between gap-6 md:gap-4 text-sm text-gray-300 font-medium pt-2 pb-6">
+          <div className="overflow-hidden">
+            <div ref={headingRef} className="text-xl font-bold tracking-tight text-white/90">
+              IDEAS IN MOTION.
+            </div>
+          </div>
+
+          <nav
+            className="flex items-center gap-6 md:gap-8 flex-wrap justify-center text-xs md:text-sm font-medium"
+            aria-label="Footer navigation"
+          >
             {navLinks.map((link) => (
               <Link
                 key={link.label}
@@ -160,13 +165,18 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Giant Outlined Wordmark with Nestled Mascot */}
-        <div className="text-center overflow-visible px-4 pt-4 pb-8">
+        {/* Stretched Outlined Wordmark Stuck to Bottom */}
+        <div
+          ref={wordmarkRef}
+          style={{ transformOrigin: 'bottom center' }}
+          className="footer-bottom w-full flex justify-center items-end text-center overflow-hidden pb-0 select-none will-change-transform"
+        >
           <h1
-            className="text-[clamp(4.5rem,14vw,11.5rem)] tracking-wider text-transparent overflow-visible leading-none select-none inline-flex items-center justify-center"
+            className="text-[clamp(3.8rem,18.5vw,15.5rem)] text-transparent overflow-visible leading-[0.82] select-none inline-flex items-center justify-center w-full mb-[-0.04em]"
             style={{
               fontFamily: "'TheSansMono', monospace",
-              WebkitTextStroke: '2px rgba(255, 255, 255, 0.9)',
+              letterSpacing: '0.05em',
+              WebkitTextStroke: '2.5px rgba(255, 255, 255, 0.95)',
             }}
           >
             <span>IM</span>
@@ -184,6 +194,7 @@ export default function Footer() {
                 title="Impulse Mascot"
               >
                 <img
+                  ref={mascotRef}
                   src="/images/mascot.avif"
                   alt="Impulse mascot"
                   draggable={false}
@@ -193,84 +204,6 @@ export default function Footer() {
             </span>
             <span>ULSE</span>
           </h1>
-        </div>
-      </div>
-
-      {/* Mobile Container */}
-      <div className="md:hidden relative w-full px-4 pt-10 pb-12 font-sans">
-        <div className="flex flex-col items-center gap-6 max-w-sm mx-auto text-center">
-          {/* Mobile Outlined Wordmark */}
-          <h1
-            className="text-[52px] tracking-wider text-transparent leading-tight select-none inline-flex items-center justify-center"
-            style={{
-              fontFamily: "'TheSansMono', monospace",
-              WebkitTextStroke: '2px #FFFFFF',
-            }}
-          >
-            <span>IM</span>
-            <span className="relative inline-flex items-center justify-center">
-              <span>P</span>
-              <span
-                className="absolute pointer-events-auto"
-                style={{
-                  top: '19%',
-                  left: '41%',
-                  width: '30%',
-                  height: '30%',
-                }}
-              >
-                <img
-                  src="/images/mascot.avif"
-                  alt="Impulse mascot"
-                  draggable={false}
-                  className="w-full h-full object-contain rounded-full"
-                />
-              </span>
-            </span>
-            <span>ULSE</span>
-          </h1>
-
-          {/* Navigation Links wrapped across 2 neat rows */}
-          <nav className="w-full text-xs font-medium" aria-label="Mobile footer navigation">
-            <div className="flex justify-center gap-4 flex-wrap">
-              {navLinks.slice(0, 3).map((link) => (
-                <Link
-                  key={link.label}
-                  to={link.path}
-                  className="text-gray-300 hover:text-white transition px-1"
-                >
-                  {link.label}
-                </Link>
-              ))}
-            </div>
-            <div className="flex justify-center gap-4 flex-wrap mt-2.5">
-              {navLinks.slice(3).map((link) => (
-                <Link
-                  key={link.label}
-                  to={link.path}
-                  className="text-gray-300 hover:text-white transition px-1"
-                >
-                  {link.label}
-                </Link>
-              ))}
-            </div>
-          </nav>
-
-          {/* Social Icons row */}
-          <div className="flex items-center justify-center gap-5 text-gray-400 mt-2">
-            {socials.map((item) => (
-              <a
-                key={item.name}
-                href={item.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={item.name}
-                className="hover:text-white"
-              >
-                {item.svg}
-              </a>
-            ))}
-          </div>
         </div>
       </div>
     </footer>

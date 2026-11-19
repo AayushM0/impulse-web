@@ -178,7 +178,7 @@
   gap: 9px;
   margin: 20px auto 0;
   color: #9aa8c2;
-  font: 9px ui-monospace, monospace;
+  font: 11px/1.4 'JetBrains Mono', monospace;
   letter-spacing: 0.2em;
 }
 
@@ -226,7 +226,7 @@
   border-radius: 999px;
   background: #0e1626;
   color: #f2f6ff;
-  font: 10px ui-monospace, monospace;
+  font: 11px/1.4 'JetBrains Mono', monospace;
   letter-spacing: 0.09em;
   box-shadow: inset 0 1px rgba(255, 255, 255, 0.06), 0 0 16px rgba(37, 99, 235, 0.08);
   transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease, background 0.22s ease;
@@ -285,7 +285,7 @@
   .community-connect-title { font-size: clamp(2rem, 9vw, 2.5rem); letter-spacing: -0.06em; }
   .community-connect-title-dot-left { left: -17px; }
   .community-connect-title-dot-right { right: -17px; }
-  .community-connect-kicker { margin-top: 16px; font-size: 8px; letter-spacing: 0.16em; }
+  .community-connect-kicker { margin-top: 16px; font-size: 10px; letter-spacing: 0.16em; }
   .community-connect-copy { max-width: 320px; margin: 14px auto 0; font-size: 13px; line-height: 1.6; }
   .community-connect-links {
     display: grid;
@@ -295,7 +295,7 @@
     width: min(100%, 300px);
     max-width: 100%;
   }
-  .community-connect-link { width: 100%; min-width: 0; min-height: 44px; padding: 11px 7px; font-size: 9px; letter-spacing: 0.04em; }
+  .community-connect-link { width: 100%; min-width: 0; min-height: 44px; padding: 11px 7px; font-size: 10px; letter-spacing: 0.04em; }
   .community-connect-link:last-child { grid-column: 1 / -1; justify-self: center; width: calc(50% - 5px); }
 }
 

@@ -384,7 +384,7 @@
   .cohort-projects { margin-top: 84px; }
 }
 .cohort-projects-heading { margin-bottom: 45px; display: flex; align-items: end; justify-content: space-between; gap: 20px; }
-.cohort-section-kicker { margin-bottom: 5px; font-size: 9px; }
+.cohort-section-kicker { margin-bottom: 5px; font-size: 11px; }
 .cohort-projects-heading .cohort-section-kicker { color: #F2F6FF; font-family: inherit; font-size: 17px; font-weight: 400; letter-spacing: normal; }
 .cohort-projects-heading h2 { margin: 0; color: #F2F6FF; font-size: 32px; font-weight: 600; letter-spacing: -0.04em; }
 .cohort-projects-heading h2 span { color: #EC4899; }
@@ -401,7 +401,7 @@
     #0E1626;
   box-shadow: 0 0 12px rgba(37, 99, 235, .1);
   color: #F2F6FF;
-  font-size: 9px;
+  font-size: 11px;
   cursor: pointer;
   transition: transform 180ms ease, box-shadow 180ms ease, filter 180ms ease, border-color 180ms ease;
 }
@@ -603,17 +603,17 @@
   100% { transform: scale(1.04); }
 }
 
-.cohort-project-return { min-height: 0; margin: 0; flex: 0 0 auto; padding: 5px 9px; border-color: #1E2A44; font-size: 8px; white-space: nowrap; }
+.cohort-project-return { min-height: 0; margin: 0; flex: 0 0 auto; padding: 5px 9px; border-color: #1E2A44; font-size: 10px; white-space: nowrap; }
 .cohort-project-return svg { transform: rotate(180deg); }
 .cohort-stack-list { display: flex; flex-wrap: wrap; gap: 5px; }
 .cohort-stack-list i,
-.cohort-detail-tags span { padding: 4px 7px; border: 1px solid #1E2A44; border-radius: 12px; color: #9AA8C2; font-size: 8px; font-style: normal; }
+.cohort-detail-tags span { padding: 4px 7px; border: 1px solid #1E2A44; border-radius: 12px; color: #9AA8C2; font-size: 10px; font-style: normal; }
 .cohort-project-empty { min-height: 185px; padding: 28px 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; border: 1px dashed #1E2A44; border-radius: 8px; background: radial-gradient(ellipse at 50% 100%, rgba(37, 99, 235, .07), transparent 62%), #0E1626; text-align: center; }
 .cohort-empty-mark { width: 36px; height: 36px; margin-bottom: 12px; display: grid; place-items: center; border: 1px solid rgba(96, 165, 250, .4); border-radius: 50%; color: #60A5FA; }
-.cohort-empty-kicker { margin-bottom: 5px; font-size: 8px; }
+.cohort-empty-kicker { margin-bottom: 5px; font-size: 10px; }
 .cohort-project-empty h3 { margin: 0 0 5px; color: #F2F6FF; font-size: 18px; font-weight: 600; }
 .cohort-project-empty > p:last-child { margin: 0; color: #9AA8C2; font-size: 10px; }
-.cohort-coming-soon { margin: 22px auto 0; display: flex; align-items: center; justify-content: center; gap: 11px; color: #9AA8C2; font: 600 8px 'JetBrains Mono', monospace; letter-spacing: .12em; }
+.cohort-coming-soon { margin: 22px auto 0; display: flex; align-items: center; justify-content: center; gap: 11px; color: #9AA8C2; font: 600 10px 'JetBrains Mono', monospace; letter-spacing: .12em; }
 .cohort-coming-soon span { width: 42px; height: 1px; background: linear-gradient(90deg, transparent, rgba(37, 99, 235, .5)); }
 .cohort-coming-soon span:last-child { transform: rotate(180deg); }
 .cohort-coming-soon i { color: #60A5FA; font-size: 17px; font-style: normal; font-weight: 400; }
@@ -627,25 +627,25 @@
 .cohort-roadmap { border-top: 1px solid #1E2A44; }
 .cohort-roadmap-step { min-height: 61px; display: grid; grid-template-columns: 68px 1fr; align-items: center; gap: 13px; border-bottom: 1px solid #1E2A44; }
 .cohort-roadmap-month { display: flex; flex-direction: column; color: #60A5FA; font: 700 11px 'JetBrains Mono', monospace; }
-.cohort-roadmap-month small { margin-top: 2px; color: #9AA8C2; font-size: 7px; }
+.cohort-roadmap-month small { margin-top: 2px; color: #9AA8C2; font-size: 10px; }
 .cohort-roadmap-step strong { color: #F2F6FF; font-size: 11px; font-weight: 600; }
-.cohort-roadmap-step p { margin: 3px 0 0; color: #9AA8C2; font-size: 9px; line-height: 1.5; }
-.cohort-modal-footnote { margin-top: 18px; display: flex; align-items: center; gap: 9px; color: #9AA8C2; font-size: 9px; }
+.cohort-roadmap-step p { margin: 3px 0 0; color: #9AA8C2; font-size: 11px; line-height: 1.5; }
+.cohort-modal-footnote { margin-top: 18px; display: flex; align-items: center; gap: 9px; color: #9AA8C2; font-size: 11px; }
 .cohort-detail-columns { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin: 23px 0; }
 .cohort-detail-columns > div { padding: 13px; border: 1px solid #1E2A44; border-radius: 6px; background: #070B14; }
-.cohort-detail-label { color: #60A5FA; font: 600 8px 'JetBrains Mono', monospace; letter-spacing: .12em; }
+.cohort-detail-label { color: #60A5FA; font: 600 10px 'JetBrains Mono', monospace; letter-spacing: .12em; }
 .cohort-detail-columns p { margin: 7px 0 0; color: #9AA8C2; font-size: 10px; line-height: 1.6; }
 .cohort-detail-section { margin-top: 20px; }
 .cohort-detail-tags,.cohort-detail-team,.cohort-detail-links { margin-top: 9px; display: flex; flex-wrap: wrap; gap: 7px; }
-.cohort-detail-team > span { display: inline-flex; align-items: center; gap: 7px; margin-right: 9px; color: #F2F6FF; font-size: 9px; }
-.cohort-detail-team i { width: 25px; height: 25px; display: grid; place-items: center; border: 1px solid rgba(96, 165, 250, .45); border-radius: 50%; color: #60A5FA; font-size: 9px; font-style: normal; }
+.cohort-detail-team > span { display: inline-flex; align-items: center; gap: 7px; margin-right: 9px; color: #F2F6FF; font-size: 11px; }
+.cohort-detail-team i { width: 25px; height: 25px; display: grid; place-items: center; border: 1px solid rgba(96, 165, 250, .45); border-radius: 50%; color: #60A5FA; font-size: 11px; font-style: normal; }
 .cohort-detail-team b { display: flex; flex-direction: column; font-weight: 500; }
-.cohort-detail-team small { margin-top: 2px; color: #9AA8C2; font-size: 8px; }
+.cohort-detail-team small { margin-top: 2px; color: #9AA8C2; font-size: 10px; }
 .cohort-outcomes { display: flex; flex-wrap: wrap; gap: 24px; padding: 13px 0; border-top: 1px solid #1E2A44; border-bottom: 1px solid #1E2A44; }
 .cohort-outcomes > div { display: flex; flex-direction: column; }
 .cohort-outcomes strong { color: #F472B6; font-size: 17px; }
-.cohort-outcomes span { color: #9AA8C2; font-size: 8px; }
-.cohort-detail-links a { display: inline-flex; align-items: center; gap: 6px; padding: 8px 10px; border: 1px solid #1E2A44; border-radius: 4px; color: #F2F6FF; font-size: 9px; text-decoration: none; }
+.cohort-outcomes span { color: #9AA8C2; font-size: 10px; }
+.cohort-detail-links a { display: inline-flex; align-items: center; gap: 6px; padding: 8px 12px; border: 1px solid #1E2A44; border-radius: 8px; color: #F2F6FF; font-size: 11px; text-decoration: none; }
 .cohort-detail-links a:hover { border-color: #60A5FA; }
 @keyframes cohort-fade-in { from { opacity: 0; } to { opacity: 1; } }
 @keyframes cohort-rise-in { from { opacity: 0; transform: translateY(8px) scale(.99); } to { opacity: 1; transform: translateY(0) scale(1); } }
@@ -727,7 +727,7 @@
 }
 @media (max-width: 680px) {
   .cohort-hero-content { padding: 24px 20px; }
-  .cohort-capsule { font-size: 9px; letter-spacing: .14em; }
+  .cohort-capsule { font-size: 10px; letter-spacing: .14em; }
   .cohort-intro { max-width: 410px; font-size: 14px; }
   .cohort-timeline-section { padding-top: 20px; }
   .cohort-timeline-heading { min-height: 0; margin-bottom: 28px; align-items: flex-start; }
@@ -765,14 +765,14 @@
   .cohort-project-teaser-copy > .cohort-project-category { margin-bottom: 8px; }
   .cohort-project-teaser-copy > strong { font-size: 18px; }
   .cohort-project-tech-stack { margin-top: 12px; }
-  .cohort-project-tech-stack > span { padding: 3px 5px; font-size: 8px; }
+  .cohort-project-tech-stack > span { padding: 3px 5px; font-size: 10px; }
   .cohort-project-team { margin: 12px 0 0; font-size: 11px; }
   .cohort-project-more { margin-top: 12px; }
-  .cohort-project-category { font-size: 8px; }
+  .cohort-project-category { font-size: 10px; }
   .cohort-project-summary { font-size: 12px; }
   .cohort-project-back-details { flex: 0 0 auto; grid-template-columns: 1fr; grid-template-rows: auto; gap: 6px; }
   .cohort-project-back-field { min-height: auto; overflow: visible; padding: 7px; font-size: 10px; }
-  .cohort-project-back-details i { font-size: 8px; }
+  .cohort-project-back-details i { font-size: 10px; }
   .cohort-project-back-field > span { display: block; overflow: visible; }
   .cohort-modal { padding: 30px 22px 24px; }
   .cohort-modal h2 { font-size: 26px; }

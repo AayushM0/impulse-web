@@ -149,7 +149,7 @@
 .community-art-core { fill: #F472B6; filter: drop-shadow(0 0 4px rgba(244, 114, 182, .8)); }
 .community-art-satellite { fill: #60A5FA; }
 .community-build-path { display: flex; align-items: center; gap: 5px; width: 150px; height: 54px; flex: 0 1 150px; }
-.community-build-node { position: relative; z-index: 1; padding: 4px 5px; border: 1px solid rgba(147, 197, 253, .19); border-radius: 999px; background: #070B14; color: #9AA8C2; font: 8px ui-monospace, monospace; letter-spacing: .08em; }
+.community-build-node { position: relative; z-index: 1; padding: 4px 6px; border: 1px solid rgba(147, 197, 253, .19); border-radius: 999px; background: #070B14; color: #9AA8C2; font: 10px 'JetBrains Mono', monospace; letter-spacing: .08em; }
 .community-build-line { position: relative; display: block; height: 1px; flex: 1 1 18px; overflow: hidden; background: linear-gradient(90deg, rgba(96, 165, 250, .24), rgba(244, 114, 182, .24)); }
 .community-build-line i { position: absolute; top: -2px; left: 0; width: 5px; height: 5px; border-radius: 50%; background: #60A5FA; box-shadow: 0 0 9px rgba(96, 165, 250, .95); opacity: 0; }
 .community-build-card.is-visible .community-build-line i { animation: community-build-travel 2.4s ease-in-out infinite; }
@@ -212,9 +212,8 @@
   border-radius: 14px;
   background: #0E1626;
   color: #9AA8C2;
-  font: 9px ui-monospace, monospace;
+  font: 11px/1.5 'JetBrains Mono', monospace;
   letter-spacing: .14em;
-  line-height: 1.5;
 }
 
 .community-roster-count strong {
@@ -232,7 +231,7 @@
 
 .community-org-level-label > span {
   color: #60A5FA;
-  font: 9px ui-monospace, monospace;
+  font: 11px/1.4 'JetBrains Mono', monospace;
   letter-spacing: .16em;
 }
 
@@ -462,7 +461,7 @@
 
 .community-team-node-heading-left > span {
   color: #9AA8C2;
-  font: 9px ui-monospace, monospace;
+  font: 11px/1.4 'JetBrains Mono', monospace;
   letter-spacing: .16em;
 }
 
@@ -476,7 +475,7 @@
 .community-team-count {
   margin: 0;
   color: #9AA8C2;
-  font: 8.5px ui-monospace, monospace;
+  font: 10px 'JetBrains Mono', monospace;
   letter-spacing: .12em;
 }
 
@@ -497,7 +496,7 @@
   gap: 7px;
   margin: 16px 0 12px;
   color: #60A5FA;
-  font: 8px ui-monospace, monospace;
+  font: 10px 'JetBrains Mono', monospace;
   letter-spacing: .15em;
 }
 
@@ -773,7 +772,7 @@
   left: 4px;
   overflow: hidden;
   color: rgba(255, 255, 255, 0.76);
-  font: 6px ui-monospace, monospace;
+  font: 10px 'JetBrains Mono', monospace;
   letter-spacing: .08em;
   text-align: center;
   white-space: nowrap;
@@ -800,7 +799,7 @@
 
 .community-member-designation {
   color: #9AA8C2;
-  font-size: 9px;
+  font-size: 11px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -810,7 +809,7 @@
   display: -webkit-box;
   overflow: hidden;
   color: #9AA8C2;
-  font-size: 8px;
+  font-size: 11px;
   line-height: 1.35;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
@@ -819,7 +818,7 @@
 .community-member-open {
   margin-top: auto;
   color: rgba(147, 197, 253, 0.75);
-  font: 7px ui-monospace, monospace;
+  font: 10px 'JetBrains Mono', monospace;
   letter-spacing: .08em;
   text-align: right;
 }
@@ -863,7 +862,7 @@
 
 .community-member-back-badge {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 7.5px;
+  font-size: 10px;
   padding: 2px 6px;
   border-radius: 999px;
   background: rgba(147, 197, 253, 0.15);
@@ -903,21 +902,21 @@
 
 .community-field-label {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 7px;
+  font-size: 10px;
   color: #60A5FA;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
 .community-field-val {
-  font-size: 8.5px;
+  font-size: 11px;
   color: #9AA8C2;
   line-height: 1.25;
   word-break: break-word;
 }
 
 .community-field-link {
-  font-size: 8.5px;
+  font-size: 11px;
   color: #f472b6;
   text-decoration: underline;
   text-underline-offset: 2px;
@@ -929,7 +928,7 @@
 .community-member-back-hint {
   display: block;
   font-family: 'JetBrains Mono', monospace;
-  font-size: 7px;
+  font-size: 10px;
   letter-spacing: 0.08em;
   color: rgba(147, 197, 253, 0.7);
   text-align: center;
@@ -1167,7 +1166,7 @@
 .community-president-watermark svg { width: 100%; height: 100%; stroke-width: 1; }
 .community-member-president .community-member-copy { position: relative; z-index: 1; padding-top: 8px; }
 .community-member-president .community-member-name { font-size: 14px; }
-.community-member-president .community-member-designation { color: #9AA8C2; font-size: 9px; }
+.community-member-president .community-member-designation { color: #9AA8C2; font-size: 11px; }
 
 .community-president-badge {
   align-self: flex-start;
@@ -1177,7 +1176,7 @@
   border-radius: 999px;
   background: linear-gradient(90deg, rgba(37, 99, 235, .2), rgba(124, 91, 235, .17));
   color: #9AA8C2;
-  font: 600 6px/1.2 'Space Grotesk', Inter, sans-serif;
+  font: 600 10px/1.2 'Space Grotesk', Inter, sans-serif;
   letter-spacing: .13em;
   white-space: nowrap;
 }
@@ -1187,7 +1186,7 @@
   overflow: hidden;
   margin-top: 2px;
   color: rgba(202, 213, 239, .72);
-  font-size: 8px;
+  font-size: 11px;
   line-height: 1.35;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
@@ -1204,8 +1203,8 @@
 @media (max-width: 767px) {
   .community-member-president .community-member-photo { width: 86%; }
   .community-member-president .community-member-name { font-size: 12px; }
-  .community-president-badge { font-size: 5.5px; }
-  .community-president-tagline { font-size: 7px; }
+  .community-president-badge { font-size: 10px; }
+  .community-president-tagline { font-size: 10px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

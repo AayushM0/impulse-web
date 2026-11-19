@@ -76,11 +76,11 @@
   .events-page .event-card-image { height: 160px; }
 }
 @media (max-width: 359px) {
-  .events-page .events-eyebrow { font-size: 8px; letter-spacing: .05em; }
+  .events-page .events-eyebrow { font-size: 10px; letter-spacing: .05em; }
   .events-page .event-card-body { padding: 16px; }
   .events-page .event-card-facts { gap: 8px; }
   .events-page .event-card-facts > div { padding: 10px 8px; }
-  .events-page .event-card-facts dt { font-size: 9px; gap: 4px; }
+  .events-page .event-card-facts dt { font-size: 10px; gap: 4px; }
   .events-page .event-card-facts time { font-size: 16px; }
 }
 
@@ -129,7 +129,7 @@
   .events-page > footer .mt-16 { margin-top: 32px; padding-top: 24px; align-items: flex-start; text-align: left; }
 }
 @media (max-width: 359px) {
-  .events-page .events-eyebrow { font-size: 9px; letter-spacing: 0.03em; }
+  .events-page .events-eyebrow { font-size: 10px; letter-spacing: 0.03em; }
   .events-page .event-card-body { padding: 18px; }
   .events-page .event-card-facts { grid-template-columns: 1fr; }
   .events-page .event-card-facts > div { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; align-items: start; }

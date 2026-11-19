@@ -693,7 +693,7 @@
 
   .globe-hero-tagline {
     margin-top: 6px;
-    font-size: 8px;
+    font-size: 10px;
     letter-spacing: .15em;
     text-indent: .15em;
   }
@@ -702,7 +702,7 @@
   .globe-hero-eyebrow { font-size: 10px; letter-spacing: .16em; }
   .globe-hero-description { max-width: 430px; margin-top: 8px; font-size: 11px; line-height: 1.55; }
   .globe-hero-actions { gap: 8px; margin-top: 16px; }
-  .globe-hero-button { min-height: 38px; gap: 7px; padding: 0 11px; font-size: 8px; letter-spacing: .045em; }
+  .globe-hero-button { min-height: 38px; gap: 7px; padding: 0 11px; font-size: 11px; letter-spacing: .045em; }
   .globe-hero-button svg { width: 13px; height: 13px; }
 
   .globe-hero-society-cards {
@@ -717,8 +717,8 @@
   .globe-hero-society-card:nth-child(3) { transform: translateY(0); }
   .globe-hero-society-icon { width: 28px; height: 28px; border-radius: 8px; }
   .globe-hero-society-icon svg { width: 16px; height: 16px; }
-  .globe-hero-society-card h2 { font-size: 8px; letter-spacing: .1em; }
-  .globe-hero-society-card p { font-size: 9px; }
+  .globe-hero-society-card h2 { font-size: 10px; letter-spacing: .1em; }
+  .globe-hero-society-card p { font-size: 10px; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -992,7 +992,7 @@
     transform: none;
   }
 
-  .globe-hero-society-card h2 { font-size: 9px; }
+  .globe-hero-society-card h2 { font-size: 10px; }
   .globe-hero-society-card p { font-size: 10px; line-height: 1.45; }
 }
 
@@ -1000,11 +1000,11 @@
   .globe-hero { padding-inline: 12px; }
   .globe-hero-pill { height: 146px; }
   .globe-hero-title { font-size: clamp(15px, 5vw, 19px); }
-  .globe-hero-tagline { font-size: 7px; letter-spacing: .12em; }
+  .globe-hero-tagline { font-size: 10px; letter-spacing: .12em; }
   .globe-hero-actions { flex-direction: column; align-items: stretch; }
   .globe-hero-button { width: 100%; }
   .globe-hero-society-card:nth-child(1) { width: 100%; }
   .globe-hero-society-card { padding: 8px; gap: 7px; }
   .globe-hero-society-icon { width: 28px; height: 28px; }
-  .globe-hero-society-card p { font-size: 9px; }
+  .globe-hero-society-card p { font-size: 10px; }
 }

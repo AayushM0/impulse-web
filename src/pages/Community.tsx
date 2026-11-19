@@ -384,7 +384,7 @@ function ValueCard({
       <div className="community-value-card-top mb-6 flex items-center justify-end">
         <CardArtwork number={number} />
       </div>
-      <p className="mb-3 font-mono-label text-[9px] text-[#9AA8C2] sm:text-[10px]">{heading}</p>
+      <p className="mb-3 font-mono-label text-[10px] text-[#9AA8C2]">{heading}</p>
       <h3 className="mb-4 text-2xl font-medium leading-[1.16] tracking-[-0.035em] text-[#F2F6FF] sm:text-[1.7rem]">{statement}</h3>
       <p className="text-sm leading-7 text-[#9AA8C2]">{supporting}</p>
     </article>

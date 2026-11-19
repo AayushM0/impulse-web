@@ -4,6 +4,7 @@ import { ArrowDown, ArrowUpRight, Calendar, CalendarDays, Clock3, MapPin, Trophy
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import EventsMeshBackground from '@/components/EventsMeshBackground';
+import { SectionKicker } from '@/components/ui';
 import { useEventReveals } from '@/hooks/useEventReveals';
 import './Events.css';
 
@@ -40,7 +41,9 @@ export default function Events() {
         <header className="events-intro">
           <EventsMeshBackground />
           <div className="events-hero-copy">
-            <p className="events-eyebrow"><span /> DISCOVER · PARTICIPATE · BUILD</p>
+            <div className="flex justify-center mb-4">
+              <SectionKicker label="DISCOVER // PARTICIPATE // BUILD" />
+            </div>
             <h1>Events at Impulse.</h1>
             <p className="events-hero-description">Explore our events and find your next challenge. New events will appear here as they’re announced.</p>
             <a className="events-explore-link" href="#upcoming-events">Explore events <ArrowDown aria-hidden="true" /></a>

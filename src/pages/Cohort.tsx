@@ -14,6 +14,7 @@ import {
 } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import { SectionKicker } from '@/components/ui';
 import { getLenis } from '@/providers/SmoothScrollProvider';
 import './Cohort.css';
 
@@ -306,6 +307,7 @@ export default function Cohort() {
         <section className="cohort-hero">
           <div className="cohort-hero-stage">
             <div className="cohort-hero-content">
+              <div className="flex justify-center mb-4"><SectionKicker label="INCUBATOR // CHAPTER ONE" /></div>
               <h1 className="cohort-motion-reveal">BUILDER <span>COHORT</span></h1>
               <div className="cohort-capsule cohort-motion-reveal">PROJECTS IN MOTION</div>
               <p className="cohort-intro cohort-motion-reveal">
@@ -337,6 +339,7 @@ export default function Cohort() {
         <div className="cohort-timeline">
           <div className="cohort-timeline-heading">
             <div>
+              <SectionKicker number="01" label="CURRICULUM // 5-MONTH SPRINT" className="mb-3" />
               <h2 className="cohort-motion-reveal">THE <span>BUILD JOURNEY</span></h2>
               <p className="cohort-motion-reveal">Five months to turn a bold idea into something real.</p>
             </div>
@@ -446,6 +449,7 @@ export default function Cohort() {
       <section className="cohort-projects" id="cohort-projects">
         <div className="cohort-projects-heading cohort-motion-reveal">
           <div>
+            <SectionKicker number="02" label="SHOWCASE // SHIPPED CODE" className="mb-3" />
             <h2 className="cohort-motion-reveal cohort-text-reveal">COHORT FEATURED <span>PROJECTS</span></h2>
             <p className="cohort-section-kicker cohort-motion-reveal cohort-text-reveal">Built together, shipped to the world</p>
           </div>

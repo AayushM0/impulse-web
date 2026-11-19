@@ -3,6 +3,7 @@ import { ArrowRight, Check } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ImpulseField from '@/components/ImpulseField';
+import { SectionKicker, Button } from '@/components/ui';
 import { interests } from '@/data/content';
 
 export default function Join() {
@@ -91,11 +92,7 @@ export default function Join() {
 
         <div className="relative max-w-[1440px] mx-auto px-6 lg:px-10 w-full pt-20">
           <div className="max-w-2xl">
-            <div className="flex items-center gap-3 font-mono-label text-impulse-blue-bright/70 mb-8">
-              <span className="text-impulse-blue-bright/50">JOIN</span>
-              <span className="w-8 h-px bg-impulse-blue/30" />
-              <span>ENTER IMPULSE</span>
-            </div>
+            <SectionKicker label="SIGNAL ACQUISITION // APPLICATION" className="mb-8" />
             <h1 className="text-5xl sm:text-7xl lg:text-8xl font-sans font-bold tracking-tight leading-[0.95] text-impulse-white">
               BUILD<br />
               <span className="text-gradient-impulse">WITH US.</span>
@@ -270,15 +267,17 @@ export default function Join() {
               </div>
 
               <div className="pt-4">
-                <button
+                <Button
                   type="submit"
+                  variant="primary"
+                  size="lg"
                   disabled={isSubmitting}
                   aria-busy={isSubmitting}
-                  className="group w-full sm:w-auto inline-flex items-center justify-center gap-3 font-mono-label text-white bg-gradient-to-r from-[#2563EB] to-[#EC4899] hover:from-blue-500 hover:to-pink-500 shadow-[0_4px_20px_rgba(37,99,235,0.35)] hover:shadow-[0_4px_24px_rgba(236,72,153,0.45)] border-0 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-300 px-12 py-4 min-h-[44px] energy-sweep"
+                  className="w-full sm:w-auto"
                 >
                   {isSubmitting ? 'TRANSMITTING SIGNAL...' : 'ENTER IMPULSE'}
                   <ArrowRight aria-hidden="true" className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                </button>
+                </Button>
               </div>
             </form>
           )}

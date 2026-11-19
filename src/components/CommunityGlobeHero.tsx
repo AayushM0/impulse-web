@@ -29,26 +29,19 @@ export default function CommunityGlobeHero() {
   const heroRef = useRef<HTMLElement>(null);
 
   const memberRows: GridMotionItem[][] = useMemo(() => {
-    const topRow = otherMemberItems.slice(0, 9);
-    const centerRowUpper = [
+    const topRow = otherMemberItems.slice(0, 8);
+    const centerRow = [
       founderItems[0],
+      otherMemberItems[8],
       otherMemberItems[9],
+      founderItems[1],
       otherMemberItems[10],
-      founderItems[1],
       otherMemberItems[11],
-      otherMemberItems[12],
     ].filter(Boolean);
-    const centerRowLower = [
-      founderItems[1],
-      otherMemberItems[13],
-      otherMemberItems[14],
-      founderItems[0],
-      otherMemberItems[15],
-      otherMemberItems[16],
-    ].filter(Boolean);
-    const bottomRow = otherMemberItems.slice(17);
+    const lowerRow = otherMemberItems.slice(12, 20);
+    const bottomRow = otherMemberItems.slice(20);
 
-    return [topRow, centerRowUpper, centerRowLower, bottomRow];
+    return [topRow, centerRow, lowerRow, bottomRow];
   }, []);
 
   return (
@@ -81,7 +74,7 @@ export default function CommunityGlobeHero() {
           Community at <span>Impulse.</span>
         </h1>
         <p className="community-hero-description">
-          A creative space where curious minds connect, innovate, and build meaningful solutions together.
+          Where curious minds connect, innovate, and build together.
         </p>
         <div className="community-hero-actions">
           <a className="community-hero-button-primary" href="#community-connect-title">

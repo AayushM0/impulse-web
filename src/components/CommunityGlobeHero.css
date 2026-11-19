@@ -82,16 +82,11 @@
 
 .community-hero-description {
   color: #9AA8C2;
-  max-width: 860px;
+  max-width: 580px;
   font-size: 16px;
   line-height: 1.6;
   margin: 0 0 32px;
-}
-
-@media (min-width: 900px) {
-  .community-hero-description {
-    white-space: nowrap;
-  }
+  text-wrap: balance;
 }
 
 /* Action triggers */

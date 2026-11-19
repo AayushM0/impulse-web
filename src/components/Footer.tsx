@@ -306,12 +306,12 @@ export default function Footer() {
   return (
     <footer
       ref={footerRef}
-      className="relative w-full overflow-hidden bg-space-950 text-white border-t border-white/20 select-none min-h-[360px] md:min-h-[420px] lg:min-h-[500px] flex flex-col justify-between"
+      className="relative w-full overflow-hidden bg-space-950 text-white border-t border-white/20 select-none flex flex-col justify-end"
     >
-      <div className="relative w-full max-w-[1440px] mx-auto px-6 lg:px-10 pt-6 pb-0 font-sans flex-1 flex flex-col justify-between min-h-[360px] md:min-h-[420px] lg:min-h-[500px]">
+      <div className="relative w-full max-w-[1440px] mx-auto px-6 lg:px-10 pt-5 md:pt-6 pb-0 font-sans flex flex-col justify-end">
         {/* Top bar: Editorial headline, nav links, socials */}
-        <div className="flex flex-col md:flex-row items-center justify-between gap-6 md:gap-4 text-sm text-gray-300 font-medium pt-2 pb-6">
-          <div className="overflow-hidden mb-3">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-gray-300 font-medium pt-1 pb-2 md:pb-3">
+          <div className="overflow-hidden mb-2 md:mb-0">
             <div
               ref={headlineRef}
               className="text-lg md:text-xl font-bold tracking-wider uppercase text-white/90 select-none"
@@ -368,7 +368,7 @@ export default function Footer() {
           className="footer-bottom w-full flex justify-center items-end text-center overflow-hidden pb-0 select-none will-change-transform"
         >
           <h1
-            className="text-[clamp(3.8rem,18.5vw,15.5rem)] text-transparent overflow-visible leading-[0.82] select-none inline-flex items-center justify-center w-full mb-[-0.04em]"
+            className="text-[clamp(3.8rem,19vw,17rem)] text-transparent overflow-visible leading-[0.82] select-none inline-flex items-center justify-center w-full mb-[-0.04em]"
             style={{
               fontFamily: "'TheSansMono', monospace",
               letterSpacing: '0.05em',

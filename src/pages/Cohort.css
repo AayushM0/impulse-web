@@ -63,39 +63,15 @@
   isolation: isolate;
   background: transparent;
 }
-.cohort-hero::before,
-.cohort-hero::after {
+.cohort-hero-ascii {
   position: absolute;
-  z-index: 0;
   inset: 0;
-  content: '';
-  pointer-events: none;
+  z-index: 0;
+  pointer-events: auto;
 }
-.cohort-hero::before {
-  inset: -18%;
-  background:
-    radial-gradient(ellipse 42% 38% at 20% 38%, rgba(37, 99, 235, .15), transparent 76%),
-    radial-gradient(ellipse 38% 42% at 76% 34%, rgba(236, 72, 153, .08), transparent 76%),
-    radial-gradient(ellipse 46% 34% at 54% 78%, rgba(37, 99, 235, .1), transparent 78%);
-  filter: blur(28px);
-  animation: cohort-hero-ambient 20s ease-in-out infinite alternate;
-  will-change: transform;
-}
-.cohort-hero::after {
-  background-image:
-    linear-gradient(rgba(96, 165, 250, .035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(96, 165, 250, .035) 1px, transparent 1px);
-  background-size: 64px 64px;
-  opacity: .7;
-  -webkit-mask-image: radial-gradient(ellipse at center, #000 0%, transparent 78%);
-  mask-image: radial-gradient(ellipse at center, #000 0%, transparent 78%);
-}
-@keyframes cohort-hero-ambient {
-  from { transform: translate3d(-1.5%, -1%, 0) scale(1); }
-  to { transform: translate3d(1.5%, 1%, 0) scale(1.06); }
-}
-.cohort-scroll-cue { z-index: 1; }
-.cohort-hero-content { position: relative; z-index: 1; box-sizing: border-box; width: 100%; max-width: 1440px; padding: 32px 40px; text-align: center; }
+.cohort-scroll-cue { z-index: 2; position: relative; }
+.cohort-hero-content { position: relative; z-index: 1; box-sizing: border-box; width: 100%; max-width: 1440px; padding: 32px 40px; text-align: center; pointer-events: none; }
+.cohort-hero-content > * { pointer-events: auto; }
 .cohort-hero-stage {
   position: relative;
   z-index: 1;
@@ -103,6 +79,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  pointer-events: none;
 }
 .cohort-motion-reveal {
   opacity: 0;
@@ -909,7 +886,6 @@
 }
 @media (prefers-reduced-motion: reduce) {
   .cohort-page *, .cohort-page *::before, .cohort-page *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
-  .cohort-hero::before { animation: none; }
   .cohort-motion-reveal { opacity: 1; translate: none; transition: none; }
   .cohort-hero-content > .cohort-primary-button.cohort-motion-reveal { filter: none; scale: 1; }
 }

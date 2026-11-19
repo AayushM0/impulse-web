@@ -14,7 +14,7 @@ import {
 } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import { SectionKicker } from '@/components/ui';
+import { AsciiBackground, SectionKicker } from '@/components/ui';
 import { getLenis } from '@/providers/SmoothScrollProvider';
 import './Cohort.css';
 
@@ -305,6 +305,20 @@ export default function Cohort() {
       <Navbar />
       <main className="cohort-page">
         <section className="cohort-hero">
+          <AsciiBackground
+            className="cohort-hero-ascii"
+            variant="waves"
+            fade="bottom"
+            colors={['#1E2A44', '#2563EB', '#38BDF8', '#60A5FA', '#F472B6']}
+            glyphs=" .:-=+*#%@"
+            size={14}
+            scale={1.0}
+            speed={0.7}
+            angle={-22}
+            clearing={0.48}
+            contrast={1.25}
+            intensity={1.05}
+          />
           <div className="cohort-hero-stage">
             <div className="cohort-hero-content">
               <div className="flex justify-center mb-4"><SectionKicker label="INCUBATOR // CHAPTER ONE" /></div>

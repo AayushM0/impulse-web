@@ -6,3 +6,6 @@ export type { CardProps } from './Card';
 
 export { SectionKicker } from './SectionKicker';
 export type { SectionKickerProps } from './SectionKicker';
+
+export { AsciiBackground } from './AsciiBackground';
+export type { AsciiBackgroundProps } from './AsciiBackground';

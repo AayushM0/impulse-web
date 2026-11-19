@@ -123,18 +123,55 @@ export default function Footer() {
   const footerRef = useRef<HTMLElement>(null);
   const wordmarkRef = useRef<HTMLDivElement>(null);
   const mascotRef = useRef<HTMLImageElement>(null);
-  const headingRef = useRef<HTMLDivElement>(null);
+  const headlineRef = useRef<HTMLDivElement>(null);
+
+  const handleLinkHover = (target: HTMLElement) => {
+    if (typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const chars = target.querySelectorAll('.footer-nav-char');
+    if (!chars.length) return;
+    gsap.killTweensOf(chars);
+    chars.forEach((char, i) => {
+      const tilt = gsap.utils.random(-8, 8);
+      gsap.to(char, {
+        scale: 1.15,
+        rotation: tilt,
+        duration: 0.2,
+        delay: i * 0.02,
+        ease: 'power2.out',
+        yoyo: true,
+        repeat: 1,
+      });
+    });
+  };
+
+  const handleLinkLeave = (target: HTMLElement) => {
+    const chars = target.querySelectorAll('.footer-nav-char');
+    if (!chars.length) return;
+    gsap.killTweensOf(chars);
+    gsap.to(chars, {
+      scale: 1,
+      rotation: 0,
+      y: 0,
+      duration: 0.2,
+      ease: 'power2.out',
+      overwrite: 'auto',
+    });
+  };
 
   useEffect(() => {
     const footerEl = footerRef.current;
     const wordmarkEl = wordmarkRef.current;
     const mascotEl = mascotRef.current;
+    const headlineEl = headlineRef.current;
     if (!footerEl || !wordmarkEl) return;
 
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       gsap.set(wordmarkEl, { scaleY: 1 });
       if (mascotEl) {
         gsap.set(mascotEl, { y: 0, rotation: 0 });
+      }
+      if (headlineEl) {
+        gsap.set(headlineEl, { y: 0, opacity: 1 });
       }
       return;
     }
@@ -155,6 +192,25 @@ export default function Footer() {
         },
       });
     };
+
+    let headlineTween: gsap.core.Tween | null = null;
+    if (headlineEl) {
+      headlineTween = gsap.fromTo(
+        headlineEl,
+        { y: 40, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.8,
+          ease: 'back.out(1.6)',
+          scrollTrigger: {
+            trigger: footerEl,
+            start: 'top 85%',
+            toggleActions: 'play none none reverse',
+          },
+        }
+      );
+    }
 
     gsap.set(wordmarkEl, {
       scaleY: 0.15,
@@ -229,9 +285,20 @@ export default function Footer() {
 
     return () => {
       st.kill();
+      if (headlineTween) {
+        headlineTween.kill();
+        headlineTween.scrollTrigger?.kill();
+      }
       gsap.killTweensOf(wordmarkEl);
+      if (headlineEl) {
+        gsap.killTweensOf(headlineEl);
+      }
       if (mascotEl) {
         gsap.killTweensOf(mascotEl);
+      }
+      const navChars = footerEl.querySelectorAll('.footer-nav-char');
+      if (navChars.length) {
+        gsap.killTweensOf(navChars);
       }
     };
   }, []);
@@ -244,8 +311,12 @@ export default function Footer() {
       <div className="relative w-full max-w-[1440px] mx-auto px-6 lg:px-10 pt-6 pb-0 font-sans flex-1 flex flex-col justify-between min-h-[360px] md:min-h-[420px] lg:min-h-[500px]">
         {/* Top bar: Editorial headline, nav links, socials */}
         <div className="flex flex-col md:flex-row items-center justify-between gap-6 md:gap-4 text-sm text-gray-300 font-medium pt-2 pb-6">
-          <div className="overflow-hidden">
-            <div ref={headingRef} className="text-xl font-bold tracking-tight text-white/90">
+          <div className="overflow-hidden mb-3">
+            <div
+              ref={headlineRef}
+              className="text-lg md:text-xl font-bold tracking-wider uppercase text-white/90 select-none"
+              style={{ fontFamily: "'TheSansMono', monospace" }}
+            >
               IDEAS IN MOTION.
             </div>
           </div>
@@ -258,9 +329,18 @@ export default function Footer() {
               <Link
                 key={link.label}
                 to={link.path}
-                className="hover:text-white transition-colors duration-200 tracking-wide"
+                className="footer-nav-link text-sm font-medium text-white/70 hover:text-white transition-colors duration-200 inline-flex"
+                onMouseEnter={(e) => handleLinkHover(e.currentTarget)}
+                onMouseLeave={(e) => handleLinkLeave(e.currentTarget)}
               >
-                {link.label}
+                {link.label.split('').map((char, i) => (
+                  <span
+                    key={i}
+                    className="footer-nav-char inline-block will-change-transform"
+                  >
+                    {char === ' ' ? '\u00A0' : char}
+                  </span>
+                ))}
               </Link>
             ))}
           </nav>

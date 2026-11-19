@@ -24,8 +24,8 @@ export interface AsciiBackgroundProps {
   children?: React.ReactNode;
 }
 
-const DEFAULT_GLYPHS = ' ·:-=+*#%@';
-const DEFAULT_COLORS = ['#1E2A44', '#2563EB', '#38BDF8', '#60A5FA', '#F472B6'];
+const DEFAULT_GLYPHS = ' ·.:;-=+*';
+const DEFAULT_COLORS = ['#0F172A', '#1E3A8A', '#2563EB', '#4B8BF5', '#818CF8'];
 
 const VERTEX_SHADER_SRC = `#version 300 es
 in vec2 aPosition;
@@ -137,12 +137,12 @@ vec4 scene(vec2 frag) {
   vec2 mid = vec2((id.x + 0.5) * cell.x, uResolution.y - (id.y + 0.5) * cell.y);
 
   float rawField = field((mid - 0.5 * uResolution) / min(uResolution.x, uResolution.y));
-  float b = 0.42 + 0.46 * uContrast * rawField + (hash21(id + uSeed) - 0.5) * 0.06;
+  float b = 0.38 + 0.38 * uContrast * rawField + (hash21(id + uSeed) - 0.5) * 0.05;
   vec2 box = uResolution / uPixelRatio;
   vec2 from = abs(mid / uPixelRatio - 0.5 * box) - min(vec2(0.38, 0.22) * box, vec2(360.0, 150.0));
   float away = length(max(from, 0.0)) + min(max(from.x, from.y), 0.0);
   float calm = uClearing * (1.0 - smoothstep(0.0, 0.25 * min(box.x, box.y) + 40.0, away));
-  b -= 0.15 * calm;
+  b -= 0.18 * calm;
 
   float reach = distance(mid, uPointer.xy) / uPixelRatio;
   float lit = uPointer.z * exp(-reach * reach / 9000.0) * 0.45;
@@ -151,7 +151,7 @@ vec4 scene(vec2 frag) {
     float ring = (distance(mid, pulse.xy) / uPixelRatio - pulse.z * 240.0) / 36.0;
     lit += exp(-ring * ring) * exp(-pulse.z * 2.0) * pulse.w * 0.6;
   }
-  b = clamp(b + lit, 0.12, 0.9999);
+  b = clamp(b + lit, 0.10, 0.9999);
 
   float level = b * uAtlasCount;
   float index = floor(level);
@@ -168,7 +168,7 @@ vec4 scene(vec2 frag) {
   lab.x = mix(min(lab.x, 0.6), lab.x, uDark);
   lab.yz *= mix(1.2, 1.0, uDark);
   float shown = smoothstep(0.0, 0.2, uIntro * 1.2 - hash21(id + 7.0));
-  float amount = glyph * mix(0.42, 0.95, b) * (1.0 - 0.25 * calm) * uIntensity * shown;
+  float amount = glyph * mix(0.24, 0.62, b) * (1.0 - 0.35 * calm) * uIntensity * shown;
   return paint(fromOklab(lab), amount);
 }
 

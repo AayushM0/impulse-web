@@ -309,15 +309,15 @@ export default function Cohort() {
             className="cohort-hero-ascii"
             variant="waves"
             fade="bottom"
-            colors={['#1E2A44', '#2563EB', '#38BDF8', '#60A5FA', '#F472B6']}
-            glyphs=" ·:-=+*#%@"
+            colors={['#0F172A', '#1E3A8A', '#2563EB', '#4B8BF5', '#818CF8']}
+            glyphs=" ·.:;-=+*"
             size={13}
-            scale={1.5}
-            speed={0.65}
+            scale={1.35}
+            speed={0.55}
             angle={-20}
-            clearing={0.12}
-            contrast={1.15}
-            intensity={1.1}
+            clearing={0.2}
+            contrast={0.88}
+            intensity={0.58}
           />
           <div className="cohort-hero-stage">
             <div className="cohort-hero-content">

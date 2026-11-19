@@ -42,8 +42,24 @@
 
 /* Fade masks */
 .ascii-background.fade-bottom {
-  -webkit-mask-image: linear-gradient(to bottom, #000 88%, transparent 100%);
-  mask-image: linear-gradient(to bottom, #000 88%, transparent 100%);
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    #000 0%,
+    #000 35%,
+    rgba(0, 0, 0, 0.85) 55%,
+    rgba(0, 0, 0, 0.5) 70%,
+    rgba(0, 0, 0, 0.2) 82%,
+    transparent 96%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    #000 0%,
+    #000 35%,
+    rgba(0, 0, 0, 0.85) 55%,
+    rgba(0, 0, 0, 0.5) 70%,
+    rgba(0, 0, 0, 0.2) 82%,
+    transparent 96%
+  );
 }
 
 .ascii-background.fade-top {

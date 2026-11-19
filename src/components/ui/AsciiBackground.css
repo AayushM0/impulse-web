@@ -42,16 +42,16 @@
 
 /* Fade masks */
 .ascii-background.fade-bottom {
-  -webkit-mask-image: linear-gradient(to bottom, #000 55%, transparent 100%);
-  mask-image: linear-gradient(to bottom, #000 55%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, #000 88%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 88%, transparent 100%);
 }
 
 .ascii-background.fade-top {
-  -webkit-mask-image: linear-gradient(to top, #000 55%, transparent 100%);
-  mask-image: linear-gradient(to top, #000 55%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to top, #000 88%, transparent 100%);
+  mask-image: linear-gradient(to top, #000 88%, transparent 100%);
 }
 
 .ascii-background.fade-radial {
-  -webkit-mask-image: radial-gradient(ellipse at center, #000 45%, transparent 80%);
-  mask-image: radial-gradient(ellipse at center, #000 45%, transparent 80%);
+  -webkit-mask-image: radial-gradient(ellipse at center, #000 65%, transparent 92%);
+  mask-image: radial-gradient(ellipse at center, #000 65%, transparent 92%);
 }

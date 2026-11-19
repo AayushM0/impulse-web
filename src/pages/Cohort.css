@@ -46,9 +46,9 @@
   width: 100vw;
   transform: translateX(-50%);
   background:
-    radial-gradient(ellipse 66% 300px at 14% 110px, rgba(37, 99, 235, .08), transparent 76%),
-    radial-gradient(ellipse 58% 270px at 92% 90px, rgba(236, 72, 153, .06), transparent 78%),
-    linear-gradient(180deg, #070B14 0%, rgba(14, 22, 38, .96) 220px, transparent 520px);
+    radial-gradient(ellipse 66% 300px at 14% 160px, rgba(37, 99, 235, .06), transparent 76%),
+    radial-gradient(ellipse 58% 270px at 92% 140px, rgba(236, 72, 153, .05), transparent 78%),
+    linear-gradient(180deg, transparent 0%, rgba(14, 22, 38, .75) 180px, transparent 520px);
   content: '';
   pointer-events: none;
 }
@@ -62,15 +62,6 @@
   overflow: hidden;
   isolation: isolate;
   background: transparent;
-}
-.cohort-hero::after {
-  content: '';
-  position: absolute;
-  inset: auto 0 0 0;
-  height: 180px;
-  background: linear-gradient(to bottom, transparent 0%, rgba(7, 11, 20, 0.65) 55%, #070B14 100%);
-  pointer-events: none;
-  z-index: 1;
 }
 .cohort-hero-ascii {
   position: absolute;

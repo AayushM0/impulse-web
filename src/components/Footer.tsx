@@ -1,5 +1,10 @@
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import { gsap, ScrollTrigger } from 'gsap/all';
+
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 const navLinks = [
   { label: 'Explore', path: '/' },
@@ -119,6 +124,87 @@ export default function Footer() {
   const wordmarkRef = useRef<HTMLDivElement>(null);
   const mascotRef = useRef<HTMLImageElement>(null);
   const headingRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const footerEl = footerRef.current;
+    const wordmarkEl = wordmarkRef.current;
+    if (!footerEl || !wordmarkEl) return;
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      gsap.set(wordmarkEl, { scaleY: 1 });
+      return;
+    }
+
+    gsap.set(wordmarkEl, {
+      scaleY: 0.15,
+      transformOrigin: 'bottom center',
+    });
+
+    let hasBounced = false;
+    const st = ScrollTrigger.create({
+      trigger: footerEl,
+      start: 'top bottom',
+      end: 'bottom bottom',
+      invalidateOnRefresh: true,
+      onUpdate: (self) => {
+        const vel = Math.abs(self.getVelocity() || 0);
+        const velStretch = Math.min(vel / 1500, 0.25);
+
+        if (self.progress >= 0.9) {
+          if (!hasBounced) {
+            hasBounced = true;
+            gsap.killTweensOf(wordmarkEl);
+            gsap.to(wordmarkEl, {
+              scaleY: 1,
+              duration: 1.4,
+              ease: 'elastic.out(1.2, 0.35)',
+              overwrite: 'auto',
+            });
+          }
+        } else {
+          hasBounced = false;
+          const baseTarget =
+            self.direction === 1
+              ? 0.15 + self.progress * 1.15 + velStretch
+              : 0.15 + self.progress * 0.95;
+          const targetScaleY = Math.max(0.15, Math.min(baseTarget, 1.4));
+          gsap.to(wordmarkEl, {
+            scaleY: targetScaleY,
+            duration: 0.1,
+            ease: 'power1.out',
+            overwrite: 'auto',
+          });
+        }
+      },
+      onLeave: () => {
+        if (!hasBounced) {
+          hasBounced = true;
+          gsap.killTweensOf(wordmarkEl);
+          gsap.to(wordmarkEl, {
+            scaleY: 1,
+            duration: 1.4,
+            ease: 'elastic.out(1.2, 0.35)',
+            overwrite: 'auto',
+          });
+        }
+      },
+      onLeaveBack: () => {
+        hasBounced = false;
+        gsap.killTweensOf(wordmarkEl);
+        gsap.to(wordmarkEl, {
+          scaleY: 0.15,
+          duration: 0.25,
+          ease: 'power2.out',
+          overwrite: 'auto',
+        });
+      },
+    });
+
+    return () => {
+      st.kill();
+      gsap.killTweensOf(wordmarkEl);
+    };
+  }, []);
 
   return (
     <footer

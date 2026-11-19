@@ -1,3 +1,11 @@
+@font-face {
+  font-family: 'TheSansMono';
+  src: url('/fonts/thesansmono_extra_bold.ttf') format('truetype');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

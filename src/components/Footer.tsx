@@ -128,12 +128,33 @@ export default function Footer() {
   useEffect(() => {
     const footerEl = footerRef.current;
     const wordmarkEl = wordmarkRef.current;
+    const mascotEl = mascotRef.current;
     if (!footerEl || !wordmarkEl) return;
 
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       gsap.set(wordmarkEl, { scaleY: 1 });
+      if (mascotEl) {
+        gsap.set(mascotEl, { y: 0, rotation: 0 });
+      }
       return;
     }
+
+    const triggerMascotJump = (el: HTMLElement | null) => {
+      if (!el) return;
+      gsap.killTweensOf(el);
+      gsap.to(el, {
+        y: -14,
+        rotation: gsap.utils.random(-8, 8),
+        duration: 0.28,
+        ease: 'power2.out',
+        yoyo: true,
+        repeat: 1,
+        overwrite: 'auto',
+        onComplete: () => {
+          gsap.to(el, { y: 0, rotation: 0, duration: 0.2, ease: 'power2.out' });
+        },
+      });
+    };
 
     gsap.set(wordmarkEl, {
       scaleY: 0.15,
@@ -160,6 +181,7 @@ export default function Footer() {
               ease: 'elastic.out(1.2, 0.35)',
               overwrite: 'auto',
             });
+            triggerMascotJump(mascotEl);
           }
         } else {
           hasBounced = false;
@@ -186,6 +208,7 @@ export default function Footer() {
             ease: 'elastic.out(1.2, 0.35)',
             overwrite: 'auto',
           });
+          triggerMascotJump(mascotEl);
         }
       },
       onLeaveBack: () => {
@@ -197,12 +220,19 @@ export default function Footer() {
           ease: 'power2.out',
           overwrite: 'auto',
         });
+        if (mascotEl) {
+          gsap.killTweensOf(mascotEl);
+          gsap.to(mascotEl, { y: 0, rotation: 0, duration: 0.2, ease: 'power2.out', overwrite: 'auto' });
+        }
       },
     });
 
     return () => {
       st.kill();
       gsap.killTweensOf(wordmarkEl);
+      if (mascotEl) {
+        gsap.killTweensOf(mascotEl);
+      }
     };
   }, []);
 

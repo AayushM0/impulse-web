@@ -10,7 +10,7 @@
 }
 .shark-hack-page ::selection { background: rgba(37, 99, 235, 0.4); color: #F2F6FF; }
 .shark-hack-page .shark-focus:focus-visible { outline: 2px solid #60a5fa; outline-offset: 5px; }
-.shark-hack-page > main { padding-top: 64px; }
+.shark-hack-page > main { padding-top: 0; }
 .shark-hack-page [role='tabpanel'][hidden] { display: none; }
 .shark-hack-page [role='tabpanel'] { min-height: calc(100svh - 140px); }
 .shark-hack-page [role='tabpanel']:focus-visible { outline: 2px solid #60a5fa; outline-offset: -4px; }
@@ -45,7 +45,7 @@
 }
 
 /* Compact typography and a clear reading column alongside the shark artwork. */
-.shark-hack-page .shark-hero { position: relative; isolation: isolate; overflow: hidden; padding: 18px 0 42px; }
+.shark-hack-page .shark-hero { position: relative; isolation: isolate; overflow: hidden; padding: 88px 0 42px; }
 .shark-hack-page .shark-hero-atmosphere { position: absolute; z-index: -1; inset: 0; overflow: hidden; pointer-events: none; background: radial-gradient(ellipse at 88% 30%, rgba(236, 72, 153, 0.12), transparent 55%), radial-gradient(ellipse at 50% 60%, rgba(37, 99, 235, 0.15), #070B14 75%); }
 .shark-hack-page .shark-hero-art { position: absolute; right: -2%; top: 0; width: 66%; height: calc(100% - 115px); object-fit: cover; object-position: right center; filter: saturate(1.15) contrast(1.06); opacity: 0.85; mask-image: linear-gradient(90deg, transparent, #000 30%); }
 .shark-hack-page .shark-hero-atmosphere::after { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, #070B14 4%, rgba(7, 11, 20, 0.92) 27%, rgba(7, 11, 20, 0.42) 48%, transparent 78%), linear-gradient(0deg, #070B14 6%, transparent 45%, rgba(7, 11, 20, 0.4)), linear-gradient(125deg, transparent 45%, rgba(37, 99, 235, 0.12) 67%, rgba(236, 72, 153, 0.12)); }
@@ -621,7 +621,7 @@
 .shark-scroll-page { background-image: radial-gradient(ellipse at 0 35%, rgba(37, 99, 235, 0.1), transparent 35%), radial-gradient(ellipse at 100% 65%, rgba(236, 72, 153, 0.08), transparent 35%); }
 .shark-scroll-page main section[id] { scroll-margin-top: 164px; }
 .shark-scroll-page main section:focus-visible { outline: 2px solid #60a5fa; outline-offset: -4px; }
-.shark-scroll-page .shark-section-nav { position: sticky; top: 76px; width: fit-content; max-width: calc(100% - 80px); margin: 12px auto -76px; border: 1px solid #1E2A44; border-radius: 999px; background: rgba(7, 11, 20, 0.94); box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4); }
+.shark-scroll-page .shark-section-nav { position: sticky; top: 16px; width: fit-content; max-width: calc(100% - 80px); margin: 12px auto -76px; border: 1px solid #1E2A44; border-radius: 999px; background: rgba(7, 11, 20, 0.94); box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4); z-index: 40; transition: top 0.3s ease; }
 .shark-scroll-page .shark-section-nav-inner { gap: 4px; padding: 6px; overflow: visible; }
 .shark-scroll-page .shark-section-link, .shark-scroll-page .shark-section-register { position: relative; min-height: 48px; padding: 12px 18px; border: 0; border-radius: 999px; background: none; color: #9AA8C2; font-size: 13px; font-weight: 500; white-space: nowrap; box-shadow: none; }
 .shark-scroll-page .shark-section-nav-inner .shark-nav-icon { display: none; }
@@ -740,7 +740,7 @@
   .shark-scroll-page .shark-prize-card { padding-inline: 18px; }
 }
 @media (max-width: 900px) {
-  .shark-scroll-page .shark-section-nav { width: calc(100% - 40px); max-width: 560px; top: 72px; margin-top: 8px; margin-bottom: -76px; border-radius: 18px; }
+  .shark-scroll-page .shark-section-nav { width: calc(100% - 40px); max-width: 560px; top: 12px; margin-top: 8px; margin-bottom: -76px; border-radius: 18px; z-index: 40; transition: top 0.3s ease; }
   .shark-scroll-page .shark-mobile-navigation { padding: 6px; }
   .shark-scroll-page .shark-mobile-section-menu { left: 0; right: 0; }
   .shark-scroll-page .shark-section-nav-inner { display: none; }

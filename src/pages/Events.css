@@ -1,6 +1,6 @@
 /* Events directory; all styles stay local to this page. */
 .events-page { --events-blue: #60a5fa; --events-pink: #f472b6; min-height: 100vh; background: #070B14; color: #F2F6FF; }
-.events-page .events-content { max-width: 1440px; margin: auto; padding: 112px 40px 64px; }
+.events-page .events-content { max-width: 1440px; margin: auto; padding: 0 40px 64px; }
 .events-page .events-intro { position: relative; padding-bottom: 36px; border-bottom: 1px solid #1E2A44; }
 .events-page .events-intro::after { content: ''; position: absolute; left: 0; bottom: -1px; width: min(280px, 65%); height: 2px; background: linear-gradient(90deg, #2563EB, #EC4899, transparent); transform-origin: left; }
 .events-page .events-eyebrow { display: flex; align-items: center; gap: 10px; color: #60a5fa; font: 10px 'JetBrains Mono', monospace; letter-spacing: .13em; }

@@ -5,7 +5,7 @@
   --cohort-pink: #F472B6;
   --cohort-muted: #9AA8C2;
   min-height: 100vh;
-  padding-top: 64px;
+  padding-top: 0;
   overflow-x: clip;
   font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif;
   color: #F2F6FF;
@@ -40,13 +40,14 @@
 
 .cohort-hero {
   position: relative;
-  min-height: calc(100vh - 64px);
-  min-height: calc(100svh - 64px);
+  min-height: 100vh;
+  min-height: 100svh;
   display: grid;
   place-items: center;
   overflow: hidden;
   isolation: isolate;
   background: transparent;
+  padding-top: 48px;
 }
 .cohort-hero-ascii {
   position: absolute;

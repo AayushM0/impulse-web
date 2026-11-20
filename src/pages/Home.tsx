@@ -1,40 +1,26 @@
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import Hero from '@/sections/Hero';
-import Experiences from '@/sections/Experiences';
-import Projects from '@/sections/Projects';
-import Community from '@/sections/Community';
-import ImpulseLoop from '@/sections/ImpulseLoop';
-import CTASection from '@/components/CTASection';
+import ExploreHero from '@/sections/ExploreHero';
+import ExploreEvents from '@/sections/ExploreEvents';
+import ExploreCohort from '@/sections/ExploreCohort';
+import ExploreCommunity from '@/sections/ExploreCommunity';
 
 export default function Home() {
   return (
     <div className="bg-space-950 min-h-screen text-impulse-white overflow-x-clip">
       <Navbar />
       <main>
-        {/* Section 1: 3D Origin Hero (Centered IMPULSE with Logo Emerging from Behind) */}
-        <Hero />
+        {/* Section 1: Lightweight Typography-Focused Hero */}
+        <ExploreHero />
 
-        {/* Section 2: Events in Motion (Interactive Horizontal Scroll) */}
-        <Experiences />
+        {/* Section 2: Events & Flagship Competitions Showcase */}
+        <ExploreEvents />
 
-        {/* Section 3: Projects Showcase ("Ideas that made it out") */}
-        <Projects />
+        {/* Section 3: Builder Cohort 5-Month Incubator */}
+        <ExploreCohort />
 
-        {/* Section 4: Teams & Builder Constellation */}
-        <Community />
-
-        {/* Section 5: The Impulse Loop Flywheel */}
-        <ImpulseLoop />
-
-        {/* Section 6: Enter Impulse CTA */}
-        <CTASection
-          headline="Ready to build?"
-          description="You don't need to know everything. You just need to be curious enough to start."
-          buttonText="EXPLORE COHORT"
-          buttonTo="/cohort"
-          microcopy="CHAPTER ONE STARTS HERE."
-        />
+        {/* Section 4: Impulse Builder Community & Ecosystem */}
+        <ExploreCommunity />
       </main>
       <Footer />
     </div>

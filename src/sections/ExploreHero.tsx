@@ -1,4 +1,5 @@
-import { ArrowRight, ArrowDown } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { ArrowRight, ArrowDown, ArrowUpRight } from 'lucide-react';
 import { Button, SectionKicker } from '@/components/ui';
 import HalftoneNebula from '@/components/ui/halftone-nebula';
 
@@ -59,15 +60,13 @@ export default function ExploreHero() {
             </p>
 
             <div className="flex flex-wrap items-center justify-center gap-4 pointer-events-auto">
-              <Button
+              <Link
                 to="/events"
-                variant="primary"
-                size="lg"
-                className="group font-bold tracking-wider shadow-[0_4px_24px_rgba(37,99,235,0.55)] pointer-events-auto"
+                className="group inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-white text-space-950 hover:bg-[#F2F6FF] font-sans font-bold text-xs sm:text-sm tracking-wider uppercase transition-all duration-300 shadow-[0_4px_24px_rgba(255,255,255,0.25),0_2px_10px_rgba(7,11,20,0.8)] hover:shadow-[0_6px_30px_rgba(255,255,255,0.4)] hover:-translate-y-0.5 select-none pointer-events-auto"
               >
-                EXPLORE EVENTS
-                <ArrowRight aria-hidden="true" className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-              </Button>
+                <span>EXPLORE EVENTS</span>
+                <ArrowUpRight aria-hidden="true" className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 stroke-[2.5]" />
+              </Link>
 
               <Button
                 to="/cohort"

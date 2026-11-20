@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, ArrowUpRight } from 'lucide-react';
 import Logo from './Logo';
 import { navLinks } from '@/data/content';
 import { getLenis } from '@/providers/SmoothScrollProvider';
@@ -91,14 +91,24 @@ export default function Navbar() {
             })}
           </div>
 
-          <button
-            className="lg:hidden text-impulse-white p-3 min-w-[44px] min-h-[44px] flex items-center justify-center -mr-2 rounded-sm"
-            onClick={() => setMobileOpen(!mobileOpen)}
-            aria-label="Toggle menu"
-            aria-expanded={mobileOpen}
-          >
-            {mobileOpen ? <X aria-hidden="true" className="w-5 h-5" /> : <Menu aria-hidden="true" className="w-5 h-5" />}
-          </button>
+          <div className="flex items-center gap-3">
+            <Link
+              to="/events"
+              className="group hidden sm:inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-white text-space-950 hover:bg-[#F2F6FF] font-sans font-bold text-xs tracking-wider uppercase transition-all duration-300 shadow-[0_2px_12px_rgba(255,255,255,0.2)] hover:shadow-[0_4px_20px_rgba(255,255,255,0.35)] select-none"
+            >
+              <span>EXPLORE EVENTS</span>
+              <ArrowUpRight aria-hidden="true" className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 stroke-[2.5]" />
+            </Link>
+
+            <button
+              className="lg:hidden text-impulse-white p-3 min-w-[44px] min-h-[44px] flex items-center justify-center -mr-2 rounded-sm"
+              onClick={() => setMobileOpen(!mobileOpen)}
+              aria-label="Toggle menu"
+              aria-expanded={mobileOpen}
+            >
+              {mobileOpen ? <X aria-hidden="true" className="w-5 h-5" /> : <Menu aria-hidden="true" className="w-5 h-5" />}
+            </button>
+          </div>
         </nav>
       </header>
 
@@ -124,6 +134,16 @@ export default function Navbar() {
               {link.label}
             </Link>
           ))}
+          <div className="pt-4 w-full max-w-xs px-4">
+            <Link
+              to="/events"
+              onClick={() => setMobileOpen(false)}
+              className="group inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-white text-space-950 font-sans font-bold text-xs tracking-wider uppercase shadow-[0_2px_12px_rgba(255,255,255,0.25)] w-full"
+            >
+              <span>EXPLORE EVENTS</span>
+              <ArrowUpRight aria-hidden="true" className="w-4 h-4 stroke-[2.5]" />
+            </Link>
+          </div>
         </div>
       </div>
     </>

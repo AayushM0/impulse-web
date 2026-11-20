@@ -92,80 +92,6 @@ export const events: EventItem[] = [
   },
 ];
 
-export interface ProjectItem {
-  id: string;
-  name: string;
-  description: string;
-  category: 'AI' | 'PRODUCT' | 'RESEARCH' | 'OPEN SOURCE' | 'EXPERIMENTAL';
-  contributors: string[];
-  status: 'EXPERIMENT' | 'BUILDING' | 'SHIPPED' | 'OPEN SOURCE';
-  github?: string;
-  demo?: string;
-  tags?: string[];
-  stars?: string;
-}
-
-export const projects: ProjectItem[] = [
-  {
-    id: 'omniagent-os',
-    name: 'OmniAgent OS',
-    description: 'An autonomous multi-agent operating scaffold with verifiable execution traces, sandboxed microVMs, and persistent semantic memory.',
-    category: 'AI',
-    contributors: ['Alex K.', 'Priya M.', 'Devon S.'],
-    status: 'SHIPPED',
-    github: 'https://github.com/impulse-community/omniagent-os',
-    demo: 'https://omniagent.impulse.build',
-    tags: ['Multi-Agent', 'TypeScript', 'Docker', 'WebSockets'],
-    stars: '1.2k',
-  },
-  {
-    id: 'neural-canvas-3d',
-    name: 'NeuralCanvas 3D',
-    description: 'A real-time WebGL and NeRF spatial generation workspace where natural language prompts synthesize 3D environments and interactable physics assets.',
-    category: 'PRODUCT',
-    contributors: ['Marcus L.', 'Sofia C.'],
-    status: 'BUILDING',
-    github: 'https://github.com/impulse-community/neural-canvas',
-    demo: 'https://canvas.impulse.build',
-    tags: ['Three.js', 'WebGL', 'NeRF', 'Python'],
-    stars: '840',
-  },
-  {
-    id: 'vocalis-sub50',
-    name: 'Vocalis AI',
-    description: 'Ultra low-latency streaming speech pipeline delivering sub-50ms conversational turnaround using localized Whisper and chunked token audio synthesis.',
-    category: 'RESEARCH',
-    contributors: ['Chen W.', 'Liam B.'],
-    status: 'EXPERIMENT',
-    github: 'https://github.com/impulse-community/vocalis',
-    tags: ['Streaming Audio', 'Rust', 'WebRTC', 'PyTorch'],
-    stars: '490',
-  },
-  {
-    id: 'edgevision-robotics',
-    name: 'EdgeVision Core',
-    description: 'Quantized computer vision and spatial depth inference model running at 90fps on Raspberry Pi 5 and Jetson Orin edge modules.',
-    category: 'EXPERIMENTAL',
-    contributors: ['Tara N.', 'Hassan R.'],
-    status: 'OPEN SOURCE',
-    github: 'https://github.com/impulse-community/edgevision',
-    demo: 'https://edgevision.impulse.build',
-    tags: ['Edge AI', 'ONNX', 'C++', 'Robotics'],
-    stars: '620',
-  },
-  {
-    id: 'eval-engine',
-    name: 'EvalEngine Suite',
-    description: 'Deterministic quality benchmarking and regression harness for continuous evaluation of agentic reasoning pipelines and LLM systems.',
-    category: 'OPEN SOURCE',
-    contributors: ['Elena P.', 'David O.'],
-    status: 'SHIPPED',
-    github: 'https://github.com/impulse-community/eval-engine',
-    tags: ['Benchmarking', 'Python', 'Evaluation', 'CI/CD'],
-    stars: '1.8k',
-  },
-];
-
 export interface TeamMember {
   name: string;
   role: string;
@@ -229,15 +155,4 @@ export const socialLinks = [
   { label: 'LinkedIn', href: '#' },
   { label: 'Discord', href: '#' },
   { label: 'X / Twitter', href: '#' },
-];
-
-export const interests = [
-  'AI Agents',
-  'Systems Engineering',
-  'Machine Learning Research',
-  'Product Design',
-  'Robotics & Hardware',
-  'Creative WebGL / 3D',
-  'Open Source',
-  'Venture & Startups',
 ];

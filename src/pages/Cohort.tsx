@@ -1,9 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import {
-  ArrowLeft,
   ArrowDown,
   ArrowRight,
-  ArrowUpRight,
   Code2,
   FileText,
   Lightbulb,
@@ -17,182 +15,6 @@ import Footer from '@/components/Footer';
 import { AsciiBackground, SectionKicker } from '@/components/ui';
 import { getLenis } from '@/providers/SmoothScrollProvider';
 import './Cohort.css';
-
-interface CohortProject {
-  id: string;
-  name: string;
-  category: string;
-  summary: string;
-  problem: string;
-  targetUser: string;
-  solution: string;
-  milestone: string;
-  architecture: string;
-  description?: string;
-  coverImage?: string;
-  stack: string[];
-  team: { name: string; role?: string; avatar?: string }[];
-  status?: string;
-  cycle?: string;
-  realUsers?: number;
-  outcomes?: { label: string; value: string }[];
-  links?: { label: string; url: string }[];
-}
-
-const cohortProjects: CohortProject[] = [
-  {
-    id: 'signalforge',
-    name: 'SignalForge',
-    category: 'AI OPERATIONS',
-    summary: 'Support signals get buried across channels; SignalForge clusters feedback into ranked, evidence-linked product opportunities.',
-    problem: 'Product teams spend hours sorting feedback across chat, tickets, and call notes, while important user patterns go unnoticed.',
-    targetUser: 'Product managers and support leads at small SaaS teams.',
-    solution: 'An evidence-linked feedback workspace groups recurring issues and turns them into ranked, reviewable opportunities.',
-    milestone: 'October MVP gate cleared; preparing the November design-partner demo.',
-    architecture: 'Ingestion workers normalize support events, embeddings cluster related feedback, and a review API serves evidence-backed themes to the dashboard.',
-    stack: ['TypeScript', 'PostgreSQL', 'pgvector', 'OpenAI'],
-    team: [{ name: 'Aarav Mehta' }, { name: 'Mina Shah' }, { name: 'Dev Kapoor' }],
-    status: 'On Track - Functional V1',
-    cycle: 'Cycle 1',
-    links: [
-      { label: 'GitHub Repository', url: 'https://github.com/impulse-community/signal-forge' },
-      { label: 'Live Demo', url: 'https://signalforge.impulse.build' },
-    ],
-  },
-  {
-    id: 'tracekit',
-    name: 'TraceKit',
-    category: 'DEVELOPER TOOLS',
-    summary: 'Async failures are hard to trace across separate tools; TraceKit brings job runs, logs, and retries into one workflow console.',
-    problem: 'Early-stage engineering teams need to understand failed background jobs without stitching together fragmented observability data.',
-    targetUser: 'Backend engineers maintaining queue-based services.',
-    solution: 'A lightweight workflow console connects each job run to its logs, retries, and execution history.',
-    milestone: 'Core trace viewer complete; November sprint is focused on replay safety and team onboarding.',
-    architecture: 'A typed SDK emits correlated events to a queue; workers persist traces and a streaming API powers the searchable run timeline.',
-    stack: ['Go', 'Redis', 'ClickHouse', 'React'],
-    team: [{ name: 'Zoya Iyer' }, { name: 'Kabir Rao' }, { name: 'Ishaan Das' }],
-    status: 'On Track - Functional V1',
-    cycle: 'Cycle 1',
-    links: [
-      { label: 'GitHub Repository', url: 'https://github.com/impulse-community/tracekit' },
-      { label: 'Live Demo', url: 'https://tracekit.impulse.build' },
-    ],
-  },
-  {
-    id: 'fieldnotes',
-    name: 'FieldNotes',
-    category: 'RESEARCH',
-    summary: 'Interview findings are hard to revisit and cite; FieldNotes links searchable transcripts directly to source moments.',
-    problem: 'Manual transcription and note sorting make qualitative research difficult to revisit and easy to misquote.',
-    targetUser: 'UX researchers and product teams running customer interviews.',
-    solution: 'A private research library links searchable transcripts and themes directly to timestamped source excerpts.',
-    milestone: 'Interview import and citation flow validated; November demo will test collaborative synthesis.',
-    architecture: 'Audio is transcribed asynchronously, speaker turns are indexed with timestamps, and every generated theme retains a source citation.',
-    stack: ['Python', 'FastAPI', 'Whisper', 'pgvector'],
-    team: [{ name: 'Anaya Sen' }, { name: 'Rohan Nair' }, { name: 'Tara Bose' }],
-    status: 'On Track - Research Preview',
-    cycle: 'Cycle 1',
-    links: [
-      { label: 'GitHub Repository', url: 'https://github.com/impulse-community/fieldnotes' },
-      { label: 'Live Demo', url: 'https://fieldnotes.impulse.build' },
-    ],
-  },
-  {
-    id: 'relayboard',
-    name: 'RelayBoard',
-    category: 'TEAM PRODUCTIVITY',
-    summary: 'Distributed handoffs get lost across chat and trackers; RelayBoard turns updates into clear owners and next actions.',
-    problem: 'Owners and blockers are difficult to spot across chat threads, issue trackers, and recurring status reports.',
-    targetUser: 'Small, distributed product and engineering teams.',
-    solution: 'A shared delivery board turns project updates into concise handoffs with clear ownership and next actions.',
-    milestone: 'Team board and update workflow shipped internally; next gate is a pilot with two remote teams.',
-    architecture: 'Connector adapters sync selected work items into a normalized event model; rules build a real-time handoff view with audit history.',
-    stack: ['Next.js', 'PostgreSQL', 'GraphQL', 'Tailwind'],
-    team: [{ name: 'Neel Verma' }, { name: 'Kiara Dutta' }, { name: 'Arjun Gill' }],
-    status: 'On Track - Pilot Ready',
-    cycle: 'Cycle 1',
-    links: [
-      { label: 'GitHub Repository', url: 'https://github.com/impulse-community/relayboard' },
-      { label: 'Live Demo', url: 'https://relayboard.impulse.build' },
-    ],
-  },
-  {
-    id: 'accesslens',
-    name: 'AccessLens',
-    category: 'ACCESSIBILITY',
-    summary: 'Accessibility issues surface too late; AccessLens maps actionable audit findings to the page elements teams own.',
-    problem: 'Automated audits surface findings, but developers lack actionable context tied to the component they own.',
-    targetUser: 'Frontend developers and accessibility reviewers.',
-    solution: 'A browser-side audit assistant maps accessibility findings to page elements and gives teams a prioritized fix queue.',
-    milestone: 'Browser audit prototype is functional; November milestone adds saved reports and regression checks.',
-    architecture: 'A browser extension runs axe-core checks, maps results to DOM selectors, and syncs signed reports to a small team API.',
-    stack: ['TypeScript', 'React', 'axe-core', 'Supabase'],
-    team: [{ name: 'Sana Qureshi' }, { name: 'Vihaan Roy' }, { name: 'Myra Thomas' }],
-    status: 'On Track - Functional V1',
-    cycle: 'Cycle 1',
-    links: [
-      { label: 'GitHub Repository', url: 'https://github.com/impulse-community/accesslens' },
-      { label: 'Live Demo', url: 'https://accesslens.impulse.build' },
-    ],
-  },
-  {
-    id: 'modelmeter',
-    name: 'ModelMeter',
-    category: 'AI INFRASTRUCTURE',
-    summary: 'AI regressions are hard to catch across model changes; ModelMeter compares quality, latency, and token cost.',
-    problem: 'Prompt regressions are often caught late because evaluation cases and production traces are not compared consistently.',
-    targetUser: 'Applied AI teams iterating on LLM-powered products.',
-    solution: 'A compact evaluation workbench tracks versioned test cases, model outputs, latency, and token spend.',
-    milestone: 'Evaluation runner and baseline comparison are ready; November sprint targets scheduled team runs.',
-    architecture: 'A provider-neutral adapter captures completions, a job runner executes versioned eval sets, and a metrics store powers comparisons.',
-    stack: ['Python', 'FastAPI', 'PostgreSQL', 'Docker'],
-    team: [{ name: 'Aditi Kulkarni' }, { name: 'Reyansh Jain' }, { name: 'Nisha Paul' }],
-    status: 'On Track - Functional V1',
-    cycle: 'Cycle 1',
-    links: [
-      { label: 'GitHub Repository', url: 'https://github.com/impulse-community/modelmeter' },
-      { label: 'Live Demo', url: 'https://modelmeter.impulse.build' },
-    ],
-  },
-  {
-    id: 'greengrid',
-    name: 'GreenGrid',
-    category: 'CLIMATE TECH',
-    summary: 'Campus energy waste is difficult to pinpoint; GreenGrid pairs meter readings with schedules to flag unusual demand.',
-    problem: 'Utility reports arrive too late and lack the building-level context needed to identify practical savings.',
-    targetUser: 'Campus facilities managers and sustainability teams.',
-    solution: 'An energy monitoring dashboard combines meter readings with occupancy schedules to highlight unusual demand.',
-    milestone: 'Sample-data dashboard is live; team is preparing a November pilot with facilities staff.',
-    architecture: 'Meter readings enter through a time-series ingestion service, are aligned with building schedules, and feed anomaly summaries.',
-    stack: ['Node.js', 'TimescaleDB', 'MQTT', 'React'],
-    team: [{ name: 'Ira Malhotra' }, { name: 'Dhruv Bansal' }, { name: 'Meera Pillai' }],
-    status: 'On Track - Pilot Ready',
-    cycle: 'Cycle 1',
-    links: [
-      { label: 'GitHub Repository', url: 'https://github.com/impulse-community/greengrid' },
-      { label: 'Live Demo', url: 'https://greengrid.impulse.build' },
-    ],
-  },
-  {
-    id: 'launchpad',
-    name: 'Launchpad',
-    category: 'EDTECH',
-    summary: 'Student projects stall before validation; Launchpad guides teams from a rough idea through milestones to a tested release.',
-    problem: 'Project-based learning often stops at tutorials, leaving teams unsure how to validate and scope their own product.',
-    targetUser: 'Student founders and multidisciplinary builder cohorts.',
-    solution: 'A guided workspace breaks a product sprint into testable milestones, mentor feedback, and weekly demos.',
-    milestone: 'Sprint planner and mentor review flow cleared the October gate; November focuses on cohort onboarding.',
-    architecture: 'A workflow engine stores milestone templates and evidence; role-based APIs deliver mentor reviews and team progress views.',
-    stack: ['TypeScript', 'Next.js', 'Supabase', 'Vercel'],
-    team: [{ name: 'Kavya Menon' }, { name: 'Advik Sethi' }, { name: 'Simran Kaur' }],
-    status: 'On Track - Functional V1',
-    cycle: 'Cycle 1',
-    links: [
-      { label: 'GitHub Repository', url: 'https://github.com/impulse-community/launchpad' },
-      { label: 'Live Demo', url: 'https://launchpad.impulse.build' },
-    ],
-  },
-];
 
 const roadmap = [
   { month: 'OCT', title: 'Validate the problem', detail: 'Research user needs, test assumptions, and choose a problem worth solving.', icon: Lightbulb },
@@ -215,19 +37,11 @@ type ActiveModal = { type: 'roadmap' } | null;
 
 export default function Cohort() {
   const [activeModal, setActiveModal] = useState<ActiveModal>(null);
-  const [flippedProjectId, setFlippedProjectId] = useState<string | null>(null);
-  const [activeCategory, setActiveCategory] = useState('All Projects');
   const [timelineDate, setTimelineDate] = useState(() => new Date());
-  const [revealedProjectIds, setRevealedProjectIds] = useState<Set<string>>(() => new Set());
-  const projectsGridRef = useRef<HTMLDivElement>(null);
   const { monthOffset, activePhase } = getCohortTimeline(timelineDate);
   const currentPhase = activePhase ?? (monthOffset >= roadmap.length ? roadmap.length - 1 : 0);
   const currentPhaseX = [100, 300, 500, 700, 900][currentPhase];
   const currentPhaseColor = ['#60a5fa', '#f472b6', '#60a5fa', '#f472b6', '#60a5fa'][currentPhase];
-  const categories = ['All Projects', ...new Set(cohortProjects.map((project) => project.category))];
-  const visibleProjects = activeCategory === 'All Projects'
-    ? cohortProjects
-    : cohortProjects.filter((project) => project.category === activeCategory);
 
   useEffect(() => {
     const revealElements = document.querySelectorAll<HTMLElement>('.cohort-motion-reveal');
@@ -246,37 +60,6 @@ export default function Cohort() {
     };
   }, []);
 
-  useEffect(() => {
-    const grid = projectsGridRef.current;
-    if (!grid) return;
-
-    const cards = Array.from(grid.querySelectorAll<HTMLElement>('.cohort-project-teaser[data-project-id]'));
-
-    if (!('IntersectionObserver' in window)) {
-      setRevealedProjectIds(new Set(cards.map((card) => card.dataset.projectId).filter((id): id is string => Boolean(id))));
-      return;
-    }
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          const projectId = (entry.target as HTMLElement).dataset.projectId;
-          if (!projectId) return;
-
-          setRevealedProjectIds((current) => {
-            const next = new Set(current);
-            if (entry.isIntersecting) next.add(projectId);
-            else next.delete(projectId);
-            return next;
-          });
-        });
-      },
-      { threshold: 0.2, rootMargin: '0px 0px -8% 0px' }
-    );
-
-    cards.forEach((card) => observer.observe(card));
-    return () => observer.disconnect();
-  }, [activeCategory]);
 
   useEffect(() => {
     if (!activeModal) return;
@@ -517,99 +300,11 @@ export default function Cohort() {
             <h2 className="cohort-motion-reveal cohort-text-reveal">COHORT FEATURED <span>PROJECTS</span></h2>
             <p className="cohort-section-kicker cohort-motion-reveal cohort-text-reveal">Built together, shipped to the world</p>
           </div>
-          {categories.length > 2 && (
-            <label className="cohort-filter-label">
-              <span className="sr-only">Filter projects</span>
-              <select value={activeCategory} onChange={(event) => setActiveCategory(event.target.value)}>
-                {categories.map((category) => <option key={category}>{category}</option>)}
-              </select>
-            </label>
-          )}
         </div>
 
-        {visibleProjects.length ? (
-          <div className="cohort-projects-grid" ref={projectsGridRef}>
-            {visibleProjects.map((project, index) => (
-              <article
-                className={`cohort-project-teaser${revealedProjectIds.has(project.id) ? ' is-revealed' : ' is-pending'}${flippedProjectId === project.id ? ' is-flipped' : ''}`}
-                data-project-id={project.id}
-                key={project.id}
-              >
-                <span className="cohort-project-teaser-inner">
-                  <span className="cohort-project-teaser-face cohort-project-teaser-front">
-                    <div className="cohort-project-card-top">
-                      <span className="cohort-project-category">{project.category}</span>
-                      <span className="cohort-project-card-art">
-                        <ProjectCardArt index={index} />
-                      </span>
-                    </div>
-                    <strong className="cohort-project-name cohort-motion-reveal cohort-text-reveal">{project.name}</strong>
-                    <p className="cohort-project-summary cohort-motion-reveal cohort-text-reveal">{project.summary}</p>
-                    <div className="cohort-project-tech-stack" aria-label="Technology stack">
-                      {project.stack.map((technology) => <span key={technology}>{technology}</span>)}
-                    </div>
-                    <div className="cohort-project-card-footer">
-                      <span className="cohort-project-team" aria-label="Project team">
-                        Team: {project.team.map((member) => member.name).join(' · ')}
-                      </span>
-                      <button
-                        className="cohort-project-teaser-action cohort-project-more"
-                        type="button"
-                        onClick={() => {
-                          setRevealedProjectIds((current) => new Set(current).add(project.id));
-                          setFlippedProjectId(project.id);
-                        }}
-                        aria-label={`Explore ${project.name}`}
-                      >
-                        View details <ArrowUpRight size={13} />
-                      </button>
-                    </div>
-                  </span>
-                  <span className="cohort-project-teaser-face cohort-project-teaser-back">
-                    <div className="cohort-project-back-header">
-                      <strong className="cohort-project-name cohort-motion-reveal cohort-text-reveal">{project.name}</strong>
-                      <span className="cohort-project-category">{project.category}</span>
-                    </div>
-                    <div className="cohort-project-back-details">
-                      <div className="cohort-project-back-field"><i className="cohort-motion-reveal cohort-text-reveal">PROBLEM STATEMENT</i><span>{project.problem}</span></div>
-                      <div className="cohort-project-back-field"><i className="cohort-motion-reveal cohort-text-reveal">TECHNICAL ARCHITECTURE</i><span>{project.architecture}</span></div>
-                      <div className="cohort-project-back-field"><i className="cohort-motion-reveal cohort-text-reveal">PROPOSED SOLUTION</i><span>{project.solution}</span></div>
-                      <div className="cohort-project-back-field"><i className="cohort-motion-reveal cohort-text-reveal">USP</i><span>{project.summary}</span></div>
-                    </div>
-                    <div className="cohort-project-links">
-                      {project.links?.map((link) => (
-                        <a key={link.label} href={link.url} target="_blank" rel="noreferrer">
-                          {link.label === 'GitHub Repository' ? 'GitHub Repo' : link.label === 'Live Demo' ? 'Website' : link.label}
-                          {' '}<ArrowUpRight size={11} aria-hidden="true" />
-                        </a>
-                      ))}
-                      <button
-                        className="cohort-project-teaser-action cohort-project-return"
-                        type="button"
-                        onClick={(event) => {
-                          setFlippedProjectId(null);
-                          event.currentTarget.blur();
-                        }}
-                        aria-label={`Return to ${project.name} summary`}
-                      >
-                        <ArrowLeft size={13} /> Return
-                      </button>
-                    </div>
-                  </span>
-                </span>
-              </article>
-            ))}
-          </div>
-        ) : (
-          <div className="cohort-project-empty">
-            <span className="cohort-empty-mark"><Code2 size={21} /></span>
-            <p className="cohort-empty-kicker cohort-motion-reveal cohort-text-reveal">THE NEXT BUILD STARTS HERE</p>
-            <h3 className="cohort-motion-reveal cohort-text-reveal">Projects in motion.</h3>
-            <p className="cohort-motion-reveal cohort-text-reveal">Featured cohort projects will appear here as teams ship and share their work.</p>
-          </div>
-        )}
-
-        <div className="cohort-coming-soon"><span /> <i>+</i> MORE PROJECTS COMING SOON <span /></div>
+        <div className="cohort-coming-soon cohort-motion-reveal my-16">
+          <span /> <i>+</i> COHORT PROJECTS COMING SOON <span />
+        </div>
       </section>
       </div>
       </main>
@@ -645,55 +340,3 @@ export default function Cohort() {
   );
 }
 
-function ProjectCardArt({ index }: { index: number }) {
-  const mod = index % 5;
-  if (mod === 0) {
-    return (
-      <svg className="cohort-card-art-svg" viewBox="0 0 60 28" fill="none" aria-hidden="true">
-        <path d="M6 20 18 8l16 14 18-16" stroke="#60A5FA" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round" />
-        <circle cx="6" cy="20" r="2.5" fill="#60A5FA" />
-        <circle cx="18" cy="8" r="2.5" fill="#60A5FA" />
-        <circle cx="34" cy="22" r="2.5" fill="#60A5FA" />
-        <circle cx="52" cy="6" r="2.5" fill="#F472B6" />
-      </svg>
-    );
-  }
-  if (mod === 1) {
-    return (
-      <svg className="cohort-card-art-svg" viewBox="0 0 60 28" fill="none" aria-hidden="true">
-        <rect x="8" y="16" width="7" height="9" rx="1" fill="rgba(244, 114, 182, 0.2)" stroke="#F472B6" strokeWidth="1.2" />
-        <rect x="20" y="11" width="7" height="14" rx="1" fill="rgba(244, 114, 182, 0.2)" stroke="#F472B6" strokeWidth="1.2" />
-        <rect x="32" y="6" width="7" height="19" rx="1" fill="rgba(244, 114, 182, 0.2)" stroke="#F472B6" strokeWidth="1.2" />
-        <rect x="44" y="2" width="6" height="23" rx="1" fill="rgba(244, 114, 182, 0.2)" stroke="#F472B6" strokeWidth="1.2" />
-      </svg>
-    );
-  }
-  if (mod === 2) {
-    return (
-      <svg className="cohort-card-art-svg" viewBox="0 0 60 28" fill="none" aria-hidden="true">
-        <ellipse cx="30" cy="14" rx="20" ry="7" stroke="rgba(96, 165, 250, 0.6)" strokeWidth="1.2" strokeDasharray="2 3" />
-        <ellipse cx="30" cy="14" rx="9" ry="12" stroke="rgba(244, 114, 182, 0.5)" strokeWidth="1.2" />
-        <circle cx="30" cy="14" r="3" fill="#F472B6" />
-        <circle cx="13" cy="14" r="2" fill="#60A5FA" />
-      </svg>
-    );
-  }
-  if (mod === 3) {
-    return (
-      <svg className="cohort-card-art-svg" viewBox="0 0 60 28" fill="none" aria-hidden="true">
-        <path d="M8 14h44M18 14l12-9 12 9-12 9-12-9Z" stroke="rgba(96, 165, 250, 0.7)" strokeWidth="1.2" />
-        <circle cx="8" cy="14" r="2.5" fill="#60A5FA" />
-        <circle cx="30" cy="5" r="2.5" fill="#F472B6" />
-        <circle cx="52" cy="14" r="2.5" fill="#60A5FA" />
-        <circle cx="30" cy="23" r="2.5" fill="#60A5FA" />
-      </svg>
-    );
-  }
-  return (
-    <div className="cohort-card-art-nodes flex items-center gap-1" aria-hidden="true">
-      <span className="font-mono-label text-[9px] px-1.5 py-0.5 rounded-full border border-blue-400/30 text-[#9AA8C2] bg-[#070B14]">MVP</span>
-      <span className="w-3 h-px bg-gradient-to-r from-blue-400/40 to-pink-400/40" />
-      <span className="font-mono-label text-[9px] px-1.5 py-0.5 rounded-full border border-pink-400/30 text-[#9AA8C2] bg-[#070B14]">PROD</span>
-    </div>
-  );
-}

@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { ArrowUpRight } from 'lucide-react';
 import GridMotion, { type GridMotionItem } from '@/components/GridMotion';
 import { SectionKicker } from '@/components/ui';
@@ -28,6 +28,7 @@ const otherMemberItems: GridMotionItem[] = allCommunityMembers
 export default function CommunityGlobeHero() {
   const heroRef = useRef<HTMLElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
+  const [isScrolledPast, setIsScrolledPast] = useState(false);
 
   useEffect(() => {
     const el = contentRef.current;
@@ -37,6 +38,8 @@ export default function CommunityGlobeHero() {
     if (prefersReduced) return;
 
     let rafId: number;
+    let lastPast = false;
+
     const handleScroll = () => {
       cancelAnimationFrame(rafId);
       rafId = requestAnimationFrame(() => {
@@ -47,6 +50,13 @@ export default function CommunityGlobeHero() {
           el.style.transform = `translate3d(0, ${-progress * 70}px, 0)`;
           el.style.opacity = `${Math.max(0, 1 - progress * 1.15)}`;
         }
+
+        const past = y > maxScroll * 1.05;
+        if (past !== lastPast) {
+          lastPast = past;
+          setIsScrolledPast(past);
+        }
+
         if (heroLayer) {
           if (progress >= 1) {
             heroLayer.style.opacity = '0';
@@ -103,6 +113,7 @@ export default function CommunityGlobeHero() {
           spotlight={0.6}
           dim={0.35}
           fade={0.5}
+          paused={isScrolledPast}
           grayscale={false}
         />
         <div className="globe-hero-gridmotion-overlay" />

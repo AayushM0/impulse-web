@@ -2,8 +2,15 @@ import { useEffect, useRef } from 'react';
 import './EventsMeshBackground.css';
 
 /** Three flowing, dotted surfaces based on the supplied motion reference. */
-export default function EventsMeshBackground() {
+export default function EventsMeshBackground({ paused = false }: { paused?: boolean }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const syncRef = useRef<() => void>(() => {});
+  const pausedRef = useRef(paused);
+  pausedRef.current = paused;
+
+  useEffect(() => {
+    syncRef.current();
+  }, [paused]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -89,11 +96,12 @@ export default function EventsMeshBackground() {
     const sync = () => {
       cancelAnimationFrame(frame);
       lastTime = 0;
-      const running = visible && !document.hidden && !motion.matches;
+      const running = visible && !document.hidden && !motion.matches && !pausedRef.current;
       canvas.dataset.running = String(running);
       if (running) frame = requestAnimationFrame(tick);
       else if (visible && !document.hidden) draw();
     };
+    syncRef.current = sync;
     const resize = () => {
       const bounds = canvas.getBoundingClientRect();
       width = bounds.width;

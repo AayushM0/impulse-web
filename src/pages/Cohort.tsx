@@ -295,6 +295,7 @@ export default function Cohort() {
 
   const contentRef = useRef<HTMLDivElement>(null);
   const heroLayerRef = useRef<HTMLDivElement>(null);
+  const [isScrolledPast, setIsScrolledPast] = useState(false);
 
   useEffect(() => {
     const el = contentRef.current;
@@ -304,6 +305,8 @@ export default function Cohort() {
     if (prefersReduced) return;
 
     let rafId: number;
+    let lastPast = false;
+
     const handleScroll = () => {
       cancelAnimationFrame(rafId);
       rafId = requestAnimationFrame(() => {
@@ -314,6 +317,13 @@ export default function Cohort() {
           el.style.transform = `translate3d(0, ${-progress * 70}px, 0)`;
           el.style.opacity = `${Math.max(0, 1 - progress * 1.15)}`;
         }
+
+        const past = y > maxScroll * 1.05;
+        if (past !== lastPast) {
+          lastPast = past;
+          setIsScrolledPast(past);
+        }
+
         if (heroLayer) {
           if (progress >= 1) {
             heroLayer.style.opacity = '0';
@@ -355,6 +365,7 @@ export default function Cohort() {
               className="cohort-hero-ascii"
               variant="waves"
               fade="bottom"
+              paused={isScrolledPast}
               colors={['#1E2A44', '#2563EB', '#38BDF8', '#60A5FA', '#F472B6']}
               glyphs=" ·:-=+*#%@"
               size={13}

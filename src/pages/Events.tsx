@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowUpRight, Calendar, CalendarDays, Clock3, MapPin, Trophy, Users } from 'lucide-react';
 import Navbar from '@/components/Navbar';
@@ -34,6 +34,7 @@ export default function Events() {
   const pageRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const heroLayerRef = useRef<HTMLElement>(null);
+  const [isScrolledPast, setIsScrolledPast] = useState(false);
   useEventReveals(pageRef);
 
   useEffect(() => {
@@ -44,6 +45,8 @@ export default function Events() {
     if (prefersReduced) return;
 
     let rafId: number;
+    let lastPast = false;
+
     const handleScroll = () => {
       cancelAnimationFrame(rafId);
       rafId = requestAnimationFrame(() => {
@@ -54,6 +57,13 @@ export default function Events() {
           el.style.transform = `translate3d(0, ${-progress * 70}px, 0)`;
           el.style.opacity = `${Math.max(0, 1 - progress * 1.15)}`;
         }
+
+        const past = y > maxScroll * 1.05;
+        if (past !== lastPast) {
+          lastPast = past;
+          setIsScrolledPast(past);
+        }
+
         if (heroLayer) {
           if (progress >= 1) {
             heroLayer.style.opacity = '0';
@@ -83,7 +93,7 @@ export default function Events() {
       <main className="relative overflow-x-clip">
         {/* Layer 1: Sticky Pinned Hero */}
         <header ref={heroLayerRef} className="events-intro sticky top-0 h-[100svh] min-h-[640px] z-0 overflow-hidden flex flex-col justify-center transition-opacity duration-300">
-          <EventsMeshBackground />
+          <EventsMeshBackground paused={isScrolledPast} />
           <div ref={contentRef} className="events-hero-copy will-change-transform max-w-4xl mx-auto text-center px-6 pt-20 pb-16">
             <div className="flex justify-center mb-4 hero-stagger-1">
               <SectionKicker label="DISCOVER · PARTICIPATE · BUILD" />

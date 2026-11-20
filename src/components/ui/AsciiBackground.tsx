@@ -18,6 +18,7 @@ export interface AsciiBackgroundProps {
   seed?: number;
   fade?: 'none' | 'bottom' | 'top' | 'radial';
   interactive?: boolean;
+  paused?: boolean;
   font?: string;
   weight?: number | string;
   style?: React.CSSProperties;
@@ -227,14 +228,27 @@ export const AsciiBackground: React.FC<AsciiBackgroundProps> = ({
   seed = 0,
   fade = 'bottom',
   interactive = true,
+  paused = false,
   font = "'Space Mono', 'JetBrains Mono', 'SFMono-Regular', Menlo, monospace",
   weight = 500,
   style,
   children,
-}) => {
+}: AsciiBackgroundProps) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [isReady, setIsReady] = useState(false);
+  const pausedRef = useRef(paused);
+  pausedRef.current = paused;
+  const startLoopRef = useRef<() => void>(() => {});
+  const stopLoopRef = useRef<() => void>(() => {});
+
+  useEffect(() => {
+    if (paused) {
+      stopLoopRef.current();
+    } else {
+      startLoopRef.current();
+    }
+  }, [paused]);
 
   useEffect(() => {
     const container = containerRef.current;
@@ -386,9 +400,17 @@ export const AsciiBackground: React.FC<AsciiBackgroundProps> = ({
     let accumulatedTime = 0;
     const introDuration = 1200;
 
+    let cachedRect: DOMRect | null = null;
+    const handleInvalidate = () => {
+      cachedRect = null;
+    };
+    window.addEventListener('resize', handleInvalidate, { passive: true });
+    window.addEventListener('scroll', handleInvalidate, { passive: true });
+
     const handlePointerMove = (e: PointerEvent) => {
-      if (!interactive || !isInView || e.pointerType === 'touch') return;
-      const rect = container.getBoundingClientRect();
+      if (!interactive || !isInView || pausedRef.current || e.pointerType === 'touch') return;
+      if (!cachedRect) cachedRect = container.getBoundingClientRect();
+      const rect = cachedRect;
       const px = e.clientX - rect.left;
       const py = rect.bottom - e.clientY;
       if (px >= 0 && px <= rect.width && py >= 0 && py <= rect.height) {
@@ -401,8 +423,9 @@ export const AsciiBackground: React.FC<AsciiBackgroundProps> = ({
     };
 
     const handlePointerDown = (e: PointerEvent) => {
-      if (!interactive || !isInView) return;
-      const rect = container.getBoundingClientRect();
+      if (!interactive || !isInView || pausedRef.current) return;
+      if (!cachedRect) cachedRect = container.getBoundingClientRect();
+      const rect = cachedRect;
       const px = e.clientX - rect.left;
       const py = rect.bottom - e.clientY;
       if (px >= 0 && px <= rect.width && py >= 0 && py <= rect.height) {
@@ -422,7 +445,7 @@ export const AsciiBackground: React.FC<AsciiBackgroundProps> = ({
 
     // Render loop
     const render = (now: number) => {
-      if (!isInView || document.hidden) {
+      if (!isInView || document.hidden || pausedRef.current) {
         animFrameId = 0;
         return;
       }
@@ -512,7 +535,7 @@ export const AsciiBackground: React.FC<AsciiBackgroundProps> = ({
     };
 
     const startLoop = () => {
-      if (!animFrameId && isInView && !document.hidden) {
+      if (!animFrameId && isInView && !document.hidden && !pausedRef.current) {
         lastTime = performance.now();
         animFrameId = requestAnimationFrame(render);
       }
@@ -524,6 +547,8 @@ export const AsciiBackground: React.FC<AsciiBackgroundProps> = ({
         animFrameId = 0;
       }
     };
+    startLoopRef.current = startLoop;
+    stopLoopRef.current = stopLoop;
 
     startLoop();
     setIsReady(true);
@@ -531,7 +556,7 @@ export const AsciiBackground: React.FC<AsciiBackgroundProps> = ({
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         isInView = entry.isIntersecting;
-        if (isInView && !document.hidden) {
+        if (isInView && !document.hidden && !pausedRef.current) {
           startLoop();
         } else {
           stopLoop();
@@ -543,7 +568,7 @@ export const AsciiBackground: React.FC<AsciiBackgroundProps> = ({
     const handleVisibilityChange = () => {
       if (document.hidden) {
         stopLoop();
-      } else if (isInView) {
+      } else if (isInView && !pausedRef.current) {
         startLoop();
       }
     };
@@ -551,8 +576,12 @@ export const AsciiBackground: React.FC<AsciiBackgroundProps> = ({
 
     return () => {
       stopLoop();
+      startLoopRef.current = () => {};
+      stopLoopRef.current = () => {};
       observer.disconnect();
       document.removeEventListener('visibilitychange', handleVisibilityChange);
+      window.removeEventListener('resize', handleInvalidate);
+      window.removeEventListener('scroll', handleInvalidate);
       window.removeEventListener('pointermove', handlePointerMove);
       container.removeEventListener('pointerdown', handlePointerDown);
       container.removeEventListener('pointerleave', handlePointerLeave);

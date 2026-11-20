@@ -109,6 +109,7 @@ export interface GridMotionProps {
   dim?: number;
   grayscale?: boolean;
   fade?: number;
+  paused?: boolean;
   tileColor?: string;
   textColor?: string;
   theme?: 'dark' | 'light';
@@ -132,6 +133,7 @@ export default function GridMotion({
   dim = 0.35,
   grayscale = false,
   fade = 0.5,
+  paused = false,
   tileColor,
   textColor,
   theme = 'dark',
@@ -140,6 +142,18 @@ export default function GridMotion({
 }: GridMotionProps) {
   const rootRef = useRef<HTMLDivElement>(null);
   const planeRef = useRef<HTMLDivElement>(null);
+  const pausedRef = useRef(paused);
+  pausedRef.current = paused;
+  const wakeRef = useRef<() => void>(() => {});
+  const stopRef = useRef<() => void>(() => {});
+
+  useEffect(() => {
+    if (paused) {
+      stopRef.current();
+    } else {
+      wakeRef.current();
+    }
+  }, [paused]);
   const motionRef = useRef({
     offsets: [] as number[],
     shifts: [] as number[],
@@ -254,9 +268,17 @@ export default function GridMotion({
     let alive = true;
     if (motion.intro >= 1) plane.style.opacity = '1';
 
+    let cachedRect: DOMRect | null = null;
+    const updateRect = () => {
+      cachedRect = root.getBoundingClientRect();
+    };
+    updateRect();
+    window.addEventListener('resize', updateRect, { passive: true });
+    window.addEventListener('scroll', updateRect, { passive: true });
+
     const frame = (now: number) => {
       raf = 0;
-      if (!alive) return;
+      if (!alive || pausedRef.current) return;
       const s = settingsRef.current;
       const dt = Math.min(0.05, Math.max(0.001, (now - last) / 1000));
       last = now;
@@ -266,7 +288,8 @@ export default function GridMotion({
         plane.style.opacity = String(1 - (1 - motion.intro) ** 3);
       }
 
-      const rect = root.getBoundingClientRect();
+      if (!cachedRect) updateRect();
+      const rect = cachedRect!;
       const scale = rect.width ? root.clientWidth / rect.width : 1;
       const halfWidth = root.clientWidth / 2 || 1;
       const halfHeight = root.clientHeight / 2 || 1;
@@ -319,23 +342,43 @@ export default function GridMotion({
         }
       });
 
-      if (visible) raf = requestAnimationFrame(frame);
+      if (visible && !pausedRef.current) raf = requestAnimationFrame(frame);
     };
 
-    const visibility = new IntersectionObserver((entries) => {
-      visible = entries.some((entry) => entry.isIntersecting);
-      if (visible && !raf) {
+    const wake = () => {
+      if (visible && !raf && alive && !pausedRef.current) {
         last = performance.now();
         raf = requestAnimationFrame(frame);
       }
+    };
+    const stop = () => {
+      if (raf) {
+        cancelAnimationFrame(raf);
+        raf = 0;
+      }
+    };
+    wakeRef.current = wake;
+    stopRef.current = stop;
+
+    const visibility = new IntersectionObserver((entries) => {
+      visible = entries.some((entry) => entry.isIntersecting);
+      if (visible) {
+        wake();
+      } else {
+        stop();
+      }
     });
     visibility.observe(root);
-    raf = requestAnimationFrame(frame);
+    wake();
 
     return () => {
       alive = false;
-      cancelAnimationFrame(raf);
+      stop();
+      wakeRef.current = () => {};
+      stopRef.current = () => {};
       visibility.disconnect();
+      window.removeEventListener('resize', updateRect);
+      window.removeEventListener('scroll', updateRect);
     };
   }, [layout, tiles, rowItems]);
 

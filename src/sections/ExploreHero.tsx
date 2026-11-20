@@ -1,15 +1,45 @@
+import { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, ArrowDown, ArrowUpRight } from 'lucide-react';
+import { ArrowRight, ArrowUpRight } from 'lucide-react';
 import { Button, SectionKicker } from '@/components/ui';
 import HalftoneNebula from '@/components/ui/halftone-nebula';
 
 export default function ExploreHero() {
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = contentRef.current;
+    if (!el) return;
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReduced) return;
+
+    let rafId: number;
+    const handleScroll = () => {
+      cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(() => {
+        const y = window.scrollY;
+        const maxScroll = Math.max(window.innerHeight * 0.65, 400);
+        const progress = Math.min(1, Math.max(0, y / maxScroll));
+        el.style.transform = `translate3d(0, ${-progress * 70}px, 0)`;
+        el.style.opacity = `${Math.max(0, 1 - progress * 1.15)}`;
+      });
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      cancelAnimationFrame(rafId);
+    };
+  }, []);
+
   return (
-    <section id="hero" className="relative w-full overflow-hidden bg-space-950">
+    <section id="hero" className="relative w-full h-full overflow-hidden bg-space-950">
       <HalftoneNebula
-        height="100svh"
+        height="100%"
         preset="impulse"
-        className="w-full min-h-[640px]"
+        className="w-full h-full min-h-[640px]"
         params={{
           // Refined star & planet balance for Impulse brand
           planet: true,
@@ -36,14 +66,11 @@ export default function ExploreHero() {
           aria-hidden="true"
         />
 
-        {/* Seamless bottom feather into Section 02 (ExploreEvents - space-950 / #070B14) */}
-        <div
-          className="absolute inset-x-0 bottom-0 h-32 pointer-events-none bg-gradient-to-t from-space-950 via-space-950/85 to-transparent z-[5]"
-          aria-hidden="true"
-        />
-
         {/* Hero Interactive & Typography Layer */}
-        <div className="relative z-10 flex flex-col items-center justify-center flex-1 h-full px-6 lg:px-10 pt-24 pb-16 text-center">
+        <div
+          ref={contentRef}
+          className="relative z-10 flex flex-col items-center justify-center flex-1 h-full px-6 lg:px-10 pt-20 pb-28 text-center will-change-transform"
+        >
           <div className="max-w-4xl mx-auto flex flex-col items-center">
             <SectionKicker label="ORIGIN // CHAPTER ONE" className="mb-6 pointer-events-auto" />
 
@@ -77,11 +104,6 @@ export default function ExploreHero() {
                 BUILDER COHORT
                 <ArrowRight aria-hidden="true" className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </Button>
-            </div>
-
-            <div className="mt-12 sm:mt-16 flex flex-col items-center gap-2 text-xs font-mono font-bold tracking-wider text-gray-200 select-none [text-shadow:_0_2px_8px_rgba(7,11,20,0.9)]">
-              <span>SCROLL TO EXPLORE</span>
-              <ArrowDown aria-hidden="true" className="w-3.5 h-3.5 animate-bounce text-impulse-blue-bright stroke-[2.5]" />
             </div>
           </div>
         </div>

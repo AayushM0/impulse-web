@@ -3,7 +3,7 @@ import { Button, SectionKicker } from '@/components/ui';
 
 export default function ExploreEvents() {
   return (
-    <section id="events" className="relative py-16 md:py-24 px-6 lg:px-10 border-t border-white/10 overflow-hidden">
+    <section id="events" className="relative pt-8 sm:pt-10 md:pt-12 pb-16 md:pb-24 px-6 lg:px-10 overflow-hidden">
       <div className="max-w-6xl mx-auto">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
           <div>

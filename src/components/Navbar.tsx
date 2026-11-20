@@ -40,6 +40,7 @@ export default function Navbar() {
 
   useEffect(() => {
     setMobileOpen(false);
+    setScrolled(window.scrollY > 40);
   }, [location.pathname]);
 
   useEffect(() => {
@@ -97,7 +98,7 @@ export default function Navbar() {
                   {link.label}
                   <span
                     className={`absolute bottom-1.5 left-3 right-3 h-px bg-impulse-blue transition-all duration-300 origin-left ${
-                      isActive ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
+                      isActive ? 'scale-x-100 shadow-[0_0_8px_rgba(96,165,250,0.85)]' : 'scale-x-0 group-hover:scale-x-100'
                     }`}
                   />
                 </Link>

@@ -213,7 +213,7 @@ export default function Experiences() {
                         )}
 
                         <Link
-                          to={event.link || '/join'}
+                          to={event.link || '/events'}
                           className={`inline-flex items-center gap-2 font-mono-label text-xs px-4 py-2 border rounded-lg transition-colors duration-200 ${
                             event.featured
                               ? 'text-impulse-white border-impulse-blue bg-impulse-blue/20 hover:bg-impulse-blue/30 hover:border-impulse-blue-bright shadow-[0_0_12px_rgba(37,99,235,0.25)]'

@@ -9,7 +9,6 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const location = useLocation();
-  const isSharkHack = location.pathname === '/shark-hack' || location.pathname === '/events/shark-hack';
 
   const isLinkActive = (path: string) => path === '/'
     ? location.pathname === '/'
@@ -58,11 +57,7 @@ export default function Navbar() {
 
   return (
     <>
-      <header
-        className={`fixed inset-x-0 top-0 z-50 pointer-events-none transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] ${
-          scrolled && isSharkHack ? '-translate-y-full opacity-0 pointer-events-none' : 'translate-y-0 opacity-100'
-        }`}
-      >
+      <header className="fixed inset-x-0 top-0 z-50 pointer-events-none">
         {/* Top ambient vignette when unscrolled to guarantee crisp legibility on ANY page/hero */}
         <div
           className={`absolute inset-x-0 top-0 h-28 pointer-events-none bg-gradient-to-b from-space-950/90 via-space-950/40 to-transparent transition-opacity duration-500 -z-10 ${

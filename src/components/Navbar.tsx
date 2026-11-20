@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, ArrowRight } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import Logo from './Logo';
 import { navLinks } from '@/data/content';
 import { getLenis } from '@/providers/SmoothScrollProvider';
@@ -65,10 +65,6 @@ export default function Navbar() {
         <nav className="max-w-[1440px] mx-auto px-6 lg:px-10 h-16 flex items-center justify-between">
           <div className="flex items-center gap-4">
             <Logo size="sm" />
-            <div className="hidden sm:inline-flex items-center gap-1.5 font-mono-label text-[10px] text-impulse-blue-bright/80 border border-impulse-blue/25 bg-space-900/60 backdrop-blur-md px-2.5 py-0.5 rounded-full">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-              <span>CHAPTER ONE</span>
-            </div>
           </div>
 
           <div className="hidden lg:flex items-center gap-6">
@@ -93,17 +89,6 @@ export default function Navbar() {
                 </Link>
               );
             })}
-          </div>
-
-          <div className="hidden lg:flex items-center">
-            <Link
-              to="/join"
-              onClick={() => handleNavClick('/join')}
-              className="group inline-flex items-center gap-2 font-mono-label text-white bg-gradient-to-r from-[#2563EB] to-[#EC4899] hover:from-blue-500 hover:to-pink-500 shadow-[0_4px_16px_rgba(37,99,235,0.3)] transition-all duration-300 px-5 py-2.5 min-h-[44px] energy-sweep"
-            >
-              Join Impulse
-              <ArrowRight aria-hidden="true" className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
-            </Link>
           </div>
 
           <button
@@ -139,16 +124,6 @@ export default function Navbar() {
               {link.label}
             </Link>
           ))}
-          <Link
-            to="/join"
-            onClick={() => handleMobileNavClick('/join')}
-            className={`mt-4 inline-flex items-center gap-2 font-mono-label text-white bg-gradient-to-r from-[#2563EB] to-[#EC4899] px-7 py-3.5 transition-all duration-500 ${
-              mobileOpen ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
-            }`}
-            style={{ transitionDelay: '300ms' }}
-          >
-            Join Impulse <ArrowRight aria-hidden="true" className="w-4 h-4" />
-          </Link>
         </div>
       </div>
     </>

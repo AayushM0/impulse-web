@@ -222,7 +222,6 @@ export const footerLinks = [
   { label: 'Events', path: '/events' },
   { label: 'Cohort', path: '/cohort' },
   { label: 'Community', path: '/community' },
-  { label: 'Join', path: '/join' },
 ];
 
 export const socialLinks = [

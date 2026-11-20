@@ -31,8 +31,8 @@ export default function Home() {
         <CTASection
           headline="Ready to build?"
           description="You don't need to know everything. You just need to be curious enough to start."
-          buttonText="ENTER IMPULSE"
-          buttonTo="/join"
+          buttonText="EXPLORE COHORT"
+          buttonTo="/cohort"
           microcopy="CHAPTER ONE STARTS HERE."
         />
       </main>

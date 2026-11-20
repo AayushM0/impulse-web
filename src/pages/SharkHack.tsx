@@ -155,7 +155,11 @@ export default function SharkHack() {
     // The event is a continuous document; section links scroll to their content.
     <div className="shark-hack-page shark-scroll-page" ref={pageRef} data-lenis-prevent>
       <Navbar />
-      <main>
+      <main className="relative">
+        <div className="shark-hero-atmosphere" aria-hidden="true">
+          <img src="/images/shark-hack-banner.jpg" alt="" width="1600" height="639" fetchPriority="high" className="shark-hero-art" />
+        </div>
+
         <nav aria-label="Shark Hack sections" className="shark-section-nav">
           <div className="shark-mobile-navigation" ref={mobileMenuRef}>
             <div className="shark-mobile-shortcuts">
@@ -193,9 +197,6 @@ export default function SharkHack() {
 
         <section id="overview" {...panelProps('overview')}>
           <div className="shark-hero">
-            <div className="shark-hero-atmosphere" aria-hidden="true">
-              <img src="/images/shark-hack-banner.jpg" alt="" width="1600" height="639" fetchPriority="high" className="shark-hero-art" />
-            </div>
             <div className="shark-content-width">
             <div className="shark-hero-topline">
               <Link to="/events" className={'shark-back-link' + focusStyle}><ArrowUpRight className="shark-back-icon" aria-hidden="true" /> All events</Link>

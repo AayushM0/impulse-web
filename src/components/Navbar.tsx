@@ -9,6 +9,7 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const location = useLocation();
+  const isSharkHack = location.pathname === '/shark-hack' || location.pathname === '/events/shark-hack';
 
   const isLinkActive = (path: string) => path === '/'
     ? location.pathname === '/'
@@ -58,19 +59,23 @@ export default function Navbar() {
   return (
     <>
       <header className="fixed inset-x-0 top-0 z-50 pointer-events-none">
-        {/* Top ambient vignette when unscrolled to guarantee crisp legibility on ANY page/hero */}
-        <div
-          className={`absolute inset-x-0 top-0 h-28 pointer-events-none bg-gradient-to-b from-space-950/90 via-space-950/40 to-transparent transition-opacity duration-500 -z-10 ${
-            scrolled ? 'opacity-0' : 'opacity-100'
-          }`}
-          aria-hidden="true"
-        />
+        {/* Top ambient vignette when unscrolled to guarantee crisp legibility on ANY page/hero (disabled on Shark Hack to preserve full ocean artwork) */}
+        {!isSharkHack && (
+          <div
+            className={`absolute inset-x-0 top-0 h-28 pointer-events-none bg-gradient-to-b from-space-950/90 via-space-950/40 to-transparent transition-opacity duration-500 -z-10 ${
+              scrolled ? 'opacity-0' : 'opacity-100'
+            }`}
+            aria-hidden="true"
+          />
+        )}
 
         <nav
-          className={`pointer-events-auto mx-auto flex items-center justify-between transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none ${
-            scrolled
-              ? 'mt-3 md:mt-4 w-[calc(100%-24px)] md:w-[calc(100%-48px)] max-w-7xl h-14 md:h-16 px-5 lg:px-8 py-2 rounded-2xl md:rounded-full bg-[#070B14]/90 backdrop-blur-2xl border border-white/12 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.85),0_0_0_1px_rgba(255,255,255,0.06)]'
-              : 'mt-0 w-full max-w-7xl h-16 md:h-20 px-6 lg:px-10 py-0 rounded-none bg-transparent border border-transparent shadow-none'
+          className={`pointer-events-auto mx-auto flex items-center justify-between motion-reduce:transition-none ${
+            isSharkHack
+              ? 'mt-0 w-full max-w-7xl h-16 md:h-20 px-6 lg:px-10 py-0 rounded-none bg-transparent border border-transparent shadow-none'
+              : scrolled
+                ? 'mt-3 md:mt-4 w-[calc(100%-24px)] md:w-[calc(100%-48px)] max-w-7xl h-14 md:h-16 px-5 lg:px-8 py-2 rounded-2xl md:rounded-full bg-[#070B14]/90 backdrop-blur-2xl border border-white/12 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.85),0_0_0_1px_rgba(255,255,255,0.06)] transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]'
+                : 'mt-0 w-full max-w-7xl h-16 md:h-20 px-6 lg:px-10 py-0 rounded-none bg-transparent border border-transparent shadow-none transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)]'
           }`}
         >
           <div className="flex items-center gap-4">

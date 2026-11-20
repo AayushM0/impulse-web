@@ -33,10 +33,12 @@ const upcomingEvents = [
 export default function Events() {
   const pageRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
+  const heroLayerRef = useRef<HTMLElement>(null);
   useEventReveals(pageRef);
 
   useEffect(() => {
     const el = contentRef.current;
+    const heroLayer = heroLayerRef.current;
     if (!el) return;
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReduced) return;
@@ -48,8 +50,21 @@ export default function Events() {
         const y = window.scrollY;
         const maxScroll = Math.max(window.innerHeight * 0.65, 400);
         const progress = Math.min(1, Math.max(0, y / maxScroll));
-        el.style.transform = `translate3d(0, ${-progress * 70}px, 0)`;
-        el.style.opacity = `${Math.max(0, 1 - progress * 1.15)}`;
+        if (el) {
+          el.style.transform = `translate3d(0, ${-progress * 70}px, 0)`;
+          el.style.opacity = `${Math.max(0, 1 - progress * 1.15)}`;
+        }
+        if (heroLayer) {
+          if (progress >= 1) {
+            heroLayer.style.opacity = '0';
+            heroLayer.style.visibility = 'hidden';
+            heroLayer.style.pointerEvents = 'none';
+          } else {
+            heroLayer.style.opacity = `${Math.max(0, 1 - progress * 1.05)}`;
+            heroLayer.style.visibility = 'visible';
+            heroLayer.style.pointerEvents = 'auto';
+          }
+        }
       });
     };
 
@@ -67,7 +82,7 @@ export default function Events() {
       <Navbar />
       <main className="relative overflow-x-clip">
         {/* Layer 1: Sticky Pinned Hero */}
-        <header className="events-intro sticky top-0 h-[100svh] min-h-[640px] z-0 overflow-hidden flex flex-col justify-center">
+        <header ref={heroLayerRef} className="events-intro sticky top-0 h-[100svh] min-h-[640px] z-0 overflow-hidden flex flex-col justify-center transition-opacity duration-300">
           <EventsMeshBackground />
           <div ref={contentRef} className="events-hero-copy will-change-transform max-w-4xl mx-auto text-center px-6 pt-20 pb-16">
             <div className="flex justify-center mb-4 hero-stagger-1">
@@ -144,7 +159,9 @@ export default function Events() {
           </section>
         </div>
       </main>
-      <Footer />
+      <div className="relative z-10 bg-[#070B14]">
+        <Footer />
+      </div>
     </div>
   );
 }

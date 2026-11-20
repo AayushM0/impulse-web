@@ -208,8 +208,9 @@ export default function Community() {
           <ConnectWithUs />
         </div>
       </main>
-
-      <Footer />
+      <div className="relative z-10 bg-[#070B14]">
+        <Footer />
+      </div>
     </div>
   );
 }

@@ -294,9 +294,11 @@ export default function Cohort() {
   }, [activeModal]);
 
   const contentRef = useRef<HTMLDivElement>(null);
+  const heroLayerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const el = contentRef.current;
+    const heroLayer = heroLayerRef.current;
     if (!el) return;
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReduced) return;
@@ -308,8 +310,21 @@ export default function Cohort() {
         const y = window.scrollY;
         const maxScroll = Math.max(window.innerHeight * 0.65, 400);
         const progress = Math.min(1, Math.max(0, y / maxScroll));
-        el.style.transform = `translate3d(0, ${-progress * 70}px, 0)`;
-        el.style.opacity = `${Math.max(0, 1 - progress * 1.15)}`;
+        if (el) {
+          el.style.transform = `translate3d(0, ${-progress * 70}px, 0)`;
+          el.style.opacity = `${Math.max(0, 1 - progress * 1.15)}`;
+        }
+        if (heroLayer) {
+          if (progress >= 1) {
+            heroLayer.style.opacity = '0';
+            heroLayer.style.visibility = 'hidden';
+            heroLayer.style.pointerEvents = 'none';
+          } else {
+            heroLayer.style.opacity = `${Math.max(0, 1 - progress * 1.05)}`;
+            heroLayer.style.visibility = 'visible';
+            heroLayer.style.pointerEvents = 'auto';
+          }
+        }
       });
     };
 
@@ -334,7 +349,7 @@ export default function Cohort() {
       <Navbar />
       <main className="cohort-page relative overflow-x-clip">
         {/* Layer 1: Sticky Pinned Hero */}
-        <div className="sticky top-0 h-[100svh] min-h-[640px] z-0 overflow-hidden">
+        <div ref={heroLayerRef} className="sticky top-0 h-[100svh] min-h-[640px] z-0 overflow-hidden transition-opacity duration-300">
           <section className="cohort-hero h-full">
             <AsciiBackground
               className="cohort-hero-ascii"
@@ -372,7 +387,7 @@ export default function Cohort() {
         </div>
 
         {/* Layer 2: Rising Obsidian Sheet with Peeking Blue Pill */}
-        <div className="relative z-10 -mt-14 sm:-mt-15 md:-mt-16 rounded-t-[32px] sm:rounded-t-[40px] md:rounded-t-[48px] bg-[#070B14] border-t border-[#2563EB]/40 shadow-[0_-12px_36px_-6px_rgba(37,99,235,0.15),0_-24px_50px_-12px_rgba(0,0,0,0.95)]">
+        <div className="relative z-10 -mt-14 sm:-mt-15 md:-mt-16 rounded-t-[32px] sm:rounded-t-[40px] md:rounded-t-[48px] bg-[#070B14] border-t border-[#2563EB]/40 shadow-[0_-12px_36px_-6px_rgba(37,99,235,0.15),0_-24px_50px_-12px_rgba(0,0,0,0.95)] pb-20 sm:pb-28">
           <section className="cohort-timeline-section pt-5 sm:pt-6 md:pt-7" id="cohort-timeline" aria-label="Five-month cohort timeline">
             <div className="cohort-timeline">
               <div className="cohort-timeline-heading">
@@ -586,8 +601,11 @@ export default function Cohort() {
         <div className="cohort-coming-soon"><span /> <i>+</i> MORE PROJECTS COMING SOON <span /></div>
       </section>
       </div>
+      </main>
 
-      <Footer />
+      <div className="relative z-10 bg-[#070B14]">
+        <Footer />
+      </div>
 
       {activeModal && (
         <div className="cohort-modal-backdrop" onMouseDown={(event) => { if (event.target === event.currentTarget) setActiveModal(null); }}>
@@ -612,7 +630,6 @@ export default function Cohort() {
           </section>
         </div>
       )}
-      </main>
     </div>
   );
 }

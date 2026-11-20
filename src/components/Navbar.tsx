@@ -55,14 +55,14 @@ export default function Navbar() {
 
   return (
     <>
-      <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          scrolled
-            ? 'bg-space-950/80 backdrop-blur-xl border-b border-impulse-blue/10'
-            : 'bg-transparent'
-        }`}
-      >
-        <nav className="max-w-[1440px] mx-auto px-6 lg:px-10 h-16 flex items-center justify-between">
+      <header className="fixed inset-x-0 top-0 z-50 pointer-events-none">
+        <nav
+          className={`pointer-events-auto mx-auto flex items-center justify-between transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] motion-reduce:transition-none ${
+            scrolled
+              ? 'mt-3 md:mt-4 w-[calc(100%-24px)] md:w-[calc(100%-48px)] max-w-7xl h-14 md:h-16 px-5 lg:px-8 py-2 rounded-2xl md:rounded-full bg-space-950/80 backdrop-blur-xl border border-white/10 shadow-[0_16px_40px_-12px_rgba(0,0,0,0.7)]'
+              : 'mt-0 w-full max-w-7xl h-16 md:h-20 px-6 lg:px-10 py-0 rounded-none bg-transparent border border-transparent shadow-none'
+          }`}
+        >
           <div className="flex items-center gap-4">
             <Logo size="sm" />
           </div>
@@ -76,13 +76,13 @@ export default function Navbar() {
                   to={link.path}
                   onClick={() => handleNavClick(link.path)}
                   aria-current={isActive ? 'page' : undefined}
-                  className={`font-mono text-xs font-bold tracking-wider transition-colors duration-300 relative group py-2.5 px-3 min-h-[44px] inline-flex items-center drop-shadow-[0_2px_8px_rgba(7,11,20,0.8)] ${
+                  className={`font-mono text-xs font-bold tracking-wider transition-colors duration-300 relative group py-2 px-3 min-h-[40px] inline-flex items-center drop-shadow-[0_2px_8px_rgba(7,11,20,0.8)] ${
                     isActive ? 'text-white' : 'text-gray-200 hover:text-white'
                   }`}
                 >
                   {link.label}
                   <span
-                    className={`absolute bottom-2 left-3 right-3 h-px bg-impulse-blue transition-all duration-300 origin-left ${
+                    className={`absolute bottom-1.5 left-3 right-3 h-px bg-impulse-blue transition-all duration-300 origin-left ${
                       isActive ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
                     }`}
                   />
@@ -94,7 +94,7 @@ export default function Navbar() {
           <div className="flex items-center gap-3">
             <Link
               to="/events"
-              className="group hidden sm:inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-white text-space-950 hover:bg-[#F2F6FF] font-sans font-bold text-xs tracking-wider uppercase transition-all duration-300 shadow-[0_2px_12px_rgba(255,255,255,0.2)] hover:shadow-[0_4px_20px_rgba(255,255,255,0.35)] select-none"
+              className="group hidden sm:inline-flex items-center gap-1.5 px-4 py-2 rounded-xl md:rounded-full bg-white text-space-950 hover:bg-[#F2F6FF] font-sans font-bold text-xs tracking-wider uppercase transition-all duration-300 shadow-[0_2px_12px_rgba(255,255,255,0.2)] hover:shadow-[0_4px_20px_rgba(255,255,255,0.35)] select-none"
             >
               <span>EXPLORE EVENTS</span>
               <ArrowUpRight aria-hidden="true" className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 stroke-[2.5]" />

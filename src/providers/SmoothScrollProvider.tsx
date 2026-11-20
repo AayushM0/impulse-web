@@ -35,7 +35,8 @@ export default function SmoothScrollProvider({ children }: SmoothScrollProviderP
     };
 
     gsap.ticker.add(updateTicker);
-    gsap.ticker.lagSmoothing(0);
+    // Clamp ticker delta on tab switch to avoid NaN / infinite velocity jumps
+    gsap.ticker.lagSmoothing(500, 33);
 
     return () => {
       gsap.ticker.remove(updateTicker);

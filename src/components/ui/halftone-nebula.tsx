@@ -867,6 +867,7 @@ export default function HalftoneNebula({
       canvas.removeEventListener("webglcontextrestored", onRestored)
       gl.deleteVertexArray(vao)
       gl.deleteProgram(program)
+      gl.getExtension("WEBGL_lose_context")?.loseContext()
     }
   }, [interactive, reduced, generation, maxDpr])
 

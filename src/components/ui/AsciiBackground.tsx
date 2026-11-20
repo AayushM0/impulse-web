@@ -268,6 +268,12 @@ export const AsciiBackground: React.FC<AsciiBackgroundProps> = ({
       return;
     }
 
+    const handleContextLost = (e: Event) => {
+      e.preventDefault();
+      stopLoop();
+    };
+    canvas.addEventListener('webglcontextlost', handleContextLost);
+
     const compileShader = (type: number, source: string) => {
       const shader = gl.createShader(type);
       if (!shader) return null;
@@ -585,12 +591,14 @@ export const AsciiBackground: React.FC<AsciiBackgroundProps> = ({
       window.removeEventListener('pointermove', handlePointerMove);
       container.removeEventListener('pointerdown', handlePointerDown);
       container.removeEventListener('pointerleave', handlePointerLeave);
+      canvas.removeEventListener('webglcontextlost', handleContextLost);
 
       gl.deleteBuffer(quadBuffer);
       gl.deleteTexture(atlasTexture);
       gl.deleteShader(vertShader);
       gl.deleteShader(fragShader);
       gl.deleteProgram(program);
+      gl.getExtension('WEBGL_lose_context')?.loseContext();
     };
   }, [
     glyphs,

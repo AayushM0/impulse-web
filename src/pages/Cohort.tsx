@@ -131,11 +131,12 @@ export default function Cohort() {
   }, []);
 
   useEffect(() => {
-    const now = new Date();
-    const nextMonth = new Date(now.getFullYear(), now.getMonth() + 1, 1);
-    const timeout = window.setTimeout(() => setTimelineDate(new Date()), nextMonth.getTime() - now.getTime());
-    return () => window.clearTimeout(timeout);
-  }, [timelineDate]);
+    // Check once per hour if the month has transitioned
+    const interval = window.setInterval(() => {
+      setTimelineDate(new Date());
+    }, 1000 * 60 * 60);
+    return () => window.clearInterval(interval);
+  }, []);
 
   return (
     <div className="bg-[#070B14] min-h-screen">

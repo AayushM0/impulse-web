@@ -1,7 +1,6 @@
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { useEffect, lazy, Suspense } from 'react';
 import Home from '@/pages/Home';
-const Join = lazy(() => import('@/pages/Join'));
 const Events = lazy(() => import('@/pages/Events'));
 const CommunityPage = lazy(() => import('@/pages/Community'));
 const SharkHack = lazy(() => import('@/pages/SharkHack'));
@@ -28,7 +27,6 @@ function PageTitle() {
   useEffect(() => {
     const titles: Record<string, string> = {
       '/': 'IMPULSE: Ideas in Motion',
-      '/join': 'Join | IMPULSE: Ideas in Motion',
       '/events': 'Events | IMPULSE: Ideas in Motion',
       '/cohort': 'Builder Cohort | IMPULSE: Ideas in Motion',
       '/shark-hack': 'Shark Hack 2027 | IMPULSE: Ideas in Motion',
@@ -51,7 +49,6 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Route path="/shark-hack" element={<SharkHack />} />
         <Route path="/events/shark-hack" element={<SharkHack />} />
-        <Route path="/join" element={<Join />} />
         <Route path="/events" element={<Events />} />
         <Route path="/cohort" element={<Cohort />} />
         <Route path="/community" element={<CommunityPage />} />

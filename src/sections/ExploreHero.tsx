@@ -69,7 +69,7 @@ export default function ExploreHero() {
         {/* Hero Interactive & Typography Layer */}
         <div
           ref={contentRef}
-          className="relative z-10 flex flex-col items-center justify-center flex-1 h-full px-6 lg:px-10 pt-20 pb-28 text-center will-change-transform"
+          className="relative z-10 flex flex-col items-center justify-center flex-1 h-full px-6 lg:px-10 pt-16 pb-12 text-center will-change-transform"
         >
           <div className="max-w-4xl mx-auto flex flex-col items-center">
             <SectionKicker label="ORIGIN // CHAPTER ONE" className="mb-6 pointer-events-auto" />

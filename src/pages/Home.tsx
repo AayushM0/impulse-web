@@ -16,13 +16,7 @@ export default function Home() {
         </div>
 
         {/* Layer 2: Rising Obsidian Sheet with Peeking Top Rim */}
-        <div className="relative z-10 -mt-[clamp(100px,13svh,136px)] rounded-t-[32px] sm:rounded-t-[40px] md:rounded-t-[48px] bg-[#070B14] border-t border-white/12 shadow-[0_-24px_50px_-12px_rgba(0,0,0,0.9),0_0_0_1px_rgba(255,255,255,0.04)]">
-          {/* Ambient glass rim specular reflection */}
-          <div
-            className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent pointer-events-none rounded-t-[48px]"
-            aria-hidden="true"
-          />
-
+        <div className="relative z-10 -mt-12 sm:-mt-14 md:-mt-16 rounded-t-[32px] sm:rounded-t-[40px] md:rounded-t-[48px] bg-[#070B14] shadow-[0_-20px_40px_-15px_rgba(0,0,0,0.9)]">
           {/* Section 2: Events & Flagship Competitions Showcase */}
           <ExploreEvents />
 

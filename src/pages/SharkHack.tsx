@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { ArrowLeft, ArrowRight, ArrowUpRight, Calendar, ChevronDown, Coins, MapPin, Trophy, Users, FileText, Code2, Flag, CheckCircle2, Clock3, ClipboardList, Mic2, MonitorPlay, MessagesSquare, Handshake, GraduationCap, Sparkles, Award, Building2, LayoutGrid, CircleHelp, X } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Calendar, ChevronDown, Coins, MapPin, Trophy, Users, FileText, Code2, Flag, CheckCircle2, Clock3, ClipboardList, Mic2, MonitorPlay, MessagesSquare, Handshake, GraduationCap, Sparkles, Award, Building2, LayoutGrid, CircleHelp, X } from 'lucide-react';
 import Footer from '@/components/Footer';
 import SharkRegistrationButton from '@/components/SharkRegistrationButton';
 import SharkTimeline from '@/components/OceanSharkTimeline';
@@ -203,9 +203,6 @@ export default function SharkHack() {
               <img src="/images/shark-hack-banner.jpg" alt="" width="1600" height="639" fetchPriority="high" className="shark-hero-art" />
             </div>
             <div className="shark-content-width">
-            <div className="shark-hero-topline">
-              <Link to="/events" className={'shark-back-link' + focusStyle}><ArrowUpRight className="shark-back-icon" aria-hidden="true" /> All events</Link>
-            </div>
             <div className="shark-hero-content">
               <div className="flex justify-center mb-4">
                 <SectionKicker label="ALL-INDIA HACKATHON // FINALE" />

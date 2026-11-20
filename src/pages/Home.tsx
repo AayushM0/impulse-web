@@ -16,7 +16,7 @@ export default function Home() {
         </div>
 
         {/* Layer 2: Rising Obsidian Sheet with Peeking Top Rim */}
-        <div className="relative z-10 -mt-20 sm:-mt-22 md:-mt-24 rounded-t-[32px] sm:rounded-t-[40px] md:rounded-t-[48px] bg-[#070B14] border-t border-[#2563EB]/40 shadow-[0_-12px_36px_-6px_rgba(37,99,235,0.15),0_-24px_50px_-12px_rgba(0,0,0,0.95)]">
+        <div className="relative z-10 -mt-14 sm:-mt-15 md:-mt-16 rounded-t-[32px] sm:rounded-t-[40px] md:rounded-t-[48px] bg-[#070B14] border-t border-[#2563EB]/40 shadow-[0_-12px_36px_-6px_rgba(37,99,235,0.15),0_-24px_50px_-12px_rgba(0,0,0,0.95)]">
           {/* Section 2: Events & Flagship Competitions Showcase */}
           <ExploreEvents />
 

@@ -208,7 +208,7 @@ export default function SharkHackTicket({ className = '' }: SharkHackTicketProps
                 <div className="flex flex-wrap items-center justify-between gap-3 mb-6">
                   <div className="inline-flex items-center gap-2 font-mono text-[11px] font-bold tracking-[0.16em] uppercase text-[#93C5FD] border border-[#2563EB]/40 bg-[#070B14]/80 backdrop-blur-md px-3.5 py-1.5 rounded-full shadow-[0_2px_12px_rgba(7,11,20,0.8)]">
                     <span className="w-1.5 h-1.5 rounded-full bg-[#60A5FA] shadow-[0_0_10px_#60A5FA] animate-pulse" />
-                    <span>IMPULSE // CHAPTER ONE FINALE</span>
+                    <span>IMPULSE · CHAPTER ONE FINALE</span>
                   </div>
 
                   <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-mono font-bold tracking-wider uppercase text-emerald-400 bg-emerald-500/10 border border-emerald-500/25">

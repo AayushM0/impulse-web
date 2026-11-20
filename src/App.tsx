@@ -14,7 +14,7 @@ function RouteLoadingFallback() {
         <div className="absolute w-2 h-2 rounded-full bg-impulse-blue animate-pulse" />
       </div>
       <p className="font-mono-label text-xs tracking-[0.25em] text-impulse-blue-bright/70 animate-pulse">
-        INITIALIZING IMPULSE //
+        INITIALIZING IMPULSE ·
       </p>
     </div>
   );

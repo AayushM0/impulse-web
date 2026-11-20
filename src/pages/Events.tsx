@@ -69,9 +69,9 @@ export default function Events() {
         {/* Layer 1: Sticky Pinned Hero */}
         <header className="events-intro sticky top-0 h-[100svh] min-h-[640px] z-0 overflow-hidden flex flex-col justify-center">
           <EventsMeshBackground />
-          <div ref={contentRef} className="events-hero-copy will-change-transform max-w-4xl mx-auto text-center px-6 pt-20 pb-16">
+          <div ref={contentRef} className="events-hero-copy will-change-transform max-w-4xl mx-auto text-center px-6 pt-20 pb-16 hero-fade-in">
             <div className="flex justify-center mb-4">
-              <SectionKicker label="DISCOVER // PARTICIPATE // BUILD" />
+              <SectionKicker label="DISCOVER · PARTICIPATE · BUILD" />
             </div>
             <h1>Events at Impulse.</h1>
             <p className="events-hero-description">Explore our events and find your next challenge. New events will appear here as they’re announced.</p>
@@ -89,7 +89,7 @@ export default function Events() {
         {/* Layer 2: Rising Obsidian Sheet with Peeking Top Rim */}
         <div className="relative z-10 -mt-14 sm:-mt-15 md:-mt-16 rounded-t-[32px] sm:rounded-t-[40px] md:rounded-t-[48px] bg-[#070B14] border-t border-[#2563EB]/40 shadow-[0_-12px_36px_-6px_rgba(37,99,235,0.15),0_-24px_50px_-12px_rgba(0,0,0,0.95)]">
           <div className="w-full max-w-[1440px] mx-auto px-6 sm:px-10 pt-5 sm:pt-6 md:pt-7">
-            <SectionKicker label="01 // DIRECTORY" className="mb-2" />
+            <SectionKicker label="01 · DIRECTORY" className="mb-2" />
           </div>
           <section id="upcoming-events" aria-labelledby="upcoming-events-title" className="events-directory">
             <div className="events-list-heading">

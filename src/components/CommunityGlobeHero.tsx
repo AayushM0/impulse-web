@@ -94,9 +94,9 @@ export default function CommunityGlobeHero() {
         <div className="globe-hero-gridmotion-overlay" />
       </div>
 
-      <div ref={contentRef} className="community-hero-copy will-change-transform">
+      <div ref={contentRef} className="community-hero-copy will-change-transform hero-fade-in">
         <div className="flex justify-center mb-4">
-          <SectionKicker label="PEOPLE // BUILDERS // COLLABORATION" />
+          <SectionKicker label="PEOPLE · BUILDERS · COLLABORATION" />
         </div>
         <h1 id="community-title">
           Community at <span>Impulse.</span>

@@ -71,8 +71,8 @@ export default function ExploreHero() {
           ref={contentRef}
           className="relative z-10 flex flex-col items-center justify-center flex-1 h-full px-6 lg:px-10 pt-16 pb-12 text-center will-change-transform"
         >
-          <div className="max-w-4xl mx-auto flex flex-col items-center">
-            <SectionKicker label="ORIGIN // CHAPTER ONE" className="mb-6 pointer-events-auto" />
+          <div className="max-w-4xl mx-auto flex flex-col items-center hero-fade-in">
+            <SectionKicker label="ORIGIN · CHAPTER ONE" className="mb-6 pointer-events-auto" />
 
             <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-extrabold sm:font-black font-sans tracking-tight text-white select-none leading-[0.92] mb-4 [text-shadow:_0_4px_32px_rgba(0,0,0,0.95),_0_2px_10px_rgba(7,11,20,0.9)]">
               IMPULSE

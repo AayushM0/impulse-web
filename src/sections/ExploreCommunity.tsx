@@ -199,7 +199,7 @@ export default function ExploreCommunity() {
 
           {/* Protected Center Corridor with Heading & CTA */}
           <div className="absolute left-1/2 top-1/2 w-[38%] -translate-x-1/2 -translate-y-1/2 text-center z-10 pointer-events-auto">
-            <SectionKicker label="03 // ECOSYSTEM" className="mb-4 inline-flex justify-center" />
+            <SectionKicker label="03 · ECOSYSTEM" className="mb-4 inline-flex justify-center" />
             <h2 className="text-3xl lg:text-4xl xl:text-5xl font-bold font-sans text-white tracking-tight leading-[1.08] mb-4">
               BUILDER{' '}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-pink-400 to-pink-500">
@@ -222,7 +222,7 @@ export default function ExploreCommunity() {
         <div className="lg:hidden">
           {/* Header */}
           <div className="text-center mb-10">
-            <SectionKicker label="03 // ECOSYSTEM" className="mb-3 inline-flex justify-center" />
+            <SectionKicker label="03 · ECOSYSTEM" className="mb-3 inline-flex justify-center" />
             <h2 className="text-3xl sm:text-4xl font-bold font-sans text-white tracking-tight mb-3">
               BUILDER{' '}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-pink-400 to-pink-500">

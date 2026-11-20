@@ -175,6 +175,29 @@
   .tabular-nums {
     font-variant-numeric: tabular-nums;
   }
+
+  @keyframes heroFadeInUp {
+    0% {
+      opacity: 0;
+      transform: translate3d(0, 22px, 0);
+    }
+    100% {
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
+    }
+  }
+
+  .hero-fade-in {
+    animation: heroFadeInUp 750ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .hero-fade-in-delay-1 {
+    animation: heroFadeInUp 800ms cubic-bezier(0.16, 1, 0.3, 1) 120ms both;
+  }
+
+  .hero-fade-in-delay-2 {
+    animation: heroFadeInUp 800ms cubic-bezier(0.16, 1, 0.3, 1) 220ms both;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -130,7 +130,7 @@ export default function Community() {
           <section id="flashcards" className="relative px-6 pt-5 sm:pt-6 md:pt-7 pb-16 sm:pb-24 lg:px-10 scroll-mt-20">
             <span id="who-we-are" className="sr-only" />
             <div className="community-section-shell mx-auto max-w-[1240px]">
-              <SectionKicker label="01 // CULTURE & VALUES" className="mb-7" />
+              <SectionKicker label="01 · CULTURE & VALUES" className="mb-7" />
               <div className="community-section-intro mb-12 flex items-end justify-between gap-8 sm:mb-16">
                 <div>
                   <SplitLine as="p" text="WHAT BRINGS US TOGETHER" className="mb-4 font-mono-label text-[10px] text-[#93C5FD] sm:text-xs" delay={18} />

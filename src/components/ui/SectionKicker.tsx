@@ -11,16 +11,17 @@ export const SectionKicker: React.FC<SectionKickerProps> = ({
   label,
   className = '',
 }) => {
+  const cleanLabel = label.replace(/\s*\/\/\s*/g, ' · ');
   return (
     <div
       className={`inline-flex items-center gap-2 font-mono text-[11px] font-bold tracking-[0.16em] uppercase text-[#93C5FD] border border-[#2563EB]/40 bg-[#070B14]/85 backdrop-blur-md px-3.5 py-1.5 rounded-full mb-3 shadow-[0_2px_14px_rgba(7,11,20,0.8)] ${className}`.trim()}
-      aria-label={number ? `Section ${number}: ${label}` : label}
+      aria-label={number ? `Section ${number}: ${cleanLabel}` : cleanLabel}
     >
       <span
         className="w-1.5 h-1.5 rounded-full bg-[#60A5FA] shadow-[0_0_10px_#60A5FA] animate-pulse"
         aria-hidden="true"
       />
-      <span>{number ? `${number} // ${label}` : label}</span>
+      <span>{number ? `${number} · ${cleanLabel}` : cleanLabel}</span>
     </div>
   );
 };

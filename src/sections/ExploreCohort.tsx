@@ -60,7 +60,7 @@ export default function ExploreCohort() {
           
           {/* Left Column: Heading, Context, and CTA */}
           <div className="lg:col-span-5 lg:sticky lg:top-28">
-            <SectionKicker label="02 // INCUBATOR" className="mb-4" />
+            <SectionKicker label="02 · INCUBATOR" className="mb-4" />
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold font-sans text-white tracking-tight leading-[1.08] mb-4">
               BUILDER{' '}
               <span className="bg-gradient-to-r from-[#60A5FA] via-[#93C5FD] to-[#EC4899] bg-clip-text text-transparent">
@@ -73,10 +73,10 @@ export default function ExploreCohort() {
               From problem validation to live production deployment with real users.
             </p>
 
-            {/* Active Cycle Badge */}
-            <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 font-mono-label text-xs tracking-wider mb-8">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_rgba(52,211,153,0.8)]" />
-              CYCLE 1 ACTIVE · 5 TEAMS SHIPPING
+            {/* Active Cycle Badge with small green dot (unboxed) */}
+            <div className="flex items-center gap-2 text-xs font-mono-label text-gray-300 mb-8">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_#34D399] shrink-0" />
+              <span>CYCLE 1 ACTIVE · 5 TEAMS SHIPPING</span>
             </div>
 
             {/* CTA Action Button */}
@@ -141,29 +141,37 @@ export default function ExploreCohort() {
 
                       {/* Header Text & Phase Number */}
                       <div className="min-w-0">
-                        <div className="flex items-center gap-2 mb-0.5">
+                        <div className="flex items-center gap-2 sm:gap-2.5 mb-0.5 flex-wrap">
                           <span
                             className={`font-mono-label text-[11px] sm:text-xs tracking-wider font-bold ${
                               isOngoing ? 'text-pink-400' : 'text-[#60A5FA]'
                             }`}
                           >
-                            PHASE // {phase.num}
+                            PHASE · {phase.num}
                           </span>
 
-                          {/* Currently Ongoing Live Pill */}
+                          <span className="text-gray-600 font-mono text-[10px]">·</span>
+
+                          {/* Small Dot Status Indicator (No boxy blocks) */}
                           {isOngoing ? (
-                            <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-mono-label bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 font-semibold shadow-[0_0_10px_rgba(52,211,153,0.2)]">
-                              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                            <span className="inline-flex items-center gap-1.5 text-[11px] font-mono-label text-emerald-400 font-semibold">
+                              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse shadow-[0_0_8px_#34D399] shrink-0" />
                               CURRENTLY ONGOING
                             </span>
+                          ) : phase.statusType === 'completed' ? (
+                            <span className="inline-flex items-center gap-1.5 text-[11px] font-mono-label text-gray-400">
+                              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400/80 shrink-0" />
+                              VALIDATED
+                            </span>
                           ) : (
-                            <span className="hidden sm:inline-block text-[10px] font-mono-label text-gray-400 px-2 py-0.5 rounded bg-white/[0.04] border border-white/5">
-                              {phase.statusLabel}
+                            <span className="inline-flex items-center gap-1.5 text-[11px] font-mono-label text-gray-400">
+                              <span className="w-1.5 h-1.5 rounded-full bg-gray-500 shrink-0" />
+                              UPCOMING
                             </span>
                           )}
                         </div>
 
-                        <h3 className="text-base sm:text-lg lg:text-xl font-bold font-sans text-white tracking-tight truncate">
+                        <h3 className="text-base sm:text-lg lg:text-xl font-bold font-sans text-white tracking-tight">
                           {phase.title}
                         </h3>
                       </div>

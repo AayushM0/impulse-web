@@ -10,9 +10,23 @@ export default function SharkHackTicket({ className = '' }: SharkHackTicketProps
   const containerRef = useRef<HTMLDivElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
   const glareRef = useRef<HTMLDivElement>(null);
+  const cachedRectRef = useRef<DOMRect | null>(null);
 
   const [dimensions, setDimensions] = useState({ width: 0, height: 0, isMobile: false });
   const [isHovered, setIsHovered] = useState(false);
+
+  // Invalidate cached rect on scroll or resize so coordinates stay accurate without per-frame thrashing
+  useEffect(() => {
+    const handleInvalidate = () => {
+      cachedRectRef.current = null;
+    };
+    window.addEventListener('scroll', handleInvalidate, { passive: true });
+    window.addEventListener('resize', handleInvalidate, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', handleInvalidate);
+      window.removeEventListener('resize', handleInvalidate);
+    };
+  }, []);
 
   // Measure actual pixel size for mathematical SVG path and clip-path
   useEffect(() => {
@@ -95,6 +109,13 @@ export default function SharkHackTicket({ className = '' }: SharkHackTicketProps
     }
   }, [width, height, isMobile]);
 
+  const handlePointerEnter = useCallback(() => {
+    setIsHovered(true);
+    if (cardRef.current) {
+      cachedRectRef.current = cardRef.current.getBoundingClientRect();
+    }
+  }, []);
+
   // Interactive 3D tilt & glare physics
   const handlePointerMove = useCallback((e: React.PointerEvent<HTMLDivElement>) => {
     const card = cardRef.current;
@@ -103,9 +124,12 @@ export default function SharkHackTicket({ className = '' }: SharkHackTicketProps
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReducedMotion) return;
 
-    const rect = card.getBoundingClientRect();
-    const xRatio = (e.clientX - rect.left) / rect.width - 0.5;
-    const yRatio = (e.clientY - rect.top) / rect.height - 0.5;
+    if (!cachedRectRef.current) {
+      cachedRectRef.current = card.getBoundingClientRect();
+    }
+    const rect = cachedRectRef.current;
+    const xRatio = (e.clientX - rect.left) / Math.max(rect.width, 1) - 0.5;
+    const yRatio = (e.clientY - rect.top) / Math.max(rect.height, 1) - 0.5;
 
     const maxTilt = 7;
     const rotX = -yRatio * 2 * maxTilt;
@@ -122,6 +146,7 @@ export default function SharkHackTicket({ className = '' }: SharkHackTicketProps
 
   const handlePointerLeave = useCallback(() => {
     setIsHovered(false);
+    cachedRectRef.current = null;
     const card = cardRef.current;
     if (card) {
       card.style.transform = 'perspective(1200px) rotateX(0deg) rotateY(0deg) scale(1)';
@@ -137,7 +162,7 @@ export default function SharkHackTicket({ className = '' }: SharkHackTicketProps
     <div
       ref={containerRef}
       className={`relative w-full max-w-5xl mx-auto will-change-transform ${className}`.trim()}
-      onPointerEnter={() => setIsHovered(true)}
+      onPointerEnter={handlePointerEnter}
       onPointerMove={handlePointerMove}
       onPointerLeave={handlePointerLeave}
     >

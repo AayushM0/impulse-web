@@ -260,7 +260,7 @@ export default function SharkHackTicket({ className = '' }: SharkHackTicketProps
                 {/* Event Meta Badges */}
                 <div className="flex flex-wrap gap-2.5 sm:gap-3 text-xs font-mono font-semibold text-gray-300 mb-8">
                   <span className="inline-flex items-center gap-1.5 bg-space-900/90 border border-white/10 px-3 py-1.5 rounded-lg shadow-sm">
-                    <Calendar className="w-3.5 h-3.5 text-blue-400" /> Jan 23–24, 2027
+                    <Calendar className="w-3.5 h-3.5 text-blue-400" /> Jan 23, 2027
                   </span>
                   <span className="inline-flex items-center gap-1.5 bg-space-900/90 border border-white/10 px-3 py-1.5 rounded-lg shadow-sm">
                     <MapPin className="w-3.5 h-3.5 text-pink-400" /> Offline / New Delhi
@@ -271,34 +271,23 @@ export default function SharkHackTicket({ className = '' }: SharkHackTicketProps
                 </div>
               </div>
 
-              {/* Bottom Actions + Tracks */}
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-5 pt-4 border-t border-white/10">
-                <div className="flex flex-wrap items-center gap-3">
-                  <Link
-                    to="/shark-hack"
-                    className="group inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-white text-space-950 hover:bg-[#F2F6FF] font-sans font-bold text-xs tracking-wider uppercase transition-all duration-300 shadow-[0_4px_20px_rgba(255,255,255,0.25)] hover:shadow-[0_6px_28px_rgba(255,255,255,0.4)]"
-                  >
-                    <span>EXPLORE SHARKHACK</span>
-                    <ArrowRight aria-hidden="true" className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
-                  </Link>
+              {/* Bottom Actions */}
+              <div className="flex flex-wrap items-center gap-3 pt-4 border-t border-white/10">
+                <Link
+                  to="/shark-hack"
+                  className="group inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-white text-space-950 hover:bg-[#F2F6FF] font-sans font-bold text-xs tracking-wider uppercase transition-all duration-300 shadow-[0_4px_20px_rgba(255,255,255,0.25)] hover:shadow-[0_6px_28px_rgba(255,255,255,0.4)]"
+                >
+                  <span>EXPLORE SHARKHACK</span>
+                  <ArrowRight aria-hidden="true" className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
+                </Link>
 
-                  <Link
-                    to="/events"
-                    className="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl border border-white/15 bg-white/5 hover:bg-white/10 text-gray-200 hover:text-white font-sans font-semibold text-xs tracking-wider uppercase transition-all duration-300"
-                  >
-                    <span>ALL EVENTS</span>
-                    <ArrowUpRight aria-hidden="true" className="w-3.5 h-3.5 text-gray-400" />
-                  </Link>
-                </div>
-
-                {/* Tracks preview */}
-                <div className="hidden lg:flex items-center gap-2 text-[11px] font-mono text-gray-400">
-                  <span className="text-gray-500">TRACKS:</span>
-                  <span className="text-gray-300">AI/ML</span> ·
-                  <span className="text-gray-300">Web3</span> ·
-                  <span className="text-gray-300">DevTools</span> ·
-                  <span className="text-gray-300">Open</span>
-                </div>
+                <Link
+                  to="/events"
+                  className="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl border border-white/15 bg-white/5 hover:bg-white/10 text-gray-200 hover:text-white font-sans font-semibold text-xs tracking-wider uppercase transition-all duration-300"
+                >
+                  <span>ALL EVENTS</span>
+                  <ArrowUpRight aria-hidden="true" className="w-3.5 h-3.5 text-gray-400" />
+                </Link>
               </div>
             </div>
 

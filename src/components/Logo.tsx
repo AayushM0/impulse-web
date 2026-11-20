@@ -4,47 +4,51 @@ interface LogoProps {
   size?: 'sm' | 'md' | 'lg';
   showText?: boolean;
   className?: string;
+  asLink?: boolean;
 }
 
-export default function Logo({ size = 'md', showText = true, className = '' }: LogoProps) {
+export default function Logo({
+  size = 'md',
+  showText = true,
+  className = '',
+  asLink = true,
+}: LogoProps) {
   const dimensions = {
-    sm: { box: 'w-7 h-7', text: 'text-base' },
-    md: { box: 'w-9 h-9', text: 'text-xl' },
-    lg: { box: 'w-14 h-14', text: 'text-3xl' },
+    sm: { box: 'w-8 h-8', text: 'text-base font-semibold' },
+    md: { box: 'w-10 h-10', text: 'text-xl font-bold' },
+    lg: { box: 'w-16 h-16', text: 'text-3xl font-extrabold' },
   };
 
-  return (
-    <Link to="/" className={`flex items-center gap-2.5 group ${className}`} aria-label="IMPULSE home">
-      <div className={`${dimensions[size].box} relative flex-shrink-0`}>
-        <svg viewBox="0 0 100 100" className="w-full h-full">
-          {/* Starburst lines */}
-          <line x1="50" y1="10" x2="50" y2="90" stroke="#2563EB" strokeWidth="2" opacity="0.75" className="group-hover:opacity-100 transition-opacity" />
-          <line x1="10" y1="50" x2="90" y2="50" stroke="#2563EB" strokeWidth="2" opacity="0.75" className="group-hover:opacity-100 transition-opacity" />
-          <line x1="22" y1="22" x2="78" y2="78" stroke="#60A5FA" strokeWidth="1.5" opacity="0.5" className="group-hover:opacity-80 transition-opacity" />
-          <line x1="78" y1="22" x2="22" y2="78" stroke="#60A5FA" strokeWidth="1.5" opacity="0.5" className="group-hover:opacity-80 transition-opacity" />
-          {/* Outer extensions */}
-          <line x1="50" y1="2" x2="50" y2="10" stroke="#EC4899" strokeWidth="1" opacity="0.4" />
-          <line x1="50" y1="90" x2="50" y2="98" stroke="#EC4899" strokeWidth="1" opacity="0.4" />
-          <line x1="2" y1="50" x2="10" y2="50" stroke="#EC4899" strokeWidth="1" opacity="0.4" />
-          <line x1="90" y1="50" x2="98" y2="50" stroke="#EC4899" strokeWidth="1" opacity="0.4" />
-          {/* Nodes */}
-          <circle cx="50" cy="50" r="5" fill="#F2F6FF" />
-          <circle cx="50" cy="50" r="2.5" fill="#60A5FA" />
-          <circle cx="50" cy="10" r="2.5" fill="#2563EB" />
-          <circle cx="50" cy="90" r="2.5" fill="#2563EB" />
-          <circle cx="10" cy="50" r="2.5" fill="#2563EB" />
-          <circle cx="90" cy="50" r="2.5" fill="#2563EB" />
-          <circle cx="22" cy="22" r="2" fill="#60A5FA" />
-          <circle cx="78" cy="78" r="2" fill="#60A5FA" />
-          <circle cx="78" cy="22" r="2" fill="#60A5FA" />
-          <circle cx="22" cy="78" r="2" fill="#60A5FA" />
-        </svg>
+  const content = (
+    <div className={`flex items-center gap-2.5 group select-none ${className}`}>
+      <div className={`${dimensions[size].box} relative flex-shrink-0 flex items-center justify-center`}>
+        <picture>
+          <source srcSet="/images/impulse-logo.webp" type="image/webp" />
+          <img
+            src="/images/impulse-logo.png"
+            alt="IMPULSE"
+            className="w-full h-full object-contain filter drop-shadow-[0_0_8px_rgba(96,165,250,0.45)] group-hover:drop-shadow-[0_0_14px_rgba(244,114,182,0.7)] group-hover:scale-105 transition-all duration-300 pointer-events-none"
+            loading="eager"
+            decoding="async"
+            draggable={false}
+          />
+        </picture>
       </div>
       {showText && (
-        <span className={`${dimensions[size].text} font-sans font-semibold tracking-wide-sm text-impulse-white tracking-[0.1em]`}>
+        <span className={`${dimensions[size].text} font-sans tracking-[0.1em] text-impulse-white group-hover:text-white transition-colors duration-200`}>
           IMPULSE
         </span>
       )}
+    </div>
+  );
+
+  if (!asLink) {
+    return content;
+  }
+
+  return (
+    <Link to="/" className="inline-flex items-center" aria-label="IMPULSE home">
+      {content}
     </Link>
   );
 }

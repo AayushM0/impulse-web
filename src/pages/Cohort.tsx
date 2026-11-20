@@ -373,10 +373,10 @@ export default function Cohort() {
               <div className="cohort-timeline-heading">
                 <div>
                   <SectionKicker number="01" label="CURRICULUM // 5-MONTH SPRINT" className="mb-7" />
-              <h2 className="cohort-motion-reveal">THE <span>BUILD JOURNEY</span></h2>
-              <p className="cohort-motion-reveal">Five months to turn a bold idea into something real.</p>
-            </div>
-          </div>
+                  <h2 className="cohort-motion-reveal">THE <span>BUILD JOURNEY</span></h2>
+                  <p className="cohort-motion-reveal">Five months to turn a bold idea into something real.</p>
+                </div>
+              </div>
           <ol className="cohort-timeline-track">
             <svg className="cohort-timeline-connector" viewBox="0 0 1020 260" preserveAspectRatio="none" aria-hidden="true">
               <defs>

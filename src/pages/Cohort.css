@@ -25,12 +25,9 @@
   box-sizing: border-box;
   width: 100%;
   max-width: 1440px;
-  min-height: calc(100vh - 64px);
-  min-height: calc(100svh - 64px);
   margin: 0 auto;
-  padding: 20px 40px 34px;
-  display: grid;
-  align-content: center;
+  padding: 24px 40px 64px;
+  display: block;
   scroll-margin-top: 64px;
   isolation: isolate;
 }
@@ -202,7 +199,7 @@
   padding: 0;
   text-align: left;
 }
-.cohort-timeline-heading { min-height: 53px; margin-bottom: 28px; display: flex; align-items: center; justify-content: space-between; gap: 20px; translate: 0 -4lh; }
+.cohort-timeline-heading { min-height: 53px; margin-bottom: 28px; display: flex; align-items: center; justify-content: space-between; gap: 20px; translate: none; }
 .cohort-timeline-heading h2 { margin: 0; color: #F2F6FF; font-size: 32px; font-weight: 600; letter-spacing: -0.04em; }
 .cohort-timeline-heading h2 span { background: linear-gradient(100deg, #2563EB 0%, #60A5FA 50%, #EC4899 100%); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 .cohort-timeline-heading p { margin: 4px 0 0; color: #9AA8C2; font-size: 16px; transition-delay: 90ms; }

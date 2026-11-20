@@ -93,7 +93,7 @@ export default function Navbar() {
               className="flex items-center group"
               aria-label="Impulse Home"
             >
-              <Logo size="sm" />
+              <Logo size="sm" asLink={false} />
             </Link>
           </div>
 

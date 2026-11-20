@@ -243,6 +243,25 @@ function TeamNode({ team }: { team: CommunityTeam }) {
   );
 }
 
+function getPlatformHandle(url: string, platform: 'github' | 'linkedin'): string {
+  try {
+    const parsed = new URL(url);
+    if (platform === 'github') {
+      const user = parsed.pathname.split('/').filter(Boolean)[0];
+      return user ? `@${user}` : 'GitHub';
+    }
+    const segments = parsed.pathname.split('/').filter(Boolean);
+    const inIdx = segments.indexOf('in');
+    const slug = inIdx !== -1 && segments[inIdx + 1] ? segments[inIdx + 1] : segments[0];
+    return slug ? `@${slug}` : 'LinkedIn';
+  } catch {
+    const match = platform === 'github'
+      ? url.match(/github\.com\/([^/?#]+)/i)
+      : url.match(/linkedin\.com\/in\/([^/?#]+)/i);
+    return match ? `@${match[1]}` : platform;
+  }
+}
+
 function MemberCard({
   member,
   variant = 'committee',
@@ -365,9 +384,11 @@ function MemberCard({
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={(e) => e.stopPropagation()}
-                  className="community-field-link"
+                  className="community-field-link inline-flex items-center max-w-full gap-1"
+                  title={getPlatformHandle(member.linkedinUrl, 'linkedin')}
                 >
-                  View Profile ↗
+                  <span className="truncate">{getPlatformHandle(member.linkedinUrl, 'linkedin')}</span>
+                  <span className="shrink-0 text-[10px]" aria-hidden="true">↗</span>
                 </a>
               </div>
             )}
@@ -379,9 +400,11 @@ function MemberCard({
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={(e) => e.stopPropagation()}
-                  className="community-field-link"
+                  className="community-field-link inline-flex items-center max-w-full gap-1"
+                  title={getPlatformHandle(member.githubUrl, 'github')}
                 >
-                  View Profile ↗
+                  <span className="truncate">{getPlatformHandle(member.githubUrl, 'github')}</span>
+                  <span className="shrink-0 text-[10px]" aria-hidden="true">↗</span>
                 </a>
               </div>
             )}

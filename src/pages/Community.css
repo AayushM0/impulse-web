@@ -947,6 +947,7 @@
   color: #f472b6;
   text-decoration: underline;
   text-underline-offset: 2px;
+  max-width: 100%;
 }
 .community-field-link:hover {
   color: #F472B6;

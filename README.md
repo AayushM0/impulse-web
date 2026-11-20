@@ -1,102 +1,145 @@
-# IMPULSE - Ideas in Motion
+# IMPULSE · IDEAS IN MOTION.
 
-The official web application for IMPULSE, a community and accelerator platform for AI builders, systems engineers, and technical founders. 
+> **A collective of student engineers, designers, researchers, and founders building live products, running high-impact hackathons, and fostering tech culture across universities.**
 
-The site features interactive WebGL graphics via Three.js, momentum virtual scrolling via Lenis synchronized with GSAP ScrollTrigger, and route-level code splitting using React 18 and React Router DOM.
-
----
-
-## Key Features
-
-- **3D Starburst Origin Hero**: Interactive WebGL scene featuring dynamic particle fields and responsive cursor tilt.
-- **Synchronized Scroll Choreography**: Seamless integration between Lenis smooth scrolling and pinned GSAP ScrollTrigger timelines.
-- **Builder Cohort Hub (`/cohort`)**: Five-month builder acceleration track, stage milestones, and project showcases.
-- **Community Directory (`/community`)**: Interactive builder roster, discipline breakdown, and team directories.
-- **Events and Hackathons (`/events`)**: Directory of upcoming hackathons, AI labs, and builder sprints.
-- **Shark Hack Flagship (`/shark-hack`)**: Dedicated interface for the flagship Delhi hackathon and deal room showcase.
-- **Membership Intake (`/join`)**: Application intake interface for new cohort candidates and community builders.
+[![Impulse](https://img.shields.io/badge/IMPULSE-Ideas%20in%20Motion-2563EB?style=for-the-badge)](https://impulse.build)
+[![Status](https://img.shields.io/badge/Status-Live%20Production-10B981?style=for-the-badge)](#)
+[![Cohort](https://img.shields.io/badge/Incubator-Cycle%201%20Active-EC4899?style=for-the-badge)](/cohort)
+[![SharkHack](https://img.shields.io/badge/Flagship-Shark%20Hack%202027-38BDF8?style=for-the-badge)](/shark-hack)
 
 ---
 
-## Tech Stack
+## What is IMPULSE?
 
-| Category | Technology | Version | Purpose |
-| :--- | :--- | :--- | :--- |
-| Framework | React | ^18.3.1 | Core UI component tree and state management |
-| Language | TypeScript | ^5.5.3 | Static typing, interface definitions, compiler safety |
-| Build Tool | Vite | ^5.4.2 | Development server with HMR and production bundling |
-| Styling | Tailwind CSS | ^3.4.1 | Utility-first styling with custom theme tokens |
-| 3D Graphics | Three.js | ^0.186.0 | WebGL canvas, particle fields, and lighting |
-| Animation | GSAP / @gsap/react | ^3.15.0 | Pinned timelines and scrubbed scroll interactions |
-| Smooth Scroll | Lenis | ^1.3.26 | Virtual momentum scroll tied to the GSAP animation ticker |
-| Routing | React Router DOM | ^7.18.2 | Client-side routing and navigation lifecycle |
-| Icons | Lucide React | ^0.446.0 | Vector iconography |
+**IMPULSE** is an ecosystem built for ambitious builders who refuse to wait until graduation to ship meaningful technology. 
+
+Too many student projects die as slide decks, toy demos, or classroom assignments. IMPULSE exists to change that trajectory. We operate as an end-to-end engine for technical ambition:
+* **Hackathons & Competitions** that stress-test technical problem-solving under real-world constraints.
+* **A 5-Month Venture Incubator** that guides student teams from day-zero user validation to deployed production products with active users.
+* **Specialized Technical Guilds** across Artificial Intelligence, Systems Architecture, and Design Engineering.
+* **A Peer-Driven Network** of founders, angel investors, and experienced alumni who mentor builders and back promising ventures.
+
+This website serves as the primary digital home and live dispatch for the entire collective.
 
 ---
 
-## Getting Started
+## What the Website Showcases
+
+The platform is designed around four core pillars, each representing a distinct chapter of the builder journey:
+
+### 1. Origin & Explore (`/`)
+The front door to the collective. It establishes the Impulse ethos, previews ongoing cohort momentum, introduces flagship competitions, and bridges visitors directly into active initiatives.
+* **Halftone Nebula Sky:** A retro-styled, interactive night-sky canvas that reflects the collective’s space-age aesthetic, reacting dynamically as visitors explore.
+* **Live Telemetry & Momentum:** Real-time visibility into active sprints, current cohort shipping rates, and upcoming flagship dates.
+* **Curated Portals:** Direct access to hackathon registrations, builder intake, and community channels.
+
+### 2. SharkHack 2027 (`/shark-hack` & `/events/shark-hack`)
+The dedicated digital headquarters for Impulse's flagship all-India competition in Delhi.
+> *"Don’t Just Build. Make Them Believe."*
+
+SharkHack is not a conventional hackathon where projects are judged on presentation slides. It bridges raw engineering with product viability and high-stakes negotiation:
+* **Surprise Problem Statements:** Prompts are revealed on the spot to test authentic problem discovery, architecture speed, and execution under pressure.
+* **The Shark Deal Room:** Shortlisted teams step onto the stage in Delhi to present live, working prototypes directly to seasoned founders, venture scouts, and angel "Sharks".
+* **Live Negotiation & Credits:** Teams negotiate investment checks, builder grants, and venture support in real-time.
+* **3D Admit-One Ticket:** An interactive, physics-responsive ticket pass showcasing event coordinates, tracks, and verification badges.
+* **₹1 Lakh+ Prize Pool:** Dedicated prize tracks spanning AI & Autonomous Agents, Systems & Core Infrastructure, Fintech, and Developer Tooling, alongside specialized Women-In-Tech grants.
+
+### 3. Builder Cohort (`/cohort`)
+A high-intensity, 5-month incubator turning ambitious students into venture product teams.
+* **Three Structured Milestones:**
+  1. **Phase 01 · Problem & Validation:** Teams conduct 30+ structured user interviews, identifying genuine market pain points and validating demand before writing a line of code.
+  2. **Phase 02 · Sprint & MVP Build (Currently Ongoing):** Weekly architecture reviews, automated test pipelines, and security audits. Teams ship functional V1 releases with live user telemetry.
+  3. **Phase 03 · Ship, Showcase & Demo Day (February 2027):** Live production releases, customer onboarding, and onstage investor pitches at the Delhi Grand Finale with ₹1 Lakh+ in prizes and angel syndicate backing.
+* **Featured Cohort Products:**
+  * **SignalForge:** Clusters fragmented support tickets and call notes into ranked, evidence-linked product opportunities.
+  * **TraceKit:** Distributed tracing and observability toolkit engineered for asynchronous LLM agent pipelines.
+  * **FieldNotes:** Collaborative user interview synthesis platform that auto-extracts verifiable pain points.
+  * **RelayBoard:** High-throughput webhook delivery engine with zero-loss replay guarantees.
+  * **AccessLens:** Automated WCAG 2.2 accessibility auditor with visual issue highlighting.
+  * **ModelMeter:** Real-time cost, token latency, and throughput profiler for multi-model LLM inference.
+  * **GreenGrid:** Workload scheduler shifting heavy AI compute jobs to carbon-optimal data centers.
+  * **Launchpad:** Milestone-driven workspace guiding collegiate founders from raw idea to validated release.
+
+### 4. Events & Hackathons (`/events`)
+A live calendar of upcoming competitions, technical labs, and demo nights.
+* **Hackathons:** Multi-day sprints focused on autonomous systems, machine learning, and hardware prototypes.
+* **Technical Labs:** Hands-on deep dives covering local LLM fine-tuning, quantization (LoRA, Unsloth, vLLM), and scalable backend architectures.
+* **Demo Nights:** Monthly open-mic evenings where builders demo working prototypes shipped during the week and receive candid technical peer feedback.
+
+### 5. Community & Ecosystem (`/community`)
+The people behind the products. Impulse is powered by self-organized student teams across universities.
+* **Builder Directory:** Roster of founding leads, research directors, technical heads, and chapter coordinators.
+* **Interactive Flashcards:** Detailed cards showcasing each member’s specialized disciplines, tech stacks, and active projects.
+* **Technical Guilds:** Focused cohorts for Artificial Intelligence, Systems Architecture, Design Systems, and Open Source.
+* **Values in Action:** Collaboration over competition, learning by building, and high-velocity iteration.
+
+---
+
+## Community Culture & Values
+
+| Value | Principle | What It Means in Practice |
+| :--- | :--- | :--- |
+| **01 · Curiosity First** | *Curiosity over credentials* | We value what you build with your hands over university pedigrees or resumes. |
+| **02 · Real Over Toy** | *Real things, not just assignments* | If a project doesn't have real users, real telemetry, or real feedback, it's not finished. |
+| **03 · Open Collaboration** | *Collaboration over competition* | Cross-functional guilds share deployment pipelines, review each other’s code, and co-build tools. |
+| **04 · Rapid Velocity** | *Ship every single week* | Product teams maintain a continuous shipping cadence with visible weekly milestones. |
+| **05 · Safe to Fail** | *Room to experiment and learn* | Bold technical experiments are encouraged; failures are dissected openly as learning opportunities. |
+
+---
+
+## Platform Routes
+
+| Route | Page | Purpose |
+| :--- | :--- | :--- |
+| `/` | **Explore** | Platform overview, origin story, featured tracks, and ecosystem entry points |
+| `/events` | **Events** | Comprehensive directory of upcoming hackathons, AI labs, and workshops |
+| `/events/shark-hack` | **SharkHack 2027** | Flagship hackathon details, schedule, prize tracks, rules, and admit ticket |
+| `/cohort` | **Builder Cohort** | 5-month incubator roadmap, phase milestones, and featured startup projects |
+| `/community` | **Community** | Builder roster, core guild breakdown, leadership profiles, and culture values |
+
+---
+
+## Quickstart for Contributors
+
+While the website is built for visitors and community members, developers contributing to the platform can run it locally in seconds:
 
 ### Prerequisites
+- Node.js (v18 or higher)
+- npm (v9 or higher)
 
-- Node.js: version 20.x or higher
-- npm: version 10.x or higher
-- Git: version 2.40 or higher
+### Setup & Run
+```bash
+# 1. Clone the repository
+git clone https://github.com/AayushM0/impulse-web.git
+cd impulse-web/impulse_website-main/impulse_website-main
 
-### Installation
+# 2. Install dependencies
+npm install
 
-1. Navigate to the project root:
-   ```bash
-   cd impulse_website-main/impulse_website-main
-   ```
-
-2. Install dependencies using the lockfile:
-   ```bash
-   npm ci
-   ```
-
-3. Start the local development server:
-   ```bash
-   npm run dev
-   ```
-   The local application will be available at `http://localhost:5173/`.
-
----
-
-## Available Scripts
-
-- `npm run dev`: Starts the Vite development server with Hot Module Replacement.
-- `npm run build`: Compiles TypeScript and creates optimized production bundles in `dist/`.
-- `npm run typecheck`: Runs `tsc --noEmit` to verify type safety across the application.
-- `npm run preview`: Serves the production build locally for verification.
-- `npm run lint`: Executes ESLint across the codebase.
-
----
-
-## Project Structure
-
+# 3. Start the local development server
+npm run dev
 ```
-impulse_website-main/
-├── docs/                 # Architecture, onboarding, and roadmap guides
-├── public/               # Static assets, images, and favicons
-├── src/
-│   ├── components/       # Reusable UI components, 3D scenes, navigation
-│   │   └── 3d/           # Three.js canvas implementations and 3D card tilt
-│   ├── data/             # Centralized application content (content.ts)
-│   ├── hooks/            # Custom hooks for scroll and reveal observers
-│   ├── pages/            # Top-level route pages (Home, Cohort, Events, etc.)
-│   ├── providers/        # Context providers (SmoothScrollProvider)
-│   ├── sections/         # Composable section components for the homepage
-│   ├── App.tsx           # Route declarations, page titles, and provider setup
-│   ├── index.css         # Global Tailwind layers and custom keyframes
-│   └── main.tsx          # Application entry point with React StrictMode
-├── unused/               # Archived components and decommissioned pages
-└── vite.config.ts        # Vite configuration, alias setup, and bundle chunking
+
+The application will be live at `http://localhost:5173/`.
+
+### Quality & Verification Checks
+```bash
+# Verify static TypeScript types
+npm run typecheck
+
+# Build for production
+npm run build
 ```
 
 ---
 
-## Architecture and Guidelines
+## Connect with the Movement
 
-- **Centralized Data**: All site copy, events, projects, and navigation links reside in `src/data/content.ts`. Update content there rather than hardcoding in components.
-- **Smooth Scroll Integration**: Lenis controls vertical scroll kinematics. Never call native `window.scrollTo` without checking `getLenis()`, as doing so disrupts the GSAP animation ticker.
-- **Developer Onboarding**: Refer to `docs/ONBOARDING.md` for in-depth architecture notes, task runbooks, and debugging guides.
+* **Website:** [impulse.build](https://impulse.build)
+* **GitHub:** [github.com/impulse-community](https://github.com/impulse-community)
+* **Discord:** Join our active builder channels for weekly sprint check-ins and hackathon announcements.
+* **X / Twitter:** [@impulse_build](https://x.com/impulse_build)
+
+---
+
+*© 2026 IMPULSE Collective. Built by and for the next generation of technical founders.*

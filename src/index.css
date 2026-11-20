@@ -179,11 +179,67 @@
   @keyframes heroFadeInUp {
     0% {
       opacity: 0;
-      transform: translate3d(0, 22px, 0);
+      transform: translate3d(0, 24px, 0);
     }
     100% {
       opacity: 1;
       transform: translate3d(0, 0, 0);
+    }
+  }
+
+  @keyframes heroBlurIn {
+    0% {
+      opacity: 0;
+      transform: translate3d(0, 26px, 0) scale(0.96);
+      filter: blur(12px);
+    }
+    100% {
+      opacity: 1;
+      transform: translate3d(0, 0, 0) scale(1);
+      filter: blur(0px);
+    }
+  }
+
+  @keyframes heroScaleIn {
+    0% {
+      opacity: 0;
+      transform: translate3d(0, 16px, 0) scale(0.93);
+    }
+    100% {
+      opacity: 1;
+      transform: translate3d(0, 0, 0) scale(1);
+    }
+  }
+
+  @keyframes gradientFlow {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  @keyframes heroFloat {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-5px);
+    }
+  }
+
+  @keyframes heroAuraPulse {
+    0%, 100% {
+      opacity: 0.35;
+      transform: scale(0.95);
+    }
+    50% {
+      opacity: 0.75;
+      transform: scale(1.08);
     }
   }
 
@@ -197,6 +253,39 @@
 
   .hero-fade-in-delay-2 {
     animation: heroFadeInUp 800ms cubic-bezier(0.16, 1, 0.3, 1) 220ms both;
+  }
+
+  .hero-stagger-1 {
+    animation: heroFadeInUp 700ms cubic-bezier(0.16, 1, 0.3, 1) 60ms both;
+  }
+
+  .hero-stagger-2 {
+    animation: heroBlurIn 900ms cubic-bezier(0.16, 1, 0.3, 1) 160ms both;
+  }
+
+  .hero-stagger-3 {
+    animation: heroFadeInUp 800ms cubic-bezier(0.16, 1, 0.3, 1) 280ms both;
+  }
+
+  .hero-stagger-4 {
+    animation: heroFadeInUp 800ms cubic-bezier(0.16, 1, 0.3, 1) 400ms both;
+  }
+
+  .hero-stagger-5 {
+    animation: heroScaleIn 850ms cubic-bezier(0.16, 1, 0.3, 1) 520ms both;
+  }
+
+  .animate-gradient-flow {
+    background-size: 200% 200% !important;
+    animation: gradientFlow 8s ease infinite !important;
+  }
+
+  .hero-ambient-float {
+    animation: heroFloat 5s ease-in-out infinite;
+  }
+
+  .hero-aura-pulse {
+    animation: heroAuraPulse 6s ease-in-out infinite;
   }
 }
 

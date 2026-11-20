@@ -71,22 +71,28 @@ export default function ExploreHero() {
           ref={contentRef}
           className="relative z-10 flex flex-col items-center justify-center flex-1 h-full px-6 lg:px-10 pt-16 pb-12 text-center will-change-transform"
         >
-          <div className="max-w-4xl mx-auto flex flex-col items-center hero-fade-in">
-            <SectionKicker label="ORIGIN · CHAPTER ONE" className="mb-6 pointer-events-auto" />
+          <div className="relative max-w-4xl mx-auto flex flex-col items-center">
+            {/* Ambient Aura Pulse behind Wordmark */}
+            <div
+              className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[340px] sm:w-[500px] h-[160px] sm:h-[220px] bg-gradient-to-r from-blue-600/25 via-purple-600/20 to-pink-600/25 rounded-full blur-3xl pointer-events-none hero-aura-pulse -z-10"
+              aria-hidden="true"
+            />
 
-            <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-extrabold sm:font-black font-sans tracking-tight text-white select-none leading-[0.92] mb-4 [text-shadow:_0_4px_32px_rgba(0,0,0,0.95),_0_2px_10px_rgba(7,11,20,0.9)]">
+            <SectionKicker label="ORIGIN · CHAPTER ONE" className="mb-6 pointer-events-auto hero-stagger-1" />
+
+            <h1 className="hero-stagger-2 text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-extrabold sm:font-black font-sans tracking-tight text-white select-none leading-[0.92] mb-4 [text-shadow:_0_4px_32px_rgba(0,0,0,0.95),_0_2px_10px_rgba(7,11,20,0.9)]">
               IMPULSE
             </h1>
 
-            <div className="text-lg sm:text-xl md:text-2xl font-mono font-bold tracking-[0.22em] uppercase text-transparent bg-clip-text bg-gradient-to-r from-[#93C5FD] via-[#C084FC] to-[#F472B6] mb-6 select-none drop-shadow-[0_2px_12px_rgba(7,11,20,0.95)]">
+            <div className="hero-stagger-3 text-lg sm:text-xl md:text-2xl font-mono font-bold tracking-[0.22em] uppercase text-transparent bg-clip-text bg-gradient-to-r from-[#93C5FD] via-[#C084FC] to-[#F472B6] animate-gradient-flow mb-6 select-none drop-shadow-[0_2px_12px_rgba(7,11,20,0.95)]">
               IDEAS IN MOTION.
             </div>
 
-            <p className="text-base sm:text-lg md:text-xl font-medium sm:font-semibold text-gray-100 max-w-2xl leading-relaxed font-sans mb-10 px-4 [text-shadow:_0_2px_12px_rgba(7,11,20,0.95)]">
+            <p className="hero-stagger-4 text-base sm:text-lg md:text-xl font-medium sm:font-semibold text-gray-100 max-w-2xl leading-relaxed font-sans mb-10 px-4 [text-shadow:_0_2px_12px_rgba(7,11,20,0.95)]">
               A collective of student engineers, designers, and founders building live products, running high-impact hackathons, and fostering tech culture.
             </p>
 
-            <div className="flex flex-wrap items-center justify-center gap-4 pointer-events-auto">
+            <div className="hero-stagger-5 flex flex-wrap items-center justify-center gap-4 pointer-events-auto">
               <Link
                 to="/events"
                 className="group inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl bg-white text-space-950 hover:bg-[#F2F6FF] font-sans font-bold text-xs sm:text-sm tracking-wider uppercase transition-all duration-300 shadow-[0_4px_24px_rgba(255,255,255,0.25),0_2px_10px_rgba(7,11,20,0.8)] hover:shadow-[0_6px_30px_rgba(255,255,255,0.4)] hover:-translate-y-0.5 select-none pointer-events-auto"

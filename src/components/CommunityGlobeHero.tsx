@@ -94,19 +94,19 @@ export default function CommunityGlobeHero() {
         <div className="globe-hero-gridmotion-overlay" />
       </div>
 
-      <div ref={contentRef} className="community-hero-copy will-change-transform hero-fade-in">
-        <div className="flex justify-center mb-4">
+      <div ref={contentRef} className="community-hero-copy will-change-transform">
+        <div className="flex justify-center mb-4 hero-stagger-1">
           <SectionKicker label="PEOPLE · BUILDERS · COLLABORATION" />
         </div>
-        <h1 id="community-title">
-          Community at <span>Impulse.</span>
+        <h1 id="community-title" className="hero-stagger-2">
+          Community at <span className="animate-gradient-flow">Impulse.</span>
         </h1>
-        <p className="community-hero-description">
+        <p className="community-hero-description hero-stagger-3">
           Where curious minds connect, innovate, and build together.
         </p>
-        <div className="community-hero-actions">
-          <a className="community-hero-button-primary" href="#community-connect-title">
-            Connect With Us <ArrowUpRight aria-hidden="true" />
+        <div className="community-hero-actions hero-stagger-4">
+          <a className="community-hero-button-primary group transition-all duration-300 hover:shadow-[0_0_24px_rgba(96,165,250,0.3)] hover:-translate-y-0.5" href="#community-connect-title">
+            Connect With Us <ArrowUpRight aria-hidden="true" className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
           </a>
         </div>
       </div>

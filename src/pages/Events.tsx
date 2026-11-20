@@ -69,18 +69,18 @@ export default function Events() {
         {/* Layer 1: Sticky Pinned Hero */}
         <header className="events-intro sticky top-0 h-[100svh] min-h-[640px] z-0 overflow-hidden flex flex-col justify-center">
           <EventsMeshBackground />
-          <div ref={contentRef} className="events-hero-copy will-change-transform max-w-4xl mx-auto text-center px-6 pt-20 pb-16 hero-fade-in">
-            <div className="flex justify-center mb-4">
+          <div ref={contentRef} className="events-hero-copy will-change-transform max-w-4xl mx-auto text-center px-6 pt-20 pb-16">
+            <div className="flex justify-center mb-4 hero-stagger-1">
               <SectionKicker label="DISCOVER · PARTICIPATE · BUILD" />
             </div>
-            <h1>Events at Impulse.</h1>
-            <p className="events-hero-description">Explore our events and find your next challenge. New events will appear here as they’re announced.</p>
-            <div className="flex justify-center mt-6">
-              <Link className="events-hero-feature" to={upcomingEvents[0].href}>
-                <span className="events-feature-label"><span /> NEXT UP</span>
+            <h1 className="hero-stagger-2">Events at <span className="animate-gradient-flow">Impulse.</span></h1>
+            <p className="events-hero-description hero-stagger-3">Explore our events and find your next challenge. New events will appear here as they’re announced.</p>
+            <div className="flex justify-center mt-6 hero-stagger-4">
+              <Link className="events-hero-feature hero-ambient-float group hover:border-[#60A5FA]/80 hover:shadow-[0_0_25px_rgba(96,165,250,0.25)] transition-all duration-300" to={upcomingEvents[0].href}>
+                <span className="events-feature-label"><span className="animate-pulse" /> NEXT UP</span>
                 <strong>{upcomingEvents[0].title}</strong>
                 <span className="events-feature-date">{upcomingEvents[0].date} · {upcomingEvents[0].location}</span>
-                <ArrowUpRight aria-hidden="true" />
+                <ArrowUpRight aria-hidden="true" className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </Link>
             </div>
           </div>

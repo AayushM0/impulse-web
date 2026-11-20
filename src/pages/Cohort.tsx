@@ -350,15 +350,20 @@ export default function Cohort() {
               contrast={1.15}
               intensity={1.05}
             />
-            <div ref={contentRef} className="cohort-hero-stage will-change-transform hero-fade-in">
-              <div className="cohort-hero-content">
-                <div className="flex justify-center mb-4"><SectionKicker label="INCUBATOR · CHAPTER ONE" /></div>
-                <h1 className="cohort-motion-reveal">BUILDER <span>COHORT</span></h1>
-                <div className="cohort-capsule cohort-motion-reveal">PROJECTS IN MOTION</div>
-                <p className="cohort-intro cohort-motion-reveal">
+            <div ref={contentRef} className="cohort-hero-stage will-change-transform">
+              <div className="relative cohort-hero-content">
+                {/* Ambient Aura Pulse behind Wordmark */}
+                <div
+                  className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[340px] sm:w-[520px] h-[160px] sm:h-[220px] bg-gradient-to-r from-blue-600/20 via-sky-500/15 to-pink-500/20 rounded-full blur-3xl pointer-events-none hero-aura-pulse -z-10"
+                  aria-hidden="true"
+                />
+                <div className="flex justify-center mb-4 hero-stagger-1"><SectionKicker label="INCUBATOR · CHAPTER ONE" /></div>
+                <h1 className="cohort-motion-reveal hero-stagger-2">BUILDER <span className="animate-gradient-flow">COHORT</span></h1>
+                <div className="cohort-capsule cohort-motion-reveal hero-stagger-3">PROJECTS IN MOTION</div>
+                <p className="cohort-intro cohort-motion-reveal hero-stagger-4">
                   A high-intensity, 5-month cohort turning builders into product teams. From problem validation to live production deployment with real users.
                 </p>
-                <button className="cohort-primary-button cohort-motion-reveal" onClick={() => setActiveModal({ type: 'roadmap' })}>
+                <button className="cohort-primary-button cohort-motion-reveal hero-stagger-5" onClick={() => setActiveModal({ type: 'roadmap' })}>
                   Learn more <ArrowRight size={15} />
                 </button>
               </div>

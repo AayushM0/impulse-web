@@ -4,6 +4,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import CommunityGlobeHero from '@/components/CommunityGlobeHero';
 import ConnectWithUs from '@/components/ConnectWithUs';
+import { SectionKicker } from '@/components/ui';
 import { useReveal } from '@/hooks/useReveal';
 import {
   communityPresidents,
@@ -118,87 +119,94 @@ export default function Community() {
     <div className="community-page min-h-screen bg-[#070B14] text-[#F2F6FF]">
       <Navbar />
 
-      <main>
-        <CommunityGlobeHero />
+      <main className="relative overflow-x-clip">
+        {/* Layer 1: Sticky Pinned Hero */}
+        <div className="sticky top-0 h-[100svh] min-h-[640px] z-0 overflow-hidden">
+          <CommunityGlobeHero />
+        </div>
 
-        <section id="flashcards" className="relative px-6 pt-20 pb-16 sm:pt-28 sm:pb-24 lg:px-10 scroll-mt-20">
-          <span id="who-we-are" className="sr-only" />
-          <div className="community-section-shell mx-auto max-w-[1240px]">
-            <div className="community-section-intro mb-12 flex items-end justify-between gap-8 sm:mb-16">
-              <div>
-                <SplitLine as="p" text="WHAT BRINGS US TOGETHER" className="mb-4 font-mono-label text-[10px] text-[#93C5FD] sm:text-xs" delay={18} />
-                <CommunityReveal as="h2" delay={80} className="max-w-2xl text-3xl font-medium tracking-[-0.04em] sm:text-5xl">
-                  A place to <span className="community-gradient-text">make things matter.</span>
-                </CommunityReveal>
-              </div>
-            </div>
-
-            <div className="community-values-grid">
-              {communityValues.map((value, idx) => <ValueCard key={value.number} {...value} index={idx} />)}
-            </div>
-          </div>
-        </section>
-
-        <section id="organization" className="community-people-section px-6 pb-20 pt-12 sm:px-10 sm:pb-24 sm:pt-16 scroll-mt-20" aria-labelledby="people-title">
-          <span id="people" className="sr-only" />
-          <div className="mx-auto max-w-[1240px]">
-            <div className="community-roster-heading">
-              <div>
-                <SplitLine as="p" text="IMPULSE COMMUNITY · ORGANIZATION" className="mb-4 font-mono-label text-[10px] text-[#93C5FD] sm:text-xs" delay={16} />
-                <CommunityReveal as="h2" id="people-title" delay={80} className="text-3xl font-medium tracking-[-0.04em] sm:text-5xl">
-                  The people <span className="community-gradient-text">behind the work.</span>
-                </CommunityReveal>
-              </div>
-            </div>
-
-            <div className="community-org-chart">
-              {/* Level 01: Presidents */}
-              <CommunityReveal className="community-org-level-label"><h3>Presidents</h3><small>Community leadership</small></CommunityReveal>
-              <div className="community-president-row">
-                {communityPresidents.map((member, idx) => (
-                  <MemberCard key={member.id} member={member} variant="president" index={idx} />
-                ))}
-              </div>
-
-              <div className="community-org-connector" aria-hidden="true"><span /></div>
-
-              {/* Team Leadership & Coordinators */}
-              <CommunityReveal className="community-org-level-label community-team-level-label">
-                <h3>Team leadership &amp; coordinators</h3>
-                <small>Select a department below to view its heads and coordinators</small>
-              </CommunityReveal>
-
-              {/* Department Tabs */}
-              <div className="community-team-tabs-container">
-                <div className="community-team-tabs" role="tablist" aria-label="Department switcher">
-                  {communityTeams.map((team, idx) => {
-                    const isActive = activeTeamIndex === idx;
-                    return (
-                      <button
-                        key={team.id}
-                        type="button"
-                        role="tab"
-                        aria-selected={isActive}
-                        className={`community-team-tab ${isActive ? 'is-active' : ''}`}
-                        onClick={() => setActiveTeamIndex(idx)}
-                      >
-                        <span className="community-team-tab-name">{team.name}</span>
-                      </button>
-                    );
-                  })}
+        {/* Layer 2: Rising Obsidian Sheet with Peeking Blue Pill */}
+        <div className="relative z-10 -mt-14 sm:-mt-15 md:-mt-16 rounded-t-[32px] sm:rounded-t-[40px] md:rounded-t-[48px] bg-[#070B14] border-t border-[#2563EB]/40 shadow-[0_-12px_36px_-6px_rgba(37,99,235,0.15),0_-24px_50px_-12px_rgba(0,0,0,0.95)]">
+          <section id="flashcards" className="relative px-6 pt-5 sm:pt-6 md:pt-7 pb-16 sm:pb-24 lg:px-10 scroll-mt-20">
+            <span id="who-we-are" className="sr-only" />
+            <div className="community-section-shell mx-auto max-w-[1240px]">
+              <SectionKicker label="01 // CULTURE & VALUES" className="mb-7" />
+              <div className="community-section-intro mb-12 flex items-end justify-between gap-8 sm:mb-16">
+                <div>
+                  <SplitLine as="p" text="WHAT BRINGS US TOGETHER" className="mb-4 font-mono-label text-[10px] text-[#93C5FD] sm:text-xs" delay={18} />
+                  <CommunityReveal as="h2" delay={80} className="max-w-2xl text-3xl font-medium tracking-[-0.04em] sm:text-5xl">
+                    A place to <span className="community-gradient-text">make things matter.</span>
+                  </CommunityReveal>
                 </div>
               </div>
 
-              {/* Active Team Showcase: One department at a time */}
-              <div className="community-team-showcase" key={activeTeam.id}>
-                <TeamNode team={activeTeam} />
+              <div className="community-values-grid">
+                {communityValues.map((value, idx) => <ValueCard key={value.number} {...value} index={idx} />)}
+              </div>
+            </div>
+          </section>
+
+          <section id="organization" className="community-people-section px-6 pb-20 pt-12 sm:px-10 sm:pb-24 sm:pt-16 scroll-mt-20" aria-labelledby="people-title">
+            <span id="people" className="sr-only" />
+            <div className="mx-auto max-w-[1240px]">
+              <div className="community-roster-heading">
+                <div>
+                  <SplitLine as="p" text="IMPULSE COMMUNITY · ORGANIZATION" className="mb-4 font-mono-label text-[10px] text-[#93C5FD] sm:text-xs" delay={16} />
+                  <CommunityReveal as="h2" id="people-title" delay={80} className="text-3xl font-medium tracking-[-0.04em] sm:text-5xl">
+                    The people <span className="community-gradient-text">behind the work.</span>
+                  </CommunityReveal>
+                </div>
               </div>
 
-            </div>
-          </div>
-        </section>
+              <div className="community-org-chart">
+                {/* Level 01: Presidents */}
+                <CommunityReveal className="community-org-level-label"><h3>Presidents</h3><small>Community leadership</small></CommunityReveal>
+                <div className="community-president-row">
+                  {communityPresidents.map((member, idx) => (
+                    <MemberCard key={member.id} member={member} variant="president" index={idx} />
+                  ))}
+                </div>
 
-        <ConnectWithUs />
+                <div className="community-org-connector" aria-hidden="true"><span /></div>
+
+                {/* Team Leadership & Coordinators */}
+                <CommunityReveal className="community-org-level-label community-team-level-label">
+                  <h3>Team leadership &amp; coordinators</h3>
+                  <small>Select a department below to view its heads and coordinators</small>
+                </CommunityReveal>
+
+                {/* Department Tabs */}
+                <div className="community-team-tabs-container">
+                  <div className="community-team-tabs" role="tablist" aria-label="Department switcher">
+                    {communityTeams.map((team, idx) => {
+                      const isActive = activeTeamIndex === idx;
+                      return (
+                        <button
+                          key={team.id}
+                          type="button"
+                          role="tab"
+                          aria-selected={isActive}
+                          className={`community-team-tab ${isActive ? 'is-active' : ''}`}
+                          onClick={() => setActiveTeamIndex(idx)}
+                        >
+                          <span className="community-team-tab-name">{team.name}</span>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* Active Team Showcase: One department at a time */}
+                <div className="community-team-showcase" key={activeTeam.id}>
+                  <TeamNode team={activeTeam} />
+                </div>
+
+              </div>
+            </div>
+          </section>
+
+          <ConnectWithUs />
+        </div>
       </main>
 
       <Footer />

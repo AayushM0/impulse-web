@@ -28,7 +28,7 @@
   min-height: calc(100vh - 64px);
   min-height: calc(100svh - 64px);
   margin: 0 auto;
-  padding: 34px 40px;
+  padding: 20px 40px 34px;
   display: grid;
   align-content: center;
   scroll-margin-top: 64px;
@@ -47,7 +47,7 @@
   overflow: hidden;
   isolation: isolate;
   background: transparent;
-  padding-top: 48px;
+  padding-top: 24px;
 }
 .cohort-hero-ascii {
   position: absolute;

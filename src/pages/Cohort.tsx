@@ -293,6 +293,35 @@ export default function Cohort() {
     };
   }, [activeModal]);
 
+  const contentRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = contentRef.current;
+    if (!el) return;
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReduced) return;
+
+    let rafId: number;
+    const handleScroll = () => {
+      cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(() => {
+        const y = window.scrollY;
+        const maxScroll = Math.max(window.innerHeight * 0.65, 400);
+        const progress = Math.min(1, Math.max(0, y / maxScroll));
+        el.style.transform = `translate3d(0, ${-progress * 70}px, 0)`;
+        el.style.opacity = `${Math.max(0, 1 - progress * 1.15)}`;
+      });
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      cancelAnimationFrame(rafId);
+    };
+  }, []);
+
   useEffect(() => {
     const now = new Date();
     const nextMonth = new Date(now.getFullYear(), now.getMonth() + 1, 1);
@@ -303,57 +332,47 @@ export default function Cohort() {
   return (
     <div className="bg-[#070B14] min-h-screen">
       <Navbar />
-      <main className="cohort-page">
-        <section className="cohort-hero">
-          <AsciiBackground
-            className="cohort-hero-ascii"
-            variant="waves"
-            fade="bottom"
-            colors={['#1E2A44', '#2563EB', '#38BDF8', '#60A5FA', '#F472B6']}
-            glyphs=" ·:-=+*#%@"
-            size={13}
-            scale={1.4}
-            speed={0.65}
-            angle={-20}
-            clearing={0.15}
-            contrast={1.15}
-            intensity={1.05}
-          />
-          <div className="cohort-hero-stage">
-            <div className="cohort-hero-content">
-              <div className="flex justify-center mb-4"><SectionKicker label="INCUBATOR // CHAPTER ONE" /></div>
-              <h1 className="cohort-motion-reveal">BUILDER <span>COHORT</span></h1>
-              <div className="cohort-capsule cohort-motion-reveal">PROJECTS IN MOTION</div>
-              <p className="cohort-intro cohort-motion-reveal">
-                A high-intensity, 5-month cohort turning builders into product teams. From problem validation to live production deployment with real users.
-              </p>
-              <button className="cohort-primary-button cohort-motion-reveal" onClick={() => setActiveModal({ type: 'roadmap' })}>
-                Learn more <ArrowRight size={15} />
-              </button>
+      <main className="cohort-page relative overflow-x-clip">
+        {/* Layer 1: Sticky Pinned Hero */}
+        <div className="sticky top-0 h-[100svh] min-h-[640px] z-0 overflow-hidden">
+          <section className="cohort-hero h-full">
+            <AsciiBackground
+              className="cohort-hero-ascii"
+              variant="waves"
+              fade="bottom"
+              colors={['#1E2A44', '#2563EB', '#38BDF8', '#60A5FA', '#F472B6']}
+              glyphs=" ·:-=+*#%@"
+              size={13}
+              scale={1.4}
+              speed={0.65}
+              angle={-20}
+              clearing={0.15}
+              contrast={1.15}
+              intensity={1.05}
+            />
+            <div ref={contentRef} className="cohort-hero-stage will-change-transform">
+              <div className="cohort-hero-content">
+                <div className="flex justify-center mb-4"><SectionKicker label="INCUBATOR // CHAPTER ONE" /></div>
+                <h1 className="cohort-motion-reveal">BUILDER <span>COHORT</span></h1>
+                <div className="cohort-capsule cohort-motion-reveal">PROJECTS IN MOTION</div>
+                <p className="cohort-intro cohort-motion-reveal">
+                  A high-intensity, 5-month cohort turning builders into product teams. From problem validation to live production deployment with real users.
+                </p>
+                <button className="cohort-primary-button cohort-motion-reveal" onClick={() => setActiveModal({ type: 'roadmap' })}>
+                  Learn more <ArrowRight size={15} />
+                </button>
+              </div>
             </div>
-          </div>
-          <button
-            type="button"
-            className="cohort-scroll-cue"
-            onClick={() => {
-              const el = document.getElementById('cohort-timeline');
-              if (el) {
-                const lenis = getLenis();
-                if (lenis) lenis.scrollTo(el, { offset: -64 });
-                else el.scrollIntoView({ behavior: 'smooth' });
-              }
-            }}
-            aria-label="Scroll to cohort timeline"
-          >
-            <ArrowDown size={15} />
-          </button>
-        </section>
+          </section>
+        </div>
 
-      <section className="cohort-timeline-section" id="cohort-timeline" aria-label="Five-month cohort timeline">
-        <div className="cohort-timeline">
-          <div className="cohort-timeline-heading">
-            <div>
-              <SectionKicker number="01" label="CURRICULUM // 5-MONTH SPRINT" className="mb-3" />
+        {/* Layer 2: Rising Obsidian Sheet with Peeking Blue Pill */}
+        <div className="relative z-10 -mt-14 sm:-mt-15 md:-mt-16 rounded-t-[32px] sm:rounded-t-[40px] md:rounded-t-[48px] bg-[#070B14] border-t border-[#2563EB]/40 shadow-[0_-12px_36px_-6px_rgba(37,99,235,0.15),0_-24px_50px_-12px_rgba(0,0,0,0.95)]">
+          <section className="cohort-timeline-section pt-5 sm:pt-6 md:pt-7" id="cohort-timeline" aria-label="Five-month cohort timeline">
+            <div className="cohort-timeline">
+              <div className="cohort-timeline-heading">
+                <div>
+                  <SectionKicker number="01" label="CURRICULUM // 5-MONTH SPRINT" className="mb-7" />
               <h2 className="cohort-motion-reveal">THE <span>BUILD JOURNEY</span></h2>
               <p className="cohort-motion-reveal">Five months to turn a bold idea into something real.</p>
             </div>
@@ -561,6 +580,7 @@ export default function Cohort() {
 
         <div className="cohort-coming-soon"><span /> <i>+</i> MORE PROJECTS COMING SOON <span /></div>
       </section>
+      </div>
 
       <Footer />
 

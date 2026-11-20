@@ -361,18 +361,20 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Stretched Outlined Wordmark Stuck to Bottom */}
+        {/* Stretched Solid Lifted Wordmark Stuck to Bottom */}
         <div
           ref={wordmarkRef}
           style={{ transformOrigin: 'bottom center' }}
           className="footer-bottom w-full flex justify-center items-end text-center overflow-hidden pb-0 select-none will-change-transform"
         >
           <h1
-            className="text-[clamp(3.8rem,19vw,17rem)] text-transparent overflow-visible leading-[0.82] select-none inline-flex items-center justify-center w-full mb-[-0.04em]"
+            className="text-[clamp(3.8rem,19vw,17rem)] text-[#E2E8F0] overflow-visible leading-[0.82] select-none inline-flex items-center justify-center w-full mb-[-0.04em]"
             style={{
               fontFamily: "'TheSansMono', monospace",
               letterSpacing: '0.05em',
-              WebkitTextStroke: '2.5px rgba(255, 255, 255, 0.95)',
+              textShadow:
+                '0 1px 2px rgba(255, 255, 255, 0.2), 0 4px 12px rgba(0, 0, 0, 0.7), 0 16px 32px rgba(0, 0, 0, 0.85), 0 32px 64px rgba(0, 0, 0, 0.95)',
+              filter: 'drop-shadow(0 16px 24px rgba(0, 0, 0, 0.8))',
             }}
           >
             <span>IM</span>
@@ -380,7 +382,7 @@ export default function Footer() {
               <span>P</span>
               {/* Mascot centered inside the counter loop of letter P */}
               <span
-                className="absolute pointer-events-auto cursor-pointer group"
+                className="absolute pointer-events-auto cursor-pointer group z-10"
                 style={{
                   top: '19%',
                   left: '41%',

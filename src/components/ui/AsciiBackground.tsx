@@ -270,7 +270,7 @@ export const AsciiBackground: React.FC<AsciiBackgroundProps> = ({
 
     const handleContextLost = (e: Event) => {
       e.preventDefault();
-      stopLoop();
+      stopLoopRef.current();
     };
     canvas.addEventListener('webglcontextlost', handleContextLost);
 
@@ -598,11 +598,10 @@ export const AsciiBackground: React.FC<AsciiBackgroundProps> = ({
       gl.deleteShader(vertShader);
       gl.deleteShader(fragShader);
       gl.deleteProgram(program);
-      gl.getExtension('WEBGL_lose_context')?.loseContext();
     };
   }, [
     glyphs,
-    colors,
+    colors?.join(','),
     variant,
     size,
     scale,

@@ -24,6 +24,8 @@ const roadmap = [
   { month: 'FEB', title: 'Ship and showcase', detail: 'Launch the product, share outcomes, and plan what comes next.', icon: Rocket },
 ];
 
+const COHORT_ASCII_COLORS = ['#1E2A44', '#2563EB', '#38BDF8', '#60A5FA', '#F472B6'];
+
 function getCohortTimeline(now: Date) {
   const month = now.getMonth();
   const startYear = month >= 8 ? now.getFullYear() : now.getFullYear() - 1;
@@ -108,12 +110,10 @@ export default function Cohort() {
         }
 
         if (heroLayer) {
-          if (progress >= 1) {
-            heroLayer.style.opacity = '0';
+          if (past) {
             heroLayer.style.visibility = 'hidden';
             heroLayer.style.pointerEvents = 'none';
           } else {
-            heroLayer.style.opacity = `${Math.max(0, 1 - progress * 1.05)}`;
             heroLayer.style.visibility = 'visible';
             heroLayer.style.pointerEvents = 'auto';
           }
@@ -143,14 +143,14 @@ export default function Cohort() {
       <Navbar />
       <main className="cohort-page relative overflow-x-clip">
         {/* Layer 1: Sticky Pinned Hero */}
-        <div ref={heroLayerRef} className="sticky top-0 h-[100svh] min-h-[640px] z-0 overflow-hidden transition-opacity duration-300">
+        <div ref={heroLayerRef} className="sticky top-0 h-[100svh] min-h-[640px] z-0 overflow-hidden">
           <section className="cohort-hero h-full">
             <AsciiBackground
               className="cohort-hero-ascii"
               variant="waves"
               fade="bottom"
               paused={isScrolledPast}
-              colors={['#1E2A44', '#2563EB', '#38BDF8', '#60A5FA', '#F472B6']}
+              colors={COHORT_ASCII_COLORS}
               glyphs=" ·:-=+*#%@"
               size={13}
               scale={1.4}

@@ -65,12 +65,10 @@ export default function Events() {
         }
 
         if (heroLayer) {
-          if (progress >= 1) {
-            heroLayer.style.opacity = '0';
+          if (past) {
             heroLayer.style.visibility = 'hidden';
             heroLayer.style.pointerEvents = 'none';
           } else {
-            heroLayer.style.opacity = `${Math.max(0, 1 - progress * 1.05)}`;
             heroLayer.style.visibility = 'visible';
             heroLayer.style.pointerEvents = 'auto';
           }
@@ -92,7 +90,7 @@ export default function Events() {
       <Navbar />
       <main className="relative overflow-x-clip">
         {/* Layer 1: Sticky Pinned Hero */}
-        <header ref={heroLayerRef} className="events-intro sticky top-0 h-[100svh] min-h-[640px] z-0 overflow-hidden flex flex-col justify-center transition-opacity duration-300">
+        <header ref={heroLayerRef} className="events-intro sticky top-0 h-[100svh] min-h-[640px] z-0 overflow-hidden flex flex-col justify-center">
           <EventsMeshBackground paused={isScrolledPast} />
           <div ref={contentRef} className="events-hero-copy will-change-transform max-w-4xl mx-auto text-center px-6 pt-20 pb-16">
             <div className="flex justify-center mb-4 hero-stagger-1">

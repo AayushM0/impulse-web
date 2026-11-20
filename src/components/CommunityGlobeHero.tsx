@@ -58,12 +58,10 @@ export default function CommunityGlobeHero() {
         }
 
         if (heroLayer) {
-          if (progress >= 1) {
-            heroLayer.style.opacity = '0';
+          if (past) {
             heroLayer.style.visibility = 'hidden';
             heroLayer.style.pointerEvents = 'none';
           } else {
-            heroLayer.style.opacity = `${Math.max(0, 1 - progress * 1.05)}`;
             heroLayer.style.visibility = 'visible';
             heroLayer.style.pointerEvents = 'auto';
           }
@@ -97,7 +95,7 @@ export default function CommunityGlobeHero() {
   }, []);
 
   return (
-    <header ref={heroRef} className="globe-hero community-intro h-full transition-opacity duration-300" aria-labelledby="community-title">
+    <header ref={heroRef} className="globe-hero community-intro h-full" aria-labelledby="community-title">
       <div className="globe-hero-gridmotion" aria-hidden="true">
         <GridMotion
           rowItems={memberRows}

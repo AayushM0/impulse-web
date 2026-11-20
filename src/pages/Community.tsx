@@ -319,10 +319,27 @@ function MemberCard({
         </div>
 
         {/* Back of card - reveals on hover */}
-        <div className="community-member-face community-member-back">
+        <div
+          className="community-member-face community-member-back"
+          onClick={(e) => {
+            // Prevent scrolling or tapping inside the back face from toggling card flip
+            e.stopPropagation();
+          }}
+        >
           <div className="community-member-back-header">
             <span className="community-member-back-name" title={displayName}>{displayName}</span>
-            <span className="community-member-back-badge">DETAILS</span>
+            <button
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation();
+                setIsFlipped(false);
+              }}
+              className="community-member-back-badge cursor-pointer hover:bg-blue-500/25 transition-colors"
+              title="Close details"
+              aria-label="Close details"
+            >
+              DETAILS
+            </button>
           </div>
 
           <div className="community-member-back-body">

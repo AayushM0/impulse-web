@@ -541,6 +541,7 @@
   user-select: none;
   -webkit-user-select: none;
   outline: none;
+  touch-action: pan-y;
 
   /* Dynamic scroll pop-up animation */
   opacity: 0;
@@ -594,13 +595,14 @@
   justify-content: flex-start;
   background: radial-gradient(ellipse at 100% 0%, rgba(96, 165, 250, 0.18), transparent 60%),
               #0E1626;
-  transform: rotateY(0deg);
+  transform: rotateY(0deg) translateZ(1px);
   z-index: 2;
+  pointer-events: auto;
   transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .community-member-front:hover {
-  transform: translateY(-2px);
+  transform: translateY(-2px) translateZ(1px);
   border-color: rgba(96, 165, 250, 0.65);
   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45);
 }
@@ -832,8 +834,24 @@
   border: 1px solid #1E2A44;
   background: radial-gradient(ellipse at 50% 0%, rgba(96, 165, 250, 0.15), transparent 70%),
               #0E1626;
-  transform: rotateY(180deg);
+  transform: rotateY(180deg) translateZ(1px);
   z-index: 1;
+  pointer-events: none;
+}
+
+/* Ensure active face receives pointer/scroll events exclusively */
+.community-member-card:hover .community-member-front,
+.community-member-card:focus-within .community-member-front,
+.community-member-card.is-flipped .community-member-front {
+  pointer-events: none !important;
+  z-index: 0 !important;
+}
+
+.community-member-card:hover .community-member-back,
+.community-member-card:focus-within .community-member-back,
+.community-member-card.is-flipped .community-member-back {
+  pointer-events: auto !important;
+  z-index: 10 !important;
 }
 
 .community-member-card:nth-child(even) .community-member-back {
@@ -849,6 +867,7 @@
   gap: 6px;
   padding-bottom: 4px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  flex-shrink: 0;
 }
 
 .community-member-back-name {
@@ -875,21 +894,29 @@
 .community-member-back-body {
   flex: 1 1 auto;
   overflow-y: auto;
+  overflow-x: hidden;
   min-height: 0;
   display: flex;
   flex-direction: column;
   gap: 5px;
-  padding-right: 2px;
+  padding-right: 4px;
   scrollbar-width: thin;
-  scrollbar-color: rgba(147, 197, 253, 0.3) transparent;
+  scrollbar-color: rgba(147, 197, 253, 0.4) transparent;
+  overscroll-behavior: auto;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-y;
+  pointer-events: auto;
 }
 
 .community-member-back-body::-webkit-scrollbar {
-  width: 2px;
+  width: 4px;
 }
 .community-member-back-body::-webkit-scrollbar-thumb {
-  background: rgba(147, 197, 253, 0.3);
+  background: rgba(147, 197, 253, 0.4);
   border-radius: 999px;
+}
+.community-member-back-body::-webkit-scrollbar-thumb:hover {
+  background: rgba(147, 197, 253, 0.7);
 }
 
 .community-member-back-field {

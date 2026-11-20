@@ -414,23 +414,6 @@ const vaishnaviMediaHead: CommunityMember = {
   avatarInitial: 'VS',
 };
 
-const shubhangiMediaHead: CommunityMember = {
-  id: 'shubhangi-sinha-media-head',
-  name: 'Shubhangi Sinha',
-  branch: '',
-  team: 'Media & PR',
-  designation: 'Head',
-  interests: [],
-  photoPath: '/community/members/media-pr-head-shubhangi-sinha-2026-10-28.jpg',
-  photoPosition: '50% 25%',
-  photoZoom: 1.05,
-  oneLiner: '',
-  linkedinUrl: 'https://www.linkedin.com/in/shubhangi-sinha-415613382/',
-  githubUrl: 'https://github.com/shubhangiverse',
-  skills: ['Adobe Photoshop', 'Adobe Illustrator', 'Python', 'C++', 'Content creation', 'Git and Github', 'Cyber Security', 'Public Speaking'],
-  avatarInitial: 'SS',
-};
-
 const ektaChauhan: CommunityMember = {
   id: 'ekta-chauhan-president',
   name: 'Ekta Chauhan',
@@ -455,7 +438,7 @@ const ektaYadav: CommunityMember = {
   name: 'Ekta Yadav',
   branch: '',
   team: 'Presidents',
-  designation: 'Former President & Co-founder',
+  designation: 'President & Co-founder',
   interests: [],
   photoPath: '/community/members/president-ekta-yadav-2026-11-03.jpg',
   photoPosition: '50% 28%',
@@ -505,7 +488,7 @@ export const communityTeams: CommunityTeam[] = [
   {
     id: 'media-pr',
     name: 'Media & PR',
-    heads: [vaishnaviMediaHead, shubhangiMediaHead],
+    heads: [vaishnaviMediaHead],
     committeeMembers: [bhavyaGuptaMediaCoordinator, ektaYadavMediaCoordinator, meherGuptaMediaCoordinator],
   },
   {
@@ -527,6 +510,6 @@ export const allCommunityMembers = [
   ...communityTeams.flatMap((team) => [...team.heads, ...team.committeeMembers]),
 ];
 
-if (allCommunityMembers.length !== 31) {
-  throw new Error(`Community roster must contain exactly 31 members; found ${allCommunityMembers.length}.`);
+if (allCommunityMembers.length !== 30) {
+  throw new Error(`Community roster must contain exactly 30 members; found ${allCommunityMembers.length}.`);
 }

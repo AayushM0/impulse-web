@@ -619,9 +619,11 @@
 
 /* --- Layout overrides consolidated from SharkHackLayout.css --- */
 .shark-scroll-page { background-image: radial-gradient(ellipse at 0 35%, rgba(37, 99, 235, 0.1), transparent 35%), radial-gradient(ellipse at 100% 65%, rgba(236, 72, 153, 0.08), transparent 35%); }
-.shark-scroll-page main section[id] { scroll-margin-top: 164px; }
+.shark-scroll-page main section[id] { scroll-margin-top: 88px; }
 .shark-scroll-page main section:focus-visible { outline: 2px solid #60a5fa; outline-offset: -4px; }
-.shark-scroll-page .shark-section-nav { position: sticky; top: 76px; width: fit-content; max-width: calc(100% - 80px); margin: 80px auto -76px; border: 1px solid #1E2A44; border-radius: 999px; background: rgba(7, 11, 20, 0.94); box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4); z-index: 40; }
+.shark-scroll-page .shark-section-nav { position: sticky; top: 16px; width: fit-content; max-width: calc(100% - 80px); margin: 20px auto -76px; border: 1px solid #1E2A44; border-radius: 999px; background: rgba(7, 11, 20, 0.94); box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4); z-index: 40; }
+.shark-scroll-page .shark-events-tab { display: inline-flex; align-items: center; gap: 6px; color: #9AA8C2; border-right: 1px solid #1E2A44; border-radius: 999px 0 0 999px; padding-right: 16px; margin-right: 2px; }
+.shark-scroll-page .shark-events-tab:hover { color: #F2F6FF; background: #0E1626; }
 .shark-scroll-page .shark-section-nav-inner { gap: 4px; padding: 6px; overflow: visible; }
 .shark-scroll-page .shark-section-link, .shark-scroll-page .shark-section-register { position: relative; min-height: 48px; padding: 12px 18px; border: 0; border-radius: 999px; background: none; color: #9AA8C2; font-size: 13px; font-weight: 500; white-space: nowrap; box-shadow: none; }
 .shark-scroll-page .shark-section-nav-inner .shark-nav-icon { display: none; }
@@ -638,10 +640,10 @@
 .shark-registration-notice button { display: grid; place-items: center; flex-shrink: 0; width: 36px; height: 36px; margin-left: auto; }
 .shark-registration-notice svg { width: 16px; height: 16px; }
 .shark-registration-notice p { margin-top: 8px; font-size: 13px; line-height: 1.7; }
-.shark-scroll-page .shark-hero { position: relative; z-index: 1; padding: 110px 0 0; }
-.shark-scroll-page .shark-hero-atmosphere { position: absolute; z-index: 0; top: 0; left: 0; right: 0; width: 100%; max-width: none; height: min(980px, 110vh); margin: 0; background: radial-gradient(ellipse at 80% 30%, rgba(236, 72, 153, 0.12), transparent 65%), #070B14; overflow: hidden; pointer-events: none; }
-.shark-scroll-page .shark-hero-art { position: absolute; top: 0; right: 0; width: 140%; max-width: none; height: 100%; object-fit: cover; object-position: right top; opacity: 0.6; mask-image: linear-gradient(#000, #000 65%, transparent 100%); }
-.shark-scroll-page .shark-hero-atmosphere::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(7, 11, 20, 0.15) 0%, rgba(7, 11, 20, 0.05) 25%, rgba(7, 11, 20, 0.8) 75%, #070B14 100%); }
+.shark-scroll-page .shark-hero { padding: 96px 0 0; }
+.shark-scroll-page .shark-hero-atmosphere { position: absolute; z-index: -1; inset: 0; width: 100%; max-width: none; height: 100%; margin: 0; background: radial-gradient(ellipse at 80% 30%, rgba(236, 72, 153, 0.12), transparent 65%), #070B14; }
+.shark-scroll-page .shark-hero-art { top: 0; right: 0; width: 140%; max-width: none; height: 100%; object-fit: cover; object-position: right center; opacity: 0.55; mask-image: linear-gradient(#000, #000 55%, transparent 95%); }
+.shark-scroll-page .shark-hero-atmosphere::after { background: linear-gradient(180deg, rgba(7, 11, 20, 0.2) 0%, rgba(7, 11, 20, 0.05) 25%, rgba(7, 11, 20, 0.8) 65%, #070B14 100%); }
 .shark-scroll-page .shark-hero-topline { position: relative; top: auto; }
 .shark-scroll-page .shark-back-link { border: 0; background: none; padding: 8px 0; min-height: 44px; }
 .shark-scroll-page .shark-hero-content { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: min(800px, calc(100svh - 140px)); max-width: 1000px; margin: 0 auto; padding: 48px 0 70px; text-align: center; }
@@ -740,11 +742,13 @@
   .shark-scroll-page .shark-prize-card { padding-inline: 18px; }
 }
 @media (max-width: 900px) {
-  .shark-scroll-page .shark-section-nav { width: calc(100% - 40px); max-width: 560px; top: 72px; margin-top: 76px; margin-bottom: -72px; border-radius: 18px; z-index: 40; }
+  .shark-scroll-page .shark-section-nav { width: calc(100% - 40px); max-width: 560px; top: 12px; margin-top: 14px; margin-bottom: -72px; border-radius: 18px; z-index: 40; }
   .shark-scroll-page .shark-mobile-navigation { padding: 6px; }
   .shark-scroll-page .shark-mobile-section-menu { left: 0; right: 0; }
   .shark-scroll-page .shark-section-nav-inner { display: none; }
-  .shark-scroll-page .shark-mobile-shortcuts { grid-template-columns: 1fr 1fr .8fr auto; gap: 2px; }
+  .shark-scroll-page .shark-mobile-shortcuts { grid-template-columns: auto 1fr .8fr auto; gap: 2px; }
+  .shark-scroll-page .shark-mobile-shortcuts .shark-events-tab { display: flex; align-items: center; justify-content: center; gap: 4px; color: #9AA8C2; font-size: 12px; border-right: 1px solid #1E2A44; border-radius: 8px 0 0 8px; padding-inline: 8px; }
+  .shark-scroll-page .shark-mobile-shortcuts .shark-events-tab:hover { color: #FFFFFF; }
   .shark-scroll-page .shark-mobile-tab { padding-inline: 5px; gap: 5px; font-size: 12px; }
   .shark-scroll-page .shark-mobile-tab .shark-nav-icon,
   .shark-scroll-page .shark-mobile-more > svg,
@@ -753,7 +757,7 @@
   .shark-scroll-page .shark-mobile-shortcuts .shark-section-register > svg { width: 14px; height: 14px; }
 }
 @media (max-width: 767px) {
-  .shark-scroll-page .shark-section-nav { display: none; width: calc(100% - 24px); max-width: none; }
+  .shark-scroll-page .shark-section-nav { display: block; width: calc(100% - 24px); max-width: none; }
   .shark-scroll-page main section[id] { scroll-margin-top: 156px; }
   .shark-scroll-page .shark-hero { padding-top: 104px; }
   .shark-scroll-page .shark-hero-art { width: 235%; height: 660px; opacity: 0.5; object-position: right top; }

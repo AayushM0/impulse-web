@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { ArrowRight, ArrowUpRight, Calendar, ChevronDown, Coins, MapPin, Trophy, Users, FileText, Code2, Flag, CheckCircle2, Clock3, ClipboardList, Mic2, MonitorPlay, MessagesSquare, Handshake, GraduationCap, Sparkles, Award, Building2, LayoutGrid, CircleHelp, X } from 'lucide-react';
-import Navbar from '@/components/Navbar';
+import { ArrowLeft, ArrowRight, ArrowUpRight, Calendar, ChevronDown, Coins, MapPin, Trophy, Users, FileText, Code2, Flag, CheckCircle2, Clock3, ClipboardList, Mic2, MonitorPlay, MessagesSquare, Handshake, GraduationCap, Sparkles, Award, Building2, LayoutGrid, CircleHelp, X } from 'lucide-react';
 import Footer from '@/components/Footer';
 import SharkRegistrationButton from '@/components/SharkRegistrationButton';
 import SharkTimeline from '@/components/OceanSharkTimeline';
@@ -154,26 +153,25 @@ export default function SharkHack() {
   return (
     // The event is a continuous document; section links scroll to their content.
     <div className="shark-hack-page shark-scroll-page" ref={pageRef} data-lenis-prevent>
-      <Navbar />
-      <main className="relative">
-        <div className="shark-hero-atmosphere" aria-hidden="true">
-          <img src="/images/shark-hack-banner.jpg" alt="" width="1600" height="639" fetchPriority="high" className="shark-hero-art" />
-        </div>
-
+      <main>
         <nav aria-label="Shark Hack sections" className="shark-section-nav">
           <div className="shark-mobile-navigation" ref={mobileMenuRef}>
             <div className="shark-mobile-shortcuts">
-              {sectionLinks.slice(0, 2).map(([id, label]) => {
+              <Link to="/events" className={'shark-mobile-tab shark-events-tab' + focusStyle}>
+                <ArrowLeft aria-hidden="true" className="w-3.5 h-3.5" />
+                <span>Events</span>
+              </Link>
+              {sectionLinks.slice(0, 1).map(([id, label]) => {
                 const Icon = sectionIcons[id];
                 return <button key={id} type="button" className={'shark-mobile-tab' + focusStyle} aria-current={activeSection === id ? 'location' : undefined} aria-controls={id} onClick={() => selectSection(id)}><span className={'shark-nav-icon shark-nav-icon-' + id}><Icon aria-hidden="true" /></span>{label}</button>;
               })}
-              <button ref={mobileMenuButtonRef} type="button" className={'shark-mobile-tab shark-mobile-more' + focusStyle} aria-expanded={mobileMenuOpen} aria-controls="shark-mobile-section-menu" data-active={!['overview', 'timeline'].includes(activeSection)} onClick={() => setMobileMenuOpen(open => !open)}><LayoutGrid aria-hidden="true" />More<span className="shark-mobile-menu-indicator" aria-hidden="true" /></button>
+              <button ref={mobileMenuButtonRef} type="button" className={'shark-mobile-tab shark-mobile-more' + focusStyle} aria-expanded={mobileMenuOpen} aria-controls="shark-mobile-section-menu" data-active={!['overview'].includes(activeSection)} onClick={() => setMobileMenuOpen(open => !open)}><LayoutGrid aria-hidden="true" />More<span className="shark-mobile-menu-indicator" aria-hidden="true" /></button>
               <SharkRegistrationButton onOpen={() => setMobileMenuOpen(false)} />
             </div>
             <div id="shark-mobile-section-menu" className="shark-mobile-section-menu" hidden={!mobileMenuOpen}>
               <div className="shark-mobile-menu-heading"><span>Explore Shark Hack</span><button type="button" aria-label="Close section menu" className={focusStyle} onClick={() => { setMobileMenuOpen(false); mobileMenuButtonRef.current?.focus(); }}><X aria-hidden="true" /></button></div>
               <div className="shark-mobile-menu-grid">
-                {sectionLinks.slice(2).map(([id, label]) => {
+                {sectionLinks.slice(1).map(([id, label]) => {
                   const Icon = sectionIcons[id];
                   return <button key={id} type="button" className={'shark-mobile-menu-option' + focusStyle} aria-current={activeSection === id ? 'location' : undefined} aria-controls={id} onClick={() => {
                     selectSection(id, true);
@@ -183,6 +181,10 @@ export default function SharkHack() {
             </div>
           </div>
           <div className="shark-content-width shark-section-nav-inner">
+            <Link to="/events" className={'shark-section-link shark-events-tab' + focusStyle}>
+              <ArrowLeft className="w-3.5 h-3.5" aria-hidden="true" />
+              <span>Events</span>
+            </Link>
             {sectionLinks.map(([id, label]) => {
               const TabIcon = sectionIcons[id];
               return (
@@ -197,6 +199,9 @@ export default function SharkHack() {
 
         <section id="overview" {...panelProps('overview')}>
           <div className="shark-hero">
+            <div className="shark-hero-atmosphere" aria-hidden="true">
+              <img src="/images/shark-hack-banner.jpg" alt="" width="1600" height="639" fetchPriority="high" className="shark-hero-art" />
+            </div>
             <div className="shark-content-width">
             <div className="shark-hero-topline">
               <Link to="/events" className={'shark-back-link' + focusStyle}><ArrowUpRight className="shark-back-icon" aria-hidden="true" /> All events</Link>

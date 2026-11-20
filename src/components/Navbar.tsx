@@ -76,8 +76,8 @@ export default function Navbar() {
                   to={link.path}
                   onClick={() => handleNavClick(link.path)}
                   aria-current={isActive ? 'page' : undefined}
-                  className={`font-mono-label text-xs tracking-wider transition-colors duration-300 relative group py-2.5 px-3 min-h-[44px] inline-flex items-center ${
-                    isActive ? 'text-impulse-white' : 'text-impulse-gray-light/70 hover:text-impulse-white'
+                  className={`font-mono text-xs font-bold tracking-wider transition-colors duration-300 relative group py-2.5 px-3 min-h-[44px] inline-flex items-center drop-shadow-[0_2px_8px_rgba(7,11,20,0.8)] ${
+                    isActive ? 'text-white' : 'text-gray-200 hover:text-white'
                   }`}
                 >
                   {link.label}

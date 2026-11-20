@@ -23,21 +23,21 @@ export default function ExploreHero() {
           haze: 0.8,
         }}
       >
-        {/* Subtle top vignette under navbar */}
+        {/* Top vignette under navbar */}
         <div
-          className="absolute inset-x-0 top-0 h-28 pointer-events-none bg-gradient-to-b from-space-950/80 via-space-950/40 to-transparent z-[2]"
+          className="absolute inset-x-0 top-0 h-28 pointer-events-none bg-gradient-to-b from-space-950/85 via-space-950/45 to-transparent z-[2]"
           aria-hidden="true"
         />
 
-        {/* Ambient radial shadow behind center typography for clean contrast */}
+        {/* Deep contrast backdrop behind center typography for pristine legibility over halftone dots */}
         <div
-          className="absolute inset-0 pointer-events-none opacity-50 bg-[radial-gradient(ellipse_60%_50%_at_50%_48%,rgba(7,11,20,0.75)_0%,rgba(7,11,20,0.35)_55%,transparent_80%)] z-[2]"
+          className="absolute inset-0 pointer-events-none bg-[radial-gradient(ellipse_75%_65%_at_50%_48%,rgba(7,11,20,0.85)_0%,rgba(7,11,20,0.55)_50%,transparent_85%)] z-[2]"
           aria-hidden="true"
         />
 
         {/* Seamless bottom feather into Section 02 (ExploreEvents - space-950 / #070B14) */}
         <div
-          className="absolute inset-x-0 bottom-0 h-32 pointer-events-none bg-gradient-to-t from-space-950 via-space-950/80 to-transparent z-[5]"
+          className="absolute inset-x-0 bottom-0 h-32 pointer-events-none bg-gradient-to-t from-space-950 via-space-950/85 to-transparent z-[5]"
           aria-hidden="true"
         />
 
@@ -46,15 +46,15 @@ export default function ExploreHero() {
           <div className="max-w-4xl mx-auto flex flex-col items-center">
             <SectionKicker label="ORIGIN // CHAPTER ONE" className="mb-6 pointer-events-auto" />
 
-            <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-bold font-sans tracking-tight text-white select-none leading-[0.92] mb-4 drop-shadow-[0_4px_32px_rgba(7,11,20,0.9)]">
+            <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-extrabold sm:font-black font-sans tracking-tight text-white select-none leading-[0.92] mb-4 [text-shadow:_0_4px_32px_rgba(0,0,0,0.95),_0_2px_10px_rgba(7,11,20,0.9)]">
               IMPULSE
             </h1>
 
-            <div className="text-lg sm:text-xl md:text-2xl font-mono-label font-bold tracking-[0.2em] uppercase text-transparent bg-clip-text bg-gradient-to-r from-[#60A5FA] via-[#A855F7] to-[#EC4899] mb-6 select-none">
+            <div className="text-lg sm:text-xl md:text-2xl font-mono font-bold tracking-[0.22em] uppercase text-transparent bg-clip-text bg-gradient-to-r from-[#93C5FD] via-[#C084FC] to-[#F472B6] mb-6 select-none drop-shadow-[0_2px_12px_rgba(7,11,20,0.95)]">
               IDEAS IN MOTION.
             </div>
 
-            <p className="text-base sm:text-lg md:text-xl text-gray-300/85 max-w-2xl leading-relaxed font-sans mb-10 px-4">
+            <p className="text-base sm:text-lg md:text-xl font-medium sm:font-semibold text-gray-100 max-w-2xl leading-relaxed font-sans mb-10 px-4 [text-shadow:_0_2px_12px_rgba(7,11,20,0.95)]">
               A collective of student engineers, designers, and founders building live products, running high-impact hackathons, and fostering tech culture.
             </p>
 
@@ -63,7 +63,7 @@ export default function ExploreHero() {
                 to="/events"
                 variant="primary"
                 size="lg"
-                className="group shadow-[0_4px_24px_rgba(37,99,235,0.4)] pointer-events-auto"
+                className="group font-bold tracking-wider shadow-[0_4px_24px_rgba(37,99,235,0.55)] pointer-events-auto"
               >
                 EXPLORE EVENTS
                 <ArrowRight aria-hidden="true" className="w-4 h-4 transition-transform group-hover:translate-x-1" />
@@ -73,16 +73,16 @@ export default function ExploreHero() {
                 to="/cohort"
                 variant="secondary"
                 size="lg"
-                className="group hover:border-[#EC4899]/60 pointer-events-auto"
+                className="group font-bold tracking-wider hover:border-[#EC4899]/60 pointer-events-auto bg-space-900/90 backdrop-blur-md shadow-[0_4px_20px_rgba(7,11,20,0.7)]"
               >
                 BUILDER COHORT
                 <ArrowRight aria-hidden="true" className="w-4 h-4 transition-transform group-hover:translate-x-1" />
               </Button>
             </div>
 
-            <div className="mt-12 sm:mt-16 flex flex-col items-center gap-2 text-xs font-mono-label text-gray-400/70 select-none">
+            <div className="mt-12 sm:mt-16 flex flex-col items-center gap-2 text-xs font-mono font-bold tracking-wider text-gray-200 select-none [text-shadow:_0_2px_8px_rgba(7,11,20,0.9)]">
               <span>SCROLL TO EXPLORE</span>
-              <ArrowDown aria-hidden="true" className="w-3.5 h-3.5 animate-bounce text-impulse-blue-bright" />
+              <ArrowDown aria-hidden="true" className="w-3.5 h-3.5 animate-bounce text-impulse-blue-bright stroke-[2.5]" />
             </div>
           </div>
         </div>

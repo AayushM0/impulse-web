@@ -235,11 +235,11 @@
   @keyframes heroAuraPulse {
     0%, 100% {
       opacity: 0.35;
-      transform: scale(0.95);
+      transform: translate3d(-50%, -50%, 0) scale(0.95);
     }
     50% {
       opacity: 0.75;
-      transform: scale(1.08);
+      transform: translate3d(-50%, -50%, 0) scale(1.08);
     }
   }
 

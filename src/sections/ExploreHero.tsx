@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, ArrowUpRight } from 'lucide-react';
 import { Button, SectionKicker } from '@/components/ui';
@@ -6,22 +6,42 @@ import HalftoneNebula from '@/components/ui/halftone-nebula';
 
 export default function ExploreHero() {
   const contentRef = useRef<HTMLDivElement>(null);
+  const heroLayerRef = useRef<HTMLElement>(null);
+  const [isScrolledPast, setIsScrolledPast] = useState(false);
 
   useEffect(() => {
     const el = contentRef.current;
-    if (!el) return;
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReduced) return;
 
     let rafId: number;
+    let lastPast = false;
+
     const handleScroll = () => {
       cancelAnimationFrame(rafId);
       rafId = requestAnimationFrame(() => {
         const y = window.scrollY;
         const maxScroll = Math.max(window.innerHeight * 0.65, 400);
         const progress = Math.min(1, Math.max(0, y / maxScroll));
-        el.style.transform = `translate3d(0, ${-progress * 70}px, 0)`;
-        el.style.opacity = `${Math.max(0, 1 - progress * 1.15)}`;
+
+        if (!prefersReduced && el) {
+          el.style.transform = `translate3d(0, ${-progress * 70}px, 0)`;
+          el.style.opacity = `${Math.max(0, 1 - progress * 1.15)}`;
+        }
+
+        const past = y > maxScroll * 1.05;
+        if (past !== lastPast) {
+          lastPast = past;
+          setIsScrolledPast(past);
+          if (heroLayerRef.current) {
+            if (past) {
+              heroLayerRef.current.style.visibility = 'hidden';
+              heroLayerRef.current.style.pointerEvents = 'none';
+            } else {
+              heroLayerRef.current.style.visibility = 'visible';
+              heroLayerRef.current.style.pointerEvents = 'auto';
+            }
+          }
+        }
       });
     };
 
@@ -35,11 +55,13 @@ export default function ExploreHero() {
   }, []);
 
   return (
-    <section id="hero" className="relative w-full h-full overflow-hidden bg-space-950">
+    <section ref={heroLayerRef} id="hero" className="relative w-full h-full overflow-hidden bg-space-950">
       <HalftoneNebula
         height="100%"
         preset="impulse"
         className="w-full h-full min-h-[640px]"
+        paused={isScrolledPast}
+        maxDpr={1.5}
         params={{
           // Refined star & planet balance for Impulse brand
           planet: true,

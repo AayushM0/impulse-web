@@ -236,6 +236,12 @@ float fbm(vec2 p){
   for (int i = 0; i < 5; i++) { s += a * vnoise(p); p = r * p * 2.03 + 17.1; a *= 0.5; }
   return s / 0.96875;
 }
+float fbm3(vec2 p){
+  float s = 0.0, a = 0.5;
+  mat2 r = mat2(0.8, -0.6, 0.6, 0.8);
+  for (int i = 0; i < 3; i++) { s += a * vnoise(p); p = r * p * 2.03 + 17.1; a *= 0.5; }
+  return s / 0.875;
+}
 float bayer4(vec2 c){
   vec2 m = mod(c, 4.0);
   int i = int(m.x) + int(m.y) * 4;
@@ -276,7 +282,7 @@ vec3 field(vec2 pos, vec2 resCss){
   }
 
   float t = uTime * uDrift;
-  vec2 q = vec2(fbm(p + vec2(0.0, t * 0.7)), fbm(p + vec2(5.2, 1.3) - t * 0.5));
+  vec2 q = vec2(fbm3(p + vec2(0.0, t * 0.7)), fbm3(p + vec2(5.2, 1.3) - t * 0.5));
   float n = fbm(p + uWarp * q + vec2(t * 0.4, -t * 0.25));
 
   vec2 dir = vec2(cos(uBandAngle), sin(uBandAngle));
@@ -298,7 +304,7 @@ vec3 field(vec2 pos, vec2 resCss){
   }
 
   float hz = smoothstep(0.25, 0.75, n + river * 0.25) * uHaze;
-  float tone = fbm(p * 0.45 + vec2(11.0, -3.0) + t * 0.2);
+  float tone = fbm3(p * 0.45 + vec2(11.0, -3.0) + t * 0.2);
   return vec3(clamp(d, 0.0, 1.0), hz, tone);
 }
 
@@ -518,8 +524,10 @@ export type HalftoneNebulaProps = {
   interactive?: boolean
   /** "scroll" keeps page scrolling on touch; "draw" takes the gesture. */
   touch?: "scroll" | "draw"
-  /** Device-pixel-ratio cap. The shader is per-pixel, so 2 is plenty. */
+  /** Device-pixel-ratio cap. The shader is per-pixel, so 1.5 is plenty. */
   maxDpr?: number
+  /** Pause rendering when off-screen or covered */
+  paused?: boolean
   /** Content laid over the sky. Pointer events pass through unless opted in. */
   children?: React.ReactNode
   className?: string
@@ -532,7 +540,8 @@ export default function HalftoneNebula({
   params,
   interactive = true,
   touch = "scroll",
-  maxDpr = 2,
+  maxDpr = 1.5,
+  paused = false,
   children,
   className = "",
   style,
@@ -559,6 +568,20 @@ export default function HalftoneNebula({
   // The loop reads through a ref, so tuning a value never restarts WebGL.
   const paramsRef = React.useRef(P)
   paramsRef.current = P
+
+  const pausedRef = React.useRef(paused)
+  pausedRef.current = paused
+  const wakeRef = React.useRef<() => void>(() => {})
+  const stopRef = React.useRef<() => void>(() => {})
+
+  // Decoupled pause/resume effect: immediately pauses or resumes rAF without tearing down WebGL!
+  React.useEffect(() => {
+    if (paused) {
+      stopRef.current()
+    } else {
+      wakeRef.current()
+    }
+  }, [paused])
 
   React.useEffect(() => {
     const root = rootRef.current
@@ -659,13 +682,18 @@ export default function HalftoneNebula({
     let lampOn = 0
     let inside = false
     let lastTouched = -1e9
+    let cachedRect: DOMRect | null = null
 
     const toUv = (e: PointerEvent): [number, number] => {
-      const r = canvas.getBoundingClientRect()
+      if (!cachedRect) cachedRect = canvas.getBoundingClientRect()
+      const r = cachedRect
       return [
         Math.min(Math.max((e.clientX - r.left) / Math.max(r.width, 1), 0), 1),
         Math.min(Math.max(1 - (e.clientY - r.top) / Math.max(r.height, 1), 0), 1),
       ]
+    }
+    const onEnter = () => {
+      cachedRect = canvas.getBoundingClientRect()
     }
     const onMove = (e: PointerEvent) => {
       if (!interactive) return
@@ -675,6 +703,7 @@ export default function HalftoneNebula({
     }
     const onLeave = () => {
       inside = false
+      cachedRect = null
     }
     const onDown = (e: PointerEvent) => {
       if (!interactive || e.button > 0) return
@@ -701,6 +730,11 @@ export default function HalftoneNebula({
       if (reduced) paint()
     }
 
+    const onScroll = () => {
+      cachedRect = null
+    }
+    window.addEventListener("scroll", onScroll, { passive: true })
+    root.addEventListener("pointerenter", onEnter)
     root.addEventListener("pointermove", onMove)
     root.addEventListener("pointerdown", onDown)
     root.addEventListener("pointerleave", onLeave)
@@ -783,11 +817,20 @@ export default function HalftoneNebula({
     const frame = () => {
       raf = 0
       paint()
-      if (visible && !document.hidden) raf = requestAnimationFrame(frame)
+      if (visible && !document.hidden && !pausedRef.current) raf = requestAnimationFrame(frame)
     }
     const wake = () => {
-      if (!reduced && !raf && visible && !document.hidden) raf = requestAnimationFrame(frame)
+      if (!reduced && !raf && visible && !document.hidden && !pausedRef.current) raf = requestAnimationFrame(frame)
     }
+    const stop = () => {
+      if (raf) {
+        cancelAnimationFrame(raf)
+        raf = 0
+      }
+    }
+    wakeRef.current = wake
+    stopRef.current = stop
+
     const io = new IntersectionObserver((entries) => {
       visible = entries.some((e) => e.isIntersecting)
       wake()
@@ -801,7 +844,7 @@ export default function HalftoneNebula({
 
     // Paint before the first rAF so nothing ever flashes an empty canvas.
     paint()
-    if (reduced) {
+    if (reduced || pausedRef.current) {
       // Nothing moves; one frame is the whole piece.
     } else {
       wake()
@@ -809,9 +852,13 @@ export default function HalftoneNebula({
 
     return () => {
       cancelAnimationFrame(raf)
+      wakeRef.current = () => {}
+      stopRef.current = () => {}
       observer.disconnect()
       io.disconnect()
       document.removeEventListener("visibilitychange", wake)
+      window.removeEventListener("scroll", onScroll)
+      root.removeEventListener("pointerenter", onEnter)
       root.removeEventListener("pointermove", onMove)
       root.removeEventListener("pointerdown", onDown)
       root.removeEventListener("pointerleave", onLeave)

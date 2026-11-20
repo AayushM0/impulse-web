@@ -27,6 +27,8 @@ export default function Logo({
           <img
             src="/images/impulse-logo.png"
             alt="IMPULSE"
+            width={size === 'sm' ? 32 : size === 'lg' ? 64 : 40}
+            height={size === 'sm' ? 32 : size === 'lg' ? 64 : 40}
             className="w-full h-full object-contain filter drop-shadow-[0_0_8px_rgba(96,165,250,0.45)] group-hover:drop-shadow-[0_0_14px_rgba(244,114,182,0.7)] group-hover:scale-105 transition-all duration-300 pointer-events-none"
             loading="eager"
             decoding="async"

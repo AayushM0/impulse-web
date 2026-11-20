@@ -393,6 +393,10 @@ export default function Footer() {
                   ref={mascotRef}
                   src="/images/mascot.avif"
                   alt="Impulse mascot"
+                  width={48}
+                  height={48}
+                  loading="lazy"
+                  decoding="async"
                   draggable={false}
                   className="w-full h-full object-contain rounded-full shadow-[0_0_12px_rgba(236,72,153,0.4)] transition-transform duration-300 group-hover:scale-125 group-hover:rotate-6"
                 />

@@ -422,8 +422,8 @@ export const AsciiBackground: React.FC<AsciiBackgroundProps> = ({
 
     // Render loop
     const render = (now: number) => {
-      if (!isInView) {
-        animFrameId = requestAnimationFrame(render);
+      if (!isInView || document.hidden) {
+        animFrameId = 0;
         return;
       }
 
@@ -511,19 +511,48 @@ export const AsciiBackground: React.FC<AsciiBackgroundProps> = ({
       animFrameId = requestAnimationFrame(render);
     };
 
-    animFrameId = requestAnimationFrame(render);
+    const startLoop = () => {
+      if (!animFrameId && isInView && !document.hidden) {
+        lastTime = performance.now();
+        animFrameId = requestAnimationFrame(render);
+      }
+    };
+
+    const stopLoop = () => {
+      if (animFrameId) {
+        cancelAnimationFrame(animFrameId);
+        animFrameId = 0;
+      }
+    };
+
+    startLoop();
     setIsReady(true);
 
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         isInView = entry.isIntersecting;
+        if (isInView && !document.hidden) {
+          startLoop();
+        } else {
+          stopLoop();
+        }
       });
     });
     observer.observe(container);
 
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        stopLoop();
+      } else if (isInView) {
+        startLoop();
+      }
+    };
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+
     return () => {
-      cancelAnimationFrame(animFrameId);
+      stopLoop();
       observer.disconnect();
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
       window.removeEventListener('pointermove', handlePointerMove);
       container.removeEventListener('pointerdown', handlePointerDown);
       container.removeEventListener('pointerleave', handlePointerLeave);

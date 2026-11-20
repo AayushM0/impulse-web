@@ -31,6 +31,7 @@ export default function CommunityGlobeHero() {
 
   useEffect(() => {
     const el = contentRef.current;
+    const heroLayer = heroRef.current;
     if (!el) return;
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     if (prefersReduced) return;
@@ -42,8 +43,21 @@ export default function CommunityGlobeHero() {
         const y = window.scrollY;
         const maxScroll = Math.max(window.innerHeight * 0.65, 400);
         const progress = Math.min(1, Math.max(0, y / maxScroll));
-        el.style.transform = `translate3d(0, ${-progress * 70}px, 0)`;
-        el.style.opacity = `${Math.max(0, 1 - progress * 1.15)}`;
+        if (el) {
+          el.style.transform = `translate3d(0, ${-progress * 70}px, 0)`;
+          el.style.opacity = `${Math.max(0, 1 - progress * 1.15)}`;
+        }
+        if (heroLayer) {
+          if (progress >= 1) {
+            heroLayer.style.opacity = '0';
+            heroLayer.style.visibility = 'hidden';
+            heroLayer.style.pointerEvents = 'none';
+          } else {
+            heroLayer.style.opacity = `${Math.max(0, 1 - progress * 1.05)}`;
+            heroLayer.style.visibility = 'visible';
+            heroLayer.style.pointerEvents = 'auto';
+          }
+        }
       });
     };
 
@@ -73,7 +87,7 @@ export default function CommunityGlobeHero() {
   }, []);
 
   return (
-    <header ref={heroRef} className="globe-hero community-intro h-full" aria-labelledby="community-title">
+    <header ref={heroRef} className="globe-hero community-intro h-full transition-opacity duration-300" aria-labelledby="community-title">
       <div className="globe-hero-gridmotion" aria-hidden="true">
         <GridMotion
           rowItems={memberRows}

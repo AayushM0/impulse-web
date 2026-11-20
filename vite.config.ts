@@ -10,15 +10,11 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
   },
-  optimizeDeps: {
-    exclude: ['lucide-react'],
-  },
   build: {
     chunkSizeWarningLimit: 600,
     rollupOptions: {
       output: {
         manualChunks: {
-          'vendor-three': ['three'],
           'vendor-animation': ['gsap', '@gsap/react', 'lenis'],
           'vendor-framework': ['react', 'react-dom', 'react-router-dom'],
         },

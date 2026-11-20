@@ -100,7 +100,7 @@ export default function ExploreHero() {
               aria-hidden="true"
             />
 
-            <SectionKicker label="ORIGIN · CHAPTER ONE" className="mb-6 pointer-events-auto hero-stagger-1" />
+            <SectionKicker label="ORIGIN" className="mb-6 pointer-events-auto hero-stagger-1" />
 
             <h1 className="hero-stagger-2 text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-extrabold sm:font-black font-sans tracking-tight text-white select-none leading-[0.92] mb-4 [text-shadow:_0_4px_32px_rgba(0,0,0,0.95),_0_2px_10px_rgba(7,11,20,0.9)]">
               IMPULSE

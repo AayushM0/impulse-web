@@ -383,7 +383,7 @@ export default function Cohort() {
                   className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[340px] sm:w-[520px] h-[160px] sm:h-[220px] bg-gradient-to-r from-blue-600/20 via-sky-500/15 to-pink-500/20 rounded-full blur-3xl pointer-events-none hero-aura-pulse -z-10"
                   aria-hidden="true"
                 />
-                <div className="flex justify-center mb-4 hero-stagger-1"><SectionKicker label="INCUBATOR · CHAPTER ONE" /></div>
+                <div className="flex justify-center mb-4 hero-stagger-1"><SectionKicker label="BUILDER INCUBATOR" /></div>
                 <h1 className="cohort-motion-reveal hero-stagger-2">BUILDER <span className="animate-gradient-flow">COHORT</span></h1>
                 <div className="cohort-capsule cohort-motion-reveal hero-stagger-3">PROJECTS IN MOTION</div>
                 <p className="cohort-intro cohort-motion-reveal hero-stagger-4">

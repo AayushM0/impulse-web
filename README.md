@@ -25,7 +25,7 @@ This website serves as the primary digital home and live dispatch for the entire
 
 ## What the Website Showcases
 
-The platform is designed around four core pillars, each representing a distinct chapter of the builder journey:
+The platform is designed around four core pillars representing the builder journey:
 
 ### 1. Origin & Explore (`/`)
 The front door to the collective. It establishes the Impulse ethos, previews ongoing cohort momentum, introduces flagship competitions, and bridges visitors directly into active initiatives.

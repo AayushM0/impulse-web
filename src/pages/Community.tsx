@@ -340,6 +340,7 @@ function MemberCard({
         {/* Back of card - reveals on hover */}
         <div
           className="community-member-face community-member-back"
+          data-lenis-prevent
           onClick={(e) => {
             // Prevent scrolling or tapping inside the back face from toggling card flip
             e.stopPropagation();
@@ -361,7 +362,14 @@ function MemberCard({
             </button>
           </div>
 
-          <div className="community-member-back-body">
+          <div
+            className="community-member-back-body"
+            data-lenis-prevent
+            onWheel={(e) => {
+              // Ensure Lenis and outer page never hijack scroll while cursor is inside card
+              e.stopPropagation();
+            }}
+          >
             <div className="community-member-back-field">
               <span className="community-field-label">TEAM</span>
               <span className="community-field-val">{member.team}</span>

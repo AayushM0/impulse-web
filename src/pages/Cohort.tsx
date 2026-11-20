@@ -316,7 +316,7 @@ export default function Cohort() {
 
       {activeModal && (
         <div className="cohort-modal-backdrop" onMouseDown={(event) => { if (event.target === event.currentTarget) setActiveModal(null); }}>
-          <section className="cohort-modal" role="dialog" aria-modal="true" aria-labelledby="cohort-modal-title">
+          <section className="cohort-modal" role="dialog" aria-modal="true" aria-labelledby="cohort-modal-title" data-lenis-prevent>
             <button className="cohort-modal-close" onClick={() => setActiveModal(null)} aria-label="Close dialog"><X size={19} /></button>
             {activeModal.type === 'roadmap' ? (
               <>

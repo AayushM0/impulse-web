@@ -902,7 +902,7 @@
   padding-right: 4px;
   scrollbar-width: thin;
   scrollbar-color: rgba(147, 197, 253, 0.4) transparent;
-  overscroll-behavior: auto;
+  overscroll-behavior: contain;
   -webkit-overflow-scrolling: touch;
   touch-action: pan-y;
   pointer-events: auto;
